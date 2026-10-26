@@ -1,0 +1,335 @@
+
+ACTOR MariaMegaHealth : Health replaces Soulsphere
+{
+  Scale 0.9
+  +COUNTITEM
+  +INVENTORY.AUTOACTIVATE
+  +INVENTORY.ALWAYSPICKUP
+  +INVENTORY.FANCYPICKUPSOUND
+  Inventory.Amount 100
+  Inventory.MaxAmount 200
+  Inventory.PickupMessage "$GOTSUPER"
+  Inventory.PickupSound "misc/p_pkup"
+  States
+  {
+  Spawn:
+    QMEG A -1
+    Stop
+  }
+}
+
+ACTOR MariaMegaStone : Megasphere replaces Megasphere
+{
+	+COUNTITEM
+    +FLOATBOB
+	+INVENTORY.ALWAYSPICKUP
+	Inventory.PickupMessage "$GOTMSPHERE"
+	Inventory.PickupSound "Maria/Powerup/Mega"
+	//Inventory.PickupAnnouncerEntry "megasphere"
+	States
+	{
+	Spawn:
+		MGST ABCDEF 3
+		Loop
+	Pickup:
+		TNT1 A 0 A_GiveInventory("BlueArmorForMegasphere", 1)
+		TNT1 A 0 A_GiveInventory("MegasphereHealth", 1)
+		Stop
+	}
+}	
+
+ACTOR MariaRosary : InvulnerabilitySphere replaces InvulnerabilitySphere
+{
+	+COUNTITEM
+    +FLOATBOB
+	+INVENTORY.AUTOACTIVATE
+	+INVENTORY.ALWAYSPICKUP
+	+INVENTORY.BIGPOWERUP
+	Inventory.MaxAmount 0
+	Powerup.Type Invulnerable
+	Powerup.Color Yellow, 0.125
+	Inventory.PickupSound "Maria/Powerup/Invul"
+	Inventory.PickupMessage "$GOTROSARIA"
+	States
+	{
+	Spawn:
+		ROSA ABCDCB 5 //Bright
+		Loop
+	}
+}
+
+ACTOR MariaDiary : MapRevealer replaces Allmap
+{
+	+COUNTITEM
+	+INVENTORY.FANCYPICKUPSOUND
+	+INVENTORY.ALWAYSPICKUP
+	Inventory.MaxAmount 0
+	Inventory.PickupSound "Maria/Powerup/Diary"
+	Inventory.PickupMessage "$GOTMAP"
+	States
+	{
+	Spawn:
+		DIAR A -1
+		Stop
+	}
+}
+
+ACTOR MariaBerserk : CustomInventory //replaces Berserk
+{
+  +COUNTITEM
+  +FLOATBOB
+  +INVENTORY.AUTOACTIVATE
+  +INVENTORY.ALWAYSPICKUP
+  +INVENTORY.FANCYPICKUPSOUND
+  FloatBobPhase 1
+  FloatBobStrength 0.5
+  Scale 0.7
+  Inventory.PickupSound "Maria/Powerup/Berserk"
+  Inventory.PickupMessage "$GOTBERSERK"
+  States
+  {
+  Spawn:
+    BERS ABCDCB 5
+    Loop
+  Pickup:
+	TNT1 A 0 A_SetBlend("FF0000",0.95,60)
+	TNT1 A 0 radius_quake(4, 5, 0, 1, 0)
+    TNT1 A 0 A_GiveInventory("BerserkStrength")
+    TNT1 A 0 A_PrintBold ("\c[White]Mother. Rip and Tear, until it is done.")
+	TNT1 A 0 A_GiveInventory("BerserkSpeed")
+	TNT1 A 0 HealThing(100, 0) 
+	TNT1 A 0 A_GiveInventory("MariaBerserkerFists")
+	TNT1 A 0 A_SelectWeapon("MariaBerserkerFists")
+    Stop
+  }
+}
+
+ACTOR BerserkStrength : PowerProtection
+{
+	Powerup.Colormap 1.25, 0.0, 0.0
+	Powerup.Duration -30
+	Damagefactor "normal", 0.1
+	+INVENTORY.ADDITIVETIME
+}
+
+ACTOR BerserkSpeed : PowerSpeed
+{
+	Powerup.Duration -30
+}
+
+ACTOR PowerQuadDamage : PowerDamage
+{
+	Damagefactor "normal", 4
+	//ActiveSound "Maria/Powerup/Quad/Shoot"	//This gets way too loud when you frag multiple enemies with the rocket launcher. Trust me.
+	//DeathSound "Maria/Powerup/Quad/Shoot"
+}
+
+ACTOR MariaOnslaught : PowerupGiver 12370
+{
+	+COUNTITEM
+    +FLOATBOB
+	+INVENTORY.AUTOACTIVATE
+	+INVENTORY.ALWAYSPICKUP
+	Inventory.MaxAmount 0
+	Inventory.PickupMessage "$GOTQUAD"
+	Inventory.PickupSound "Maria/Powerup/Quad"
+	Powerup.Type QuadDamage
+	Powerup.Color 255, 0, 255, 0.1
+	Powerup.Duration -30
+	Alpha 0.8
+    FloatBobPhase 1
+    FloatBobStrength 0.5
+    Scale 0.7	
+  States
+  {
+  Spawn:	
+    QDMG ABCDCB 5 
+    Loop
+  Pickup:
+    TNT1 A 0 A_PrintBold ("Mother. Multiply the damage, until it ends.")
+    Stop
+		}
+}
+
+Actor MariaInvisibilityCloak : PowerupGiver replaces BlurSphere
+{
+  +CountItem
+  +FLOATBOB
+  +VisibilityPulse
+  +Inventory.AutoActivate
+  +Inventory.AlwaysPickup
+  Inventory.MaxAmount 0
+  Powerup.Type Invisibility
+  Powerup.Mode Translucent
+  Powerup.Strength 80
+  RenderStyle Translucent
+  Inventory.PickupSound "Maria/Powerup/Cape"
+  Inventory.PickupMessage "$GOTINVIS"
+  States
+  {
+  Spawn:
+    CAPE ABCD 6 Bright
+    Loop
+  }
+}
+
+ACTOR MariaCandle : PowerupGiver replaces Infrared
+{
+	+COUNTITEM
+	+INVENTORY.AUTOACTIVATE
+	+INVENTORY.ALWAYSPICKUP
+	+INVENTORY.PICKUPFLASH
+	Inventory.MaxAmount 0
+	Powerup.Type Torch
+	Inventory.PickupMessage "$GOTCANDLE"
+	Inventory.PickupSound "Maria/Powerup/Candle"
+	States
+	{
+	Spawn:
+		COHL ABCD 3 //Bright
+		Loop
+	}
+}
+
+ACTOR MariaAntiHazmat : RadSuit Replaces RadSuit
+{
+	Inventory.PickupMessage "$GOTSUIT"
+	Inventory.PickupSound "Maria/Powerup/Hazmat"
+    Scale 0.7
+    +FLOATBOB
+	States
+	{
+	Spawn:
+		SUIT ABCDCB 5
+		Loop
+    Pickup:
+        TNT1 A 0 A_GiveInventory("AntiHazmatFeet", 1)
+        TNT1 A 0 A_GiveInventory("AntiHazmatProtector", 1)
+        Stop
+	}
+}
+
+Actor AntiHazmatFeet : PowerupGiver
+{
+  +Inventory.AutoActivate
+  +Inventory.AlwaysPickup
+  Inventory.MaxAmount 0
+  Inventory.PickupMessage ""
+  Powerup.Type "IronFeet"
+  Powerup.Duration -120
+  Powerup.Color "Green", 0.1
+  States
+  {
+  Spawn:
+    TNT1 A 1
+    Fail
+  }
+}
+
+Actor AntiHazmatProtection : PowerProtection
+{
+  DamageFactor "Poison", 0.1
+  DamageFactor "MariaGasGrenade", 0.1
+  //Add your custom poison-ish damagetypes here!
+}
+
+Actor AntiHazmatProtector : PowerupGiver
+{
+  +Inventory.AutoActivate
+  +Inventory.AlwaysPickup
+  Inventory.MaxAmount 0
+  Inventory.PickupMessage ""
+  Powerup.Type AntiHazmatProtection
+  Powerup.Duration -120
+  States
+  {
+  Spawn:
+    TNT1 A 1
+    Fail
+  }
+}
+
+ACTOR MariaOverkill : CustomInventory //replaces Berserk
+{
+  +COUNTITEM
+  +FLOATBOB
+  +INVENTORY.AUTOACTIVATE
+  +INVENTORY.ALWAYSPICKUP
+  +INVENTORY.FANCYPICKUPSOUND
+  FloatBobPhase 1
+  FloatBobStrength 0.5
+  Scale 0.7
+  Inventory.PickupSound "Maria/Powerup/Minigun"
+  Inventory.PickupMessage "$GOTOVERKILL"
+  States
+  {
+  Spawn:
+    OVKI ABCDCB 5 Bright
+    Loop
+  Pickup:
+    TNT1 A 0 A_PrintBold ("\c[White]Mother. Unleash the Fist of Iron.")
+    TNT1 A 0 A_GiveInventory("OverkillDuration")
+	TNT1 A 0 A_GiveInventory("MariaDeathMachine")
+	TNT1 A 0 A_SelectWeapon("MariaDeathMachine")
+    Stop
+  }
+}
+
+ACTOR OverkillDuration : PowerProtection
+{
+	Powerup.Color "Blue", 0.1
+	Powerup.Duration -20
+	+INVENTORY.ADDITIVETIME
+}
+
+ACTOR MariaCatPlushie : Megasphere //MariaMegaStone
+{
+	+COUNTITEM
+    //+FLOATBOB
+	+INVENTORY.ALWAYSPICKUP
+	Inventory.PickupMessage "$GOTCATPLUSH"
+	Inventory.PickupSound "Maria/Powerup/Mega"
+	//Inventory.PickupAnnouncerEntry "megasphere"
+	States
+	{
+	Spawn:
+		PL11 A 3
+		Loop
+	Pickup:
+        TNT1 A 0 A_PrintBold ("\c[Purple]Praise me!")
+		TNT1 A 0 A_GiveInventory("ChibiLife", 1)
+		TNT1 A 0 A_GiveInventory("ChibiArmor", 1)
+		Stop
+	}
+}	
+
+Actor ChibiArmor : BasicArmorPickup
+{
+  +Inventory.AutoActivate
+  +Inventory.AlwaysPickup
+  Inventory.Icon "MA_ARM4"
+  Armor.Savepercent 100.0
+  Armor.Saveamount 300
+  States
+  {
+  Spawn:
+    TNT1 A 0 Bright
+    Loop
+  }
+}
+
+ACTOR ChibiLife : Health
+{
+  +Inventory.AutoActivate
+  +Inventory.AlwaysPickup
+  Inventory.Amount 300
+  Inventory.MaxAmount 300
+  States
+  {
+  Spawn:
+    TNT1 A 0 Bright
+    Loop
+  }
+}
+
+//https://www.youtube.com/@UchiZero/featured

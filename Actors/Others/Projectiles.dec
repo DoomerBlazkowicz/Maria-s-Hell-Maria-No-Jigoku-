@@ -1,0 +1,2236 @@
+/////////////////////////////////
+//////////////Arrow//////////////
+/////////////////////////////////
+
+ACTOR MariaArrowMissile : FastProjectile //For Crossbow
+{
+	Radius 2
+	Height 4
+	Damage 30
+    Gravity 0.2
+	DamageType "Bleeding"
+	PoisonDamage 14, 6, 45
+	Speed 150
+	PROJECTILE
+    +DROPOFF
+	-NOGRAVITY
+	+STRIFEDAMAGE
+	+BLOODSPLATTER
+	+NOEXTREMEDEATH
+	+ADDITIVEPOISONDAMAGE
+	+ADDITIVEPOISONDURATION
+	+PIERCEARMOR
+	States
+	{
+		Spawn:
+			ARWP A 1 A_SpawnItem("MariaArrowTrail", 0, 0)
+			Loop
+		Death:
+		Crash:
+			NLPJ B 3 A_PlaySound("Weapon/Crossbow/Arrow/Hit")
+            TNT1 A 0 A_SetScale(0.3)
+	        TNT1 A 0 A_SetTranslucent(0.8)	  
+            MUFF AABCDE 1 BRIGHT
+			Stop
+		XDeath:
+			TNT1 A 10 A_PlaySound("Weapon/Crossbow/Arrow/Splatter")
+			Stop
+	}
+}
+
+ACTOR MariaArrowMissile2 : MariaArrowMissile //For Oscillator
+{
+	Radius 2
+	Height 4
+	Damage 35
+	DamageType "Bleeding"
+	PoisonDamage 2, 2, 5
+	Speed 150
+}
+
+
+Actor MariaArrowTrail
+{
+  +ForceXYBillBoard
+  +NoInteraction
+  Radius 4
+  Height 8
+  Renderstyle "Add"
+  Alpha 0.75
+  //Scale 0.65
+  States
+  {
+  Spawn:
+    ARTR ABCDEF 1 Bright
+    Stop
+  }
+}
+
+/////////////////////////////////
+///////////Grenades//////////////
+/////////////////////////////////
+
+ACTOR ShinigamiGrenade //From removed Shinigami, now serves as a base for Grenades
+{
+	Radius 5
+	Height 5
+    Speed 60	
+	//Mass 9	
+    Damage (random(102,120))
+    //+NOBLOCKMAP
+    //+DROPOFF
+    +MISSILE
+    +ACTIVATEIMPACT
+    +ACTIVATEPCROSS
+    +NOTELEPORT
+    +FORCEXYBILLBOARD
+    +THRUGHOST
+	BounceSound "Weapon/Shinigami/Grenade/Bounce"
+    Gravity 0.7
+    ReactionTime 139
+	DeathSound "Weapon/RocketLauncher/Boom"
+	Obituary "$OB_GRENADE"
+	DamageType "UGL"
+	DamageType Grenade
+	States
+	{
+	Spawn:
+		TNT1 A 0
+		TNT1 A 0 A_Changevelocity(0,0,2,CVF_RELATIVE)
+	Spawn2:
+		HLGR AA 2 bright //A_CountDown
+		Loop
+	Death:
+        TNT1 A 0 A_JumpIf(CallACS("AntiTinnitus")==1, "NoRinging")
+		GLXP A 0 Bright A_NoGravity
+		TNT1 A 0 Bright radius_quake(7,24,0,960,0)
+		GLXP A 0 bright A_Explode(128,256)
+		GLXP A 0 A_SetTranslucent(0.75,1)
+		//RCKT A 2 Bright 
+		TNT1 A 0 A_PlaySound("Maria/Explosion/Ear",5,1,0,1)
+		TNT1 A 0 A_SpawnItemEx("MariaShockWave")
+        TNT1 AAAAAAAAAA 0 A_SpawnItemEx("MariaMediumExplosionFlames",0,0,0,Random(-10,10),Random(-10,10),Random(-10,10))
+        TNT1 AAAAAAAAAAAAAAA 0 A_SpawnItemEx("MariaExplosionSmoke",0,0,0,Random(-10,10),Random(-10,10),Random(-10,10))
+		stop
+	NoRinging:
+		GLXP A 0 Bright A_NoGravity
+		TNT1 A 0 Bright radius_quake(7,24,0,960,0)
+		GLXP A 0 bright A_Explode(128,256,1,1)
+		GLXP A 0 A_SetTranslucent(0.75,1)
+		//RCKT A 2 Bright 
+		TNT1 A 0 A_SpawnItemEx("MariaShockWave")
+        TNT1 AAAAAAAAAA 0 A_SpawnItemEx("MariaMediumExplosionFlames",0,0,0,Random(-10,10),Random(-10,10),Random(-10,10))
+        TNT1 AAAAAAAAAAAAAAA 0 A_SpawnItemEx("MariaExplosionSmoke",0,0,0,Random(-10,10),Random(-10,10),Random(-10,10))
+		stop
+	}
+}
+
+ACTOR MariaGrenadeLauncherGrenade : ShinigamiGrenade //For Thumper
+{
+    Speed 80	
+    Damage 225
+	States
+	{
+	Spawn:
+		TNT1 A 0
+		TNT1 A 0 A_Changevelocity(0,0,2,CVF_RELATIVE)
+	Spawn2:
+		HLGR AA 2 bright //A_CountDown
+		Loop
+	Death:
+        TNT1 A 0 A_JumpIf(CallACS("AntiTinnitus")==1, "NoRinging")
+		GLXP A 0 Bright A_NoGravity
+		TNT1 A 0 Bright radius_quake(7,16,0,960,0)
+		GLXP A 0 bright A_Explode(200,256,1,1)
+		GLXP A 0 A_SetTranslucent(0.75,1)
+		//RCKT A 2 Bright 
+		TNT1 A 0 A_PlaySound("Maria/Explosion/Ear",5,1,0,1)
+		TNT1 A 0 A_SpawnItemEx("MariaShockWave")
+        TNT1 AAAAAAAAAA 0 A_SpawnItemEx("MariaMediumExplosionFlames",0,0,0,Random(-10,10),Random(-10,10),Random(-10,10))
+        TNT1 AAAAAAAAAAAAAAA 0 A_SpawnItemEx("MariaExplosionSmoke",0,0,0,Random(-10,10),Random(-10,10),Random(-10,10))
+		stop
+	NoRinging:
+		GLXP A 0 Bright A_NoGravity
+		TNT1 A 0 Bright radius_quake(7,16,0,960,0)
+		GLXP A 0 bright A_Explode(200,256,1,1)
+		GLXP A 0 A_SetTranslucent(0.75,1)
+		//RCKT A 2 Bright 
+		TNT1 A 0 A_SpawnItemEx("MariaShockWave")
+        TNT1 AAAAAAAAAA 0 A_SpawnItemEx("MariaMediumExplosionFlames",0,0,0,Random(-10,10),Random(-10,10),Random(-10,10))
+        TNT1 AAAAAAAAAAAAAAA 0 A_SpawnItemEx("MariaExplosionSmoke",0,0,0,Random(-10,10),Random(-10,10),Random(-10,10))
+		stop
+	}
+}
+
+ACTOR MariaMicroRocket : ShinigamiGrenade //For Micro Rocket Launcher 
+{
+    Gravity 0.3
+    Speed 100	
+    Damage 225
+	States
+	{
+	Spawn:
+		TNT1 A 0
+		TNT1 A 0 A_Changevelocity(0,0,2,CVF_RELATIVE)
+	Spawn2:
+		HLGR A 1 Bright
+        {
+        //A_PlaySound("weapons/rocket/fly")
+        A_SpawnItem("MariaRocketFlare", -20, 0);
+        A_SpawnItem("MariaSmokeTrail", 0, 0);
+		A_SpawnItem("MariaFlameTrails", 0, 0);
+        }
+		Loop
+	Death:
+        TNT1 A 0 A_JumpIf(CallACS("AntiTinnitus")==1, "NoRinging")
+		GLXP A 0 Bright A_NoGravity
+		TNT1 A 0 Bright radius_quake(7,16,0,960,0)
+		GLXP A 0 bright A_Explode(200,256,1,1)
+		GLXP A 0 A_SetTranslucent(0.75,1)
+		//RCKT A 2 Bright 
+		TNT1 A 0 A_PlaySound("Maria/Explosion/Ear",5,1,0,1)
+		TNT1 A 0 A_SpawnItemEx("MariaShockWave")
+        TNT1 AAAAAAAAAA 0 A_SpawnItemEx("MariaMediumExplosionFlames",0,0,0,Random(-10,10),Random(-10,10),Random(-10,10))
+        TNT1 AAAAAAAAAAAAAAA 0 A_SpawnItemEx("MariaExplosionSmoke",0,0,0,Random(-10,10),Random(-10,10),Random(-10,10))
+		stop
+	NoRinging:
+		GLXP A 0 Bright A_NoGravity
+		TNT1 A 0 Bright radius_quake(7,16,0,960,0)
+		GLXP A 0 bright A_Explode(200,256,1,1)
+		GLXP A 0 A_SetTranslucent(0.75,1)
+		//RCKT A 2 Bright 
+		TNT1 A 0 A_SpawnItemEx("MariaShockWave")
+        TNT1 AAAAAAAAAA 0 A_SpawnItemEx("MariaMediumExplosionFlames",0,0,0,Random(-10,10),Random(-10,10),Random(-10,10))
+        TNT1 AAAAAAAAAAAAAAA 0 A_SpawnItemEx("MariaExplosionSmoke",0,0,0,Random(-10,10),Random(-10,10),Random(-10,10))
+		stop
+	}
+}
+
+/////////////////////////////////
+///////////FlameTracer///////////
+/////////////////////////////////
+
+ACTOR MariaFlameTracer : FastProjectile
+{
+	Alpha 0.90
+	RenderStyle Add
+	Radius 2
+	Height 2
+	Speed 100
+    Damage 15
+	PROJECTILE
+    +THRUGHOST
+    +THRUSPECIES
+    +NOTIMEFREEZE
+    +NOEXTREMEDEATH
+    +BLOODSPLATTER
+    //DamageType Bullet
+	DamageType Fire
+	MissileHeight 8
+	Decal BulletChip
+	DeathSound "booletricochet"
+	States
+	{
+	Spawn:
+		INCB A 1 BRIGHT
+        {
+        A_SpawnItem("MariaFlameBulletFlare", 0, 0);
+		A_SpawnItem("MariaFlameTracerTrail", 0, 0);
+        }
+		Loop
+	Death:
+		PUFF A 0 BRIGHT
+	Crash:
+        TNT1 A 0 A_SetScale(0.3)
+	    TNT1 A 0 A_SetTranslucent(0.8)
+        TNT1 A 0 A_PlaySound("booletricochet")	  
+        MUFF AABCDE 1 BRIGHT
+		Stop
+	XDeath:
+		TNT1 A 3 A_PlaySound("hitflesh")
+		Stop
+	}
+}
+
+ACTOR MariaFlameTracerTrail
+{
+    +ForceXYBillBoard
+    +NoInteraction
+    Radius 4
+    Height 8
+	RenderStyle Add
+	Alpha 0.50
+    Scale 0.15
+	States
+	{
+		Spawn:
+			FRPR ABCDEFG 2 BRIGHT
+			Stop
+	}
+}
+
+ACTOR MariaDragonsBreathTracer : MariaFlameTracer //For USAS-12
+{
+    Damage 7
+}
+
+ACTOR MariaFlameArrowMissile : MariaArrowMissile //For Oscillator
+{
+	Radius 2
+	Height 4
+	Damage (random(30,60))
+    Gravity 0.2
+	DamageType Fire
+	//PoisonDamage 14, 6, 45
+	Speed 150
+	PROJECTILE
+    +DROPOFF
+	-NOGRAVITY
+	+STRIFEDAMAGE
+	+BLOODSPLATTER
+	+NOEXTREMEDEATH
+	-ADDITIVEPOISONDAMAGE
+	-ADDITIVEPOISONDURATION
+	+PIERCEARMOR
+	States
+	{
+		Spawn:
+			AROP A 1
+            {
+            A_SpawnItem("MariaFlameBulletFlare", 0, 0);
+	    	A_SpawnItem("MariaFlameTracerTrail", 0, 0);
+            }
+			Loop
+	}
+}
+
+/////////////////////////////////
+//////////////Flame//////////////
+/////////////////////////////////
+
+Actor MariaSprayFlame //For Aerosol Can
+{
+    Radius 2
+    Height 2
+    Speed 20
+	Damage 1
+	Projectile	
+	RenderStyle add
+    Gravity 0
+    Scale 0.3
+	alpha 1
+	DamageType "Fire"
+    PoisonDamage 7, 10, 5
+    Obituary "%o was incinerated by %k."
+	Decal "Scorch"
+	Projectile
+    +NOBLOCKMAP
+    +NOTELEPORT
+    +DONTSPLASH
+	+MISSILE
+	+FORCEXYBILLBOARD
+	+STRIFEDAMAGE
+	-RIPPER
+	+NOBLOOD
+	+NOBLOODDECALS
+	+BLOODLESSIMPACT
+	-BLOODSPLATTER
+	States
+	{
+	Spawn:
+     HONO A 1 Bright
+     TNT1 A 0 A_Explode(1, 100, 0)
+     HONO B 1 Bright
+     TNT1 A 0 A_Explode(1, 100, 0)
+     HONO C 1 Bright
+     TNT1 A 0 A_Explode(1, 100, 0)
+     HONO D 1 Bright
+     TNT1 A 0 A_Explode(1, 100, 0)
+     HONO E 1 Bright
+     TNT1 A 0 A_Explode(1, 100, 0)
+     HONO F 1 Bright
+     TNT1 A 0 A_Explode(1, 100, 0)
+     HONO G 1 Bright 
+     TNT1 A 0 A_Explode(1, 100, 0)
+     HONO H 1 Bright 
+     TNT1 A 0 A_Explode(1, 100, 0)
+     HONO I 1 Bright 
+     TNT1 A 0 A_Explode(1, 100, 0)
+     HONO J 1 Bright 
+     TNT1 A 0 A_Explode(1, 100, 0)
+     HONO K 1 Bright 
+     TNT1 A 0 A_Explode(1, 100, 0)
+     HONO L 1 Bright 
+     TNT1 A 0 A_Explode(1, 100, 0)
+     HONO M 1 Bright 
+     TNT1 A 0 A_Explode(1, 100, 0)
+     HONO N 1 Bright 
+     TNT1 A 0 A_Explode(1, 100, 0)
+     HONO O 1 Bright 
+     TNT1 A 0 A_Explode(1, 100, 0)
+     HONO P 1 Bright 
+     TNT1 A 0 A_Explode(1, 100, 0)
+	stop
+   Death:
+ 	 HONO ABCDEFGHIJKLMNOP 1 Bright
+     TNT1 A 0 A_Explode(1, 50)
+      stop
+	}
+}
+
+Actor MariaIncineratorFlame : MariaSprayFlame //For Incinerator
+{
+    Speed 50
+	Damage 5
+	Projectile	
+	RenderStyle add
+    Gravity 0
+    Scale 0.6
+	alpha 1
+	DamageType "Fire"
+    PoisonDamage 0, 0, 0
+    Obituary "%o was incinerated by %k."
+	Decal "Scorch"
+	Projectile
+    +NOBLOCKMAP
+    +NOTELEPORT
+    +DONTSPLASH
+	+MISSILE
+    +FORCERADIUSDMG
+	+FORCEXYBILLBOARD
+	+STRIFEDAMAGE
+	-RIPPER
+	+NOBLOOD
+	+NOBLOODDECALS
+	+BLOODLESSIMPACT
+	-BLOODSPLATTER
+	States
+	{
+	Spawn:
+     HONO A 2 Bright
+     TNT1 A 0 A_Explode(5, 125, 0)
+     HONO B 2 Bright
+     TNT1 A 0 A_Explode(5, 125, 0)
+     HONO C 2 Bright
+     TNT1 A 0 A_Explode(5, 125, 0)
+     HONO D 2 Bright
+     TNT1 A 0 A_Explode(5, 125, 0)
+     HONO E 2 Bright
+     TNT1 A 0 A_Explode(5, 125, 0)
+     HONO F 2 Bright
+     TNT1 A 0 A_Explode(5, 125, 0)
+     HONO G 2 Bright 
+     TNT1 A 0 A_Explode(5, 125, 0)
+     HONO H 2 Bright 
+     TNT1 A 0 A_Explode(5, 125, 0)
+     HONO I 2 Bright 
+     TNT1 A 0 A_Explode(5, 125, 0)
+     HONO J 2 Bright 
+     TNT1 A 0 A_Explode(5, 125, 0)
+     HONO K 2 Bright 
+     TNT1 A 0 A_Explode(5, 125, 0)
+     HONO L 2 Bright 
+     TNT1 A 0 A_Explode(5, 125, 0)
+     HONO M 2 Bright 
+     TNT1 A 0 A_Explode(5, 125, 0)
+     HONO N 2 Bright 
+     TNT1 A 0 A_Explode(5, 125, 0)
+     HONO O 2 Bright 
+     TNT1 A 0 A_Explode(5, 125, 0)
+     HONO P 2 Bright 
+     TNT1 A 0 A_Explode(5, 125, 0)
+	stop
+   Death:
+     TNT1 A 0 A_Explode(16, 128)
+ 	 HONO ABCDEFGHIJKLMNOP 2 Bright
+      stop
+	}
+}
+
+/////////////////////////////////
+/////////////Plasmas/////////////
+/////////////////////////////////
+//NOTE: TOO FUCKING LONG!
+
+ACTOR MariaPlasmaBall : PlasmaBall //Replaces PlasmaBall
+{
+  Alpha 1
+  Scale 0.5
+  Height 4
+  Radius 4
+  Speed 60
+  Damage (random(40, 40))
+  DamageType Plasma  
+  Decal "PlasmaScorchLower"
+  Projectile
+  +MISSILE
+  +BLOODLESSIMPACT 
+  +NOEXTREMEDEATH
+  +FORCERADIUSDMG
+  +NOBLOOD
+  -RANDOMIZE
+  SeeSound ""
+  DeathSound "Weapon/PlasmaRifle/Ball"
+  RenderStyle Add 
+  States
+  {
+  Spawn:
+    PLPB A 1 Bright A_SpawnItem("MariaPlasmaFlare", 0, 0)
+	TNT1 A 0 A_SpawnItemEx("MariaPlasmaBallTrail1",(3 *momx)/-35.0,-(3 *momy)/-35.0,0+(3 *momz)/-35.0,0,0,0,0,SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx("MariaPlasmaBallTrail2",(6 *momx)/-35.0,-(6 *momy)/-35.0,0+(6 *momz)/-35.0,0,0,0,0,SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx("MariaPlasmaBallTrail3",(9 *momx)/-35.0,-(9 *momy)/-35.0,0+(9 *momz)/-35.0,0,0,0,0,SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx("MariaPlasmaBallTrail4",(12*momx)/-35.0,-(12*momy)/-35.0,0+(12*momz)/-35.0,0,0,0,0,SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx("MariaPlasmaBallTrail5",(15*momx)/-35.0,-(15*momy)/-35.0,0+(15*momz)/-35.0,0,0,0,0,SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx("MariaPlasmaBallTrail6",(18*momx)/-35.0,-(18*momy)/-35.0,0+(18*momz)/-35.0,0,0,0,0,SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx("MariaPlasmaBallTrail7",(21*momx)/-35.0,-(21*momy)/-35.0,0+(21*momz)/-35.0,0,0,0,0,SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx("MariaPlasmaBallTrail8",(24*momx)/-35.0,-(24*momy)/-35.0,0+(24*momz)/-35.0,0,0,0,0,SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx("MariaPlasmaBallTrail9",(27*momx)/-35.0,-(27*momy)/-35.0,0+(27*momz)/-35.0,0,0,0,0,SXF_ABSOLUTEANGLE)
+    PLPB B 1 Bright A_SpawnItem("MariaPlasmaFlare", 0, 0)
+	TNT1 A 0 A_SpawnItemEx("MariaPlasmaBallTrail1",(3 *momx)/-35.0,-(3 *momy)/-35.0,0+(3 *momz)/-35.0,0,0,0,0,SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx("MariaPlasmaBallTrail2",(6 *momx)/-35.0,-(6 *momy)/-35.0,0+(6 *momz)/-35.0,0,0,0,0,SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx("MariaPlasmaBallTrail3",(9 *momx)/-35.0,-(9 *momy)/-35.0,0+(9 *momz)/-35.0,0,0,0,0,SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx("MariaPlasmaBallTrail4",(12*momx)/-35.0,-(12*momy)/-35.0,0+(12*momz)/-35.0,0,0,0,0,SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx("MariaPlasmaBallTrail5",(15*momx)/-35.0,-(15*momy)/-35.0,0+(15*momz)/-35.0,0,0,0,0,SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx("MariaPlasmaBallTrail6",(18*momx)/-35.0,-(18*momy)/-35.0,0+(18*momz)/-35.0,0,0,0,0,SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx("MariaPlasmaBallTrail7",(21*momx)/-35.0,-(21*momy)/-35.0,0+(21*momz)/-35.0,0,0,0,0,SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx("MariaPlasmaBallTrail8",(24*momx)/-35.0,-(24*momy)/-35.0,0+(24*momz)/-35.0,0,0,0,0,SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx("MariaPlasmaBallTrail9",(27*momx)/-35.0,-(27*momy)/-35.0,0+(27*momz)/-35.0,0,0,0,0,SXF_ABSOLUTEANGLE)
+    PLPB C 1 Bright A_SpawnItem("MariaPlasmaFlare", 0, 0) 
+	TNT1 A 0 A_SpawnItemEx("MariaPlasmaBallTrail1",(3 *momx)/-35.0,-(3 *momy)/-35.0,0+(3 *momz)/-35.0,0,0,0,0,SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx("MariaPlasmaBallTrail2",(6 *momx)/-35.0,-(6 *momy)/-35.0,0+(6 *momz)/-35.0,0,0,0,0,SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx("MariaPlasmaBallTrail3",(9 *momx)/-35.0,-(9 *momy)/-35.0,0+(9 *momz)/-35.0,0,0,0,0,SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx("MariaPlasmaBallTrail4",(12*momx)/-35.0,-(12*momy)/-35.0,0+(12*momz)/-35.0,0,0,0,0,SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx("MariaPlasmaBallTrail5",(15*momx)/-35.0,-(15*momy)/-35.0,0+(15*momz)/-35.0,0,0,0,0,SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx("MariaPlasmaBallTrail6",(18*momx)/-35.0,-(18*momy)/-35.0,0+(18*momz)/-35.0,0,0,0,0,SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx("MariaPlasmaBallTrail7",(21*momx)/-35.0,-(21*momy)/-35.0,0+(21*momz)/-35.0,0,0,0,0,SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx("MariaPlasmaBallTrail8",(24*momx)/-35.0,-(24*momy)/-35.0,0+(24*momz)/-35.0,0,0,0,0,SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx("MariaPlasmaBallTrail9",(27*momx)/-35.0,-(27*momy)/-35.0,0+(27*momz)/-35.0,0,0,0,0,SXF_ABSOLUTEANGLE)
+    PLPB D 1 Bright A_SpawnItem("MariaPlasmaFlare", 0, 0) 
+	TNT1 A 0 A_SpawnItemEx("MariaPlasmaBallTrail1",(3 *momx)/-35.0,-(3 *momy)/-35.0,0+(3 *momz)/-35.0,0,0,0,0,SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx("MariaPlasmaBallTrail2",(6 *momx)/-35.0,-(6 *momy)/-35.0,0+(6 *momz)/-35.0,0,0,0,0,SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx("MariaPlasmaBallTrail3",(9 *momx)/-35.0,-(9 *momy)/-35.0,0+(9 *momz)/-35.0,0,0,0,0,SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx("MariaPlasmaBallTrail4",(12*momx)/-35.0,-(12*momy)/-35.0,0+(12*momz)/-35.0,0,0,0,0,SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx("MariaPlasmaBallTrail5",(15*momx)/-35.0,-(15*momy)/-35.0,0+(15*momz)/-35.0,0,0,0,0,SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx("MariaPlasmaBallTrail6",(18*momx)/-35.0,-(18*momy)/-35.0,0+(18*momz)/-35.0,0,0,0,0,SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx("MariaPlasmaBallTrail7",(21*momx)/-35.0,-(21*momy)/-35.0,0+(21*momz)/-35.0,0,0,0,0,SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx("MariaPlasmaBallTrail8",(24*momx)/-35.0,-(24*momy)/-35.0,0+(24*momz)/-35.0,0,0,0,0,SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx("MariaPlasmaBallTrail9",(27*momx)/-35.0,-(27*momy)/-35.0,0+(27*momz)/-35.0,0,0,0,0,SXF_ABSOLUTEANGLE)
+	Loop
+  Death:
+    TNT1 A 0 A_SetScale (1.0)
+    TNT1 A 0 //A_Explode(6,50)
+    TNT1 AAA 0 A_SpawnProjectile("MariaMiniSmoke", 1, 0, random(0, 360), CMF_AIMDIRECTION, random(0, -160))
+	PLPE ABCDE 2 Bright
+	Stop
+  XDeath:
+    TNT1 A 0 A_SetScale (1.0)
+    TNT1 A 0 //A_Explode(6,50)
+    TNT1 AAA 0 A_SpawnProjectile("MariaMiniSmoke", 1, 0, random(0, 360), CMF_AIMDIRECTION, random(0, -160))
+	PLPE ABCDE 2 Bright
+	Stop
+  }
+}
+
+Actor MariaPlasmaBallTrail1
+{
+Scale 0.4
+Alpha 0.99
+Renderstyle Add
++THRUACTORS
++CLIENTSIDEONLY
++NOBLOCKMAP
++NOGRAVITY
+	States
+	{
+	Spawn:
+		PLPB AB 1 Bright A_SpawnItem("MariaPlasmaFlare", 0, 0)
+		Stop
+	}
+}
+
+Actor MariaPlasmaBallTrail2 : MariaPlasmaBallTrail1
+{
+Alpha 0.8
+	States
+	{
+	Spawn:
+		PLPB CD 1 Bright A_SpawnItem("MariaPlasmaFlare", 0, 0)
+		Stop
+	}
+}
+
+Actor MariaPlasmaBallTrail3 : MariaPlasmaBallTrail1
+{
+Alpha 0.7
+}
+
+Actor MariaPlasmaBallTrail4 : MariaPlasmaBallTrail2
+{
+Alpha 0.6
+}
+
+Actor MariaPlasmaBallTrail5 : MariaPlasmaBallTrail2
+{
+Alpha 0.5
+}
+
+Actor MariaPlasmaBallTrail6 : MariaPlasmaBallTrail1
+{
+Alpha 0.4
+}
+
+Actor MariaPlasmaBallTrail7 : MariaPlasmaBallTrail2
+{
+Alpha 0.3
+}
+
+Actor MariaPlasmaBallTrail8 : MariaPlasmaBallTrail1
+{
+Alpha 0.2
+}
+
+Actor MariaPlasmaBallTrail9 : MariaPlasmaBallTrail2
+{
+Alpha 0.1
+}
+
+ACTOR MariaRedPlasmaBall : MariaPlasmaBall //Replaces PlasmaBall
+{
+  Damage (random(60, 60))
+  States
+  {
+  Spawn:
+    REBB A 1 Bright A_SpawnItem("MariaRedPlasmaFlare", 0, 0)
+	TNT1 A 0 A_SpawnItemEx("MariaRedPlasmaBallTrail1",(3 *momx)/-35.0,-(3 *momy)/-35.0,0+(3 *momz)/-35.0,0,0,0,0,SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx("MariaRedPlasmaBallTrail2",(6 *momx)/-35.0,-(6 *momy)/-35.0,0+(6 *momz)/-35.0,0,0,0,0,SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx("MariaRedPlasmaBallTrail3",(9 *momx)/-35.0,-(9 *momy)/-35.0,0+(9 *momz)/-35.0,0,0,0,0,SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx("MariaRedPlasmaBallTrail4",(12*momx)/-35.0,-(12*momy)/-35.0,0+(12*momz)/-35.0,0,0,0,0,SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx("MariaRedPlasmaBallTrail5",(15*momx)/-35.0,-(15*momy)/-35.0,0+(15*momz)/-35.0,0,0,0,0,SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx("MariaRedPlasmaBallTrail6",(18*momx)/-35.0,-(18*momy)/-35.0,0+(18*momz)/-35.0,0,0,0,0,SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx("MariaRedPlasmaBallTrail7",(21*momx)/-35.0,-(21*momy)/-35.0,0+(21*momz)/-35.0,0,0,0,0,SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx("MariaRedPlasmaBallTrail8",(24*momx)/-35.0,-(24*momy)/-35.0,0+(24*momz)/-35.0,0,0,0,0,SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx("MariaRedPlasmaBallTrail9",(27*momx)/-35.0,-(27*momy)/-35.0,0+(27*momz)/-35.0,0,0,0,0,SXF_ABSOLUTEANGLE)
+    REBB B 1 Bright A_SpawnItem("MariaRedPlasmaFlare", 0, 0)
+	TNT1 A 0 A_SpawnItemEx("MariaRedPlasmaBallTrail1",(3 *momx)/-35.0,-(3 *momy)/-35.0,0+(3 *momz)/-35.0,0,0,0,0,SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx("MariaRedPlasmaBallTrail2",(6 *momx)/-35.0,-(6 *momy)/-35.0,0+(6 *momz)/-35.0,0,0,0,0,SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx("MariaRedPlasmaBallTrail3",(9 *momx)/-35.0,-(9 *momy)/-35.0,0+(9 *momz)/-35.0,0,0,0,0,SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx("MariaRedPlasmaBallTrail4",(12*momx)/-35.0,-(12*momy)/-35.0,0+(12*momz)/-35.0,0,0,0,0,SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx("MariaRedPlasmaBallTrail5",(15*momx)/-35.0,-(15*momy)/-35.0,0+(15*momz)/-35.0,0,0,0,0,SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx("MariaRedPlasmaBallTrail6",(18*momx)/-35.0,-(18*momy)/-35.0,0+(18*momz)/-35.0,0,0,0,0,SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx("MariaRedPlasmaBallTrail7",(21*momx)/-35.0,-(21*momy)/-35.0,0+(21*momz)/-35.0,0,0,0,0,SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx("MariaRedPlasmaBallTrail8",(24*momx)/-35.0,-(24*momy)/-35.0,0+(24*momz)/-35.0,0,0,0,0,SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx("MariaRedPlasmaBallTrail9",(27*momx)/-35.0,-(27*momy)/-35.0,0+(27*momz)/-35.0,0,0,0,0,SXF_ABSOLUTEANGLE)
+    REBB C 1 Bright A_SpawnItem("MariaRedPlasmaFlare", 0, 0)
+	TNT1 A 0 A_SpawnItemEx("MariaRedPlasmaBallTrail1",(3 *momx)/-35.0,-(3 *momy)/-35.0,0+(3 *momz)/-35.0,0,0,0,0,SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx("MariaRedPlasmaBallTrail2",(6 *momx)/-35.0,-(6 *momy)/-35.0,0+(6 *momz)/-35.0,0,0,0,0,SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx("MariaRedPlasmaBallTrail3",(9 *momx)/-35.0,-(9 *momy)/-35.0,0+(9 *momz)/-35.0,0,0,0,0,SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx("MariaRedPlasmaBallTrail4",(12*momx)/-35.0,-(12*momy)/-35.0,0+(12*momz)/-35.0,0,0,0,0,SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx("MariaRedPlasmaBallTrail5",(15*momx)/-35.0,-(15*momy)/-35.0,0+(15*momz)/-35.0,0,0,0,0,SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx("MariaRedPlasmaBallTrail6",(18*momx)/-35.0,-(18*momy)/-35.0,0+(18*momz)/-35.0,0,0,0,0,SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx("MariaRedPlasmaBallTrail7",(21*momx)/-35.0,-(21*momy)/-35.0,0+(21*momz)/-35.0,0,0,0,0,SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx("MariaRedPlasmaBallTrail8",(24*momx)/-35.0,-(24*momy)/-35.0,0+(24*momz)/-35.0,0,0,0,0,SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx("MariaRedPlasmaBallTrail9",(27*momx)/-35.0,-(27*momy)/-35.0,0+(27*momz)/-35.0,0,0,0,0,SXF_ABSOLUTEANGLE)
+    REBB D 1 Bright A_SpawnItem("MariaRedPlasmaFlare", 0, 0)
+	TNT1 A 0 A_SpawnItemEx("MariaRedPlasmaBallTrail1",(3 *momx)/-35.0,-(3 *momy)/-35.0,0+(3 *momz)/-35.0,0,0,0,0,SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx("MariaRedPlasmaBallTrail2",(6 *momx)/-35.0,-(6 *momy)/-35.0,0+(6 *momz)/-35.0,0,0,0,0,SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx("MariaRedPlasmaBallTrail3",(9 *momx)/-35.0,-(9 *momy)/-35.0,0+(9 *momz)/-35.0,0,0,0,0,SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx("MariaRedPlasmaBallTrail4",(12*momx)/-35.0,-(12*momy)/-35.0,0+(12*momz)/-35.0,0,0,0,0,SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx("MariaRedPlasmaBallTrail5",(15*momx)/-35.0,-(15*momy)/-35.0,0+(15*momz)/-35.0,0,0,0,0,SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx("MariaRedPlasmaBallTrail6",(18*momx)/-35.0,-(18*momy)/-35.0,0+(18*momz)/-35.0,0,0,0,0,SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx("MariaRedPlasmaBallTrail7",(21*momx)/-35.0,-(21*momy)/-35.0,0+(21*momz)/-35.0,0,0,0,0,SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx("MariaRedPlasmaBallTrail8",(24*momx)/-35.0,-(24*momy)/-35.0,0+(24*momz)/-35.0,0,0,0,0,SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx("MariaRedPlasmaBallTrail9",(27*momx)/-35.0,-(27*momy)/-35.0,0+(27*momz)/-35.0,0,0,0,0,SXF_ABSOLUTEANGLE)
+	Loop
+  Death:
+    TNT1 A 0 A_SetScale (1.0)
+    TNT1 A 0 //A_Explode(9,55)
+    TNT1 AAAAAA 0 A_SpawnProjectile("MariaMiniSmoke", 1, 0, random(0, 360), CMF_AIMDIRECTION, random(0, -160))
+	REBE ABCDE 2 Bright
+	Stop
+  XDeath:
+    TNT1 A 0 A_SetScale (1.0)
+    TNT1 A 0 //A_Explode(9,55)
+    TNT1 AAAAAA 0 A_SpawnProjectile("MariaMiniSmoke", 1, 0, random(0, 360), CMF_AIMDIRECTION, random(0, -160))
+	REBE ABCDE 2 Bright
+	Stop
+  }
+} 
+
+Actor MariaRedPlasmaBallTrail1
+{
+Scale 0.4
+Alpha 0.99
+Renderstyle Add
++THRUACTORS
++CLIENTSIDEONLY
++NOBLOCKMAP
++NOGRAVITY
+	States
+	{
+	Spawn:
+		REBB AB 1 Bright A_SpawnItem("MariaRedPlasmaFlare", 0, 0)
+		Stop
+	}
+}
+
+Actor MariaRedPlasmaBallTrail2 : MariaRedPlasmaBallTrail1
+{
+Alpha 0.8
+	States
+	{
+	Spawn:
+		REBB CD 1 Bright A_SpawnItem("MariaRedPlasmaFlare", 0, 0)
+		Stop
+	}
+}
+
+Actor MariaRedPlasmaBallTrail3 : MariaRedPlasmaBallTrail1
+{
+Alpha 0.7
+}
+
+Actor MariaRedPlasmaBallTrail4 : MariaRedPlasmaBallTrail2
+{
+Alpha 0.6
+}
+
+Actor MariaRedPlasmaBallTrail5 : MariaRedPlasmaBallTrail2
+{
+Alpha 0.5
+}
+
+Actor MariaRedPlasmaBallTrail6 : MariaRedPlasmaBallTrail1
+{
+Alpha 0.4
+}
+
+Actor MariaRedPlasmaBallTrail7 : MariaRedPlasmaBallTrail2
+{
+Alpha 0.3
+}
+
+Actor MariaRedPlasmaBallTrail8 : MariaRedPlasmaBallTrail1
+{
+Alpha 0.2
+}
+
+Actor MariaRedPlasmaBallTrail9 : MariaRedPlasmaBallTrail2
+{
+Alpha 0.1
+}
+
+ACTOR MariaLunarPlasmaBall : MariaPlasmaBall //Replaces PlasmaBall
+{
+  Alpha 1
+  Scale 0.5
+  Height 4
+  Radius 4
+  Speed 60
+  Damage (random(40, 40))
+  DamageType Plasma  
+  Decal "PlasmaScorchLower"
+  Projectile
+  +MISSILE
+  +BLOODLESSIMPACT 
+  +NOEXTREMEDEATH
+  +FORCERADIUSDMG
+  +NOBLOOD
+  -RANDOMIZE
+  SeeSound ""
+  DeathSound "Weapon/PlasmaRifle/Ball"
+  RenderStyle Add 
+  States
+  {
+  Spawn:
+    BLPB A 1 Bright A_SpawnItem("MariaLunarPlasmaFlare", 0, 0)
+	TNT1 A 0 A_SpawnItemEx("MariaLunarPlasmaBallTrail1",(3 *momx)/-35.0,-(3 *momy)/-35.0,0+(3 *momz)/-35.0,0,0,0,0,SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx("MariaLunarPlasmaBallTrail2",(6 *momx)/-35.0,-(6 *momy)/-35.0,0+(6 *momz)/-35.0,0,0,0,0,SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx("MariaLunarPlasmaBallTrail3",(9 *momx)/-35.0,-(9 *momy)/-35.0,0+(9 *momz)/-35.0,0,0,0,0,SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx("MariaLunarPlasmaBallTrail4",(12*momx)/-35.0,-(12*momy)/-35.0,0+(12*momz)/-35.0,0,0,0,0,SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx("MariaLunarPlasmaBallTrail5",(15*momx)/-35.0,-(15*momy)/-35.0,0+(15*momz)/-35.0,0,0,0,0,SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx("MariaLunarPlasmaBallTrail6",(18*momx)/-35.0,-(18*momy)/-35.0,0+(18*momz)/-35.0,0,0,0,0,SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx("MariaLunarPlasmaBallTrail7",(21*momx)/-35.0,-(21*momy)/-35.0,0+(21*momz)/-35.0,0,0,0,0,SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx("MariaLunarPlasmaBallTrail8",(24*momx)/-35.0,-(24*momy)/-35.0,0+(24*momz)/-35.0,0,0,0,0,SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx("MariaLunarPlasmaBallTrail9",(27*momx)/-35.0,-(27*momy)/-35.0,0+(27*momz)/-35.0,0,0,0,0,SXF_ABSOLUTEANGLE)
+    BLPB B 1 Bright A_SpawnItem("MariaLunarPlasmaFlare", 0, 0)
+	TNT1 A 0 A_SpawnItemEx("MariaLunarPlasmaBallTrail1",(3 *momx)/-35.0,-(3 *momy)/-35.0,0+(3 *momz)/-35.0,0,0,0,0,SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx("MariaLunarPlasmaBallTrail2",(6 *momx)/-35.0,-(6 *momy)/-35.0,0+(6 *momz)/-35.0,0,0,0,0,SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx("MariaLunarPlasmaBallTrail3",(9 *momx)/-35.0,-(9 *momy)/-35.0,0+(9 *momz)/-35.0,0,0,0,0,SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx("MariaLunarPlasmaBallTrail4",(12*momx)/-35.0,-(12*momy)/-35.0,0+(12*momz)/-35.0,0,0,0,0,SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx("MariaLunarPlasmaBallTrail5",(15*momx)/-35.0,-(15*momy)/-35.0,0+(15*momz)/-35.0,0,0,0,0,SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx("MariaLunarPlasmaBallTrail6",(18*momx)/-35.0,-(18*momy)/-35.0,0+(18*momz)/-35.0,0,0,0,0,SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx("MariaLunarPlasmaBallTrail7",(21*momx)/-35.0,-(21*momy)/-35.0,0+(21*momz)/-35.0,0,0,0,0,SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx("MariaLunarPlasmaBallTrail8",(24*momx)/-35.0,-(24*momy)/-35.0,0+(24*momz)/-35.0,0,0,0,0,SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx("MariaLunarPlasmaBallTrail9",(27*momx)/-35.0,-(27*momy)/-35.0,0+(27*momz)/-35.0,0,0,0,0,SXF_ABSOLUTEANGLE)
+    BLPB C 1 Bright A_SpawnItem("MariaLunarPlasmaFlare", 0, 0)
+	TNT1 A 0 A_SpawnItemEx("MariaLunarPlasmaBallTrail1",(3 *momx)/-35.0,-(3 *momy)/-35.0,0+(3 *momz)/-35.0,0,0,0,0,SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx("MariaLunarPlasmaBallTrail2",(6 *momx)/-35.0,-(6 *momy)/-35.0,0+(6 *momz)/-35.0,0,0,0,0,SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx("MariaLunarPlasmaBallTrail3",(9 *momx)/-35.0,-(9 *momy)/-35.0,0+(9 *momz)/-35.0,0,0,0,0,SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx("MariaLunarPlasmaBallTrail4",(12*momx)/-35.0,-(12*momy)/-35.0,0+(12*momz)/-35.0,0,0,0,0,SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx("MariaLunarPlasmaBallTrail5",(15*momx)/-35.0,-(15*momy)/-35.0,0+(15*momz)/-35.0,0,0,0,0,SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx("MariaLunarPlasmaBallTrail6",(18*momx)/-35.0,-(18*momy)/-35.0,0+(18*momz)/-35.0,0,0,0,0,SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx("MariaLunarPlasmaBallTrail7",(21*momx)/-35.0,-(21*momy)/-35.0,0+(21*momz)/-35.0,0,0,0,0,SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx("MariaLunarPlasmaBallTrail8",(24*momx)/-35.0,-(24*momy)/-35.0,0+(24*momz)/-35.0,0,0,0,0,SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx("MariaLunarPlasmaBallTrail9",(27*momx)/-35.0,-(27*momy)/-35.0,0+(27*momz)/-35.0,0,0,0,0,SXF_ABSOLUTEANGLE)
+    BLPB D 1 Bright A_SpawnItem("MariaLunarPlasmaFlare", 0, 0)
+	TNT1 A 0 A_SpawnItemEx("MariaLunarPlasmaBallTrail1",(3 *momx)/-35.0,-(3 *momy)/-35.0,0+(3 *momz)/-35.0,0,0,0,0,SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx("MariaLunarPlasmaBallTrail2",(6 *momx)/-35.0,-(6 *momy)/-35.0,0+(6 *momz)/-35.0,0,0,0,0,SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx("MariaLunarPlasmaBallTrail3",(9 *momx)/-35.0,-(9 *momy)/-35.0,0+(9 *momz)/-35.0,0,0,0,0,SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx("MariaLunarPlasmaBallTrail4",(12*momx)/-35.0,-(12*momy)/-35.0,0+(12*momz)/-35.0,0,0,0,0,SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx("MariaLunarPlasmaBallTrail5",(15*momx)/-35.0,-(15*momy)/-35.0,0+(15*momz)/-35.0,0,0,0,0,SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx("MariaLunarPlasmaBallTrail6",(18*momx)/-35.0,-(18*momy)/-35.0,0+(18*momz)/-35.0,0,0,0,0,SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx("MariaLunarPlasmaBallTrail7",(21*momx)/-35.0,-(21*momy)/-35.0,0+(21*momz)/-35.0,0,0,0,0,SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx("MariaLunarPlasmaBallTrail8",(24*momx)/-35.0,-(24*momy)/-35.0,0+(24*momz)/-35.0,0,0,0,0,SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx("MariaLunarPlasmaBallTrail9",(27*momx)/-35.0,-(27*momy)/-35.0,0+(27*momz)/-35.0,0,0,0,0,SXF_ABSOLUTEANGLE)
+	Loop
+  Death:
+    TNT1 A 0 A_SetScale (1.0)
+    TNT1 A 0 //A_Explode(6,50)
+    TNT1 AAA 0 A_SpawnProjectile("MariaMiniSmoke", 1, 0, random(0, 360), CMF_AIMDIRECTION, random(0, -160))
+	BLPE ABCDE 2 Bright
+	Stop
+  XDeath:
+    TNT1 A 0 A_SetScale (1.0)
+    TNT1 A 0 //A_Explode(6,50)
+    TNT1 AAA 0 A_SpawnProjectile("MariaMiniSmoke", 1, 0, random(0, 360), CMF_AIMDIRECTION, random(0, -160))
+	BLPE ABCDE 2 Bright
+	Stop
+  }
+}
+
+Actor MariaLunarPlasmaBallTrail1
+{
+Scale 0.4
+Alpha 0.99
+Renderstyle Add
++THRUACTORS
++CLIENTSIDEONLY
++NOBLOCKMAP
++NOGRAVITY
+	States
+	{
+	Spawn:
+		BLPB AB 1 Bright A_SpawnItem("MariaLunarPlasmaFlare", 0, 0)
+		Stop
+	}
+}
+
+Actor MariaLunarPlasmaBallTrail2 : MariaLunarPlasmaBallTrail1
+{
+Alpha 0.8
+	States
+	{
+	Spawn:
+		BLPB CD 1 Bright A_SpawnItem("MariaLunarPlasmaFlare", 0, 0)
+		Stop
+	}
+}
+
+Actor MariaLunarPlasmaBallTrail3 : MariaLunarPlasmaBallTrail1
+{
+Alpha 0.7
+}
+
+Actor MariaLunarPlasmaBallTrail4 : MariaLunarPlasmaBallTrail2
+{
+Alpha 0.6
+}
+
+Actor MariaLunarPlasmaBallTrail5 : MariaLunarPlasmaBallTrail2
+{
+Alpha 0.5
+}
+
+Actor MariaLunarPlasmaBallTrail6 : MariaLunarPlasmaBallTrail1
+{
+Alpha 0.4
+}
+
+Actor MariaLunarPlasmaBallTrail7 : MariaLunarPlasmaBallTrail2
+{
+Alpha 0.3
+}
+
+Actor MariaLunarPlasmaBallTrail8 : MariaLunarPlasmaBallTrail1
+{
+Alpha 0.2
+}
+
+Actor MariaLunarPlasmaBallTrail9 : MariaLunarPlasmaBallTrail2
+{
+Alpha 0.1
+}
+
+/////////////////////////////////
+///////////////Cryo//////////////
+/////////////////////////////////
+
+Actor MariaCryoProjectile
+{
+	Radius 8
+	Height 8
+	Speed 25
+    Gravity 0.15
+	Damage 18
+	Mass 9
+	Projectile
+	DamageType Ice
+	RenderStyle Add
+	//MaxStepHeight 9
+    Alpha 0.75
+    scale 0.50
+	Alpha 1
+    -NOGRAVITY
+	+DROPOFF
+	+NOBLOOD
+    +NOTELEPORT
+	+NOEXTREMEDEATH
+	+BLOODLESSIMPACT
+    +NOBOSSRIP
+	States
+	{
+	Spawn:
+		TNT1 A 0 NoDelay //A_SetScale(0.75)
+		CRYO ABCD 2 Bright A_SpawnItem("MariaCyanPlasmaFlare", 0, 0)
+		CRYO EFGH 2 Bright A_SpawnItem("MariaCyanPlasmaFlare", 0, 0)
+		CRYO IJKL 1 Bright A_SpawnItem("MariaCyanPlasmaFlare", 0, 0)
+		CRYO MN 1 Bright A_SpawnItem("MariaCyanPlasmaFlare", 0, 0)
+        Stop
+	Death:
+        TNT1 A 0 //A_Explode(2,64)
+		TNT1 A 0 //A_Fadeout(0.6)
+		Stop	
+	XDeath:
+        TNT1 A 0 //A_Explode(2,64)
+		TNT1 A 0 //A_Fadeout(0.6)
+		Stop
+		}
+}
+
+/////////////////////////////////
+/////////////Rocket//////////////
+/////////////////////////////////
+
+Actor MariaRocketPlayer : Rocket
+{
+	Radius 6
+	Height 6
+	Speed 120
+	Damage 500
+    Gravity 0.2
+	Projectile
+	//Scale 0.75
+	SeeSound ""
+	Obituary "$OB_MPROCKET"
+	DamageType "Explosive"
+    Damagetype "ExplosiveImpact"
+    DamageType "Extreme"
+	Decal "Scorch"
+	+MISSILE 	
+    //+DEHEXPLOSION
+    +EXTREMEDEATH
+    +BLOODSPLATTER 
+	+FORCERADIUSDMG
+    +THRUSPECIES
+    +NODAMAGETHRUST
+	States
+	{
+	Spawn:
+		//TNT1 A 0 A_PlaySound("Rocket/Fly")	
+	Live:
+		RCKT A 1 Bright
+        {
+        //A_PlaySound("weapons/rocket/fly")
+        A_SpawnItem("MariaRocketFlare", -20, 0);
+        A_SpawnItem("MariaSmokeTrail", 0, 0);
+		A_SpawnItem("MariaFlameTrails", 0, 0);
+        }
+		Loop
+	Death:
+        TNT1 A 0 A_JumpIf(CallACS("AntiTinnitus")==1, "NoRinging")
+		TNT1 A 0 A_Explode(300,192,1,1,128)
+		TNT1 A 0 Bright A_NoGravity
+		TNT1 A 0 Bright radius_quake(11,20,0,1200,0)
+		GLXP A 0 A_PlaySound("Weapon/Barrel/Explosion")
+		TNT1 A 0 A_PlaySound("Maria/Explosion/Ear",5,1,0,1)
+        TNT1 A 0 A_PlaySound("Maria/Explosion/Far", 3)
+		//RCKT A 2 Bright 
+        TNT1 A 0 A_SpawnItemEx ("DetectCeilCrater",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION,0)
+		TNT1 A 0 A_SpawnItemEx("MariaShockWave")
+		TNT1 A 0 A_RadiusThrust(128,-1,RTF_AFFECTSOURCE|RTF_NOIMPACTDAMAGE) 
+        TNT1 A 0 A_SpawnItemEx ("MariaExplosionFlareSpawner",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION,0)
+        TNT1 A 0 A_SpawnItemEx ("MariaExplosionFlareSpawner",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION,0)
+        //TNT1 AAAAAAAAAA 0 A_SpawnItemEx("MariaMediumExplosionFlames",0,0,0,Random(-10,10),Random(-10,10),Random(-10,10))
+        TNT1 AAAAAAAAAA 0 A_CustomMissile("MariaMediumExplosionFlames", 0, 0, random (0, 360), 2, random (0, 360))
+        TNT1 A 0 A_SpawnProjectile("MariaBarrelExplosionFlame")
+        TNT1 AAAAAAAAAAAAAAA 0 A_SpawnItemEx("MariaExplosionSmoke",0,0,0,Random(-10,10),Random(-10,10),Random(-10,10))
+		Stop
+	NoRinging:
+		TNT1 A 0 A_Explode(300,192,1,1,128)
+		TNT1 A 0 Bright A_NoGravity
+		TNT1 A 0 Bright radius_quake(11,20,0,1200,0) 
+		GLXP A 0 A_PlaySound("Weapon/Barrel/Explosion")
+        TNT1 A 0 A_PlaySound("Maria/Explosion/Far", 3)
+		//RCKT A 2 Bright 
+        TNT1 A 0 A_SpawnItemEx ("DetectCeilCrater",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION,0)
+		TNT1 A 0 A_SpawnItemEx("MariaShockWave")
+		TNT1 A 0 A_RadiusThrust(128,-1,RTF_AFFECTSOURCE|RTF_NOIMPACTDAMAGE) 
+        TNT1 A 0 A_SpawnItemEx ("MariaExplosionFlareSpawner",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION,0)
+        //TNT1 AAAAAAAAAA 0 A_SpawnItemEx("MariaMediumExplosionFlames",0,0,0,Random(-10,10),Random(-10,10),Random(-10,10))
+        TNT1 AAAAAAAAAA 0 A_CustomMissile("MariaMediumExplosionFlames", 0, 0, random (0, 360), 2, random (0, 360))
+        TNT1 A 0 A_SpawnProjectile("MariaBarrelExplosionFlame")
+        TNT1 AAAAAAAAAAAAAAA 0 A_SpawnItemEx("MariaExplosionSmoke",0,0,0,Random(-10,10),Random(-10,10),Random(-10,10))
+		Stop
+      }
+}
+
+ACTOR MariaRocketTrail : RocketSmokeTrail
+{
+	RenderStyle Translucent
+	Alpha 0.50
+	States
+	{
+		Spawn:
+			MTRL ABCDEFG 2 BRIGHT
+			Stop
+	}
+}
+
+/////////////////////////////////
+/////////////BFG Ball////////////
+/////////////////////////////////
+
+ACTOR MariaBFGBall : BFGBall //replaces BFGBall
+{
+  Speed 30
+  Damage 300
+  Height 19
+  Radius 19	
+  Damagetype "BFG"
+  Decal "BFGScorch"
+  +EXTREMEDEATH
+  +FRIENDLY
+  +NODAMAGETHRUST
+  +FORCERADIUSDMG
+  +MTHRUSPECIES
+  DeathSound "Weapon/BFG/Explode"
+  States
+  {
+  Spawn:
+    BFGB A 2 Bright A_SpawnItemEx("MariaBFGAlpha",0,0,0)
+    TNT1 A 0 A_SpawnItem("MariaGreenFlareMedium")
+    BFGB B 2 Bright A_SpawnItemEx("MariaBFGAlpha",0,0,0)
+    TNT1 A 0 A_SpawnItem("MariaGreenFlareMedium")
+    BFGB C 2 Bright A_SpawnItemEx("MariaBFGAlpha",0,0,0)
+    TNT1 A 0 A_SpawnItem("MariaGreenFlareMedium")
+    BFGB D 2 Bright A_SpawnItemEx("MariaBFGAlpha",0,0,0)
+    TNT1 A 0 A_SpawnItem("MariaGreenFlareMedium")
+    BFGB E 2 Bright A_SpawnItemEx("MariaBFGAlpha",0,0,0)
+    TNT1 A 0 A_SpawnItem("MariaGreenFlareMedium")
+    Loop
+  Death:
+    TNT1 A 0 A_JumpIf(CallACS("AntiTinnitus")==1, "NoRinging")
+	BFE1 A 0 BRIGHT //A_Explode(1024,192)
+    TNT1 A 0 radius_quake(11,20,0,1200,0)
+    BFE1 A 0 Bright //A_Explode
+	TNT1 A 0 A_PlaySound("Maria/Explosion/Ear",5,1,0,1)
+    TNT1 AAAA 0 A_BFGSpray("MariaBFGExtra",255,200)    
+    TNT1 AAAAAAAA 0 A_BFGSpray("MariaBFGExtra")    
+	TNT1 A 0 A_SpawnItemEx("MariaShockWave")
+    /*TNT1 AAAAA 0 A_SpawnProjectile("MariaBFGFlames", 0, 0, random(0, 360), CMF_AIMDIRECTION, random(0, -360))*/
+    TNT1 AAAAA 0 A_SpawnProjectile("MariaExplosionSmoke", 0, 0, random(0, 360), CMF_AIMDIRECTION, random(0, -360))
+    TNT1 A 0 A_SetScale(1.5)
+	BFBE ABCDE 2 bright A_SpawnItem("MariaGreenFlare")
+	BFBE F 4 bright A_SpawnItem("MariaGreenFlare")
+	BFBE GHIJK 3 bright
+    Stop
+  NoRinging:
+	BFE1 A 0 BRIGHT //A_Explode(1024,192)
+    TNT1 A 0 radius_quake(11,20,0,1200,0)
+    BFE1 A 0 Bright //A_Explode
+    TNT1 A 0 A_BFGSpray("MariaBFGExtra",255,200)    
+    TNT1 AAAA 0 A_BFGSpray("MariaBFGExtra")    
+	TNT1 A 0 A_SpawnItemEx("MariaShockWave")
+    /*TNT1 AAAAA 0 A_SpawnProjectile("MariaBFGFlames", 0, 0, random(0, 360), CMF_AIMDIRECTION, random(0, -360))*/
+    TNT1 AAAAA 0 A_SpawnProjectile("MariaExplosionSmoke", 0, 0, random(0, 360), CMF_AIMDIRECTION, random(0, -360))
+    TNT1 A 0 A_SetScale(1.5)
+	BFBE ABCDE 2 bright A_SpawnItem("MariaGreenFlare")
+	BFBE F 4 bright A_SpawnItem("MariaGreenFlare")
+	BFBE GHIJK 3 bright A_SpawnItem("MariaGreenFlare")
+    Stop
+  }
+}
+
+ACTOR MariaBFGExtra : BFGExtra //replaces BFGExtra
+{
+  Damagetype "BFG"
+  States
+  {
+  Spawn:
+    BFBX ABCDEFGHIJKLMNO 2 Bright
+    Stop
+  }
+}
+
+ACTOR MariaBFGAlpha     
+{
+    Radius 6
+    Height 8
+    Speed 1
+    Damage 0
+    -BLOODSPLATTER 
+    +NOBOSSRIP
+    +NOBLOOD 
+    +PAINLESS 
+    +RIPPER
+    +DOOMBOUNCE
+    +NOTIMEFREEZE
+	+NODAMAGETHRUST
+    +MTHRUSPECIES
+	+FRIENDLY
+    BloodType AXEDT
+    Scale 1
+    Damagetype "BFG"
+    PROJECTILE
+    RENDERSTYLE ADD
+    +CLIENTSIDEONLY
+    ALPHA 0.6
+    States
+    {
+    Spawn:
+       TNT1 A 0 Bright
+       TNT1 A 1 Bright A_SpawnItemEx("MariaBFGTurn",0,0,0,3,0,0,  0,SXF_NOCHECKPOSITION|SXF_TRANSFERPOINTERS)
+       TNT1 A 1 Bright A_SpawnItemEx("MariaBFGTurn",0,0,0,3,0,0,  60,SXF_NOCHECKPOSITION|SXF_TRANSFERPOINTERS)
+       TNT1 A 1 Bright A_SpawnItemEx("MariaBFGTurn",0,0,0,3,0,0,  120,SXF_NOCHECKPOSITION|SXF_TRANSFERPOINTERS) 
+       TNT1 A 1 Bright A_SpawnItemEx("MariaBFGTurn",0,0,0,3,0,0,  0,SXF_NOCHECKPOSITION|SXF_TRANSFERPOINTERS)
+       TNT1 A 1 Bright A_SpawnItemEx("MariaBFGTurn",0,0,0,3,0,0,  60,SXF_NOCHECKPOSITION|SXF_TRANSFERPOINTERS)
+       TNT1 A 1 Bright A_SpawnItemEx("MariaBFGTurn",0,0,0,3,0,0,  120,SXF_NOCHECKPOSITION|SXF_TRANSFERPOINTERS) 
+	   Stop
+    }
+}
+
+ACTOR MariaBFGTurn
+{  
+    MONSTER
+    Radius 1
+    Height 1
+    Speed 0
+    +PAINLESS
+    -BLOODSPLATTER 
+    +NOBOSSRIP
+    +NOBLOOD 
+    +NOTIMEFREEZE
+    +NOGRAVITY
+    +NOCLIP
+    +LOOKALLAROUND
+    +MISSILEMORE
+    +MISSILEEVENMORE
+	+NODAMAGETHRUST
+    +FORCERADIUSDMG
+    +MTHRUSPECIES
+	+DONTHARMSPECIES
+	+FRIENDLY
+    DAMAGETYPE "BFG"
+   -SOLID
+   -SHOOTABLE
+    BloodType AXEDT
+    MinMissileChance 0
+    RenderStyle None
+    ReactionTime 25
+    States
+    {
+    Spawn:
+       NULL A 0 A_CountDown
+       XXXX A 1 A_Look
+//    loop
+    See:
+       XXXX A 0 A_Chase
+    Missile:
+       XXXX A 0 A_FaceTarget
+       XXXX A 0 A_CustomRailgun(30,0,none,"Green",1,10,3,"NopainBFG",0,0,600,1,4.0,0,"NopainBFG",-15)
+       Stop 
+    }
+}
+
+Actor NopainBFG : BulletPuff
+{
+    Radius 1
+    Height 1
+    VSpeed 0
+    +NOTELEPORT
+    +NOGRAVITY
+    +NOEXTREMEDEATH
+	+noblood
+    +PUFFONACTORS
+	+BLOODLESSIMPACT
+	+alwayspuff
+	+painless
+	+NODECAL
+    -ALLOWPARTICLES
+	Damagetype "NopainforBFG"
+    Scale 0.50
+    RenderStyle "Add"
+    States
+    {
+    Spawn:
+        BFE4 AAAAAA 1 bright
+        Stop
+    }
+}
+
+Actor MariaBFGTendril
+{
+    +ALWAYSPUFF
+    +BLOODLESSIMPACT
+    +NOINTERACTION
+    +NOPAIN
+    +NOTIMEFREEZE
+    RenderStyle Add
+    States
+    {
+      Spawn:
+        BFG4 A 1 bright
+        Stop
+    }
+}
+
+ACTOR NewBFGPuff
+{
+	+NOINTERACTION
+	RenderStyle None
+	DamageType "BFGDamage"
+}
+
+/////////////////////////////////
+/////////////Unmakyr/////////////
+/////////////////////////////////
+
+Actor MariaUnmakyrLaser
+{
+  Alpha 1
+  Scale 0.3
+  Height 4
+  Radius 4
+  Speed 200
+  Damage 60
+  DamageType Plasma  
+  Decal "PlasmaScorchLower"
+  Projectile
+  +MISSILE
+  +BLOODLESSIMPACT 
+  +NOEXTREMEDEATH
+  +FORCERADIUSDMG
+  +NOBLOOD
+  -RANDOMIZE
+  SeeSound ""
+  DeathSound "Weapon/PlasmaRifle/Ball"
+  RenderStyle Add 
+  States
+  {
+  Spawn:
+    UNPR A 1 Bright A_SpawnItem("MariaCyanPlasmaFlare", 0, 0)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (3*velx)/-35.0,  -(3*vely)/-35.0,  2+(3*velz)/-35.0,  0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (3.5*velx)/-35.0,  -(3.5*vely)/-35.0,  2+(3.5*velz)/-35.0,  0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (4*velx)/-35.0,  -(4*vely)/-35.0,  2+(4*velz)/-35.0,  0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (4.5*velx)/-35.0,  -(4.5*vely)/-35.0,  2+(4.5*velz)/-35.0,  0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (5*velx)/-35.0,  -(5*vely)/-35.0,  2+(5*velz)/-35.0,  0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (5.5*velx)/-35.0,  -(5.5*vely)/-35.0,  2+(5.5*velz)/-35.0,  0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (6*velx)/-35.0,  -(6*vely)/-35.0,  2+(6*velz)/-35.0,  0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (6.5*velx)/-35.0,  -(6.5*vely)/-35.0,  2+(6.5*velz)/-35.0,  0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (7*velx)/-35.0,  -(7*vely)/-35.0,  2+(7*velz)/-35.0,  0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (7.5*velx)/-35.0,  -(7.5*vely)/-35.0,  2+(7.5*velz)/-35.0,  0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (8*velx)/-35.0,  -(8*vely)/-35.0,  2+(8*velz)/-35.0,  0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (8.5*velx)/-35.0,  -(8.5*vely)/-35.0,  2+(8.5*velz)/-35.0,  0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (9*velx)/-35.0,  -(9*vely)/-35.0,  2+(9*velz)/-35.0,  0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (9.5*velx)/-35.0,  -(9.5*vely)/-35.0,  2+(9.5*velz)/-35.0,  0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (10*velx)/-35.0, -(10*vely)/-35.0, 2+(10*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (10.5*velx)/-35.0, -(10.5*vely)/-35.0, 2+(10.5*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (11*velx)/-35.0, -(11*vely)/-35.0, 2+(11*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (11.5*velx)/-35.0, -(11.5*vely)/-35.0, 2+(11.5*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (12*velx)/-35.0, -(12*vely)/-35.0, 2+(12*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (12.5*velx)/-35.0, -(12.5*vely)/-35.0, 2+(12.5*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (13*velx)/-35.0, -(13*vely)/-35.0, 2+(13*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (13.5*velx)/-35.0, -(13.5*vely)/-35.0, 2+(13.5*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (14*velx)/-35.0, -(14*vely)/-35.0, 2+(14*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (14.5*velx)/-35.0, -(14.5*vely)/-35.0, 2+(14.5*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (15*velx)/-35.0, -(15*vely)/-35.0, 2+(15*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (15.5*velx)/-35.0, -(15.5*vely)/-35.0, 2+(15.5*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (16*velx)/-35.0, -(16*vely)/-35.0, 2+(16*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (16.5*velx)/-35.0, -(16.5*vely)/-35.0, 2+(16.5*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (17*velx)/-35.0, -(17*vely)/-35.0, 2+(17*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (17.5*velx)/-35.0, -(17.5*vely)/-35.0, 2+(17.5*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (18*velx)/-35.0, -(18*vely)/-35.0, 2+(18*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (18.5*velx)/-35.0, -(18.5*vely)/-35.0, 2+(18.5*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (19*velx)/-35.0, -(19*vely)/-35.0, 2+(19*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (19.5*velx)/-35.0, -(19.5*vely)/-35.0, 2+(19.5*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (20*velx)/-35.0, -(20*vely)/-35.0, 2+(20*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (20.5*velx)/-35.0, -(20.5*vely)/-35.0, 2+(20.5*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (21*velx)/-35.0, -(21*vely)/-35.0, 2+(21*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (21.5*velx)/-35.0, -(21.5*vely)/-35.0, 2+(21.5*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (22*velx)/-35.0, -(22*vely)/-35.0, 2+(22*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (22.5*velx)/-35.0, -(22.5*vely)/-35.0, 2+(22.5*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (23*velx)/-35.0, -(23*vely)/-35.0, 2+(23*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (23.5*velx)/-35.0, -(23.5*vely)/-35.0, 2+(23.5*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (24*velx)/-35.0, -(24*vely)/-35.0, 2+(24*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (24.5*velx)/-35.0, -(24.5*vely)/-35.0, 2+(24.5*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (25*velx)/-35.0, -(25*vely)/-35.0, 2+(25*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (25.5*velx)/-35.0, -(25.5*vely)/-35.0, 2+(25.5*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+			
+    UNPR B 1 Bright A_SpawnItem("MariaCyanPlasmaFlare", 0, 0)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (3*velx)/-35.0,  -(3*vely)/-35.0,  2+(3*velz)/-35.0,  0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (3.5*velx)/-35.0,  -(3.5*vely)/-35.0,  2+(3.5*velz)/-35.0,  0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (4*velx)/-35.0,  -(4*vely)/-35.0,  2+(4*velz)/-35.0,  0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (4.5*velx)/-35.0,  -(4.5*vely)/-35.0,  2+(4.5*velz)/-35.0,  0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (5*velx)/-35.0,  -(5*vely)/-35.0,  2+(5*velz)/-35.0,  0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (5.5*velx)/-35.0,  -(5.5*vely)/-35.0,  2+(5.5*velz)/-35.0,  0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (6*velx)/-35.0,  -(6*vely)/-35.0,  2+(6*velz)/-35.0,  0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (6.5*velx)/-35.0,  -(6.5*vely)/-35.0,  2+(6.5*velz)/-35.0,  0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (7*velx)/-35.0,  -(7*vely)/-35.0,  2+(7*velz)/-35.0,  0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (7.5*velx)/-35.0,  -(7.5*vely)/-35.0,  2+(7.5*velz)/-35.0,  0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (8*velx)/-35.0,  -(8*vely)/-35.0,  2+(8*velz)/-35.0,  0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (8.5*velx)/-35.0,  -(8.5*vely)/-35.0,  2+(8.5*velz)/-35.0,  0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (9*velx)/-35.0,  -(9*vely)/-35.0,  2+(9*velz)/-35.0,  0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (9.5*velx)/-35.0,  -(9.5*vely)/-35.0,  2+(9.5*velz)/-35.0,  0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (10*velx)/-35.0, -(10*vely)/-35.0, 2+(10*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (10.5*velx)/-35.0, -(10.5*vely)/-35.0, 2+(10.5*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (11*velx)/-35.0, -(11*vely)/-35.0, 2+(11*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (11.5*velx)/-35.0, -(11.5*vely)/-35.0, 2+(11.5*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (12*velx)/-35.0, -(12*vely)/-35.0, 2+(12*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (12.5*velx)/-35.0, -(12.5*vely)/-35.0, 2+(12.5*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (13*velx)/-35.0, -(13*vely)/-35.0, 2+(13*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (13.5*velx)/-35.0, -(13.5*vely)/-35.0, 2+(13.5*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (14*velx)/-35.0, -(14*vely)/-35.0, 2+(14*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (14.5*velx)/-35.0, -(14.5*vely)/-35.0, 2+(14.5*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (15*velx)/-35.0, -(15*vely)/-35.0, 2+(15*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (15.5*velx)/-35.0, -(15.5*vely)/-35.0, 2+(15.5*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (16*velx)/-35.0, -(16*vely)/-35.0, 2+(16*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (16.5*velx)/-35.0, -(16.5*vely)/-35.0, 2+(16.5*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (17*velx)/-35.0, -(17*vely)/-35.0, 2+(17*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (17.5*velx)/-35.0, -(17.5*vely)/-35.0, 2+(17.5*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (18*velx)/-35.0, -(18*vely)/-35.0, 2+(18*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (18.5*velx)/-35.0, -(18.5*vely)/-35.0, 2+(18.5*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (19*velx)/-35.0, -(19*vely)/-35.0, 2+(19*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (19.5*velx)/-35.0, -(19.5*vely)/-35.0, 2+(19.5*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (20*velx)/-35.0, -(20*vely)/-35.0, 2+(20*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (20.5*velx)/-35.0, -(20.5*vely)/-35.0, 2+(20.5*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (21*velx)/-35.0, -(21*vely)/-35.0, 2+(21*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (21.5*velx)/-35.0, -(21.5*vely)/-35.0, 2+(21.5*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (22*velx)/-35.0, -(22*vely)/-35.0, 2+(22*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (22.5*velx)/-35.0, -(22.5*vely)/-35.0, 2+(22.5*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (23*velx)/-35.0, -(23*vely)/-35.0, 2+(23*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (23.5*velx)/-35.0, -(23.5*vely)/-35.0, 2+(23.5*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (24*velx)/-35.0, -(24*vely)/-35.0, 2+(24*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (24.5*velx)/-35.0, -(24.5*vely)/-35.0, 2+(24.5*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (25*velx)/-35.0, -(25*vely)/-35.0, 2+(25*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (25.5*velx)/-35.0, -(25.5*vely)/-35.0, 2+(25.5*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+    UNPR C 1 Bright A_SpawnItem("MariaCyanPlasmaFlare", 0, 0)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (3*velx)/-35.0,  -(3*vely)/-35.0,  2+(3*velz)/-35.0,  0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (3.5*velx)/-35.0,  -(3.5*vely)/-35.0,  2+(3.5*velz)/-35.0,  0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (4*velx)/-35.0,  -(4*vely)/-35.0,  2+(4*velz)/-35.0,  0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (4.5*velx)/-35.0,  -(4.5*vely)/-35.0,  2+(4.5*velz)/-35.0,  0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (5*velx)/-35.0,  -(5*vely)/-35.0,  2+(5*velz)/-35.0,  0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (5.5*velx)/-35.0,  -(5.5*vely)/-35.0,  2+(5.5*velz)/-35.0,  0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (6*velx)/-35.0,  -(6*vely)/-35.0,  2+(6*velz)/-35.0,  0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (6.5*velx)/-35.0,  -(6.5*vely)/-35.0,  2+(6.5*velz)/-35.0,  0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (7*velx)/-35.0,  -(7*vely)/-35.0,  2+(7*velz)/-35.0,  0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (7.5*velx)/-35.0,  -(7.5*vely)/-35.0,  2+(7.5*velz)/-35.0,  0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (8*velx)/-35.0,  -(8*vely)/-35.0,  2+(8*velz)/-35.0,  0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (8.5*velx)/-35.0,  -(8.5*vely)/-35.0,  2+(8.5*velz)/-35.0,  0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (9*velx)/-35.0,  -(9*vely)/-35.0,  2+(9*velz)/-35.0,  0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (9.5*velx)/-35.0,  -(9.5*vely)/-35.0,  2+(9.5*velz)/-35.0,  0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (10*velx)/-35.0, -(10*vely)/-35.0, 2+(10*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (10.5*velx)/-35.0, -(10.5*vely)/-35.0, 2+(10.5*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (11*velx)/-35.0, -(11*vely)/-35.0, 2+(11*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (11.5*velx)/-35.0, -(11.5*vely)/-35.0, 2+(11.5*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (12*velx)/-35.0, -(12*vely)/-35.0, 2+(12*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (12.5*velx)/-35.0, -(12.5*vely)/-35.0, 2+(12.5*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (13*velx)/-35.0, -(13*vely)/-35.0, 2+(13*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (13.5*velx)/-35.0, -(13.5*vely)/-35.0, 2+(13.5*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (14*velx)/-35.0, -(14*vely)/-35.0, 2+(14*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (14.5*velx)/-35.0, -(14.5*vely)/-35.0, 2+(14.5*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (15*velx)/-35.0, -(15*vely)/-35.0, 2+(15*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (15.5*velx)/-35.0, -(15.5*vely)/-35.0, 2+(15.5*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (16*velx)/-35.0, -(16*vely)/-35.0, 2+(16*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (16.5*velx)/-35.0, -(16.5*vely)/-35.0, 2+(16.5*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (17*velx)/-35.0, -(17*vely)/-35.0, 2+(17*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (17.5*velx)/-35.0, -(17.5*vely)/-35.0, 2+(17.5*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (18*velx)/-35.0, -(18*vely)/-35.0, 2+(18*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (18.5*velx)/-35.0, -(18.5*vely)/-35.0, 2+(18.5*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (19*velx)/-35.0, -(19*vely)/-35.0, 2+(19*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (19.5*velx)/-35.0, -(19.5*vely)/-35.0, 2+(19.5*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (20*velx)/-35.0, -(20*vely)/-35.0, 2+(20*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (20.5*velx)/-35.0, -(20.5*vely)/-35.0, 2+(20.5*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (21*velx)/-35.0, -(21*vely)/-35.0, 2+(21*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (21.5*velx)/-35.0, -(21.5*vely)/-35.0, 2+(21.5*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (22*velx)/-35.0, -(22*vely)/-35.0, 2+(22*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (22.5*velx)/-35.0, -(22.5*vely)/-35.0, 2+(22.5*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (23*velx)/-35.0, -(23*vely)/-35.0, 2+(23*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (23.5*velx)/-35.0, -(23.5*vely)/-35.0, 2+(23.5*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (24*velx)/-35.0, -(24*vely)/-35.0, 2+(24*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (24.5*velx)/-35.0, -(24.5*vely)/-35.0, 2+(24.5*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (25*velx)/-35.0, -(25*vely)/-35.0, 2+(25*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (25.5*velx)/-35.0, -(25.5*vely)/-35.0, 2+(25.5*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+    UNPR D 1 Bright A_SpawnItem("MariaCyanPlasmaFlare", 0, 0)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (3*velx)/-35.0,  -(3*vely)/-35.0,  2+(3*velz)/-35.0,  0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (3.5*velx)/-35.0,  -(3.5*vely)/-35.0,  2+(3.5*velz)/-35.0,  0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (4*velx)/-35.0,  -(4*vely)/-35.0,  2+(4*velz)/-35.0,  0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (4.5*velx)/-35.0,  -(4.5*vely)/-35.0,  2+(4.5*velz)/-35.0,  0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (5*velx)/-35.0,  -(5*vely)/-35.0,  2+(5*velz)/-35.0,  0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (5.5*velx)/-35.0,  -(5.5*vely)/-35.0,  2+(5.5*velz)/-35.0,  0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (6*velx)/-35.0,  -(6*vely)/-35.0,  2+(6*velz)/-35.0,  0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (6.5*velx)/-35.0,  -(6.5*vely)/-35.0,  2+(6.5*velz)/-35.0,  0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (7*velx)/-35.0,  -(7*vely)/-35.0,  2+(7*velz)/-35.0,  0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (7.5*velx)/-35.0,  -(7.5*vely)/-35.0,  2+(7.5*velz)/-35.0,  0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (8*velx)/-35.0,  -(8*vely)/-35.0,  2+(8*velz)/-35.0,  0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (8.5*velx)/-35.0,  -(8.5*vely)/-35.0,  2+(8.5*velz)/-35.0,  0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (9*velx)/-35.0,  -(9*vely)/-35.0,  2+(9*velz)/-35.0,  0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (9.5*velx)/-35.0,  -(9.5*vely)/-35.0,  2+(9.5*velz)/-35.0,  0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (10*velx)/-35.0, -(10*vely)/-35.0, 2+(10*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (10.5*velx)/-35.0, -(10.5*vely)/-35.0, 2+(10.5*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (11*velx)/-35.0, -(11*vely)/-35.0, 2+(11*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (11.5*velx)/-35.0, -(11.5*vely)/-35.0, 2+(11.5*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (12*velx)/-35.0, -(12*vely)/-35.0, 2+(12*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (12.5*velx)/-35.0, -(12.5*vely)/-35.0, 2+(12.5*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (13*velx)/-35.0, -(13*vely)/-35.0, 2+(13*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (13.5*velx)/-35.0, -(13.5*vely)/-35.0, 2+(13.5*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (14*velx)/-35.0, -(14*vely)/-35.0, 2+(14*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (14.5*velx)/-35.0, -(14.5*vely)/-35.0, 2+(14.5*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (15*velx)/-35.0, -(15*vely)/-35.0, 2+(15*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (15.5*velx)/-35.0, -(15.5*vely)/-35.0, 2+(15.5*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (16*velx)/-35.0, -(16*vely)/-35.0, 2+(16*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (16.5*velx)/-35.0, -(16.5*vely)/-35.0, 2+(16.5*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (17*velx)/-35.0, -(17*vely)/-35.0, 2+(17*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (17.5*velx)/-35.0, -(17.5*vely)/-35.0, 2+(17.5*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (18*velx)/-35.0, -(18*vely)/-35.0, 2+(18*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (18.5*velx)/-35.0, -(18.5*vely)/-35.0, 2+(18.5*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (19*velx)/-35.0, -(19*vely)/-35.0, 2+(19*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (19.5*velx)/-35.0, -(19.5*vely)/-35.0, 2+(19.5*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (20*velx)/-35.0, -(20*vely)/-35.0, 2+(20*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (20.5*velx)/-35.0, -(20.5*vely)/-35.0, 2+(20.5*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (21*velx)/-35.0, -(21*vely)/-35.0, 2+(21*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (21.5*velx)/-35.0, -(21.5*vely)/-35.0, 2+(21.5*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (22*velx)/-35.0, -(22*vely)/-35.0, 2+(22*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (22.5*velx)/-35.0, -(22.5*vely)/-35.0, 2+(22.5*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (23*velx)/-35.0, -(23*vely)/-35.0, 2+(23*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (23.5*velx)/-35.0, -(23.5*vely)/-35.0, 2+(23.5*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (24*velx)/-35.0, -(24*vely)/-35.0, 2+(24*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (24.5*velx)/-35.0, -(24.5*vely)/-35.0, 2+(24.5*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (25*velx)/-35.0, -(25*vely)/-35.0, 2+(25*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (25.5*velx)/-35.0, -(25.5*vely)/-35.0, 2+(25.5*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	Loop
+  Death:
+    TNT1 A 0 A_SetScale (1.0)
+    TNT1 A 0 //A_Explode(6,50)
+    TNT1 AAA 0 A_SpawnProjectile("MariaMiniSmoke", 1, 0, random(0, 360), CMF_AIMDIRECTION, random(0, -160))
+	UNPD ABCDE 2 Bright
+	Stop
+  XDeath:
+    TNT1 A 0 A_SetScale (1.0)
+    TNT1 A 0 //A_Explode(6,50)
+    TNT1 AAA 0 A_SpawnProjectile("MariaMiniSmoke", 1, 0, random(0, 360), CMF_AIMDIRECTION, random(0, -160))
+	UNPD ABCDE 2 Bright
+	Stop
+  }
+}
+
+Actor MariaUnmakyrLaserTrail
+{
+Scale 0.2
+Alpha 0.99
+Renderstyle Add
++THRUACTORS
++CLIENTSIDEONLY
++NOBLOCKMAP
++NOGRAVITY
+	States
+	{
+	Spawn:
+		UNPR ABCD 1 Bright
+		Stop
+	Death:
+		UNPR A 1 BRIGHT A_SetScale (0.55)
+		UNPR B 1 BRIGHT A_SetScale (0.45)
+		UNPR C 1 BRIGHT A_SetScale (0.35)
+		UNPR D 1 BRIGHT A_SetScale (0.25)
+		UNPR A 1 BRIGHT A_SetScale (0.15)
+		UNPR B 1 BRIGHT A_SetScale (0.05)
+		UNPR C 1 BRIGHT A_SetScale (0)
+		Stop
+	}
+}
+
+Actor MariaBallistaShot : MageWandMissile
+{
+  Radius 4
+  Height 8
+  Speed 300
+  Damage 150
+  Projectile
+  RenderStyle "Add"
+  Alpha 0.9
+  Scale 1.00
+  +RIPPER
+  -CANNOTPUSH
+  -NODAMAGETHRUST
+  +THRUSPECIES
+  DeathSound "Weapon/Railgun/ProjectileHit"
+  MissileType "MariaBallistaTrail"
+  MissileHeight 8
+  Decal "PlasmaScorchLower"
+  States
+  {
+  Spawn:
+    CAAR A 1 Bright
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (3*velx)/-35.0,  -(3*vely)/-35.0,  2+(3*velz)/-35.0,  0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (3.5*velx)/-35.0,  -(3.5*vely)/-35.0,  2+(3.5*velz)/-35.0,  0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (4*velx)/-35.0,  -(4*vely)/-35.0,  2+(4*velz)/-35.0,  0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (4.5*velx)/-35.0,  -(4.5*vely)/-35.0,  2+(4.5*velz)/-35.0,  0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (5*velx)/-35.0,  -(5*vely)/-35.0,  2+(5*velz)/-35.0,  0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (5.5*velx)/-35.0,  -(5.5*vely)/-35.0,  2+(5.5*velz)/-35.0,  0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (6*velx)/-35.0,  -(6*vely)/-35.0,  2+(6*velz)/-35.0,  0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (6.5*velx)/-35.0,  -(6.5*vely)/-35.0,  2+(6.5*velz)/-35.0,  0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (7*velx)/-35.0,  -(7*vely)/-35.0,  2+(7*velz)/-35.0,  0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (7.5*velx)/-35.0,  -(7.5*vely)/-35.0,  2+(7.5*velz)/-35.0,  0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (8*velx)/-35.0,  -(8*vely)/-35.0,  2+(8*velz)/-35.0,  0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (8.5*velx)/-35.0,  -(8.5*vely)/-35.0,  2+(8.5*velz)/-35.0,  0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (9*velx)/-35.0,  -(9*vely)/-35.0,  2+(9*velz)/-35.0,  0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (9.5*velx)/-35.0,  -(9.5*vely)/-35.0,  2+(9.5*velz)/-35.0,  0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (10*velx)/-35.0, -(10*vely)/-35.0, 2+(10*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (10.5*velx)/-35.0, -(10.5*vely)/-35.0, 2+(10.5*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (11*velx)/-35.0, -(11*vely)/-35.0, 2+(11*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (11.5*velx)/-35.0, -(11.5*vely)/-35.0, 2+(11.5*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (12*velx)/-35.0, -(12*vely)/-35.0, 2+(12*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (12.5*velx)/-35.0, -(12.5*vely)/-35.0, 2+(12.5*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (13*velx)/-35.0, -(13*vely)/-35.0, 2+(13*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (13.5*velx)/-35.0, -(13.5*vely)/-35.0, 2+(13.5*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (14*velx)/-35.0, -(14*vely)/-35.0, 2+(14*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (14.5*velx)/-35.0, -(14.5*vely)/-35.0, 2+(14.5*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (15*velx)/-35.0, -(15*vely)/-35.0, 2+(15*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (15.5*velx)/-35.0, -(15.5*vely)/-35.0, 2+(15.5*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (16*velx)/-35.0, -(16*vely)/-35.0, 2+(16*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (16.5*velx)/-35.0, -(16.5*vely)/-35.0, 2+(16.5*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (17*velx)/-35.0, -(17*vely)/-35.0, 2+(17*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (17.5*velx)/-35.0, -(17.5*vely)/-35.0, 2+(17.5*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (18*velx)/-35.0, -(18*vely)/-35.0, 2+(18*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (18.5*velx)/-35.0, -(18.5*vely)/-35.0, 2+(18.5*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (19*velx)/-35.0, -(19*vely)/-35.0, 2+(19*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (19.5*velx)/-35.0, -(19.5*vely)/-35.0, 2+(19.5*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (20*velx)/-35.0, -(20*vely)/-35.0, 2+(20*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (20.5*velx)/-35.0, -(20.5*vely)/-35.0, 2+(20.5*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (21*velx)/-35.0, -(21*vely)/-35.0, 2+(21*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (21.5*velx)/-35.0, -(21.5*vely)/-35.0, 2+(21.5*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (22*velx)/-35.0, -(22*vely)/-35.0, 2+(22*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (22.5*velx)/-35.0, -(22.5*vely)/-35.0, 2+(22.5*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (23*velx)/-35.0, -(23*vely)/-35.0, 2+(23*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (23.5*velx)/-35.0, -(23.5*vely)/-35.0, 2+(23.5*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (24*velx)/-35.0, -(24*vely)/-35.0, 2+(24*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (24.5*velx)/-35.0, -(24.5*vely)/-35.0, 2+(24.5*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (25*velx)/-35.0, -(25*vely)/-35.0, 2+(25*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (25.5*velx)/-35.0, -(25.5*vely)/-35.0, 2+(25.5*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (26*velx)/-35.0, -(26*vely)/-35.0, 2+(26*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (26.5*velx)/-35.0, -(26.5*vely)/-35.0, 2+(26.5*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (27*velx)/-35.0, -(27*vely)/-35.0, 2+(27*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (27.5*velx)/-35.0, -(27.5*vely)/-35.0, 2+(27.5*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (28*velx)/-35.0, -(28*vely)/-35.0, 2+(28*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (28.5*velx)/-35.0, -(28.5*vely)/-35.0, 2+(28.5*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (29*velx)/-35.0, -(29*vely)/-35.0, 2+(29*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (29.5*velx)/-35.0, -(29.5*vely)/-35.0, 2+(29.5*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (30*velx)/-35.0, -(30*vely)/-35.0, 2+(30*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (30.5*velx)/-35.0, -(30.5*vely)/-35.0, 2+(30.5*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (31*velx)/-35.0, -(31*vely)/-35.0, 2+(31*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (31.5*velx)/-35.0, -(31.5*vely)/-35.0, 2+(31.5*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (32*velx)/-35.0, -(32*vely)/-35.0, 2+(32*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (32.5*velx)/-35.0, -(32.5*vely)/-35.0, 2+(32.5*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (33*velx)/-35.0, -(33*vely)/-35.0, 2+(33*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (33.5*velx)/-35.0, -(33.5*vely)/-35.0, 2+(33.5*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (34*velx)/-35.0, -(34*vely)/-35.0, 2+(34*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (34.5*velx)/-35.0, -(34.5*vely)/-35.0, 2+(34.5*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (35*velx)/-35.0, -(35*vely)/-35.0, 2+(35*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (35.5*velx)/-35.0, -(35.5*vely)/-35.0, 2+(35.5*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (36*velx)/-35.0, -(36*vely)/-35.0, 2+(36*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (36.5*velx)/-35.0, -(36.5*vely)/-35.0, 2+(36.5*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)			
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (37*velx)/-35.0, -(37*vely)/-35.0, 2+(37*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (37.5*velx)/-35.0, -(37.5*vely)/-35.0, 2+(37.5*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (38*velx)/-35.0, -(36*vely)/-35.0, 2+(38*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (38.5*velx)/-35.0, -(36.5*vely)/-35.0, 2+(38.5*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)			
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (39*velx)/-35.0, -(37*vely)/-35.0, 2+(39*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (39.5*velx)/-35.0, -(37.5*vely)/-35.0, 2+(39.5*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (40*velx)/-35.0, -(37*vely)/-35.0, 2+(40*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (40.5*velx)/-35.0, -(37.5*vely)/-35.0, 2+(40.5*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (41*velx)/-35.0, -(37*vely)/-35.0, 2+(41*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (41.5*velx)/-35.0, -(37.5*vely)/-35.0, 2+(41.5*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (42*velx)/-35.0, -(37*vely)/-35.0, 2+(42*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (42.5*velx)/-35.0, -(37.5*vely)/-35.0, 2+(42.5*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (43*velx)/-35.0, -(37*vely)/-35.0, 2+(43*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (43.5*velx)/-35.0, -(37.5*vely)/-35.0, 2+(43.5*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (44*velx)/-35.0, -(37*vely)/-35.0, 2+(44*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (44.5*velx)/-35.0, -(37.5*vely)/-35.0, 2+(44.5*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (45*velx)/-35.0, -(37*vely)/-35.0, 2+(45*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+	TNT1 A 0 A_SpawnItemEx ("MariaUnmakyrLaserTrail", (45.5*velx)/-35.0, -(37.5*vely)/-35.0, 2+(45.5*velz)/-35.0, 0,0,0, 0, SXF_ABSOLUTEANGLE)
+    Loop
+  Death:    
+    TNT1 A 0 A_JumpIf(CallACS("AntiTinnitus")==1, "NoRinging")
+    TNT1 A 0 Bright A_StopSound(CHAN_BODY)
+	TNT1 A 0 A_Explode(150, 180, 1, 1)
+	TNT1 A 0 Bright radius_quake(7,16,0,960,0) 
+	TNT1 A 0 A_PlaySound ("Weapon/RocketLauncher/Boom")
+	TNT1 A 0 A_PlaySound("Maria/Explosion/Ear",5,1,0,1)
+    TNT1 A 0 A_PlaySound("Maria/Explosion/Far", 3)
+    TNT1 A 0 A_SpawnItemEx("MariaShockWave")
+    TNT1 AAAAA 0 A_SpawnProjectile("MariaMediumExplosionFlames", 0, 0, random(0, 360), CMF_AIMDIRECTION, random(0, -360))
+    TNT1 AAAAA 0 A_SpawnProjectile("MariaExplosionSmoke", 0, 0, random(0, 360), CMF_AIMDIRECTION, random(0, -360))
+    Stop
+  NoRinging:    
+    TNT1 A 0 Bright A_StopSound(CHAN_BODY)
+	TNT1 A 0 A_Explode(150, 180, 1, 1)
+	TNT1 A 0 Bright radius_quake(7,16,0,960,0) 
+	TNT1 A 0 A_PlaySound ("Weapon/RocketLauncher/Boom")
+    TNT1 A 0 A_PlaySound("Maria/Explosion/Far", 3)
+    TNT1 A 0 A_SpawnItemEx("MariaShockWave")
+    TNT1 AAAAA 0 A_SpawnProjectile("MariaMediumExplosionFlames", 0, 0, random(0, 360), CMF_AIMDIRECTION, random(0, -360))
+    TNT1 AAAAA 0 A_SpawnProjectile("MariaExplosionSmoke", 0, 0, random(0, 360), CMF_AIMDIRECTION, random(0, -360))
+    Stop
+  }
+}
+
+Actor MariaBallistaTrail
+	{
+  +ForceXYBillBoard
+  +NoInteraction
+  Radius 4
+  Height 8
+  Renderstyle "Add"
+  Alpha 0.75
+  Scale 1.15
+  States
+  {
+	Spawn:
+		UNPR ABCD 1 Bright
+		Stop
+	Death:
+		UNPR A 1 BRIGHT A_SetScale (0.55)
+		UNPR B 1 BRIGHT A_SetScale (0.45)
+		UNPR C 1 BRIGHT A_SetScale (0.35)
+		UNPR D 1 BRIGHT A_SetScale (0.25)
+		UNPR A 1 BRIGHT A_SetScale (0.15)
+		UNPR B 1 BRIGHT A_SetScale (0.05)
+		UNPR C 1 BRIGHT A_SetScale (0)
+		Stop
+  }
+}
+
+/////////////////////////////////
+///////////Katana Slash//////////
+/////////////////////////////////
+
+ACTOR MariaKatanaSlash
+{
+   Radius 8
+   Height 4
+   Speed 50
+   Damage 8
+   PROJECTILE
+   Renderstyle Add
+   Alpha 0.75
+   ReactionTime 15 //8
+   DONTHURTSHOOTER
+   Obituary "%k cleaved %o in half."
+   DeathSound "Weapon/Sword/Projectile"
+  +SEEKERMISSILE
+  +RIPPER
+  +EXTREMEDEATH
+  +LOOKALLAROUND
+  +FORCERADIUSDMG
+   States
+   {
+	Spawn:
+		//TNT1 A 0 A_SeekerMissile(20,30,SMF_LOOK|SMF_PRECISE)  
+		BWAV A 1 bright A_SpawnItem("MariaKatanaSlashTrail",0,0)
+		Loop
+	Death:
+		TNT1 A 0 A_StopSound(5)
+		BWAV B 8 Bright A_Explode
+		BWAV CD 8 bright A_FadeOut(0.10)
+		Stop
+	}
+}
+
+ACTOR MariaKatanaSlashTrail 
+{ 
+   Radius 8
+   Height 16
+   Speed 25
+   Damage 0
+   PROJECTILE
+   RENDERSTYLE none
+   ReactionTime 15
+   Scale 0.5
+   +RIPPER
+   +FORCEXYBILLBOARD
+   +CLIENTSIDEONLY
+   States
+   {
+   Spawn:
+      TNT1 A 0
+      BWAV A 1 Bright A_FadeOut(0.10)
+      Stop
+   }
+}
+
+/////////////////////////////////
+////////////Pipebomb/////////////
+/////////////////////////////////
+
+ACTOR HolyPipebomb
+{
+    Radius 4
+    Height 8
+    Speed 30	
+	//Mass 9	
+    Damage 3
+	-NOGRAVITY
+	+EXPLODEONWATER
+    //+NOBLOCKMAP
+    +MISSILE
+    +ACTIVATEIMPACT
+    +ACTIVATEPCROSS
+    +NOTELEPORT
+    +FORCEXYBILLBOARD
+    +THRUGHOST
+    +rollsprite
+	//SeeSound "StunGun/Ignite"
+	BounceType "Doom"
+    BounceSound "TearBomb/Bounce"	
+	BounceFactor 0.36
+	WallBounceFactor 0.43
+	BounceCount 3
+    Gravity 0.7
+	Obituary "$OB_GRENADE"
+	DamageType Grenade
+	States
+	{
+	Spawn:
+		TNT1 A 0
+		TNT1 A 0 A_Changevelocity(0,0,2,CVF_RELATIVE)
+	Spawn2:
+		PIPB ABCDEFGH 2 bright
+		Loop
+	Death:
+        TNT1 A 0 A_JumpIf(CallACS("AntiTinnitus")==1, "NoRinging")
+		PIPB AIJAIJAIJAIJAIJAIJAIJAIJAIJAIJAIJAIJ 2 bright
+		GLXP A 0 Bright A_NoGravity
+		TNT1 A 0 Radius_Quake (2, 54, 0, 15, 0)
+		GLXP A 0 A_AlertMonsters
+		//GLXP A 0 bright A_Explode(200,400)
+		GLXP A 0 bright A_Explode(100,300)
+		TNT1 A 0 A_CustomBulletAttack(180,100,FRandom(48,64),FRandom(2,10),"MariaPuff")
+        TNT1 A 0 A_PlaySound("Maria/Pipebomb/Boom", CHAN_AUTO)
+		TNT1 A 0 A_PlaySound("Maria/Explosion/Ear",5,1,0,1)
+        TNT1 A 0 A_PlaySound("Maria/Explosion/Far", CHAN_AUTO)
+		GLXP A 0 A_SetTranslucent(0.75,1)
+		//GLXP A 1 bright
+        TNT1 A 0 A_PlaySound("Maria/Explosion/Far", CHAN_ITEM)
+		TNT1 A 0 A_SpawnItemEx("MariaShockWave")
+        TNT1 AAAAAAAAAA 0 A_SpawnItemEx("MariaMediumExplosionFlames",0,0,0,Random(-10,10),Random(-10,10),Random(-10,10))
+        TNT1 AAAA 0 A_SpawnItemEx("MariaSmallExplosionFlames",0,0,0,Random(-10,10),Random(-10,10),Random(-10,10))
+        TNT1 AAAAAAAAAAAAAAA 0 A_SpawnItemEx("MariaExplosionSmoke",0,0,0,Random(-10,10),Random(-10,10),Random(-10,10))
+		stop
+	NoRinging:
+		PIPB AIJAIJAIJAIJAIJAIJAIJAIJAIJAIJAIJAIJ 2 bright
+		GLXP A 0 Bright A_NoGravity
+		TNT1 A 0 Radius_Quake (2, 54, 0, 15, 0)
+		GLXP A 0 A_AlertMonsters
+		//GLXP A 0 bright A_Explode(200,400)
+		GLXP A 0 bright A_Explode(100,300)
+		TNT1 A 0 A_CustomBulletAttack(180,100,FRandom(48,64),FRandom(2,10),"MariaPuff")
+        TNT1 A 0 A_PlaySound("Maria/Pipebomb/Boom", CHAN_AUTO)
+        TNT1 A 0 A_PlaySound("Maria/Explosion/Far", CHAN_AUTO)
+		GLXP A 0 A_SetTranslucent(0.75,1)
+		//GLXP A 1 bright
+        TNT1 A 0 A_PlaySound("Maria/Explosion/Far", CHAN_ITEM)
+		TNT1 A 0 A_SpawnItemEx("MariaShockWave")
+        TNT1 AAAAAAAAAA 0 A_SpawnItemEx("MariaMediumExplosionFlames",0,0,0,Random(-10,10),Random(-10,10),Random(-10,10))
+        TNT1 AAAA 0 A_SpawnItemEx("MariaSmallExplosionFlames",0,0,0,Random(-10,10),Random(-10,10),Random(-10,10))
+        TNT1 AAAAAAAAAAAAAAA 0 A_SpawnItemEx("MariaExplosionSmoke",0,0,0,Random(-10,10),Random(-10,10),Random(-10,10))
+		stop
+	XDeath:
+        TNT1 A 0 A_JumpIf(CallACS("AntiTinnitus")==1, "NoRingingX")
+		GLXP A 0 Bright A_NoGravity
+		GLXP A 0 A_AlertMonsters
+		TNT1 A 0 Radius_Quake (2, 54, 0, 15, 0)
+		//GLXP A 0 bright A_Explode(200,400)
+		GLXP A 0 bright A_Explode(100,300)
+		TNT1 A 0 A_CustomBulletAttack(180,100,FRandom(48,64),FRandom(2,10),"MariaPuff")
+		GLXP A 0 A_PlaySound("Pipebomb/Boom",CHAN_BODY)
+		TNT1 A 0 A_PlaySound("Maria/Explosion/Ear",5,1,0,1)
+        TNT1 A 0 A_PlaySound("Maria/Explosion/Far", 3)
+		GLXP A 0 A_SetTranslucent(0.75,1)
+		//GLXP A 1 bright
+		TNT1 A 0 A_SpawnItemEx("MariaShockWave")
+        TNT1 AAAAAAAAAA 0 A_SpawnItemEx("MariaMediumExplosionFlames",0,0,0,Random(-10,10),Random(-10,10),Random(-10,10))
+        TNT1 AAAA 0 A_SpawnItemEx("MariaSmallExplosionFlames",0,0,0,Random(-10,10),Random(-10,10),Random(-10,10))
+        TNT1 AAAAAAAAAAAAAAA 0 A_SpawnItemEx("MariaExplosionSmoke",0,0,0,Random(-10,10),Random(-10,10),Random(-10,10))
+		stop
+	NoRingingX:
+		GLXP A 0 Bright A_NoGravity
+		GLXP A 0 A_AlertMonsters
+		TNT1 A 0 Radius_Quake (2, 54, 0, 15, 0)	
+		//GLXP A 0 bright A_Explode(200,400)
+		GLXP A 0 bright A_Explode(100,300)
+		TNT1 A 0 A_CustomBulletAttack(180,100,FRandom(48,64),FRandom(2,10),"MariaPuff")
+		GLXP A 0 A_PlaySound("Pipebomb/Boom",CHAN_BODY)
+        TNT1 A 0 A_PlaySound("Maria/Explosion/Far", 3)
+		GLXP A 0 A_SetTranslucent(0.75,1)
+		//GLXP A 1 bright
+		TNT1 A 0 A_SpawnItemEx("MariaShockWave")
+        TNT1 AAAAAAAAAA 0 A_SpawnItemEx("MariaMediumExplosionFlames",0,0,0,Random(-10,10),Random(-10,10),Random(-10,10))
+        TNT1 AAAA 0 A_SpawnItemEx("MariaSmallExplosionFlames",0,0,0,Random(-10,10),Random(-10,10),Random(-10,10))
+        TNT1 AAAAAAAAAAAAAAA 0 A_SpawnItemEx("MariaExplosionSmoke",0,0,0,Random(-10,10),Random(-10,10),Random(-10,10))
+		stop
+	}
+}
+
+ACTOR HolyPipebombBerserked : HolyPipebomb
+{
+    Speed 50
+}
+
+/////////////////////////////////
+/////////////Famine//////////////
+/////////////////////////////////
+
+Actor MariaFamineCloud : FastProjectile
+{
+Radius 4
+Height 4
+Speed 120
+Damage 0
+MissileType "DarkCloudTrail3"
+MissileHeight 8
+Renderstyle Translucent
+Alpha 0.7
+DeathSound "Weapon/Book/DarkCloud/Impact"
+Obituary "%o's soul was fed to %k's Dark Claw"
++SEEKERMISSILE
++EXTREMEDEATH
++NODAMAGETHRUST
++FORCERADIUSDMG
++FORCEXYBILLBOARD
+States
+	{
+	Spawn:
+    	TNT1 A 0 A_SeekerMissile(50, 65, SMF_LOOK | SMF_PRECISE)
+		TNT1 A 1 A_SpawnItemEx("MariaFamineCloudTrail2",0,0,0,0,random(-1,1),random(-1,1))
+		Loop
+	Death:
+		ECLD A 2
+		{
+		A_SetRenderstyle(0.7,STYLE_Translucent);
+		A_StopSound(8);
+		A_StartSound("Weapon/Book/DarkCloud/End",9);
+		A_SpawnItemEx("MariaFamineCloudTrail",0,0,0,3,0,random(0,3),random(0,359));
+		A_SpawnItemEx("MariaFamineCloudTrail",0,0,0,3,0,random(0,3),random(0,359));
+		A_SpawnItemEx("MariaFamineCloudTrail",0,0,0,3,0,random(-3,0),random(0,359));
+		A_SpawnItemEx("MariaFamineCloudTrail",0,0,0,3,0,random(-3,0),random(0,359));
+		}
+		ECLD BCDEFGHI 2
+		Stop
+	XDeath:
+		TNT1 A 0 A_SetRenderstyle(1.0,STYLE_Add)
+		TNT1 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA 4 Bright
+		{
+		A_SpawnItemEx("MariaFamineCloudTrail",0,0,0,3,0,random(-1,1),random(0,359));
+		A_SpawnItemEx("MariaFamineCloudTrail",0,0,0,3,0,random(-1,1),random(0,359));
+		A_SpawnItemEx("MariaFamineCloudTrail2",0,0,0,3,0,random(-2,2),random(0,359),0,80);
+		A_SpawnItemEx("MariaFamineCloudTrail3",0,0,0,3,0,random(-4,4),random(0,359),0,140);
+		A_Explode(4,180,XF_NOSPLASH);
+		A_Warp(AAPTR_TRACER,2,0,40,0,WARPF_NOCHECKPOSITION|WARPF_INTERPOLATE);
+		A_StartSound("Weapon/Book/DarkCloud/Loop",8,CHANF_LOOPING,0.4);
+		}
+		ECLD A 2
+		{
+		A_SetRenderstyle(0.7,STYLE_Translucent);
+		A_StopSound(8);
+		A_StartSound("Weapon/Book/DarkCloud/End",9);
+		A_SpawnItemEx("MariaFamineCloudTrail",0,0,0,3,0,random(0,3),random(0,359));
+		A_SpawnItemEx("MariaFamineCloudTrail",0,0,0,3,0,random(0,3),random(0,359));
+		A_SpawnItemEx("MariaFamineCloudTrail",0,0,0,3,0,random(-3,0),random(0,359));
+		A_SpawnItemEx("MariaFamineCloudTrail",0,0,0,3,0,random(-3,0),random(0,359));
+		}
+		ECLD BCDEFGHI 2
+		Stop
+	}
+}
+
+Actor MariaFamineCloudTrail
+{
++NOINTERACTION
++ROLLSPRITE
++ROLLCENTER
++FORCEXYBILLBOARD
+Scale 0.6
+Renderstyle Translucent
+Alpha 0.5
+States
+	{
+	Spawn:
+		TNT1 A 0 NoDelay A_SetRoll(random(0,359))
+		ECLD EFGHI 2
+		Stop
+	}
+}
+Actor MariaFamineCloudTrail2 : MariaFamineCloudTrail
+{
+Scale 0.4
+}
+Actor MariaFamineCloudTrail3 : MariaFamineCloudTrail
+{
+Scale 0.2
+States
+	{
+	Spawn:
+		TNT1 A 0 NoDelay A_SetRoll(random(0,359))
+		ECLD GHI 2
+		Stop
+	}
+}
+
+/////////////////////////////////
+///////////Pestilence////////////
+/////////////////////////////////
+
+ACTOR MariaPestilenceShot
+{
+   Radius 8
+   Height 16
+   Speed 100
+   Damage 4
+   PoisonDamage 32, 13, 45
+   RENDERSTYLE ADD
+   Scale 1.15
+   ALPHA 0.67
+   PROJECTILE
+   +THRUGHOST
+   Seesound "Weapon/Book/Pestilence/Active"
+   DeathSound "Weapon/Book/Pestilence/Death"
+   Decal "DoomImpScorch"
+   States
+   {
+   Spawn:
+      PES1 AAABBB 1 Bright A_SpawnItemEx("MariaPestilenceShotTrail",0,0,0,0,0,0,0,128,0)
+      loop
+   Death:
+      TNT1 A 0 Bright A_Explode ( 3, 64 )
+      PES1 CDEF 4 Bright
+      stop
+   }
+}
+
+ACTOR MariaPestilenceShotTrail
+{   
+   Radius 0
+   Height 1
+   PROJECTILE
+   RENDERSTYLE ADD
+   Scale 0.75
+   ALPHA 0.75
+   States
+   {
+   Spawn:
+      NULL A 1 Bright
+      PES2 ABCDEFG 2 Bright
+      Stop 
+   }
+}
+
+/////////////////////////////////
+//////////////Wraith/////////////
+/////////////////////////////////
+
+Actor MariaGrimoireGhost :  HolyMissile
+{
+  Radius 8
+  Height 4
+  Speed 15
+  Damage (2*Random(2, 3))
+  WallBounceFactor 1.0
+  BounceFactor 1.0
+  RenderStyle Add
+  SeeSound "Weapons/Grimoire/Spirits/Active"
+  DeathSound "Weapons/Grimoire/Spirits/Death"
+  +SeekerMissile
+  +ScreenSeeker
+  +Ripper
+  -BloodSplatter
+  +BloodlessImpact
+  -ThruGhost
+  Projectile
+  States
+  {
+  Spawn:
+	SPI1 A 2 A_SeekerMissile(17, 17, SMF_LOOK | SMF_PRECISE)
+	SPI1 B 2 A_SeekerMissile(17, 17, SMF_LOOK | SMF_PRECISE)
+	SPI1 C 2 A_SeekerMissile(17, 17, SMF_LOOK | SMF_PRECISE)
+	SPI1 D 2 A_SeekerMissile(17, 17, SMF_LOOK | SMF_PRECISE)
+    Loop
+  Death:
+    SPI1 EFGHIJKLMNO 2
+    Stop
+  }
+}   
+
+/////////////////////////////////
+//////////////Soul///////////////
+/////////////////////////////////
+
+ACTOR MariaGrimProjectile
+{
+  Radius 8
+  Height 8
+  Speed 999999999999999
+  Damage 100
+  Projectile
+  +EXTREMEDEATH
+  +ALLOWPARTICLES
+  +PUFFONACTORS
+  +FORCERADIUSDMG
+  RenderStyle Add
+  Alpha 0.75
+  Obituary "%k taught %o about voodoo magic!"
+  States
+  {
+  Spawn:
+    TNT1 A 0 BRIGHT 
+    Loop
+  Death:
+    TNT1 A 0 A_BFGSpray("MariaGrimSoul")
+    TNT1 A 0 A_BFGSpray("MariaGrimSoul")
+    TNT1 A 0 A_BFGSpray("MariaGrimSoul")
+    TNT1 A 0 A_BFGSpray("MariaGrimSoul")	
+    Stop
+  }
+}
+
+ACTOR MariaGrimSoul
+{
+  +NOBLOCKMAP
+  +NOGRAVITY
+  RenderStyle Add
+  Alpha 0.75
+  DamageType "BFGSplash"
+  States
+  {
+  Spawn: 
+    SPRX A 3 
+    SPRX B 3 A_PlaySound("grimoire/soul")
+	SPRX C 3 A_AlertMonsters
+    SPRX DEFGHI 3
+    Stop
+  }
+}
+
+/////////////////////////////////
+//////////Miscellaneous//////////
+/////////////////////////////////
+
+Actor MariaGasGrenade
+{
+  Radius 3
+  Height 9
+  Speed 75
+  Damage 1
+  PROJECTILE
+  -BOUNCEONACTORS
+  +EXPLODEONWATER
+  +NOEXTREMEDEATH
+  -NOGRAVITY
+  BounceFactor 0.65
+  WallBounceFactor 0.7
+  Bouncetype Hexen
+  BounceCount 1
+  ReactionTime 115
+  BounceSound "TearBomb/Bounce"	
+  Deathsound "TearBomb/Gas"
+  States
+  {
+  Spawn:
+    SHGR A 0 A_CountDown		
+    SHGR A 2 A_CustomMissile("", 3, 0, 0, 1)	 
+	SHGR A 0 A_JumpIf(waterlevel >= 2, "DeepWater")
+    Loop
+  Death:
+    //TNT1 A 0 Radius_Quake (2, 54, 0, 15, 0)
+	TNT1 AAAAA 1 A_CustomMissile ("MariaGasCloudMissile", 2, 0, random (0, 360), 2, random (0, 360))
+    TNT1 AAAAAAAAA 2 A_CustomMissile ("MariaGasCloudFake", 2, 0, random (0, 360), 2, random (0, 360))
+	TNT1 AAAAA 1 A_CustomMissile ("MariaGasCloudMissile", 2, 0, random (0, 360), 2, random (0, 360))
+	TNT1 AAAAAAAAA 2 A_CustomMissile ("MariaGasCloudFake", 2, 0, random (0, 360), 2, random (0, 360))
+	TNT1 AAAAA 1 A_CustomMissile ("MariaGasCloudMissile", 2, 0, random (0, 360), 2, random (0, 360))
+	TNT1 AAAAAAAAA 2 A_CustomMissile ("MariaGasCloudFake", 2, 0, random (0, 360), 2, random (0, 360))
+	TNT1 AAAAA 1 A_CustomMissile ("MariaGasCloudMissile", 2, 0, random (0, 360), 2, random (0, 360))
+	TNT1 AAAAAAAAA 2 A_CustomMissile ("MariaGasCloudFake", 2, 0, random (0, 360), 2, random (0, 360))
+	TNT1 AAAAA 1 A_CustomMissile ("MariaGasCloudMissile", 2, 0, random (0, 360), 2, random (0, 360))
+	TNT1 AAAAAAAAA 2 A_CustomMissile ("MariaGasCloudFake", 2, 0, random (0, 360), 2, random (0, 360))
+	TNT1 AAAAA 1 A_CustomMissile ("MariaGasCloudMissile", 2, 0, random (0, 360), 2, random (0, 360))
+	TNT1 AAAAAAAAA 2 A_CustomMissile ("MariaGasCloudFake", 2, 0, random (0, 360), 2, random (0, 360))
+	TNT1 AAAAA 1 A_CustomMissile ("MariaGasCloudMissile", 2, 0, random (0, 360), 2, random (0, 360))
+	TNT1 AAAAAAAAA 2 A_CustomMissile ("MariaGasCloudFake", 2, 0, random (0, 360), 2, random (0, 360))
+	TNT1 AAAAA 1 A_CustomMissile ("MariaGasCloudMissile", 2, 0, random (0, 360), 2, random (0, 360))
+	TNT1 AAAAAAAAA 2 A_CustomMissile ("MariaGasCloudFake", 2, 0, random (0, 360), 2, random (0, 360))
+	TNT1 AAAAA 1 A_CustomMissile ("MariaGasCloudMissile", 2, 0, random (0, 360), 2, random (0, 360))
+	TNT1 AAAAAAAAA 2 A_CustomMissile ("MariaGasCloudFake", 2, 0, random (0, 360), 2, random (0, 360))
+	TNT1 AAAAA 1 A_CustomMissile ("MariaGasCloudMissile", 2, 0, random (0, 360), 2, random (0, 360))
+	TNT1 AAAAAAAAA 2 A_CustomMissile ("MariaGasCloudFake", 2, 0, random (0, 360), 2, random (0, 360))
+    Stop
+  DeepWater:
+    SHGR A 0 A_ScaleVelocity(0.5)
+    SHGR A 0 A_PlaySound("TearBomb/End")
+    SHGR AAA 6
+	SHGR AAAAAAAAAAAAAAAAAAA 1 A_FadeOut( 0.05 )
+	SHGR A 1 A_FadeOut( 1 )
+	SHGR A -1
+    stop
+  }
+}
+
+ACTOR MariaGasCloudMissile
+{
+    BounceType Doom
+	DamageType "Poison"
+	PoisonDamage 6
+    Scale 0.8
+	gravity 0.3
+	Speed 1
+	RenderStyle Translucent
+	Alpha 0.6
+	PROJECTILE
+	-ACTIVATEIMPACT
+	-ACTIVATEPCROSS
+	+NODAMAGETHRUST
+	+ADDITIVEPOISONDAMAGE
+	+BLOODLESSIMPACT
+	+FORCEPAIN
+	+THRUACTORS
+	+PIERCEARMOR
+	+NOBLOCKMAP
+    +NOCLIP 
+	States
+	{
+	Spawn:
+		TGAS A 1
+		TGAS A 0 A_Explode ( 9, 64 )
+		Goto Death
+	Death:
+		TGAS A 0 A_Explode ( 6, 64 )
+		TGAS ABCDEFGHIJKLMNOPQRSTUVWXYZ 2 A_FadeOut(0.01)
+		TG2S AB 2 A_FadeOut(0.01)
+		TGAS A 0 A_Explode ( 6, 64 )
+		TGAS ABCDEFGHIJKLMNOPQRSTUVWXYZ 2 A_FadeOut(0.01)
+		TG2S AB 2 A_FadeOut(0.01)
+		TGAS A 0 A_Explode ( 6, 64 )
+		TGAS ABCDEFGHIJKLMNOPQRSTUVWXYZ 2 A_FadeOut(0.01)
+		TG2S AB 2 A_FadeOut(0.01)
+		TGAS A 0 A_Explode ( 6, 64 )
+		TGAS ABCDEFGHIJKLMNOPQRSTUVWXYZ 2 A_FadeOut(0.01)
+		TG2S AB 2 A_FadeOut(0.01)
+		TGAS A 0 A_Explode ( 6, 64 )
+		TGAS ABCDEFGHIJKLMNOPQRSTUVWXYZ 2 A_FadeOut(0.01)
+		TG2S AB 2 A_FadeOut(0.01)
+		TGAS A 0 A_Explode ( 6, 64 )
+		TGAS ABCDEFGHIJKLMNOPQRSTUVWXYZ 2 A_FadeOut(0.01)
+		TG2S AB 2 A_FadeOut(0.01)
+		TGAS A 0 A_Explode ( 6, 64 )
+		TGAS ABCDEFGHIJKLMNOPQRSTUVWXYZ 2 A_FadeOut(0.01)
+		TG2S AB 2 A_FadeOut(0.01)
+		TGAS A 0 A_Explode ( 6, 64 )
+		TGAS ABCDEFGHIJKLMNOPQRSTUVWXYZ 2 A_FadeOut(0.01)
+		TG2S AB 2 A_FadeOut(0.01)
+		TNT1 A -1
+        Stop
+	}
+}
+
+/*
+		TGAS ABCDE 7 A_FadeIn( 0.12 )
+		TGAS A 0 A_CustomMissile( "MariaGasCloudMissile", Random(-5, 5), Random(-10, 10), random (-45, 45), 2, Random(0, 359))	
+		TGAS A 0 A_Explode ( 3, 64 )
+		TGAS ABCDE 7
+		TGAS A 0 A_CustomMissile( "MariaGasCloudMissile", Random(-5, 5), Random(-10, 10), random (-45, 45), 2, Random(0, 359))
+		TGAS A 0 A_Explode ( 2, 64 )
+		TGAS ABCDE 7
+		TGAS A 0 A_CustomMissile( "MariaGasCloudMissile", Random(-5, 5), Random(-10, 10), random (-45, 45), 2, Random(0, 359))	
+		TGAS A 0 A_Explode ( 3, 64 )
+		TGAS ABCDE 7
+		TGAS ABCDE 7 A_FadeOut( 0.06 )
+		Stop
+	Death:
+		TGAS ABCDE 7 A_FadeOut( 0.06 )
+		TGAS A 0 A_Explode ( 1, 8 )
+		TGAS ABCDE 7 A_FadeOut( 0.06 )
+*/
+
+ACTOR MariaGasCloudFake
+{
+    BounceType Doom
+    Scale 0.8
+	gravity 0.3
+	Speed 1
+	RenderStyle Translucent
+	Alpha 0.6
+	PROJECTILE
+	-ACTIVATEIMPACT
+	-ACTIVATEPCROSS
+	+NODAMAGETHRUST
+	+ADDITIVEPOISONDAMAGE
+	+BLOODLESSIMPACT
+	+FORCEPAIN
+	+THRUACTORS
+	+PIERCEARMOR
+	+NOBLOCKMAP
+    +NOCLIP 
+	States
+	{
+	Spawn:
+		TGAS A 1
+		Goto Death
+	Death:
+		TGAS ABCDEFGHIJKLMNOPQRSTUVWXYZ 2 A_FadeOut(0.01)
+		TG2S AB 4 A_FadeOut(0.01)
+		TGAS ABCDEFGHIJKLMNOPQRSTUVWXYZ 2 A_FadeOut(0.01)
+		TG2S AB 4 A_FadeOut(0.01)
+		TGAS ABCDEFGHIJKLMNOPQRSTUVWXYZ 2 A_FadeOut(0.01)
+		TG2S AB 4 A_FadeOut(0.01)
+		TGAS ABCDEFGHIJKLMNOPQRSTUVWXYZ 2 A_FadeOut(0.01)
+		TG2S AB 4 A_FadeOut(0.01)
+		TGAS ABCDEFGHIJKLMNOPQRSTUVWXYZ 2 A_FadeOut(0.01)
+		TG2S AB 4 A_FadeOut(0.01)
+		TGAS ABCDEFGHIJKLMNOPQRSTUVWXYZ 2 A_FadeOut(0.01)
+		TG2S AB 4 A_FadeOut(0.01)
+		TGAS ABCDEFGHIJKLMNOPQRSTUVWXYZ 2 A_FadeOut(0.01)
+		TG2S AB 4 A_FadeOut(0.01)
+		TGAS ABCDEFGHIJKLMNOPQRSTUVWXYZ 2 A_FadeOut(0.01)
+		TG2S AB 4 A_FadeOut(0.01)
+		TNT1 A -1
+        Stop
+	}
+}
+
+
+
+ACTOR MariaShockWave
+{
+    Alpha 0.4
+	+NOBLOCKMAP
+	+NOGRAVITY
+	+NOTELEPORT
+	+NOCLIP
+	+DONTSPLASH
+	+FORCEXYBILLBOARD
+    Renderstyle Add
+	States
+	{
+	Spawn:
+		SHWK A 1
+		SHWK CEGIKMOQR 1 A_FadeOut(0.03)
+		Stop
+	}
+}

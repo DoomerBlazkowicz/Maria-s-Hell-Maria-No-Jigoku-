@@ -1,0 +1,175 @@
+//==============================================================================
+// A Mother's Rage/Berserk
+//==============================================================================
+// Caliber: 404
+//==============================================================================
+// KILL THEM! KILL THEM! KILL THEM! KILL THEM! KILL THEM! KILL THEM! KILL THEM!
+// KILL THEM! KILL THEM! KILL THEM! KILL THEM! KILL THEM! KILL THEM! KILL THEM! 
+// KILL THEM! KILL THEM! KILL THEM! KILL THEM! KILL THEM! KILL THEM! KILL THEM! 
+// KILL THEM! KILL THEM! KILL THEM! KILL THEM! KILL THEM! KILL THEM! KILL THEM! 
+// KILL THEM! KILL THEM! KILL THEM! KILL THEM! KILL THEM! KILL THEM! KILL THEM! 
+//==============================================================================
+ACTOR MariaBerserkerFists : Weapon
+{ 
+    Tag "A Mother's Rage"
+    Weapon.SelectionOrder 7000
+	Weapon.Kickback 1000
+    +NoAutoAim
+    +WEAPON.MELEEWEAPON
+    +INVENTORY.UNDROPPABLE
+    +CHEATNOTWEAPON
+	Scale 0.4
+	Obituary "%k had huge guts. %o saw what they looked like."
+    Weapon.BobStyle 		"Smooth"
+    Weapon.BobSpeed 		2.5
+    Weapon.BobRangeX 		0.75
+    Weapon.BobRangeY 		0.5
+	States 
+	{  
+	TrueReady: 
+		ZRKH AAAAAAAAAAAAAAAAAAAAAAAABBBAAAAAAABBB 1 
+		{
+		radius_quake(1, 2, 0, 1, 0);
+		A_WeaponReady(WRF_DisableSwitch|WRF_NoSwitch|WRF_ALLOWZOOM);
+		Return A_JumpIf(CountInv("BerserkStrength") == 0, "DeselectFancy"); 
+		}
+		Loop 
+    DeselectFancy:
+        TNT1 A 0 A_PlayWeaponSound("weapons/berserk/stop")
+	    TNT1 A 0 A_SetBlend("FF0000",0.75,50)
+	    TNT1 A 0 radius_quake(4, 6, 0, 1, 0)
+		ZRKH CD 1 A_WeaponReady(WRF_NoFire|WRF_NoSecondary|WRF_DisableSwitch|WRF_NoSwitch)
+	Deselect: 
+        TNT1 A 0 A_JumpIf(health <= 0, "DeselectDying")
+		TNT1 A 0 A_JumpIf(CountInv("BerserkStrength") == 1, "Ready")
+		TNT1 A 0 A_StopSound(CHAN_6)
+		TNT1 A 0 A_TakeInventory("MariaBerserkerFists",1)
+	    TNT1 A 1 
+		Loop 
+   DeselectDying:
+        TNT1 A 0 A_PlayWeaponSound("weapons/berserk/stop")
+	    TNT1 A 0 A_SetBlend("FF0000",0.75,50)
+	    TNT1 A 0 radius_quake(4, 6, 0, 1, 0)
+		TNT1 A 0 A_StopSound(CHAN_6)
+	StayDead:
+		TNT1 A 1
+		NULL A 0 A_JumpIf(health <= 0, "StayDead")
+		Goto TakeItOff
+	TakeItOff:
+		TNT1 A 1
+		TNT1 A 0 A_TakeInventory("MariaBerserkerFists",1)
+	    TNT1 A 1 
+		Loop 
+	Select: 
+		NULL AA 0 A_Raise 
+		Loop 
+    Ready:
+	    ZRKH D 0 A_JumpIf(CountInv("BerserkStrength") == 0, "TakeItOff")
+	    ZRKH D 0 A_StartSound("weapons/berserk/loop",CHAN_6,CHANF_LOOP|CHANF_OVERLAP,1.0)
+		ZRKH DC 1 A_WeaponReady(WRF_NoFire|WRF_NoSecondary|WRF_DisableSwitch|WRF_NoSwitch)
+		ZRKH BA 1 A_WeaponReady(WRF_NoFire|WRF_NoSecondary|WRF_DisableSwitch|WRF_NoSwitch)
+		Goto TrueReady
+     Fire:
+        ZRKH CD 1
+	    TNT1 A 2
+	Hold:
+	Fire1:
+    	TNT1 A 0 A_JumpIfInventory("PowerQuadDamage",1,2)
+    	TNT1 A 0 A_Jump(256,2)
+	    TNT1 A 0 A_PlaySound("Maria/Powerup/Quad/Shoot",7)
+        ZRKD A 0 A_PlaySound("weapons/melee/fist/swing", CHAN_AUTO)
+	    ZRKD ABC 1
+        //ZRKD A 0 radius_quake(4, 7, 0, 1, 0)
+        ZRKD C 0 A_FireCustomMissile("MariaPunchBerserked",0,0)
+	    ZRKD DE 1
+     	//TNT1 A 1 radius_quake(1, 2, 0, 1, 0)
+	    TNT1 A 0 A_JumpIfInventory("BerserkStrength",1,1)
+    	Goto DeselectFancy
+    	TNT1 A 0 A_ReFire("Fire2")
+	    goto FireEnd
+	Fire2:
+	    TNT1 A 0 A_JumpIfInventory("PowerQuadDamage",1,2)
+    	TNT1 A 0 A_Jump(256,2)
+	    TNT1 A 0 A_PlaySound("Maria/Powerup/Quad/Shoot",7)
+        ZRKE A 0 A_PlaySound("weapons/melee/fist/swing", CHAN_AUTO)
+	    ZRKE ABC 1
+        //ZRKE A 0 radius_quake(4, 7, 0, 1, 0)
+    	ZRKE C 0 A_FireCustomMissile("MariaPunchBerserked",0,0)
+	    ZRKE DE 1
+	    //TNT1 A 1 radius_quake(1, 2, 0, 1, 0)
+	    TNT1 A 0 A_JumpIfInventory("BerserkStrength",1,1)
+	    Goto DeselectFancy
+	    TNT1 A 0 A_ReFire("Fire1")
+	    goto FireEnd
+
+    AltFire:
+        ZRKH CD 1
+	    TNT1 A 2
+	AltHold:
+	AltFire1:
+    	TNT1 A 0 A_JumpIfInventory("PowerQuadDamage",1,2)
+    	TNT1 A 0 A_Jump(256,2)
+	    TNT1 A 0 A_PlaySound("Maria/Powerup/Quad/Shoot",7)
+        ZRKB A 0 A_PlaySound("weapons/melee/fist/uppercut", CHAN_AUTO)
+	    ZRKB ABC 1
+        ZRKC A 0 radius_quake(4, 7, 0, 1, 0)
+        ZRKC C 0 A_FireCustomMissile("MariaPunchBerserked2",0,0)
+	    ZRKB DE 1
+     	TNT1 A 20 radius_quake(1, 2, 0, 1, 0)
+	    TNT1 A 0 A_JumpIfInventory("BerserkStrength",1,1)
+    	Goto DeselectFancy
+    	TNT1 A 0 A_ReFire("AltFire2")
+	    goto FireEnd
+	AltFire2:
+	    TNT1 A 0 A_JumpIfInventory("PowerQuadDamage",1,2)
+    	TNT1 A 0 A_Jump(256,2)
+	    TNT1 A 0 A_PlaySound("Maria/Powerup/Quad/Shoot",7)
+        ZRKB A 0 A_PlaySound("weapons/melee/fist/uppercut", CHAN_AUTO)
+	    ZRKC ABC 1
+        ZRKC A 0 radius_quake(4, 7, 0, 1, 0)
+    	ZRKC C 0 A_FireCustomMissile("MariaPunchBerserked2",0,0)
+	    ZRKC DE 1
+	    TNT1 A 20 radius_quake(1, 2, 0, 1, 0)
+	    TNT1 A 0 A_JumpIfInventory("BerserkStrength",1,1)
+	    Goto DeselectFancy
+	    TNT1 A 0 A_ReFire("AltFire1")
+	    goto FireEnd
+
+    ThrowPipebomb:
+        TNT1 A 0 A_JumpIfInventory("PipebombAmmo", 1, 1)
+        Goto NoGrenade
+        ZRKH CD 1
+	    TNT1 A 2
+        TAHA AB 1
+		TNT1 A 0 A_JumpIfInventory("PowerQuadDamage",1,2)
+		TNT1 A 0 A_Jump(256,2)
+		TNT1 A 0 A_PlaySound("Maria/Powerup/Quad/Shoot",7)
+        TNT1 A 0 A_TakeInventory("PipebombAmmo", 1)
+	    TNT1 A 0 A_PlaySound("StunGun/Throw", 3)
+        TNT1 A 0 A_FireCustomMissile("HolyPipebombBerserked",0,1,0,0)
+        TAHA CDE 1
+    	TNT1 A 2
+	    goto FireEnd
+    FireEnd:
+	    ZRKH DC 1 A_WeaponReady(WRF_DisableSwitch|WRF_NoSwitch|WRF_AllowReload)
+	    goto TrueReady
+    NoGrenade:
+        TNT1 A 0 A_Print("No Pipebombs Left")
+	    goto TrueReady
+	}
+} 
+	
+ACTOR ZKPunchThrust : CustomInventory
+{
+  -COUNTITEM
+  +INVENTORY.ALWAYSPICKUP
+  Inventory.PickupMessage ""
+  Inventory.PickupSound ""
+  States
+  {
+  Pickup:
+    TNT1 A 0 ThrustThingZ (0, 5, 0, 0)
+	TNT1 A 0 ThrustThing(angle*256/360+128, 2, 0, 0)
+    Stop
+  }
+}

@@ -1,0 +1,732 @@
+//Spawners
+
+ACTOR 9mmCasingSpawnerA
+{
+	Speed 20
+	PROJECTILE
+	+NOCLIP
+	+CLIENTSIDEONLY
+	States
+	{
+	Spawn:
+        TNT1 A 0
+		TNT1 A 1 A_CustomMissile("9mmBulletCasing",1,0,random(50,80),2,random(45,80))
+		Stop
+	}
+}
+
+ACTOR 9mmCasingSpawnerB : 9mmCasingSpawnerA
+{
+	States
+	{
+	Spawn:
+        TNT1 A 0
+		TNT1 A 1 A_CustomMissile("9mmBulletCasing",1,0,random(-50,-80),2,random(45,80))
+		Stop
+	}
+}
+
+ACTOR ShotCaseSpawner : 9mmCasingSpawnerA
+{
+	States
+	{
+	Spawn:
+        TNT1 A 0
+		TNT1 A 1 A_CustomMissile("ShotgunCasingBuckshot",1,0,random(-50,-80),2,random(45,80))
+		Stop
+	}
+} 
+
+ACTOR GasShotCaseSpawner : 9mmCasingSpawnerA
+{
+	States
+	{
+	Spawn:
+        TNT1 A 0
+		TNT1 A 1 A_CustomMissile("ShotgunCasingGas",1,0,random(-50,-80),2,random(45,80))
+		Stop
+	} 
+} 
+
+ACTOR HolyShotCaseSpawner : 9mmCasingSpawnerA
+{
+	States
+	{
+	Spawn:
+        TNT1 A 0
+		TNT1 A 1 A_CustomMissile("ShotgunCasingNOB",1,0,random(-50,-80),2,random(45,80))
+		Stop
+	} 
+} 
+
+ACTOR ShotCaseSpawner2 : 9mmCasingSpawnerA
+{
+	States
+	{
+	Spawn:
+        TNT1 A 0
+		TNT1 A 1 A_CustomMissile("ShotgunCasingBuckshot",1,0,random(50,80),2,random(45,80))
+		Stop
+	}
+} 
+
+ACTOR AKCasingSpawner
+{
+	Speed 20
+	PROJECTILE
+	+NOCLIP
+	+CLIENTSIDEONLY
+	States
+	{
+	Spawn:
+        TNT1 A 0
+		TNT1 A 1 A_CustomMissile("LMGBulletCasing",1,0,random(-50,-80),2,random(45,80))
+		Stop
+	}
+}
+
+ACTOR LMGCasingSpawner
+{
+	Speed 20
+	PROJECTILE
+	+NOCLIP
+	+CLIENTSIDEONLY
+	States
+	{
+	Spawn:
+        TNT1 A 0
+		TNT1 A 1 A_CustomMissile("LMGBulletCasing",1,0,random(-50,-80),2,random(45,80))
+		Stop
+	}
+}
+
+ACTOR SniperCasingSpawner
+{
+	Speed 20
+	PROJECTILE
+	+NOCLIP
+	+CLIENTSIDEONLY
+	States
+	{
+	Spawn:
+        TNT1 A 0
+		TNT1 A 1 A_CustomMissile("SniperBulletCasing",1,0,random(-50,-80),2,random(45,80))
+		Stop
+	}
+}
+
+ACTOR GrenCaseSpawner : 9mmCasingSpawnerA
+{
+	States
+	{
+	Spawn:
+        TNT1 A 0
+		TNT1 A 1 A_CustomMissile("BarrelGrenadeCasing",1,0,random(50,80),2,random(45,80))
+		Stop
+	}
+} 
+
+ACTOR MinigunCasingSpawner
+{
+	Speed 20
+	PROJECTILE
+	+NOCLIP
+	+CLIENTSIDEONLY
+	States
+	{
+	Spawn:
+        TNT1 A 0
+		TNT1 A 1 A_CustomMissile("ARBulletCasing",1,0,random(-80,-110),2,random(45,80))
+		Stop
+	}
+}
+
+ACTOR MinigunLinkCasingSpawner
+{
+	Speed 20
+	PROJECTILE
+	+NOCLIP
+	+CLIENTSIDEONLY
+	States
+	{
+	Spawn:
+        TNT1 A 0
+		TNT1 A 1 A_CustomMissile("EmptyBulletLink",1,0,random(-80,-110),2,random(45,80))
+		Stop
+	}
+}
+
+///////////
+//Casings//
+///////////
+
+ACTOR 9mmBulletCasing
+{
+   Height 2
+   Radius 2
+   Speed 8
+   Scale 0.14
+   +DOOMBOUNCE
+   -BLOODSPLATTER
+   +WINDTHRUST
+   +CLIENTSIDEONLY
+   +MOVEWITHSECTOR
+   +MISSILE
+   +NOBLOCKMAP
+   -DROPOFF
+   +NOTELEPORT
+   +FORCEXYBILLBOARD
+   +NOTDMATCH
+   +GHOST
+   +FLOORCLIP
+   +THRUACTORS
+   Mass 1
+   BounceFactor 0.4
+   SeeSound "Casing/Bullet/Light"
+   States
+   {
+   Spawn:
+      CAS2 ABCDEFGHIJKLMNOPABCDEFGHIJKLMNOP 2
+      STOP
+   Death:
+       TNT1 A 0
+       TNT1 A 0 A_Jump(256,"Rest1","Rest2","Rest3","Rest4")
+    Rest1:
+      CAS2 Q 1
+      Goto Lying
+    Rest2:
+      CAS2 R 1
+      Goto Lying
+    Rest3:
+      CAS2 S 1
+      Goto Lying
+    Rest4:
+      CAS2 T 1
+      Goto Lying
+    Lying:
+        "----" A -1
+        Loop
+   }
+}
+
+ACTOR LMGBulletCasing
+{
+   Height 8
+   Radius 6
+   Speed 5
+   Scale 0.2
+   +DOOMBOUNCE
+   -BLOODSPLATTER
+   +WINDTHRUST
+   +CLIENTSIDEONLY
+   +MOVEWITHSECTOR
+   +MISSILE
+   +NOBLOCKMAP
+   -DROPOFF
+   +NOTELEPORT
+   +FORCEXYBILLBOARD
+   +NOTDMATCH
+   +GHOST
+   +FLOORCLIP
+   +THRUACTORS
+   Mass 4
+   BounceFactor 0.3
+   SeeSound "Casing/Bullet/Rifle"
+   States
+   {
+   Spawn:
+      CAS4 ABCDEFGHIJKLMNOPABCDEFGHIJKLMNOP 2
+      STOP
+   Death:
+       TNT1 A 0
+       TNT1 A 0 A_Jump(256,"Rest1","Rest2","Rest3","Rest4")
+    Rest1:
+      CAS4 Q 1
+      Goto Lying
+    Rest2:
+      CAS4 R 1
+      Goto Lying
+    Rest3:
+      CAS4 S 1
+      Goto Lying
+    Rest4:
+      CAS4 T 1
+      Goto Lying
+    Lying:
+        "----" A -1
+        Loop
+   }
+}
+
+ACTOR AKBulletCasing
+{
+   Height 8
+   Radius 6
+   Speed 5
+   Scale 0.2
+   +DOOMBOUNCE
+   -BLOODSPLATTER
+   +WINDTHRUST
+   +CLIENTSIDEONLY
+   +MOVEWITHSECTOR
+   +MISSILE
+   +NOBLOCKMAP
+   -DROPOFF
+   +NOTELEPORT
+   +FORCEXYBILLBOARD
+   +NOTDMATCH
+   +GHOST
+   +FLOORCLIP
+   +THRUACTORS
+   Mass 4
+   BounceFactor 0.3
+   SeeSound "Casing/Bullet/Rifle"
+   States
+   {
+   Spawn:
+      CAS8 ABCDEFGHIJKLMNOPABCDEFGHIJKLMNOP 2
+      STOP
+   Death:
+       TNT1 A 0
+       TNT1 A 0 A_Jump(256,"Rest1","Rest2","Rest3","Rest4")
+    Rest1:
+      CAS8 Q 1
+      Goto Lying
+    Rest2:
+      CAS8 R 1
+      Goto Lying
+    Rest3:
+      CAS8 S 1
+      Goto Lying
+    Rest4:
+      CAS8 T 1
+      Goto Lying
+    Lying:
+        "----" A -1
+        Loop
+   }
+}
+
+ACTOR SniperBulletCasing
+{
+   Height 8
+   Radius 6
+   Speed 5
+   Scale 0.2
+   +DOOMBOUNCE
+   -BLOODSPLATTER
+   +WINDTHRUST
+   +CLIENTSIDEONLY
+   +MOVEWITHSECTOR
+   +MISSILE
+   +NOBLOCKMAP
+   -DROPOFF
+   +NOTELEPORT
+   +FORCEXYBILLBOARD
+   +NOTDMATCH
+   +GHOST
+   +FLOORCLIP
+   +THRUACTORS
+   Mass 4
+   BounceFactor 0.3
+   SeeSound "Casing/Bullet/Sniper"
+   States
+   {
+   Spawn:
+      CAS9 ABCDEFGHIJKLMNOPABCDEFGHIJKLMNOP 2
+      STOP
+   Death:
+       TNT1 A 0
+       TNT1 A 0 A_Jump(256,"Rest1","Rest2","Rest3","Rest4")
+    Rest1:
+      CAS9 Q 1
+      Goto Lying
+    Rest2:
+      CAS9 R 1
+      Goto Lying
+    Rest3:
+      CAS9 S 1
+      Goto Lying
+    Rest4:
+      CAS9 T 1
+      Goto Lying
+    Lying:
+        "----" A -1
+        Loop
+   }
+}
+
+ACTOR ShotgunCasingBuckshot
+{
+   Height 12
+   Radius 9
+   Speed 6
+   Scale 0.11
+   +DOOMBOUNCE
+   -BLOODSPLATTER
+   +WINDTHRUST
+   +CLIENTSIDEONLY
+   +MOVEWITHSECTOR
+   +MISSILE
+   +NOBLOCKMAP
+   -DROPOFF
+   +NOTELEPORT
+   +FORCEXYBILLBOARD
+   +NOTDMATCH
+   +GHOST
+   +FLOORCLIP
+   +THRUACTORS
+   Mass 1
+   BounceFactor 0.3
+   SeeSound "Casing/Shell"
+   States
+   {
+    Spawn:
+      CAS3 ABCDEFGHIJKLMNOPABCDEFGHIJKLMNOP 2
+      Stop
+   Death:
+      TNT1 A 0
+      TNT1 A 0 A_Jump(256,"Rest1","Rest2","Rest3","Rest4")
+    Rest1:
+      CAS3 Q 1
+      Goto Lying
+    Rest2:
+      CAS3 R 1
+      Goto Lying
+    Rest3:
+      CAS3 S 1
+      Goto Lying
+    Rest4:
+      CAS3 T 1
+      Goto Lying
+    Lying:
+        "----" A -1
+        Loop
+   }
+}
+
+ACTOR ShotgunCasingGas : ShotgunCasingBuckshot
+{
+   Height 12
+   Radius 9
+   Speed 6
+   Scale 0.11
+   Mass 1
+   BounceFactor 0.3
+   SeeSound "Casing/Shell"
+   States
+   {
+    Spawn:
+      CAS5 ABCDEFGHIJKLMNOPABCDEFGHIJKLMNOP 2
+      Stop
+   Death:
+      TNT1 A 0
+      TNT1 A 0 A_Jump(256,"Rest1","Rest2","Rest3","Rest4")
+    Rest1:
+      CAS5 Q 1
+      Goto Lying
+    Rest2:
+      CAS5 R 1
+      Goto Lying
+    Rest3:
+      CAS5 S 1
+      Goto Lying
+    Rest4:
+      CAS5 T 1
+      Goto Lying
+    Lying:
+        "----" A -1
+        Loop
+   }
+}
+
+ACTOR ShotgunCasingNOB : ShotgunCasingBuckshot
+{
+   Height 12
+   Radius 9
+   Speed 6
+   Scale 0.11
+   Mass 1
+   BounceFactor 0.3
+   SeeSound "Casing/Shell"
+   States
+   {
+    Spawn:
+      CAS7 ABCDEFGHIJKLMNOPABCDEFGHIJKLMNOP 2
+      Stop
+   Death:
+      TNT1 A 0
+      TNT1 A 0 A_Jump(256,"Rest1","Rest2","Rest3","Rest4")
+    Rest1:
+      CAS7 Q 1
+      Goto Lying
+    Rest2:
+      CAS7 R 1
+      Goto Lying
+    Rest3:
+      CAS7 S 1
+      Goto Lying
+    Rest4:
+      CAS7 T 1
+      Goto Lying
+   }
+}
+
+ACTOR BarrelGrenadeCasing
+{
+   Height 12
+   Radius 9
+   Speed 6
+   Scale 0.11
+   BounceType "Doom"
+   +DOOMBOUNCE
+   -BLOODSPLATTER
+   +WINDTHRUST
+   +CLIENTSIDEONLY
+   +MOVEWITHSECTOR
+   +MISSILE
+   +NOBLOCKMAP
+   -DROPOFF
+   +NOTELEPORT
+   +FORCEXYBILLBOARD
+   +NOTDMATCH
+   +GHOST
+   +FLOORCLIP
+   +THRUACTORS
+   Mass 1
+   BounceFactor 0.3
+   SeeSound "Casing/Grenade"
+   States
+   {
+    Spawn:
+      CAS6 ABCDEFGHIJKLMNOPABCDEFGHIJKLMNOP 2
+      Stop
+   Death:
+      TNT1 A 0
+      TNT1 A 0 A_Jump(256,"Rest1","Rest2","Rest3","Rest4")
+    Rest1:
+      CAS6 Q 1
+      Goto Lying
+    Rest2:
+      CAS6 R 1
+      Goto Lying
+    Rest3:
+      CAS6 S 1
+      Goto Lying
+    Rest4:
+      CAS6 T 1
+      Goto Lying
+    Lying:
+        "----" A -1
+        Loop
+   }
+}
+
+ACTOR 357BulletCasing : 9mmBulletCasing
+{
+   Scale 0.14
+   Mass 1
+   BounceFactor 0.4
+   SeeSound "Casing/Bullet/Light"
+   States
+   {
+   Spawn:
+      CAS1 ABCDEFGHIJKLMNOPABCDEFGHIJKLMNOP 2
+      STOP
+   Death:
+       TNT1 A 0
+       TNT1 A 0 A_Jump(256,"Rest1","Rest2","Rest3","Rest4")
+    Rest1:
+      CAS1 Q 1
+      Goto Lying
+    Rest2:
+      CAS1 R 1
+      Goto Lying
+    Rest3:
+      CAS1 S 1
+      Goto Lying
+    Rest4:
+      CAS1 T 1
+      Goto Lying
+   }
+}
+
+ACTOR EmptyPistolMagazine
+{
+   Height 2
+   Radius 2
+   Speed 4
+   Scale 0.75
+   BounceType "Doom"
+   +DOOMBOUNCE
+   -BLOODSPLATTER
+   +WINDTHRUST
+   +CLIENTSIDEONLY
+   +MOVEWITHSECTOR
+   +MISSILE
+   +NOBLOCKMAP
+   -DROPOFF
+   +NOTELEPORT
+   +FORCEXYBILLBOARD
+   +NOTDMATCH
+   +GHOST
+   +FLOORCLIP
+   +THRUACTORS
+   Mass 1
+   BounceFactor 0.5
+   SeeSound "Casing/Mag/Pistol"
+   States
+   {
+   Spawn:
+      TNT1 A 7
+      EPMA ABCDEFGHABCDEFGHABCDEFGHABCDEFGHABCDEFGH 4
+      Stop
+   Death:
+      TNT1 A 0
+      TNT1 A 0 A_Jump(256,"Rest1","Rest2")
+   Rest1:
+      EPMA I 1
+      Goto Lying
+   Rest2:
+      EPMA J 1
+      Goto Lying
+    Lying:
+        "----" A -1
+        Loop
+   }
+}
+
+ACTOR EmptyRifleMagazine : EmptyPistolMagazine
+{
+   Height 12
+   Radius 9
+   Speed 4
+   Scale 0.80
+   Mass 1
+   SeeSound "Casing/Mag/Rifle"
+   States
+   {
+   Spawn:
+      TNT1 A 7
+      ERIF ABCDEFGHABCDEFGHABCDEFGHABCDEFGHABCDEFGH 4
+      Stop
+   Death:
+      ERIF I 1
+      Goto Lying
+   }
+}
+
+ACTOR EmptyCell : EmptyPistolMagazine
+{
+   Height 12
+   Radius 9
+   Speed 4
+   Scale 0.80
+   Mass 1
+   SeeSound "Casing/Mag/Cell"
+   States
+   {
+   Spawn:
+      TNT1 A 7
+      ECEL ABCDEFGHABCDEFGHABCDEFGHABCDEFGHABCDEFGH 4
+      Stop
+   Death:
+      ECEL I 1
+      Goto Lying
+   }
+}
+
+ACTOR EmptySpeedLoader : EmptyPistolMagazine
+{
+   Height 12
+   Radius 9
+   Speed 4
+   Scale 0.10
+   Mass 1
+   SeeSound "Casing/Mag/Pistol"
+   States
+   {
+   Spawn:
+      TNT1 A 7
+      RVS1 ABCDEFGHABCDEFGHABCDEFGHABCDEFGHABCDEFGH 4
+      Stop
+   Death:
+      TNT1 A 0
+      TNT1 A 0 A_Jump(256,"Rest1","Rest2")
+   Rest1:
+      RVS1 I 1
+      Goto Lying
+   Rest2:
+      RVS1 J 1
+      Goto Lying
+   }
+}
+
+ACTOR EmptyASGAmmo : EmptyPistolMagazine
+{
+	Scale 0.75
+    SeeSound "Casing/Mag/Drum"
+	States
+	{
+	Spawn:
+		TNT1 A 7
+		EASG ABCDEFGHABCDEFGHABCDEFGHABCDEFGHABCDEFGH 4
+		Stop
+	Death:
+		EASG I 1
+		Goto Lying
+	}
+}
+
+/*ACTOR RocketCaseSpawn
+{
+	States
+	{
+	Spawn:
+        TNT1 A 0
+		TNT1 A 1 A_CustomMissile("EmptyRocketChamber",0,0,random(-80,-100),2,random(40,60))
+		Stop
+	}
+}*/
+
+ACTOR EmptyRocketChamber : EmptyPistolMagazine
+{
+   Scale 0.8
+   SeeSound "Casing/Mag/MLR"
+   States
+   {
+   Spawn:
+      TNT1 A 7
+      RCSE ABCDEFGHABCDEFGHABCDEFGHABCDEFGHABCDEFGH 4
+      Stop
+   Death:
+      RCSE G 1
+      Goto Lying
+   }
+}
+
+ACTOR EmptyBulletLink : EmptyPistolMagazine
+{
+   Height 12
+   Radius 9
+   Speed 4
+   Scale 0.10
+   Mass 1
+   SeeSound "Casing/LMG/Links"
+   States
+   {
+   Spawn:
+      TNT1 A 7
+      MCAP ABCDEFGHABCDEFGHABCDEFGHABCDEFGHABCDEFGH 4
+      Stop
+   Death:
+      TNT1 A 0
+      TNT1 A 0 A_Jump(256,"Rest1","Rest2")
+   Rest1:
+      MCAP I 1
+      Goto Lying
+   Rest2:
+      MCAP J 1
+      Goto Lying
+   }
+}

@@ -1,0 +1,575 @@
+//==============================================================================
+// UAC Mk93 Micro Rocket Launcher
+//==============================================================================
+// Caliber: 40mm Grenades
+//==============================================================================
+// Uhh... What is this? Why this launcher... too colourful? And why it "speaks"
+// whenever I fire or do something? Aside from it speaking Japanese, it's getting 
+// kinda annoying, but not gonna lie, "her" voice is pretty cute.
+//==============================================================================
+Actor MariaMicroRocketLauncher : MariaWeapon
+{
+  Weapon.AmmoType1 "MariaMicroRocketLauncherLoaded"
+  Weapon.AmmoGive2 6
+  Weapon.AmmoType2 "MariaGrenadeAmmo"
+  Inventory.PickupMessage "Micro Rocket Launcher Obtained!"
+  Inventory.PickupSound "Weapon/RocketLauncher/Pickup"
+  Weapon.upsound ""
+  Weapon.Kickback 600
+  Tag "Micro Rocket Launcher"
+  +WEAPON.NOAUTOFIRE
+  +WEAPON.CHEATNOTWEAPON
+  +WEAPON.AMMO_CHECKBOTH
+  States
+  {
+  Spawn:
+    MGLP A -1
+    Loop
+  Select:
+    TNT1 AA 0 A_Raise
+    Loop
+  Deselect:
+    TNT1 A 0 A_JumpIfInventory("MariaMicroRocketLauncherLoaded", 4, 4)
+    Goto ThreeDeselect
+    TNT1 A 0 A_JumpIfInventory("MariaMicroRocketLauncherLoaded", 3, 3)
+    Goto TwoDeselect
+    TNT1 A 0 A_JumpIfInventory("MariaMicroRocketLauncherLoaded", 2, 2)
+    Goto LastDeselect
+    TNT1 A 0 A_JumpIfInventory("MariaMicroRocketLauncherLoaded", 1, 1)
+    Goto EmptyDeselect
+   	TNT1 A 0 A_ZoomFactor(1.0)
+    TNT1 A 0 A_Takeinventory("Zoomed",0)
+  	MAGD ABCDE 1
+    TNT1 AAAAAAAAAAAAAAAAAA 0 A_Lower
+    TNT1 A 1
+    Wait
+  ThreeDeselect:
+    TNT1 A 0 A_JumpIfInventory("MariaMicroRocketLauncherLoaded", 3, 3)
+    Goto TwoDeselect
+    TNT1 A 0 A_JumpIfInventory("MariaMicroRocketLauncherLoaded", 2, 2)
+    Goto LastDeselect
+    TNT1 A 0 A_JumpIfInventory("MariaMicroRocketLauncherLoaded", 1, 1)
+    Goto EmptyDeselect
+   	TNT1 A 0 A_ZoomFactor(1.0)
+    TNT1 A 0 A_Takeinventory("Zoomed",0)
+  	MAGD ABCDE 1
+    TNT1 AAAAAAAAAAAAAAAAAA 0 A_Lower
+    TNT1 A 1
+    Wait
+  TwoDeselect:
+    TNT1 A 0 A_JumpIfInventory("MariaMicroRocketLauncherLoaded", 2, 2)
+    Goto LastDeselect
+    TNT1 A 0 A_JumpIfInventory("MariaMicroRocketLauncherLoaded", 1, 1)
+    Goto EmptyDeselect
+   	TNT1 A 0 A_ZoomFactor(1.0)
+    TNT1 A 0 A_Takeinventory("Zoomed",0)
+  	MAGD FGHIJ 1
+    TNT1 AAAAAAAAAAAAAAAAAA 0 A_Lower
+    TNT1 A 1
+    Wait
+  LastDeselect:
+    TNT1 A 0 A_JumpIfInventory("MariaMicroRocketLauncherLoaded", 1, 1)
+    Goto EmptyDeselect
+   	TNT1 A 0 A_ZoomFactor(1.0)
+    TNT1 A 0 A_Takeinventory("Zoomed",0)
+  	MAGD KLMNO 1
+    TNT1 AAAAAAAAAAAAAAAAAA 0 A_Lower
+    TNT1 A 1
+    Wait
+  EmptyDeselect:
+   	TNT1 A 0 A_ZoomFactor(1.0)
+    TNT1 A 0 A_Takeinventory("Zoomed",0)
+  	MAGD KLMNO 1
+    TNT1 AAAAAAAAAAAAAAAAAA 0 A_Lower
+    TNT1 A 1
+    Wait
+
+
+  Ready:
+    TNT1 A 0 A_JumpIfInventory("MariaMicroRocketLauncherLoaded", 4, 4)
+    Goto ThreeReady
+    TNT1 A 0 A_JumpIfInventory("MariaMicroRocketLauncherLoaded", 3, 3)
+    Goto TwoReady
+    TNT1 A 0 A_JumpIfInventory("MariaMicroRocketLauncherLoaded", 2, 2)
+    Goto LastReady
+    TNT1 A 0 A_JumpIfInventory("MariaMicroRocketLauncherLoaded", 1, 1)
+    Goto EmptyReady
+    TNT1 A 0 A_PlaySound("Maria/Draw/Heavy", 1)
+    TNT1 A 0 A_SetSpeed(0.85)
+    MAGS ABCDE 1
+    //TNT1 A 0 A_PlaySound("Weapon/Crossbow/Select",2 )
+    Goto ReadyLoop
+  ReadyLoop:
+    TNT1 A 0 A_JumpIfInventory("MariaMicroRocketLauncherLoaded", 4, 4)
+    Goto ThreeReadyLoop
+    TNT1 A 0 A_JumpIfInventory("MariaMicroRocketLauncherLoaded", 3, 3)
+    Goto TwoReadyLoop
+    TNT1 A 0 A_JumpIfInventory("MariaMicroRocketLauncherLoaded", 2, 2)
+    Goto LastReadyLoop
+    TNT1 A 0 A_JumpIfInventory("MariaMicroRocketLauncherLoaded", 1, 1)
+    Goto EmptyReadyLoop
+    MAGL A 1 A_WeaponReady(WRF_ALLOWZOOM|WRF_ALLOWRELOAD|WRF_ALLOWUSER1|WRF_ALLOWUSER2)
+    Loop
+
+  ThreeReady:
+    TNT1 A 0 A_JumpIfInventory("MariaMicroRocketLauncherLoaded", 3, 3)
+    Goto TwoReady
+    TNT1 A 0 A_JumpIfInventory("MariaMicroRocketLauncherLoaded", 2, 2)
+    Goto LastReady
+    TNT1 A 0 A_JumpIfInventory("MariaMicroRocketLauncherLoaded", 1, 1)
+    Goto EmptyReady
+    TNT1 A 0 A_PlaySound("Maria/Draw/Heavy", 1)
+    TNT1 A 0 A_SetSpeed(0.85)
+    MAGS ABCDE 1
+    //TNT1 A 0 A_PlaySound("Weapon/Crossbow/Select",2 )
+    Goto ThreeReadyLoop
+  ThreeReadyLoop:
+    TNT1 A 0 A_JumpIfInventory("MariaMicroRocketLauncherLoaded", 3, 3)
+    Goto TwoReadyLoop
+    TNT1 A 0 A_JumpIfInventory("MariaMicroRocketLauncherLoaded", 2, 2)
+    Goto LastReadyLoop
+    TNT1 A 0 A_JumpIfInventory("MariaMicroRocketLauncherLoaded", 1, 1)
+    Goto EmptyReadyLoop
+    MAGL A 1 A_WeaponReady(WRF_ALLOWZOOM|WRF_ALLOWRELOAD|WRF_ALLOWUSER1|WRF_ALLOWUSER2)
+    Loop
+
+  TwoReady:
+    TNT1 A 0 A_JumpIfInventory("MariaMicroRocketLauncherLoaded", 2, 2)
+    Goto LastReady
+    TNT1 A 0 A_JumpIfInventory("MariaMicroRocketLauncherLoaded", 1, 1)
+    Goto EmptyReady
+    TNT1 A 0 A_PlaySound("Maria/Draw/Heavy", 1)
+    TNT1 A 0 A_SetSpeed(0.85)
+    MAGS FGHIJ 1
+    //TNT1 A 0 A_PlaySound("Weapon/Crossbow/Select",2 )
+    Goto TwoReadyLoop
+  TwoReadyLoop:
+    TNT1 A 0 A_JumpIfInventory("MariaMicroRocketLauncherLoaded", 2, 2)
+    Goto LastReadyLoop
+    TNT1 A 0 A_JumpIfInventory("MariaMicroRocketLauncherLoaded", 1, 1)
+    Goto EmptyReadyLoop
+    MAGL B 1 A_WeaponReady(WRF_ALLOWZOOM|WRF_ALLOWRELOAD|WRF_ALLOWUSER1|WRF_ALLOWUSER2)
+    Loop
+
+  LastReady:
+    TNT1 A 0 A_JumpIfInventory("MariaMicroRocketLauncherLoaded", 1, 1)
+    Goto EmptyReady
+    TNT1 A 0 A_PlaySound("Maria/Draw/Heavy", 1)
+    TNT1 A 0 A_SetSpeed(0.85)
+    MAGS KLMNO 1
+    //TNT1 A 0 A_PlaySound("Weapon/Crossbow/Select",2 )
+    Goto LastReadyLoop
+  LastReadyLoop:
+    TNT1 A 0 A_JumpIfInventory("MariaMicroRocketLauncherLoaded", 1, 1)
+    Goto EmptyReadyLoop
+    MAGL C 1 A_WeaponReady(WRF_ALLOWZOOM|WRF_ALLOWRELOAD|WRF_ALLOWUSER1|WRF_ALLOWUSER2)
+    Loop
+
+  EmptyReady:
+    TNT1 A 0 A_PlaySound("Maria/Draw/Heavy", 1)
+    TNT1 A 0 A_SetSpeed(0.85)
+    MAGS KLMNO 1
+    //TNT1 A 0 A_PlaySound("Weapon/Crossbow/Select",2 )
+    Goto EmptyReadyLoop
+  EmptyReadyLoop:
+    MAGL C 1 A_WeaponReady(WRF_ALLOWZOOM|WRF_ALLOWRELOAD|WRF_ALLOWUSER1|WRF_ALLOWUSER2)
+    Loop
+
+  Ready2:
+    MIS2 A 2 BRIGHT A_WeaponReady (WRF_NOBOB)
+    MIS2 A 0 BRIGHT A_SetPitch(pitch-frandom(-0.9,0.9))
+    MIS2 A 2 BRIGHT A_WeaponReady (WRF_NOBOB)
+    MIS2 A 0 BRIGHT A_SetPitch(pitch-frandom(-0.9,0.9))
+  	Loop
+  Fire:
+    NULL A 0 A_JumpIfInventory("MariaMicroRocketLauncherLoaded", 4, 1)
+    Goto ThreeFire
+    TNT1 A 0 A_JumpIfInventory("Zoomed",1,"FireZoomed")
+    MAGF B 0 Bright A_GunFlash
+	TNT1 A 0 A_JumpIfInventory("PowerQuadDamage",1,2)
+	TNT1 A 0 A_Jump(256,2)
+	TNT1 A 0 A_PlaySound("Maria/Powerup/Quad/Shoot",7)
+    MAGF B 0 Bright A_PlaySound("Weapon/MicroRocketLauncher/Fire", CHAN_AUTO)
+    TNT1 A 0 A_TakeInventory("MariaMicroRocketLauncherLoaded", 1)
+    MAGL A 1 Bright A_FireCustomMissile("MariaMicroRocket", 0, 1, 0, 0)
+	MAGF AB 1 A_SetPitch(pitch-(1.0))
+	MAGF C 1 Offset(0,40) A_SetPitch(pitch+(0.6))
+	MAGF D 1 Offset(0,36) A_SetPitch(pitch+(0.4))
+	MAGF E 2 Offset(0,34)
+	MAGF F 2 Offset(0,33)
+	MAGF G 1 Offset(-1,33)
+	MAGL A 1
+    MAGF B 0 Bright A_PlaySound("Weapon/MicroRocketLauncher/Rechamber", CHAN_AUTO)
+	MAGC ABC 2
+	MAGL A 3
+    MAGL A 0 A_Refire
+    Goto ReadyLoop
+  ThreeFire:
+    NULL A 0 A_JumpIfInventory("MariaMicroRocketLauncherLoaded", 3, 1)
+    Goto TwoFire
+    TNT1 A 0 A_JumpIfInventory("Zoomed",1,"FireZoomed")
+    MAGF B 0 Bright A_GunFlash
+	TNT1 A 0 A_JumpIfInventory("PowerQuadDamage",1,2)
+	TNT1 A 0 A_Jump(256,2)
+	TNT1 A 0 A_PlaySound("Maria/Powerup/Quad/Shoot",7)
+    MAGF B 0 Bright A_PlaySound("Weapon/MicroRocketLauncher/Fire", CHAN_AUTO)
+    TNT1 A 0 A_TakeInventory("MariaMicroRocketLauncherLoaded", 1)
+    MAGL A 1 Bright A_FireCustomMissile("MariaMicroRocket", 0, 1, 0, 0)
+	MAGF AB 1 A_SetPitch(pitch-(1.0))
+	MAGF C 1 Offset(0,40) A_SetPitch(pitch+(0.6))
+	MAGF D 1 Offset(0,36) A_SetPitch(pitch+(0.4))
+	MAGF E 2 Offset(0,34)
+	MAGF F 2 Offset(0,33)
+	MAGF G 1 Offset(-1,33)
+	MAGL A 1
+    MAGF B 0 Bright A_PlaySound("Weapon/MicroRocketLauncher/Rechamber", CHAN_AUTO)
+	MAGC ABD 2
+	MAGL B 3
+    MAGL A 0 A_Refire
+    Goto TwoReadyLoop
+  TwoFire:
+    NULL A 0 A_JumpIfInventory("MariaMicroRocketLauncherLoaded", 2, 1)
+    Goto LastFire
+    TNT1 A 0 A_JumpIfInventory("Zoomed",1,"FireZoomed")
+    MAGF B 0 Bright A_GunFlash
+	TNT1 A 0 A_JumpIfInventory("PowerQuadDamage",1,2)
+	TNT1 A 0 A_Jump(256,2)
+	TNT1 A 0 A_PlaySound("Maria/Powerup/Quad/Shoot",7)
+    MAGF B 0 Bright A_PlaySound("Weapon/MicroRocketLauncher/Fire", CHAN_AUTO)
+    TNT1 A 0 A_TakeInventory("MariaMicroRocketLauncherLoaded", 1)
+    MAGL B 1 Bright A_FireCustomMissile("MariaMicroRocket", 0, 1, 0, 0)
+	MAGF HI 1 A_SetPitch(pitch-(1.0))
+	MAGF J 1 Offset(0,40) A_SetPitch(pitch+(0.6))
+	MAGF K 1 Offset(0,36) A_SetPitch(pitch+(0.4))
+	MAGF L 2 Offset(0,34)
+	MAGF M 2 Offset(0,33)
+	MAGF N 1 Offset(-1,33)
+	MAGL B 1
+    MAGF B 0 Bright A_PlaySound("Weapon/MicroRocketLauncher/Rechamber", CHAN_AUTO)
+	MAGC DEF 2
+	MAGL C 3
+    MAGL A 0 A_Refire
+    Goto LastReadyLoop
+  LastFire:
+    NULL A 0 A_JumpIfInventory("MariaMicroRocketLauncherLoaded", 1, 1)
+    Goto dryfire
+    TNT1 A 0 A_JumpIfInventory("Zoomed",1,"FireZoomed")
+    MAGF B 0 Bright A_GunFlash
+	TNT1 A 0 A_JumpIfInventory("PowerQuadDamage",1,2)
+	TNT1 A 0 A_Jump(256,2)
+	TNT1 A 0 A_PlaySound("Maria/Powerup/Quad/Shoot",7)
+    MAGF B 0 Bright A_PlaySound("Weapon/MicroRocketLauncher/Fire", CHAN_AUTO)
+    TNT1 A 0 A_TakeInventory("MariaMicroRocketLauncherLoaded", 1)
+    MAGL C 1 Bright A_FireCustomMissile("MariaMicroRocket", 0, 1, 0, 0)
+	MAGF OP 1 A_SetPitch(pitch-(1.0))
+	MAGF Q 1 Offset(0,40) A_SetPitch(pitch+(0.6))
+	MAGF R 1 Offset(0,36) A_SetPitch(pitch+(0.4))
+	MAGF S 2 Offset(0,34)
+	MAGF T 2 Offset(0,33)
+	MAGF U 1 Offset(-1,33)
+	MAGL C 4
+    MAGL A 0 A_Refire
+    Goto EmptyReadyLoop
+  FireZoomed:
+    NULL A 0 A_JumpIfInventory("MariaMicroRocketLauncherLoaded", 1, 1)
+    Goto dryfire
+    MIS2 B 0 Bright A_GunFlash
+	TNT1 A 0 A_JumpIfInventory("PowerQuadDamage",1,2)
+	TNT1 A 0 A_Jump(256,2)
+	TNT1 A 0 A_PlaySound("Maria/Powerup/Quad/Shoot",7)
+    MIS2 B 0 Bright A_PlaySound("Weapon/MicroRocketLauncher/Fire", CHAN_AUTO)
+    TNT1 A 0 A_TakeInventory("MariaMicroRocketLauncherLoaded", 1)
+    MIS2 A 1 Bright A_FireCustomMissile("MariaMicroRocket", 0, 1, 0, 0)
+	MIS2 AA 1 A_SetPitch(pitch-(1.0))
+	MIS2 A 1 Offset(0,40) A_SetPitch(pitch+(0.6))
+	MIS2 A 1 Offset(0,36) A_SetPitch(pitch+(0.4))
+	MIS2 A 2 Offset(0,34)
+	MIS2 A 2 Offset(0,33)
+	MIS2 A 1 Offset(-1,33)
+	MIS2 A 1
+    MIS2 B 0 Bright A_PlaySound("Weapon/MicroRocketLauncher/Rechamber", CHAN_AUTO)
+	MIS2 AAA 2
+	MIS2 A 3
+    MAGL A 0 A_Refire
+    Goto Ready2
+  DryFire:
+    TNT1 A 0 A_JumpIfInventory("Zoomed",1,"DryFire2")
+    TNT1 A 0 A_PlaySound("Weapon/RocketLauncher/Dry",0)
+    TNT1 A 0 offset(0,36)
+    MAGL C 1 A_WeaponReady(WRF_NOFIRE|WRF_NOSWITCH)
+    TNT1 A 0 offset(0,35)
+    MAGL C 10 A_WeaponReady(WRF_NOFIRE|WRF_NOSWITCH)
+    Goto EmptyReadyLoop
+  DryFire2:
+    TNT1 A 0 A_PlaySound("Weapon/RocketLauncher/Dry",0)
+    TNT1 A 0 offset(0,36)
+    MIS2 A 1 A_WeaponReady(WRF_NOFIRE|WRF_NOSWITCH)
+    TNT1 A 0 offset(0,35)
+    MIS2 A 10 A_WeaponReady(WRF_NOFIRE|WRF_NOSWITCH)
+    Goto Ready2
+
+  AltFire:
+    TNT1 A 0 A_JumpIfInventory("MariaMicroRocketLauncherLoaded", 3, 3)
+    Goto TwoAltFire
+    TNT1 A 0 A_JumpIfInventory("MariaMicroRocketLauncherLoaded", 2, 2)
+    Goto TwoAltFire
+    TNT1 A 0 A_JumpIfInventory("MariaMicroRocketLauncherLoaded", 1, 1)
+    Goto EmptyAltFire
+    TNT1 A 0 A_JumpIfInventory("Zoomed",1,"NoAim")
+    TNT1 A 0 A_Giveinventory("Zoomed",1)
+    TNT1 A 0 A_ZoomFactor(2.5)
+   	MAGL A 0 A_PlaySound("Foley/Sleeves/Movement", CHAN_AUTO)
+    MAGZ ABC 1 A_WeaponReady(/*WRF_ALLOWRELOAD|*/WRF_NOSECONDARY|WRF_NOBOB)
+   	MAG2 A 0 A_PlaySound("Weapon/RocketLauncher/Zoom/In",CHAN_BODY)
+	MIS2 A 1 /*Bright*/ A_SetBlend("Black",0.4,3)
+	TNT1 A 0 A_Giveinventory("RocketlauncherInfrared",1)
+	MIS2 A 1 /*Bright*/ A_SetBlend("Black",0.6,3)
+	MIS2 A 1 /*Bright*/ A_SetBlend("Black",0.8,3)
+    MIS2 A 1 /*Bright*/ A_SetBlend("Black",1.0,6)
+   	MIS2 A 3
+    Goto Ready2
+  TwoAltFire:
+    TNT1 A 0 A_JumpIfInventory("MariaMicroRocketLauncherLoaded", 1, 1)
+    Goto EmptyAltFire
+    TNT1 A 0 A_JumpIfInventory("Zoomed",1,"NoAim")
+    TNT1 A 0 A_Giveinventory("Zoomed",1)
+    TNT1 A 0 A_ZoomFactor(2.5)
+   	MAGL C 0 A_PlaySound("Foley/Sleeves/Movement", CHAN_AUTO)
+    MAGZ ABC 1 A_WeaponReady(/*WRF_ALLOWRELOAD|*/WRF_NOSECONDARY|WRF_NOBOB)
+   	MAG2 A 0 A_PlaySound("Weapon/RocketLauncher/Zoom/In",CHAN_BODY)
+	MIS2 A 1 /*Bright*/ A_SetBlend("Black",0.4,3)
+	TNT1 A 0 A_Giveinventory("RocketlauncherInfrared",1)
+	MIS2 A 1 /*Bright*/ A_SetBlend("Black",0.6,3)
+	MIS2 A 1 /*Bright*/ A_SetBlend("Black",0.8,3)
+    MIS2 A 1 /*Bright*/ A_SetBlend("Black",1.0,6)
+   	MIS2 A 3
+    Goto Ready2
+  EmptyAltFire:
+    TNT1 A 0 A_JumpIfInventory("Zoomed",1,"NoAim")
+    TNT1 A 0 A_Giveinventory("Zoomed",1)
+    TNT1 A 0 A_ZoomFactor(2.5)
+   	MAGL C 0 A_PlaySound("Foley/Sleeves/Movement", CHAN_AUTO)
+    MAGZ ABC 1 A_WeaponReady(/*WRF_ALLOWRELOAD|*/WRF_NOSECONDARY|WRF_NOBOB)
+   	MAG2 A 0 A_PlaySound("Weapon/RocketLauncher/Zoom/In",CHAN_BODY)
+	MIS2 A 1 /*Bright*/ A_SetBlend("Black",0.4,3)
+	TNT1 A 0 A_Giveinventory("RocketlauncherInfrared",1)
+	MIS2 A 1 /*Bright*/ A_SetBlend("Black",0.6,3)
+	MIS2 A 1 /*Bright*/ A_SetBlend("Black",0.8,3)
+    MIS2 A 1 /*Bright*/ A_SetBlend("Black",1.0,6)
+   	MIS2 A 3
+    Goto Ready2
+
+  NoAim:
+    TNT1 A 0 A_JumpIfInventory("MariaMicroRocketLauncherLoaded", 3, 2)
+    Goto TwoNoAim
+    TNT1 A 0 A_JumpIfInventory("MariaMicroRocketLauncherLoaded", 2, 2)
+    Goto EmptyNoAim
+    TNT1 A 0 A_JumpIfInventory("MariaMicroRocketLauncherLoaded", 1, 1)
+    Goto EmptyNoAim
+   	MIS2 A 3 A_PlaySound("Weapon/RocketLauncher/Zoom/Out",CHAN_BODY)
+   	TNT1 A 0 A_Takeinventory("Zoomed",0)
+    MIS2 A 1 A_SetBlend("Black",0.2,3)
+	MIS2 A 1 A_SetBlend("Black",0.4,3)
+	MIS2 A 1 A_SetBlend("Black",0.6,3)
+	MIS2 A 1 A_SetBlend("Black",0.8,3)
+	MIS2 A 1 A_SetBlend("Black",1.0,6)
+	TNT1 A 0 A_Takeinventory("PowerInfiniteAmmo",1)
+    TNT1 A 0 A_ZoomFactor(1.0)
+   	MAG2 A 0 A_PlaySound("Foley/Sleeves/Movement", CHAN_AUTO)
+    MAGZ CBA 1 A_WeaponReady(/*WRF_ALLOWRELOAD|*/WRF_NOSECONDARY|WRF_NOBOB) 
+   	MAGL A 3 
+    Goto ReadyLoop 
+  TwoNoAim:
+    TNT1 A 0 A_JumpIfInventory("MariaMicroRocketLauncherLoaded", 1, 1)
+    Goto EmptyNoAim
+   	MIS2 A 3 A_PlaySound("Weapon/RocketLauncher/Zoom/Out",CHAN_BODY)
+   	TNT1 A 0 A_Takeinventory("Zoomed",0)
+    MIS2 A 1 A_SetBlend("Black",0.2,3)
+	MIS2 A 1 A_SetBlend("Black",0.4,3)
+	MIS2 A 1 A_SetBlend("Black",0.6,3)
+	MIS2 A 1 A_SetBlend("Black",0.8,3)
+	MIS2 A 1 A_SetBlend("Black",1.0,6)
+	TNT1 A 0 A_Takeinventory("PowerInfiniteAmmo",1)
+    TNT1 A 0 A_ZoomFactor(1.0)
+   	MAG2 A 0 A_PlaySound("Foley/Sleeves/Movement", CHAN_AUTO)
+    MAGZ CBA 1 A_WeaponReady(/*WRF_ALLOWRELOAD|*/WRF_NOSECONDARY|WRF_NOBOB) 
+   	MAGL B 3 
+    Goto ReadyLoop 
+  EmptyNoAim:
+   	MIS2 A 3 A_PlaySound("Weapon/RocketLauncher/Zoom/Out",CHAN_BODY)
+   	TNT1 A 0 A_Takeinventory("Zoomed",0)
+    MIS2 A 1 A_SetBlend("Black",0.2,3)
+	MIS2 A 1 A_SetBlend("Black",0.4,3)
+	MIS2 A 1 A_SetBlend("Black",0.6,3)
+	MIS2 A 1 A_SetBlend("Black",0.8,3)
+	MIS2 A 1 A_SetBlend("Black",1.0,6)
+	TNT1 A 0 A_Takeinventory("PowerInfiniteAmmo",1)
+    TNT1 A 0 A_ZoomFactor(1.0)
+   	MAG2 A 0 A_PlaySound("Foley/Sleeves/Movement", CHAN_AUTO)
+    MAGZ CBA 1 A_WeaponReady(/*WRF_ALLOWRELOAD|*/WRF_NOSECONDARY|WRF_NOBOB) 
+   	MAGL C 3 
+    Goto EmptyReadyLoop 
+
+ Reload:
+    TNT1 A 0 A_JumpIfInventory("MariaMicroRocketLauncherLoaded", 6, 2)
+    TNT1 A 0 A_JumpIfInventory("MariaGrenadeAmmo", 1, "ReloadWork")
+    MAGL A 0 A_WeaponReady(WRF_NOFIRE)
+    Goto ReadyLoop
+  ReloadWork:
+    TNT1 A 0 A_JumpIfInventory("MariaMicroRocketLauncherLoaded", 1, "ReloadWork2")
+    TNT1 A 0 A_PlaySound("Weapon/MicroRocketLauncher/Unload", 5)	
+    MAGR ABCCDD 1 A_WEAPONREADY(WRF_NOBOB|WRF_NOFIRE|WRF_ALLOWZOOM)
+    TNT1 A 0 A_FireCustomMissile("EmptyRocketChamber",-20,0,2,-10)
+    TNT1 A 0 A_StartSound("Foley/RocketLauncher/Movement", CHAN_AUTO)	
+    MAGR EFGHII 1 A_WEAPONREADY(WRF_NOBOB|WRF_NOFIRE|WRF_ALLOWZOOM)
+	MAGR J 2 A_WEAPONREADY(WRF_NOBOB|WRF_NOFIRE|WRF_ALLOWZOOM)
+	TNT1 A 0 A_StartSound("Foley/MagPouch/Out", CHAN_AUTO)
+	MAGR J 8 A_WEAPONREADY(WRF_NOBOB|WRF_NOFIRE|WRF_ALLOWZOOM)
+    MAGR KL 1 A_WEAPONREADY(WRF_NOBOB|WRF_NOFIRE|WRF_ALLOWZOOM)
+    TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
+    MAGR MMNNNN 1 A_WEAPONREADY(WRF_NOBOB|WRF_NOFIRE|WRF_ALLOWZOOM)
+    TNT1 A 0 A_PlaySound("Weapon/MicroRocketLauncher/Load", 5)
+	MAGR OP 1 A_WEAPONREADY(WRF_NOBOB|WRF_NOFIRE|WRF_ALLOWZOOM)
+    Goto ReloadingLoop
+ ReloadingLoop:
+    TNT1 A 0 A_TakeInventory("MariaGrenadeAmmo", 1)
+    REVR L 0 A_GiveInventory("MariaMicroRocketLauncherLoaded", 1)
+    REVR L 0 A_JumpIfInventory("MariaMicroRocketLauncherLoaded", 6, "FinishReload")
+    REVR L 0 A_JumpIfInventory("MariaGrenadeAmmo", 1, "ReloadingLoop")		
+    Goto FinishReload
+ FinishReload:
+	MAGR QRS 1 A_WEAPONREADY(WRF_NOBOB|WRF_NOFIRE|WRF_ALLOWZOOM)
+	MAGR S 4 A_WEAPONREADY(WRF_NOBOB|WRF_NOFIRE|WRF_ALLOWZOOM)
+    TNT1 A 0 A_StartSound("Foley/RocketLauncher/Movement", CHAN_AUTO)
+	MAGR TUVWX 1 A_WEAPONREADY(WRF_NOBOB|WRF_NOFIRE|WRF_ALLOWZOOM)
+    MAGL A 1 A_WeaponReady(WRF_ALLOWZOOM)
+    Goto ReadyLoop  
+
+ ReloadWork2:
+    TNT1 A 0 A_PlaySound("Weapon/MicroRocketLauncher/Unload", 5)	
+    MAGR ABC 1 A_WEAPONREADY(WRF_NOBOB|WRF_NOFIRE|WRF_ALLOWZOOM)
+	TNT1 A 0 A_StartSound("Foley/MagPouch/In", CHAN_AUTO)
+    MAGR CDD 1 A_WEAPONREADY(WRF_NOBOB|WRF_NOFIRE|WRF_ALLOWZOOM)
+    TNT1 A 0 A_StartSound("Foley/RocketLauncher/Movement", CHAN_AUTO)	
+    MAGR EFGHII 1 A_WEAPONREADY(WRF_NOBOB|WRF_NOFIRE|WRF_ALLOWZOOM)
+	MAGR J 2 A_WEAPONREADY(WRF_NOBOB|WRF_NOFIRE|WRF_ALLOWZOOM)
+	TNT1 A 0 A_StartSound("Foley/MagPouch/Out", CHAN_AUTO)
+	MAGR J 8 A_WEAPONREADY(WRF_NOBOB|WRF_NOFIRE|WRF_ALLOWZOOM)
+    MAGR KL 1 A_WEAPONREADY(WRF_NOBOB|WRF_NOFIRE|WRF_ALLOWZOOM)
+    TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
+    MAGR MMNNNN 1 A_WEAPONREADY(WRF_NOBOB|WRF_NOFIRE|WRF_ALLOWZOOM)
+    TNT1 A 0 A_PlaySound("Weapon/MicroRocketLauncher/Load", 5)
+	MAGR OP 1 A_WEAPONREADY(WRF_NOBOB|WRF_NOFIRE|WRF_ALLOWZOOM)
+    Goto ReloadingLoop2
+ ReloadingLoop2:
+    TNT1 A 0 A_TakeInventory("MariaGrenadeAmmo", 1)
+    REVR L 0 A_GiveInventory("MariaMicroRocketLauncherLoaded", 1)
+    REVR L 0 A_JumpIfInventory("MariaMicroRocketLauncherLoaded", 6, "FinishReload2")
+    REVR L 0 A_JumpIfInventory("MariaGrenadeAmmo", 1, "ReloadingLoop2")
+    Goto FinishReload2
+ FinishReload2:
+	MAGR QRS 1 A_WEAPONREADY(WRF_NOBOB|WRF_NOFIRE|WRF_ALLOWZOOM)
+	MAGR S 4 A_WEAPONREADY(WRF_NOBOB|WRF_NOFIRE|WRF_ALLOWZOOM)
+    TNT1 A 0 A_StartSound("Foley/RocketLauncher/Movement", CHAN_AUTO)
+	MAGR TUVWX 1 A_WEAPONREADY(WRF_NOBOB|WRF_NOFIRE|WRF_ALLOWZOOM)
+    MAGL A 1 A_WeaponReady(WRF_ALLOWZOOM)
+    Goto ReadyLoop  
+
+ ThrowPipebomb:
+    MAGD ABCDE 1
+    TASQ ABC 1
+    TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
+    TASG DEH 1
+    TNT1 A 0 A_TakeInventory("PipebombAmmo", 1)
+    TASG I 1 A_PlayWeaponSound("Maria/Pipebomb/Miss",1)
+    TASG J 1 A_PlaySound("Maria/Pipebomb/Ignite", 2)
+    TASG KLM 1
+    TASG OPQR 1 
+    TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
+    TAHA AB 1
+    TNT1 A 0 A_JumpIfInventory("PowerQuadDamage",1,2)
+    TNT1 A 0 A_Jump(256,2)
+    TNT1 A 0 A_PlaySound("Maria/Powerup/Quad/Shoot",7)
+    TNT1 A 0 A_PlaySound("Maria/Pipebomb/Throw", 3)
+    TNT1 A 0 A_FireCustomMissile("HolyPipebomb",0,1,0,0)
+    TAHA CDE 1
+    TNT1 A 5
+    MAGS ABCDE 1
+    Goto ReadyLoop
+
+  UseStimShot:
+	TNT1 A 0 A_JumpIfHealthLower(100, 1)
+	Goto FullHealth
+    MAGD ABCDE 1
+    SYRI AB 1
+    TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
+    SYRI CD 1
+    SYRI EEFFGGG 1
+    SYRI HIJKKLLL 1
+    TNT1 A 0 A_PlaySound("Weapon/Syringe/Cap", 1)
+    SYRI MNOPQQQRR 1
+    TNT1 A 0 A_PlaySound("Weapon/Syringe/Tab", 1)
+    SYRI STUUUVV 1
+    TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
+    SYRI WXYZ 1
+    SYR2 AB 1
+    TNT1 A 0 A_TakeInventory("MariaSyringeAmmo", 1)
+    TNT1 A 0 A_PlaySound("Weapon/Syringe/Inject", 1)
+    SYR2 CD 1
+    TNT1 A 0 A_PlaySound("Weapon/Syringe/Heal", 2)
+    TNT1 A 0 A_SetBlend("BLUE",.5,25)
+    TNT1 A 0 HealThing(10, 100)
+    TNT1 A 0 A_GiveInventory("SyringeProtection")
+    TNT1 A 0 A_GiveInventory("SyringeRegeneration")
+    SYR2 EFGHIJ 2
+    SYR2 KLLMMN 1
+    TNT1 A 5
+    MAGS ABCDE 1
+    Goto ReadyLoop
+  FullHealth:
+	TNT1 A 0 A_Print("You are healthy.")
+	Goto ReadyLoop
+
+  User3:
+  EquipShield:
+	TNT1 A 0 A_ZoomFactor(1.0)
+	TNT1 A 0 A_GiveInventory("MariaShield",1)
+	TNT1 A 0 A_SelectWEapon("MariaShield")
+	Goto Deselect
+
+  Zoom:
+    TNT1 A 0 A_JumpIfInventory("PowerQuadDamage",1,2)
+    TNT1 A 0 A_Jump(256,2)
+    TNT1 A 0 A_PlaySound("Maria/Powerup/Quad/Shoot",7)
+    TNT1 A 0 A_PlaySound("weapons/melee/fist/uppercut")
+    TNT1 A 0 A_ChangeVelocitY(2.5,0,2,CVF_RELATIVE ) 
+    TNT1 A 0 A_gunflash("PunchFlash") //PunchFlash
+    TNT1 A 2
+    HANU AB 1 A_WeaponReady(WRF_NOFIRE|WRF_NOSWITCH)
+    HANU C 0 A_FireCustomMissile("MariaPunch2",0,0)
+    HANU CCDEFGHIJK 1 A_WeaponReady(WRF_NOFIRE|WRF_NOSWITCH)
+    TNT1 A 5 //19
+    Goto PunchFinish
+		
+ PunchFlash:
+    MAGK ABC 1
+    MAGK D 12
+    MAGK CBA 1
+    MAGL A 1
+    Goto LightDone
+  Flash:
+    TNT1 A 2 A_Light1
+    TNT1 A 2 A_Light2
+    TNT1 A 0 A_Light0
+    Stop
+  }
+}
+
+ACTOR MariaMicroRocketLauncherLoaded : Ammo
+{
+   Inventory.Amount 0
+   Inventory.MaxAmount 6
+   Ammo.BackpackAmount 0
+   Ammo.BackpackMaxAmount 6
+   Inventory.Icon ""
+}

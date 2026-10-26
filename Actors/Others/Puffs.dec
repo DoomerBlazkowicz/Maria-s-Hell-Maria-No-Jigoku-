@@ -1,0 +1,111 @@
+// Puff's
+
+ACTOR MariaPuff: BulletPuff
+{ 
+    Mass 5
+    Scale 0.50
+    Radius 1
+    Height 2
+    +NOBLOCKMAP
+    +NOGRAVITY
+    +NOEXTREMEDEATH
+    -PUFFONACTORS
+    Renderstyle TRANSLUCENT
+	DamageType Bullet
+    Decal BulletChip
+    Alpha 0.8
+    States
+    {
+    Spawn:
+      TNT1 A 0 A_SetScale(0.3)
+	  TNT1 A 0 A_SetTranslucent(0.8)
+      TNT1 AAA 0 A_CustomMissile ("MariaSmokeTrail", 2, 0, random (0, 360), 2, random (0, 360))
+      TNT1 A 0 A_PlaySound("booletricochet")	  
+      MUFF AABCDE 1 BRIGHT
+    Stop
+    }
+}
+
+ACTOR MariaPuffPurple: MariaPuff
+{ 
+    Mass 5
+    Scale 0.50
+    Radius 1
+    Height 2
+    +NOBLOCKMAP
+    +NOGRAVITY
+    +NOEXTREMEDEATH
+    -PUFFONACTORS
+    Renderstyle TRANSLUCENT
+	DamageType Bullet
+    Decal BulletChip
+    Alpha 0.8
+    States
+    {
+    Spawn:
+      TNT1 A 0 A_SetScale(0.3)
+	  TNT1 A 0 A_SetTranslucent(0.8)
+      TNT1 AAA 0 A_CustomMissile ("MariaSmokeTrail", 2, 0, random (0, 360), 2, random (0, 360))
+      TNT1 A 0 A_PlaySound("booletricochet")	  
+      MUPF AABCDE 1 BRIGHT
+    Stop
+    }
+}
+
+actor MariaShotgunPuff : MariaPuff
+{
+	DamageType Shotgun
+}
+
+ACTOR MariaNOBPuff: MariaPuff
+{ 
+    ProjectileKickback 300
+    -NOEXTREMEDEATH
+    +EXTREMEDEATH
+    DamageType SSG
+}
+
+ACTOR ShieldPuff : BulletPuff
+{   
+   ProjectileKickback 500
+   -BLOODLESSIMPACT
+   +PUFFGETSOWNER
+   States
+   {
+	Xdeath:		
+	Melee:
+      VFX1 A 0 
+	  VFX1 A 3 A_PlaySound("Weapon/Shield/Impact", CHAN_AUTO)
+	  VFX1 BCDE 3
+      Stop
+   Crash:
+      VFX1 A 0 
+	  VFX1 A 3 A_PlaySound("Weapon/Shield/Impact", CHAN_AUTO)
+	  VFX1 BCDE 3
+      Stop
+   }
+}
+
+ACTOR MariaRicochetPuff
+{ 
+    Mass 5
+    Scale 0.50
+    Radius 3
+    Height 3
+    +NOBLOCKMAP
+    +NOGRAVITY
+    -PUFFONACTORS
+    Renderstyle TRANSLUCENT
+    Decal BulletChip
+    Alpha 0.8
+    States
+    {
+    Spawn:
+      TNT1 A 0 A_SetScale(0.3)
+	  TNT1 A 0 A_SetTranslucent(0.8)
+      TNT1 A 0 A_PlaySound("booletricochet")	  
+      TNT1 A 0 A_Explode(6,3,1,1,64,15,9,"MariaPuff")
+      MUFF AABCDE 1 BRIGHT
+    Stop
+    }
+}

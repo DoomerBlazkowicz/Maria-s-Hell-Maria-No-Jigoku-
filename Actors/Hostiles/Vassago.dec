@@ -1,0 +1,161 @@
+ACTOR MariaVassago /*replaces Deh_Actor_154*/ 3011
+{
+    Health 1000
+    Speed 8
+    Radius 24
+    Height 64
+    ReactionTime 8
+    PainChance 100
+    Mass 1000
+	//+NOBLOOD
+    +SOLID
+    +SHOOTABLE
+    +COUNTKILL
+	DamageFactor "VassagoFire", 0.0 //immune to its own projectile and prevent friendly fire amongst its own species 
+	DamageFactor "MolotovFireballHostile", 0.0
+	DamageFactor "MolotovFireHostile", 0.0
+    SeeSound "Vassago/SeeSound"
+    ActiveSound "Vassago/ActiveSound"
+    PainSound "Vassago/PainSound"
+    DeathSound "Vassago/DeathSound"
+	BloodColor "orange"
+	Obituary "%o couldn't handle the Vassago's fiery wrath and was reduced to ashes."
+    States
+    {
+    Spawn:
+        VASS AB 10 A_Look
+        Loop
+    See:
+        VASS AABBCCDD 3 A_Chase
+        Loop
+	melee:
+	Missile:
+        VASS E 0 Bright A_PlaySound("Vassago/AttackSound")
+        VASS E 8 Bright A_FaceTarget
+        VASS FG 4 Bright A_FaceTarget
+        VASS H 8 Bright A_CustomMissile("MariaVassagoFlame")
+        Goto See
+    Pain:
+        VASS I 2
+        VASS I 2 A_Pain
+        Goto See
+    Death:
+        VASS J 8 Bright
+        VASS K 8 Bright A_Scream
+        VASS L 7 Bright
+        VASS M 6 Bright A_Fall
+        VASS NO 6 Bright
+        VASS P 7 Bright
+        VASS Q -1 A_BossDeath
+        Stop
+    Raise:
+        VASS P 8
+        VASS ONMLKJ 8
+        Goto See
+    }
+}
+
+ACTOR MariaVassagoFlame Replaces VassagoFlame
+{
+    Damage 5
+	DamageType "VassagoFire"
+    Speed 15
+    FastSpeed 20
+    Radius 6
+    Height 16
+    Mass 10
+	RenderStyle Translucent
+    Alpha 0.5
+    +NOBLOCKMAP
+    +NOGRAVITY
+    +DROPOFF
+    +MISSILE
+
+    SeeSound   "VassagoFlame/SeeSound"
+    DeathSound "VassagoFlame/BurnSound3"
+	
+    states
+    {
+    Spawn:
+        VFLM AB 4 Bright
+        loop
+
+    Death:
+		VFLM C 0 Bright A_ChangeFlag("NOGRAVITY",0)
+	    VFLM C 0 Bright A_ChangeFlag("NOBLOCKMAP",0)
+		VFLM C 0 Bright A_Jump(128, "DeathSound2")
+		VFLM C 0 Bright A_PlaySound("VassagoFlame/BurnSound1")
+        goto Burninate
+	DeathSound2:
+		VFLM C 0 Bright A_PlaySound("VassagoFlame/BurnSound2")
+	goto Burninate
+
+    Burninate:
+		GLXP A 0 A_PlaySound("Pipebomb/Boom",CHAN_BODY)
+	   	TNT1 AAAA 0 A_CustomMissile ("MariaSmallExplosionFlames", 0, 0, random (0, 360), 2, random (0, 360))  
+		TNT1 A 0 A_SpawnItemEx("MolotovFireballHostile",0,0,8,12,0,4)
+		TNT1 A 0 A_SpawnItemEx("MolotovFireballHostile",0,0,-8,8,0,0)
+		TNT1 A 0 A_SpawnItemEx("MolotovFireballHostile",0,0,0,8,0,0)
+        TNT1 AAAAAAAAAAAAAAA 8 A_SpawnProjectile("MariaExplosionSmoke", 1, 0, random(0, 360), CMF_AIMDIRECTION, random(-50, -130))
+        stop
+    }
+}
+
+Actor MolotovFireballHostile :  MolotovFireball
+{
+DamageType "VassagoFire"
+States
+	{
+	Spawn:
+		FRTB A 1 Bright Nodelay
+		{
+		if(waterlevel>2)
+			{
+			return state("Null");
+			}
+		else { A_SpawnItemEx("MltvFTrail"); }
+		return state("");
+		}
+		Loop
+	Death:
+		TNT1 AAAAAA 3 A_CheckFloor("FireBurn")
+		Stop
+	FireBurn:
+		TNT1 A 0 A_StartSound("Weapon/Spray/Flames/Loop",5)
+		TNT1 BBCCDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD 4
+		{
+		A_StartSound("Weapons/Molotov/Fire",7,CHANF_LOOPING,0.5);
+		A_SpawnItemEx("MolotovFireHostile",random(-52,52),random(0,52),2,0,0,-4,0,SXF_ORIGINATOR);
+		A_SpawnItemEx("MolotovFireHostile",random(-52,52),random(-52,0),2,0,0,-4,0,SXF_ORIGINATOR);
+		A_Explode(20,112,XF_HURTSOURCE|XF_NOSPLASH|XF_THRUSTLESS|XF_CIRCULAR);
+		A_SpawnItemEx("MolotovFireHostile",random(-52,52),random(0,52),2,0,0,-4,0,SXF_ORIGINATOR);
+		A_SpawnItemEx("MolotovFireHostile",random(-52,52),random(-52,0),2,0,0,-4,0,SXF_ORIGINATOR);
+		A_Explode(20,112,XF_HURTSOURCE|XF_NOSPLASH|XF_THRUSTLESS|XF_CIRCULAR);
+		A_SpawnItemEx("MolotovFireHostile",random(-52,52),random(0,52),2,0,0,-4,0,SXF_ORIGINATOR);
+		A_SpawnItemEx("MolotovFireHostile",random(-52,52),random(-52,0),2,0,0,-4,0,SXF_ORIGINATOR);
+		A_Explode(20,112,XF_HURTSOURCE|XF_NOSPLASH|XF_THRUSTLESS|XF_CIRCULAR);
+		A_SpawnItemEx("MolotovFireHostile",random(-52,52),random(0,52),2,0,0,-4,0,SXF_ORIGINATOR);
+		A_SpawnItemEx("MolotovFireHostile",random(-52,52),random(-52,0),2,0,0,-4,0,SXF_ORIGINATOR);
+		A_Explode(20,112,XF_HURTSOURCE|XF_NOSPLASH|XF_THRUSTLESS|XF_CIRCULAR);
+		A_SpawnItemEx("MolotovFireHostile",random(-52,52),random(0,52),2,0,0,-4,0,SXF_ORIGINATOR);
+		A_SpawnItemEx("MolotovFireHostile",random(-52,52),random(-52,0),2,0,0,-4,0,SXF_ORIGINATOR);
+		A_Explode(20,112,XF_HURTSOURCE|XF_NOSPLASH|XF_THRUSTLESS|XF_CIRCULAR);
+		A_SpawnItemEx("MolotovFireHostile",random(-52,52),random(0,52),2,0,0,-4,0,SXF_ORIGINATOR);
+		A_SpawnItemEx("MolotovFireHostile",random(-52,52),random(-52,0),2,0,0,-4,0,SXF_ORIGINATOR);
+		A_Explode(20,112,XF_HURTSOURCE|XF_NOSPLASH|XF_THRUSTLESS|XF_CIRCULAR);
+		}
+		TNT1 DD 4 { A_StartSound("Weapon/Spray/Flames/End",7,CHANF_LOOPING,0.5); A_Explode(4,112,XF_HURTSOURCE|XF_NOSPLASH|XF_THRUSTLESS|XF_CIRCULAR); }
+		TNT1 D 4 { A_SoundVolume(7,0.4); A_Explode(4,112,XF_HURTSOURCE|XF_NOSPLASH|XF_THRUSTLESS|XF_CIRCULAR); }
+		TNT1 D 4 { A_SoundVolume(7,0.3); A_Explode(4,108,XF_HURTSOURCE|XF_NOSPLASH|XF_THRUSTLESS|XF_CIRCULAR); }
+		TNT1 C 4 { A_SoundVolume(7,0.2); A_Explode(3,104,XF_HURTSOURCE|XF_NOSPLASH|XF_THRUSTLESS|XF_CIRCULAR); }
+		TNT1 C 4 { A_SoundVolume(7,0.1); A_Explode(3,100,XF_HURTSOURCE|XF_NOSPLASH|XF_THRUSTLESS|XF_CIRCULAR); }
+		TNT1 B 4 A_StopSound(7)
+		TNT1 BE 4
+		Stop
+	}
+}
+
+Actor MolotovFireHostile : MolotovFire
+{
+	DamageType "VassagoFire"
+}

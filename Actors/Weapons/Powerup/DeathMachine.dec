@@ -1,0 +1,155 @@
+ACTOR MariaDeathMachine : Weapon
+{
+    Scale 0.75
+    +NOAUTOFIRE
+    +INVENTORY.UNDROPPABLE
+    +CHEATNOTWEAPON
+	Tag "Death Machine"
+	Decal "BulletChip"
+	Weapon.BobStyle "Smooth"
+	Weapon.BobSpeed 2.5
+	Weapon.BobRangeX 0.75
+	Weapon.BobRangeY 0.5
+	States
+	{
+	Select:		
+		TNT1 AA 0 A_Raise
+		Loop
+    DeselectFancy:
+		TNT1 A 0 A_StopSound(5)		
+     	TNT1 A 0 A_ZoomFactor(1.0)
+     	DMGD ABCDEFGH 1 A_WeaponReady(WRF_NoFire|WRF_NoSecondary|WRF_DisableSwitch|WRF_NoSwitch)
+	Deselect:
+        //TNT1 A 0 A_JumpIf(health <= 0, "DeselectDying")
+	    TNT1 A 0 A_StopSound (CHAN_WEAPON)
+        TNT1 A 0 A_SetSpeed(1.0)
+		TNT1 A 0 A_JumpIf(CountInv("OverkillDuration") == 1, "ReadyLoop")
+		TNT1 A 0 A_TakeInventory("MariaDeathMachine",1)
+        TNT1 A 1
+        Wait
+	Ready:	
+        TNT1 A 0 A_SetSpeed(0.69)
+	    ZRKH D 0 A_JumpIf(CountInv("OverkillDuration") == 0, "TakeItOff")
+        TNT1 A 0 A_PlaySound("Maria/Draw/Heavy", 1) 
+        DMGS ABCDEFGH 1
+        TNT1 A 0 A_PlaySound("Weapon/Chaingun/Select", 2)
+    	Goto ReadyLoop
+	ReadyLoop:	
+		DMGG A 0 A_StopSound(5) 
+		DMGG A 1 
+		{
+        A_WeaponReady(WRF_DisableSwitch|WRF_NoSwitch);
+		Return A_JumpIf(CountInv("OverkillDuration") == 0, "DeselectFancy"); 
+		}
+		DMGG A 1 
+		{
+        A_WeaponReady(WRF_DisableSwitch|WRF_NoSwitch);
+		Return A_JumpIf(CountInv("OverkillDuration") == 0, "DeselectFancy"); 
+		}
+		DMGG A 1 
+		{
+        A_WeaponReady(WRF_DisableSwitch|WRF_NoSwitch);
+		Return A_JumpIf(CountInv("OverkillDuration") == 0, "DeselectFancy"); 
+		}
+		DMGG A 1 
+		{
+        A_WeaponReady(WRF_DisableSwitch|WRF_NoSwitch);
+		Return A_JumpIf(CountInv("OverkillDuration") == 0, "DeselectFancy"); 
+		}
+		DMGG A 1 
+		{
+        A_WeaponReady(WRF_DisableSwitch|WRF_NoSwitch);
+		Return A_JumpIf(CountInv("OverkillDuration") == 0, "DeselectFancy"); 
+		}
+		Loop
+	Fire:
+		TNT1 A 0 A_PlaySound("Weapon/Chaingun/Start",4)
+		DMGG ABCDEF 1
+		TNT1 A 0 A_PlaySound("Weapon/Chaingun/Loop",5,1,1)
+		//DMGG ABCDEF 1
+		DMGG D 0 A_Refire
+	FireFinish:
+	    TNT1 A 0 A_StopSound (CHAN_WEAPON)
+ 		DMGG A 0 Offset(0,32) A_PlaySound("Weapon/Chaingun/Post",4)
+		DMGG ABCDEF 1 A_WeaponReady
+		DMGG A 0 A_PlaySound("Weapon/Chaingun/Stop",5)
+		DMGG ABCDEF 1 A_WeaponReady
+		DMGG AABBCCDDEEFF 1 A_WeaponReady
+		Goto ReadyLoop
+	Hold:
+		DMGG A 0 A_GunFlash
+		DMGG A 0 A_PlaySound("Weapon/Chaingun/Fire",CHAN_WEAPON)
+		DMGF A 1 BRIGHT A_FireBullets (1, 1, -1, 30, "MariaPuffPurple")
+        TNT1 A 0 A_FireCustomMissile("MinigunCasingSpawner",-5,0,0,-6)
+        TNT1 A 0 A_FireCustomMissile("MinigunLinkCasingSpawner",-5,0,0,-6)
+        TNT1 A 0 A_FireCustomMissile("MariaFlarePurple",0,0,0,8)
+        TNT1 A 0 A_FireCustomMissile("MariaMuzzleSmoke",0,0,0,8)
+		TNT1 A 0 A_SetPitch(pitch - 0.5)
+		DMGF BC 1
+        //TNT1 A 0 A_WeaponReady(WRF_DisableSwitch|WRF_NoSwitch)
+        TNT1 A 0 A_JumpIf(CountInv("OverkillDuration") == 0, "DeselectFancy") 
+
+		DMGG A 0 A_GunFlash
+		DMGG A 0 A_PlaySound("Weapon/Chaingun/Fire", CHAN_WEAPON)
+		DMGF A 1 BRIGHT A_FireBullets (1.5, 1.5, -1, 30, "MariaPuffPurple")
+        TNT1 A 0 A_FireCustomMissile("MinigunCasingSpawner",-5,0,0,-6)
+        TNT1 A 0 A_FireCustomMissile("MinigunLinkCasingSpawner",-5,0,0,-6)
+        TNT1 A 0 A_FireCustomMissile("MariaFlarePurple",0,0,0,8)
+        TNT1 A 0 A_FireCustomMissile("MariaMuzzleSmoke",0,0,0,8)
+		TNT1 A 0 A_SetPitch(pitch - 0.5)
+		DMGF BC 1
+        //TNT1 A 0 A_WeaponReady(WRF_DisableSwitch|WRF_NoSwitch)
+        TNT1 A 0 A_JumpIf(CountInv("OverkillDuration") == 0, "DeselectFancy")
+
+		DMGF A 0 A_Refire
+		Goto FireFinish
+
+	AltFire:
+		TNT1 A 0 A_PlaySound("Weapon/Chaingun/Start",4)
+		DMGG AABBCCDDEEFF 1
+		TNT1 A 0 A_PlaySound("Weapon/Chaingun/Loop",5,1,1)
+		DMGG ABCDEFABCDEF 1
+		DMGG D 0 A_Refire
+	AltFireFinish:
+	    TNT1 A 0 A_StopSound (CHAN_WEAPON)
+ 		DMGG A 0 Offset(0,32) A_PlaySound("Weapon/Chaingun/Post",4)
+		DMGG ABCDEF 1 A_WeaponReady
+		DMGG A 0 A_PlaySound("Weapon/Chaingun/Stop",5)
+		DMGG ABCDEFABCDEF 1 A_WeaponReady
+		DMGG AABBCCDDEEFF 1 A_WeaponReady
+		Goto ReadyLoop
+	AltHold:
+		DMGG A 0 A_GunFlash
+		DMGG A 0 A_PlaySound("Weapon/Chaingun/Fire",CHAN_WEAPON)
+		DMGF A 1 BRIGHT A_FireBullets (4.5, 4.5, -1, 30, "MariaPuffPurple")
+        TNT1 A 0 A_FireCustomMissile("MinigunCasingSpawner",-5,0,0,-6)
+        TNT1 A 0 A_FireCustomMissile("MinigunLinkCasingSpawner",-5,0,0,-6)
+        TNT1 A 0 A_FireCustomMissile("MariaFlarePurple",0,0,0,8)
+        TNT1 A 0 A_FireCustomMissile("MariaMuzzleSmoke",0,0,0,8)
+		TNT1 A 0 A_SetPitch(pitch - 0.5)
+		DMGF D 1
+        //TNT1 A 0 A_WeaponReady(WRF_DisableSwitch|WRF_NoSwitch)
+        TNT1 A 0 A_JumpIf(CountInv("OverkillDuration") == 0, "DeselectFancy") 
+
+		DMGG A 0 A_GunFlash
+		DMGG A 0 A_PlaySound("Weapon/Chaingun/Fire", CHAN_WEAPON)
+		DMGF A 1 BRIGHT A_FireBullets (4.5, 4.5, -1, 30, "MariaPuffPurple")
+        TNT1 A 0 A_FireCustomMissile("MinigunCasingSpawner",-5,0,0,-6)
+        TNT1 A 0 A_FireCustomMissile("MinigunLinkCasingSpawner",-5,0,0,-6)
+        TNT1 A 0 A_FireCustomMissile("MariaFlarePurple",0,0,0,8)
+        TNT1 A 0 A_FireCustomMissile("MariaMuzzleSmoke",0,0,0,8)
+		TNT1 A 0 A_SetPitch(pitch - 0.5)
+		DMGF D 1
+        //TNT1 A 0 A_WeaponReady(WRF_DisableSwitch|WRF_NoSwitch)
+        TNT1 A 0 A_JumpIf(CountInv("OverkillDuration") == 0, "DeselectFancy")
+
+		DMGF A 0 A_Refire
+		Goto AltFireFinish
+
+	Flash:
+		TNT1 A 3 A_Light2
+		TNT1 A 3 A_Light1
+		TNT1 A 0 A_Light0
+		Goto LightDone
+	}
+}

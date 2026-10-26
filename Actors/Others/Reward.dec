@@ -1,0 +1,67 @@
+
+ACTOR MariaSecretWeaponGiver : CustomInventory
+{
+	Inventory.Icon "TNT1A0"
+	Inventory.PickupSound ""
+	Inventory.PickupMessage ""
+	+INVENTORY.AUTOACTIVATE
+	States
+	{
+	Spawn:
+		TNT1 A 1
+		Loop
+    Pickup:
+		TNT1 A 0 A_jumpifinventory("MariaSecretWeaponToken",15,"GiveWeapon5")
+		TNT1 A 0 A_jumpifinventory("MariaSecretWeaponToken",12,"GiveWeapon4")
+ 		TNT1 A 0 A_jumpifinventory("MariaSecretWeaponToken",9,"GiveWeapon3")
+		TNT1 A 0 A_jumpifinventory("MariaSecretWeaponToken",6,"GiveWeapon2")
+		TNT1 A 0 A_jumpifinventory("MariaSecretWeaponToken",3,"GiveWeapon1")
+		TNT1 A 1
+        Stop
+   GiveWeapon1: //Usas 12
+		TNT1 A 1 A_jumpifinventory("MariaUsas",1,"NoPickup")
+		TNT1 A 0 A_PlaySound ("Weapon/Usas/Pickup")
+		TNT1 A 0 A_GiveInventory ("MariaUsas",1)   
+		TNT1 A 0 A_SelectWeapon ("MariaUsas")
+		TNT1 A 0 ACS_ExecuteAlways(700)
+		TNT1 A 0
+        Stop
+   GiveWeapon2: //Sniper Rifle
+		TNT1 A 1 A_jumpifinventory("MariaSniperRifle",1,"NoPickup")
+		TNT1 A 0 A_PlaySound ("Weapon/Sniper/Bolt/Foward")
+		TNT1 A 0 A_GiveInventory ("MariaSniperRifle",1)   
+		TNT1 A 0 A_SelectWeapon ("MariaSniperRifle")
+		TNT1 A 0 ACS_ExecuteAlways(701)
+		TNT1 A 0
+        Stop
+   GiveWeapon3: //Oscillator
+		TNT1 A 1 A_jumpifinventory("MariaOscillator",1,"NoPickup")
+		TNT1 A 0 A_PlaySound ("Weapon/Nailgun/Pickup")
+		TNT1 A 0 A_GiveInventory ("MariaOscillator",1)   
+		TNT1 A 0 A_SelectWeapon ("MariaOscillator")
+		TNT1 A 0 ACS_ExecuteAlways(702)
+		TNT1 A 0
+        Stop
+   GiveWeapon4: //Micro Rocket Launcher
+		TNT1 A 1 A_jumpifinventory("MariaMicroRocketLauncher",1,"NoPickup")
+		TNT1 A 0 A_PlaySound ("Weapon/MicroRocketLauncher/Load")
+		TNT1 A 0 A_GiveInventory ("MariaMicroRocketLauncher",1)  
+		TNT1 A 0 A_SelectWeapon ("MariaMicroRocketLauncher")
+		TNT1 A 0 ACS_ExecuteAlways(703)
+		TNT1 A 0
+        Stop
+   GiveWeapon5: //Book of Sacrament
+		TNT1 A 1 A_jumpifinventory("MariaGrimoire",1,"NoPickup")
+		TNT1 A 0 A_PlaySound ("Weapon/Book/Pickup")
+		TNT1 A 0 A_GiveInventory ("MariaGrimoire",1)  
+		TNT1 A 0 A_SelectWeapon ("MariaGrimoire")
+		TNT1 A 0 ACS_ExecuteAlways(704)
+		TNT1 A 0
+        Stop
+   NoPickup:
+		TNT1 A 0
+		Stop
+   	}
+}
+
+Actor MariaSecretWeaponToken : Inventory { Inventory.MaxAmount 18 }

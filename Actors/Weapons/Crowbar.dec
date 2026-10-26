@@ -1,0 +1,182 @@
+//==============================================================================
+// Crowbar
+//==============================================================================
+// Caliber: 404
+//==============================================================================
+// Oftentimes it used as a tool, but it's also a weapon depends on the 
+// situation. Not powerful enough, but it's good to swing like a maniac.
+// I'm the right mom in the wrong place, who's can't make a difference.
+// Like that scientist in a power suit.
+//==============================================================================
+ACTOR MariaCrowbar : MariaWeapon //replaces Fist
+{
+  Obituary "%o tasted %k's crowbar!"
+  Tag "Crowbar"
+  Inventory.Icon "CROPA0"
+  +CHEATNOTWEAPON
+  +INVENTORY.UNDROPPABLE
+  +INVENTORY.UNTOSSABLE
+  +WEAPON.WIMPY_WEAPON
+  +WEAPON.MELEEWEAPON
+ States
+ {
+ Deselect:
+  CROD ABCDE 1
+  TNT1 AAAAAAAAAAAAAAAAAA 0 A_Lower
+  TNT1 A 1
+  Wait
+ Select:
+  TNT1 AA 0 A_Raise
+  Loop
+ Ready:
+  TNT1 A 0 A_PlaySound("Maria/Draw/Equipment")
+  CROS ABCDE 1
+  Goto ReadyLoop
+ ReadyLoop:
+  CROG A 1 A_WeaponReady(WRF_ALLOWZOOM|WRF_ALLOWUSER1|WRF_ALLOWUSER2|WRF_ALLOWUSER3)
+  Loop
+ Fire:
+  CROG ABCDE 1
+  TNT1 A 1
+  TNT1 A 0 A_SetPitch (pitch - 0.4)
+ Right:
+  TNT1 A 1
+  CRO1 ABC 1
+  TNT1 A 0 A_JumpIfInventory("PowerQuadDamage",1,2)
+  TNT1 A 0 A_Jump(256,2)
+  TNT1 A 0 A_PlaySound("Maria/Powerup/Quad/Shoot",7)
+  TNT1 A 0 A_PlaySound("weapons/melee/crowbarswing")
+  TNT1 A 0 A_FireCustomMissile("MariaCrowbarHit1",0,0,0,6)
+  TNT1 A 0 A_SetPitch (pitch + 0.4)
+  CRO1 D 1  
+  TNT1 A 0 A_SetPitch (pitch - 0.2)
+  CRO1 E 1 
+  TNT1 A 0 A_SetPitch (pitch - 0.1)
+  CRO1 F 1  
+  TNT1 A 0 A_SetPitch (pitch - 0.1)
+  TNT1 AAAA 1
+  CROG A 0 A_Refire("Left")
+  Goto Returning 
+ Left:
+  TNT1 A 1
+  CRO2 ABC 1
+  TNT1 A 0 A_JumpIfInventory("PowerQuadDamage",1,2)
+  TNT1 A 0 A_Jump(256,2)
+  TNT1 A 0 A_PlaySound("Maria/Powerup/Quad/Shoot",7)
+  TNT1 A 0 A_PlaySound("weapons/melee/crowbarswing")
+  TNT1 A 0 A_FireCustomMissile("MariaCrowbarHit1",0,0,0,6)
+  TNT1 A 0 A_SetPitch (pitch + 0.4)
+  CRO2 D 1  
+  TNT1 A 0 A_SetPitch (pitch - 0.2)
+  CRO2 E 1 
+  TNT1 A 0 A_SetPitch (pitch - 0.1)
+  CRO2 F 1  
+  TNT1 A 0 A_SetPitch (pitch - 0.1)
+  TNT1 AAAA 1
+  CROG A 0 A_Refire("Right")
+  Goto Returning 
+ Altfire:
+  CROG A 1
+  CROA A 1 
+  TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
+  CROA B 1
+  CROA C 1 
+  TNT1 A 0 A_SetPitch (pitch - 0.4)
+ Althold:
+  CRO3 A 1 
+  TNT1 A 0 A_Refire
+  CRO3 ABCD 1
+  TNT1 A 0 A_JumpIfInventory("PowerQuadDamage",1,2)
+  TNT1 A 0 A_Jump(256,2)
+  TNT1 A 0 A_PlaySound("Maria/Powerup/Quad/Shoot",7)
+  CRO3 E 0 A_PlaySound("weapons/melee/crowbarswing")
+  TNT1 A 0 A_ChangeVelocitY(2.5,0,2,CVF_RELATIVE ) 
+  CRO3 E 0 A_FireCustomMissile("MariaCrowbarhit2",0,0,0,0)
+  TNT1 A 0 A_SetPitch (pitch + 0.4)
+  CRO3 F 1  
+  TNT1 A 0 A_SetPitch (pitch - 0.2)
+  CRO3 G 1 
+  TNT1 A 0 A_SetPitch (pitch - 0.1)
+  CRO3 H 1  
+  TNT1 A 0 A_SetPitch (pitch - 0.1)
+  TNT1 AAAA 1
+  CROG A 0
+  Goto Returning 
+ Returning:
+  CROG E 1
+  CROG D 1
+  CROG C 1
+  CROG B 1
+  CROG A 1
+  Goto ReadyLoop
+
+ ThrowPipebomb:
+  CROD ABCDE 1
+  TASQ ABC 1
+  TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
+  TASG DEH 1
+  TNT1 A 0 A_TakeInventory("PipebombAmmo", 1)
+  TASG I 1 A_PlayWeaponSound("Maria/Pipebomb/Miss",1)
+  TASG J 1 A_PlaySound("Maria/Pipebomb/Ignite", 2)
+  TASG KLM 1
+  TASG OPQR 1 
+  TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
+  TAHA AB 1
+  TNT1 A 0 A_JumpIfInventory("PowerQuadDamage",1,2)
+  TNT1 A 0 A_Jump(256,2)
+  TNT1 A 0 A_PlaySound("Maria/Powerup/Quad/Shoot",7)
+  TNT1 A 0 A_PlaySound("Maria/Pipebomb/Throw", 3)
+  TNT1 A 0 A_FireCustomMissile("HolyPipebomb",0,1,0,0)
+  TAHA CDE 1
+  TNT1 A 5
+  CROS ABCDE 1
+  Goto ReadyLoop
+
+ UseStimShot:
+  TNT1 A 0 A_JumpIfHealthLower(100, 1)
+  Goto FullHealth
+  CROD ABCDE 1
+  SYRI AB 1
+  TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
+  SYRI CD 1
+  SYRI EEFFGGG 1
+  SYRI HIJKKLLL 1
+  TNT1 A 0 A_PlaySound("Weapon/Syringe/Cap", 1)
+  SYRI MNOPQQQRR 1
+  TNT1 A 0 A_PlaySound("Weapon/Syringe/Tab", 1)
+  SYRI STUUUVV 1
+  TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
+  SYRI WXYZ 1
+  SYR2 AB 1
+  TNT1 A 0 A_TakeInventory("MariaSyringeAmmo", 1)
+  TNT1 A 0 A_PlaySound("Weapon/Syringe/Inject", 1)
+  SYR2 CD 1
+  TNT1 A 0 A_PlaySound("Weapon/Syringe/Heal", 2)
+  TNT1 A 0 A_SetBlend("BLUE",.5,25)
+  TNT1 A 0 HealThing(10, 100)
+  TNT1 A 0 A_GiveInventory("SyringeProtection")
+  TNT1 A 0 A_GiveInventory("SyringeRegeneration")
+  SYR2 EFGHIJ 2
+  SYR2 KLLMMN 1
+  TNT1 A 5
+  CROS ABCDE 1
+  Goto ReadyLoop
+ FullHealth:
+  TNT1 A 0 A_Print("You are healthy.")
+  Goto ReadyLoop
+
+ User3:
+ EquipShield:
+  TNT1 A 0 A_ZoomFactor(1.0)
+  TNT1 A 0 A_GiveInventory("MariaShield",1)
+  TNT1 A 0 A_SelectWEapon("MariaShield")
+  Goto Deselect
+		
+ PunchFlash:
+  CROK ABC 1
+  CROK D 12
+  CROK CBA 1
+  CROW A 1
+  Goto LightDone
+          }
+}

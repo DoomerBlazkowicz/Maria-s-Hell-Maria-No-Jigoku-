@@ -1,0 +1,49 @@
+ACTOR MariaBanshee /*replaces Deh_Actor_151*/ 3008
+{
+    Health 100
+    Speed 8
+    Radius 20
+    Height 56
+    ReactionTime 8
+    PainChance 64
+    Mass 500
+
+    +SOLID
+    +SHOOTABLE
+    +COUNTKILL
+    +FLOAT
+    +NOGRAVITY
+	+NOBLOOD
+	+FORCERADIUSDMG
+	
+    SeeSound "banshee/sight"
+    PainSound "banshee/pain"
+    DeathSound "banshee/death"
+	HitObituary "%o got a loud goodbye from the banshee."//for some reason A_Explode detects it as an environmental or suicide kill
+	
+    States
+    {
+    Spawn:
+        BSHE AB 10 Bright A_Look
+        Loop
+    See:
+        BSHE A 0 Bright A_PlaySound("banshee/active")
+		BSHE AAABBBCCCAAABBBCCC 2 Bright A_Chase
+        Loop
+    Melee:
+        BSHE D 1 Bright A_Explode(128, 128) // Explosion damage
+		wait
+    Pain:
+        BSHE D 3 Bright
+        BSHE D 3 Bright A_Pain
+        Goto See
+    Death:
+        BSHE D 4 Bright A_Scream
+        BSHE E 6 Bright A_Explode(128, 128)
+        BSHE F 8 Bright A_Fall
+        BSHE G 6 Bright
+        BSHE H 4 Bright
+        TNT1 A 20
+        Stop
+    }
+}

@@ -1,0 +1,47 @@
+//==============================================================================
+// Chex Quest compatibility - Credits to wildweasel, snarboo and YukesVonFaust.
+//==============================================================================
+// Weapons
+//==============================================================================
+ACTOR NSChexWeapon1 : RandomSpawner replaces SuperBootspork	 {DropItem "MariaSawSpawner"}
+ACTOR NSChexWeapon2 : RandomSpawner replaces MiniZorcher 	 	 {DropItem "MariaRevolver"}
+ACTOR NSChexWeapon3 : RandomSpawner replaces LargeZorcher   	 {DropItem "MariaShotgunSpawner"}
+ACTOR NSChexWeapon4 : RandomSpawner replaces SuperLargeZorcher {DropItem "MariaBoomstick"}
+ACTOR NSChexWeapon5 : RandomSpawner replaces RapidZorcher   	 {DropItem "MariaChaingunSpawner"}
+ACTOR NSChexWeapon6 : RandomSpawner replaces ZorchPropulsor 	 {DropItem "MariaLauncher"}
+ACTOR NSChexWeapon7 : RandomSpawner replaces PhasingZorcher 	 {DropItem "MariaPRSpawner"}
+ACTOR NSChexWeapon8 : RandomSpawner replaces LAZDevice 	  	 {DropItem "MariaBFGSpawner"}
+
+//==============================================================================
+// Ammo
+//==============================================================================
+ACTOR NSChexAmmo1 : RandomSpawner replaces MiniZorchRecharge  {DropItem "Clip"}
+ACTOR NSChexAmmo2 : RandomSpawner replaces MiniZorchPack 	 {DropItem "Clipbox"}
+ACTOR NSChexAmmo3 : RandomSpawner replaces LargeZorchRecharge {DropItem "Shell"}
+ACTOR NSChexAmmo4 : RandomSpawner replaces LargeZorchPack 	 {DropItem "Shellbox"}
+ACTOR NSChexAmmo5 : RandomSpawner replaces PropulsorZorch 	 {DropItem "Rocket"}
+ACTOR NSChexAmmo6 : RandomSpawner replaces PropulsorZorchPack {DropItem "RocketBox"}
+ACTOR NSChexAmmo7 : RandomSpawner replaces PhasingZorch 		 {DropItem "Cell"}
+ACTOR NSChexAmmo8 : RandomSpawner replaces PhasingZorchPack 	 {DropItem "Cellpack"}
+ACTOR NSChexAmmo9 : RandomSpawner   replaces ZorchPack 		 {DropItem "MariaBackpackspawner"}
+
+//==============================================================================
+// Health and Armor
+//==============================================================================
+ACTOR NSChexHeal1  : RandomSpawner replaces BowlOfFruit 		   	 {DropItem "MariaStimpackspawner"}
+ACTOR NSChexHeal2  : RandomSpawner replaces BowlOfVegetables 	   	 {DropItem "MariaMedikitspawner"}
+ACTOR NSChexHeal3  : RandomSpawner replaces SuperchargeBreakfast 	 {DropItem "MariaMegaHealth"}
+
+ACTOR NSChexArmor1 : RandomSpawner replaces ChexArmor 	 	   	 {DropItem "MariaBallisticArmor"}
+ACTOR NSChexArmor2 : RandomSpawner replaces SuperChexArmor 	   	 {DropItem "MariaHeavyArmor"}
+
+//==============================================================================
+// Powerups
+//==============================================================================
+ACTOR NSChexBonus1 : RandomSpawner replaces GlassOfWater      {DropItem "MariaHealthBonus"}
+ACTOR NSChexBonus2 : RandomSpawner replaces SlimeRepellent    {DropItem "MariaArmorShard"}
+
+ACTOR NSChexPower1 : RandomSpawner replaces ComputerAreaMap 	 {DropItem "MariaMapScroll"}
+ACTOR NSChexPower2 : RandomSpawner replaces SlimeProofSuit 	 {DropItem "MariaHazmatSuit"}
+
+// END

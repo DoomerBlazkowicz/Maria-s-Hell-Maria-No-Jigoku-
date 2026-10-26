@@ -1,0 +1,239 @@
+//==============================================================================
+// UAC 357 Handcannon
+//==============================================================================
+// Caliber: 357 Magnum
+//==============================================================================
+// Much bigger and bulker compared Miroku "Liberty Chief", but UAC brought
+// something better against those demons. 
+// Only drawback is reloading the gun, but other than that, it does it's job
+// perfectly.
+//==============================================================================
+ACTOR MariaRevolver : MariaWeapon //replaces Pistol
+{
+  Weapon.AmmoGive2 6
+  Weapon.AmmoType1 "MariaRevolverloaded"
+  Weapon.AmmoType2 "MariaLightClip"
+  Weapon.SlotNumber 2
+  +WEAPON.NOAUTOFIRE
+  +NOEXTREMEDEATH
+  +WEAPON.AMMO_CHECKBOTH
+  Inventory.PickupSound "Weapon/Revolver/Pickup"
+  //Weapon.upsound "Weapon/Revolver/Select"
+  Obituary "%k passed the lead to %o"
+  Inventory.PickupMessage "UAC 44 Revolver Obtained!"
+  Tag "Revolver"
+   States
+{
+   Spawn:
+        MREV A -1
+        Stop
+   Select:
+        TNT1 AA 0 A_Raise
+        Loop
+   Deselect:
+     	TNT1 A 0 A_ZoomFactor(1.0)
+     	REVD ABCDE 1
+        TNT1 AAAAAAAAAAAAAAAAAA 0 A_Lower
+        TNT1 A 1
+        Wait
+   Ready:
+        REVS ABCDE 1
+        TNT1 A 0 A_PlaySound("Maria/Draw/Sidearm")
+        Goto ReadyLoop
+   ReadyLoop:
+        REVG A 1 A_WeaponReady(WRF_ALLOWZOOM|WRF_ALLOWRELOAD|WRF_ALLOWUSER1|WRF_ALLOWUSER2|WRF_ALLOWUSER3)
+        Loop
+
+	Fire:
+        NULL A 0 A_JumpIfInventory("MariaRevolverloaded", 1, 1)
+	    Goto DryFire
+        TNT1 A 0 A_PlaySound("Weapon/Shinigami/Dry",0)
+        REVG ABB 1 //A_PlayWeaponSound("weapons/revolvercock",CHAN_WEAPON)
+	FireCounted:
+        NULL A 0 A_JumpIfInventory("MariaRevolverloaded", 1, 1)
+        Goto dryfire
+        REVG A 0 A_GunFlash
+		REVG A 0 A_JumpIfInventory("PowerQuadDamage",1,2)
+		REVG A 0 A_Jump(256,2)
+		REVG A 0 A_PlaySound("Maria/Powerup/Quad/Shoot",7)
+        REVG A 0 A_PlayWeaponSound("Weapon/Revolver/Fire", CHAN_AUTO)
+		TNT1 A 0 A_PlaySound("Weapon/Revolver/Distant", 6)
+        TNT1 A 0 A_TakeInventory("MariaRevolverLoaded", 1)
+        REVG B 0 BRIGHT A_AlertMonsters
+        TNT1 B 0 radius_quake (3.5, 3, 0, 1, 0)
+        REVF A 1 BRIGHT A_FireBullets (1, 1, -1, 25, "MariaPuff")
+        TNT1 A 0 A_FireCustomMissile("MariaFlareOrange",0,0,0,8)
+        TNT1 A 0 A_FireCustomMissile("MariaMuzzleSmoke",0,0,0,8)
+        REVF BCD 1 A_SetPitch (pitch - 1.5)
+        REVF EFG 1
+        REVF HIJ 1
+        REVF KLM 1
+        REVG A 1
+        REVG A 6 //A_Refire
+        Goto ReadyLoop
+   AltFire:
+        NULL A 0 A_JumpIfInventory("MariaRevolverloaded", 1, 1)
+        Goto dryfire
+        REZF A 0 A_GunFlash
+        REVZ ABCDE 1
+   AltHold:
+        NULL A 0 A_JumpIfInventory("MariaRevolverloaded", 1, 1)
+        Goto dryfire
+        TNT1 A 0 A_PlaySound("Weapon/Shinigami/Dry",0)
+        REZF A 0 A_GunFlash
+		REZF A 0 A_JumpIfInventory("PowerQuadDamage",1,2)
+		REZF A 0 A_Jump(256,2)
+		REZF A 0 A_PlaySound("Maria/Powerup/Quad/Shoot",7)
+        REZF A 0 A_PlayWeaponSound("Weapon/Revolver/Fire", CHAN_AUTO)
+		TNT1 A 0 A_PlaySound("Weapon/Revolver/Distant", 6)
+        TNT1 A 0 A_TakeInventory("MariaRevolverLoaded", 1)
+        REZF B 0 BRIGHT A_AlertMonsters
+        TNT1 B 0 radius_quake (3.5, 3, 0, 1, 0)
+        REZF A 1 BRIGHT A_FireBullets (5, 5, -1, 25, "MariaPuff")
+        TNT1 A 0 A_FireCustomMissile("MariaFlareOrange",0,0,0,8)
+        TNT1 A 0 A_FireCustomMissile("MariaMuzzleSmoke",0,0,0,8)
+        REZF B 1 BRIGHT
+        REZF C 1 BRIGHT A_SetPitch (pitch - 1.5)
+        REZF D 1 BRIGHT A_SetPitch (pitch - 0.5)
+        REZF EFG 1 
+        REVG A 0 A_Refire
+        Goto AltFinish
+   AltFinish:
+        REVZ DCBA 1
+        Goto ReadyLoop
+    DryFire:
+        TNT1 A 0 A_PlaySound("Weapon/Revolver/Dry",0)
+        TNT1 A 0 offset(0,36)
+        REVG AB 1 A_WeaponReady(WRF_NOFIRE|WRF_NOSWITCH)
+        TNT1 A 0 offset(0,35)
+        REVG A 10 A_WeaponReady(WRF_NOFIRE|WRF_NOSWITCH)
+        Goto ReadyLoop
+    Reload:
+        TNT1 A 0 A_JumpIfInventory("MariaRevolverloaded", 6, 2)
+        TNT1 A 0 A_JumpIfInventory("MariaLightClip", 1, "ReloadWork")
+        REVG A 2 A_WeaponReady(WRF_NOFIRE)
+        Goto ReadyLoop
+    ReloadWork:
+     	TNT1 A 0 A_ZoomFactor(1.0)
+		TNT1 A 0 A_StartSound("Foley/Pistol/Raise", CHAN_AUTO)
+        REVR ABCD 1 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
+        REVR EFG 1 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
+		REVR HIIJJ 1 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
+        REVR G 0 A_PlayWeaponsound("Weapon/Revolver/Open")
+        REVR KLMNNOO 1 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
+        REVR PQRRSSTT 1 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
+        REVR L 0 A_PlayWeaponsound("Weapon/Revolver/Eject")
+		TNT1 A 0 A_FireCustomMissile("357BulletCasing",0,0,3,-6)
+		TNT1 A 0 A_FireCustomMissile("357BulletCasing",0,0,3,-8)
+		TNT1 A 0 A_FireCustomMissile("357BulletCasing",0,0,5,-10)
+		TNT1 A 0 A_FireCustomMissile("357BulletCasing",0,0,5,-12)
+		TNT1 A 0 A_FireCustomMissile("357BulletCasing",0,0,7,-14)
+		TNT1 A 0 A_FireCustomMissile("357BulletCasing",0,0,7,-16)
+		REVR U 2 
+		REVR VWXXYY 1
+		REVR Z 5
+		TNT1 A 0 A_StartSound("Foley/MagPouch/Out", CHAN_AUTO)
+		REVR Z 5
+		RE2R ABCDE 1
+		RE2R EF 2
+        TNT1 A 0 A_PlayWeaponsound("Weapon/Revolver/Load")
+		RE2R GGHHIJ 1
+		TNT1 A 0 A_FireCustomMissile("EmptySpeedLoader",0,0,1,0)
+    ReloadLoop:
+        REVR L 0 A_TakeInventory("MariaLightClip", 1)
+        REVR L 0 A_GiveInventory("MariaRevolverLoaded", 1)
+        REVR L 0 A_JumpIfInventory("MariaRevolverLoaded", 6, "ReloadFinish")
+        REVR L 0 A_JumpIfInventory("MariaLightClip", 1, "ReloadLoop")
+        Goto ReloadFinish
+    ReloadFinish:
+        RE2R KLMN 1 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
+		RE2R OP 2 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
+        TNT1 A 0 A_PlayWeaponsound("Weapon/Revolver/Close")
+        RE2R PQQRRST 1 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
+		TNT1 A 0 A_StartSound("Foley/Pistol/Lower", CHAN_AUTO)
+        RE2R UVW 2 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
+        REVG A 2 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
+        Goto ReadyLoop
+    Flash:
+        TNT1 A 2 BRIGHT A_Light2
+        TNT1 A 2 BRIGHT A_Light1
+        TNT1 A 0 A_Light0
+        Stop
+
+    ThrowPipebomb:
+        REVD ABCDE 1
+        TASQ ABC 1
+        TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
+        TASG DEH 1
+        TNT1 A 0 A_TakeInventory("PipebombAmmo", 1)
+        TASG I 1 A_PlayWeaponSound("Maria/Pipebomb/Miss",1)
+        TASG J 1 A_PlaySound("Maria/Pipebomb/Ignite", 2)
+        TASG KLM 1
+        TASG OPQR 1 
+        TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
+        TAHA AB 1
+        TNT1 A 0 A_JumpIfInventory("PowerQuadDamage",1,2)
+        TNT1 A 0 A_Jump(256,2)
+        TNT1 A 0 A_PlaySound("Maria/Powerup/Quad/Shoot",7)
+        TNT1 A 0 A_PlaySound("Maria/Pipebomb/Throw", 3)
+        TNT1 A 0 A_FireCustomMissile("HolyPipebomb",0,1,0,0)
+        TAHA CDE 1
+        TNT1 A 5
+        REVS ABCDE 1
+        Goto ReadyLoop
+
+	UseStimShot:
+		TNT1 A 0 A_JumpIfHealthLower(100, 1)
+		Goto FullHealth
+        REVD ABCDE 1
+        SYRI AB 1
+        TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
+        SYRI CD 1
+        SYRI EEFFGGG 1
+        SYRI HIJKKLLL 1
+        TNT1 A 0 A_PlaySound("Weapon/Syringe/Cap", 1)
+        SYRI MNOPQQQRR 1
+        TNT1 A 0 A_PlaySound("Weapon/Syringe/Tab", 1)
+        SYRI STUUUVV 1
+        TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
+        SYRI WXYZ 1
+        SYR2 AB 1
+        TNT1 A 0 A_TakeInventory("MariaSyringeAmmo", 1)
+        TNT1 A 0 A_PlaySound("Weapon/Syringe/Inject", 1)
+        SYR2 CD 1
+        TNT1 A 0 A_PlaySound("Weapon/Syringe/Heal", 2)
+        TNT1 A 0 A_SetBlend("BLUE",.5,25)
+        TNT1 A 0 HealThing(10, 100)
+        TNT1 A 0 A_GiveInventory("SyringeProtection")
+        TNT1 A 0 A_GiveInventory("SyringeRegeneration")
+        SYR2 EFGHIJ 2
+        SYR2 KLLMMN 1
+        TNT1 A 5
+        REVS ABCDE 1
+	    Goto ReadyLoop
+	FullHealth:
+		TNT1 A 0 A_Print("You are healthy.")
+		Goto ReadyLoop
+
+	User3:
+	EquipShield:
+		TNT1 A 0 A_ZoomFactor(1.0)
+		TNT1 A 0 A_GiveInventory("MariaShield",1)
+		TNT1 A 0 A_SelectWEapon("MariaShield")
+		Goto Deselect
+				
+    PunchFlash:
+        REVK ABC 1
+        REVK D 12
+        REVK CBA 1
+        REVG A 1
+        Goto LightDone
+      }
+}
+
+ACTOR MariaRevolverLoaded : Ammo
+{
+Inventory.MaxAmount 6
+Inventory.icon "MREVA0"
++IGNORESKILL
+}

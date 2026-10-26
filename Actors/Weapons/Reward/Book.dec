@@ -1,0 +1,312 @@
+//==============================================================================
+// Book of Sacrament
+//==============================================================================
+// Caliber: Unknown
+//==============================================================================
+// Unleash the Horsemen of Apocalypse for judgement
+//==============================================================================
+ACTOR MariaGrimoire : MariaWeapon
+{
+  Weapon.AmmoType "MariaManaCharge"
+  +FLOATBOB
+  +CHEATNOTWEAPON
+  +WEAPON.NOAUTOFIRE
+  +WEAPON.BFG   
+  Inventory.PickupSound "Weapon/Book/Pickup"
+  Inventory.PickupMessage "What is this?!?"
+  Tag "Book of Sacrament"
+  States
+  {
+  Ready:
+    TNT1 A 0 A_PlaySound("Weapon/Book/Open")
+    BOOS ABCDE 1 
+    Goto ReadyLoop
+  ReadyLoop:
+    BOOK A 1 A_WeaponReady(WRF_ALLOWZOOM|WRF_ALLOWRELOAD|WRF_ALLOWUSER1|WRF_ALLOWUSER2)
+    Loop
+  Deselect:
+    TNT1 A 0 A_PlaySound("Weapon/Book/Close")
+    BOOD ABCDE 1
+    TNT1 AAAAAAAAAAAAAAAAAA 0 A_Lower
+    TNT1 A 1
+    Wait  
+	Select:
+    TNT1 AA 0 A_Raise
+    Loop
+  Fire: //Rune of Famine
+    NULL A 0 A_JumpIfInventory("MariaManaCharge", 5, 1)
+    Goto dryfire
+    tnt1 a 0 A_JumpIfInventory("SpellChange", 3, "Fire4")
+    tnt1 a 0 A_JumpIfInventory("SpellChange", 2, "Fire3")
+    tnt1 a 0 A_JumpIfInventory("SpellChange", 1, "Fire2")
+    TNT1 A 0 A_gunflash("Rune1_Flash")
+    TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
+    FAHA A 1 
+	FAHA B 1 
+    FAHA C 1
+    TNT1 A 0 A_PlaySound("Weapon/Book/Attack/Rune1",CHAN_AUTO)
+	TNT1 A 0 A_SetBlend("Black", .5, 35)
+    //TNT1 A 0 Thing_Damage(0,40,0) 
+    TNT1 A 0 A_TakeInventory("MariaManaCharge", 5)
+	TNT1 A 0 A_FireProjectile("MariaFamineCloud")
+	TNT1 D 1 
+	TNT1 E 2
+	TNT1 F 2 
+	TNT1 A 2 
+	TNT1 A 2
+	TNT1 A 1
+	BOOK A 4 
+    Goto ReadyLoop
+  Fire2: //Rune of Pestilence
+    NULL A 0 A_JumpIfInventory("MariaManaCharge", 15, 1)
+    Goto dryfire
+    DOLL A 0 //A_PlaySound("Weapons/Grimoire/attack",CHAN_WEAPON)
+    TNT1 A 0 A_gunflash("Rune2_Flash")
+    TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
+    PEHA A 1
+	PEHA B 1 
+    PEHA C 1
+	PEHA D 1 
+	PEHA E 1 
+    TNT1 A 0 A_PlaySound("Weapon/Book/Attack/Rune2",CHAN_AUTO)
+	PEHA FGH 1 BRIGHT
+	TNT1 A 0 A_SetBlend("Green", .5, 35)
+    //TNT1 A 0 Thing_Damage(0,40,0) 
+    TNT1 A 0 A_TakeInventory("MariaManaCharge", 15)
+	TNT1 A 0 A_FireProjectile("MariaPestilenceShot", -5, 0)
+	TNT1 A 0 A_FireProjectile("MariaPestilenceShot", 0, 1)
+	TNT1 A 0 A_FireProjectile("MariaPestilenceShot", 5, 0)
+	PEHA HGF 1 BRIGHT
+	PEHA E 1
+	PEHA D 1 
+	PEHA C 1 
+	PEHA B 1
+	PEHA A 1
+	BOOK A 4 
+    Goto ReadyLoop
+  Fire3: //Rune of War
+    NULL A 0 A_JumpIfInventory("MariaManaCharge", 25, 1)
+    Goto dryfire
+    TNT1 A 0 A_gunflash("Rune3_Flash")
+    DOLL A 0 //A_PlaySound("Weapons/Grimoire/attack",CHAN_WEAPON)
+    VOHA A 1 
+	VOHA B 2 
+    TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
+    VOHA C 2
+	VOHA D 3 
+	VOHA E 3
+	VOHA F 1
+    TNT1 A 0 A_PlaySound("Weapon/Book/Attack/Rune3",CHAN_AUTO)
+	VOHA FGH 1
+	TNT1 A 0 A_SetBlend("Gray", .5, 35)
+    //TNT1 A 0 Thing_Damage(0,40,0) 
+    TNT1 A 0 A_TakeInventory("MariaManaCharge", 25)
+	RVNS B 0 A_FireCustomMissile("MariaGrimoireGhost", -9, 0)
+	RVNS B 1 A_FireCustomMissile("MariaGrimoireGhost", -4, 0)
+	RVNS B 1 A_FireCustomMissile("MariaGrimoireGhost", 0, 1)
+	RVNS B 0 A_FireCustomMissile("MariaGrimoireGhost", 4, 0)
+	RVNS B 0 A_FireCustomMissile("MariaGrimoireGhost", 9, 0)
+	VOHA HGG 1 
+	VOHA F 2
+	VOHA E 2 
+	VOHA D 2 
+	VOHA C 2
+	VOHA B 2
+    VOHA A 1
+	BOOK A 4 
+    Goto ReadyLoop
+  Fire4: //Rune of Death
+    NULL A 0 A_JumpIfInventory("MariaManaCharge", 50, 1)
+    Goto dryfire
+    TNT1 A 0 A_gunflash("Rune4_Flash")
+    DOLL A 0 //A_PlaySound("Weapons/Grimoire/attack",CHAN_WEAPON)
+    DOLL A 1 
+    TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
+	DOLL B 1 
+    DOLL C 1
+	DOLL D 2 
+    DOLL A 0 A_PlaySound("Weapon/Book/Attack/Rune4",CHAN_AUTO)
+	DOLL E 3 
+    TNT1 A 0 A_PlaySound("Weapon/Book/Chanting",CHAN_WEAPON) 
+	DOLL EFGEFGEFGEFGEFG 3 
+	TNT1 A 0 A_SetBlend("White", .5, 35)
+    //TNT1 A 0 Thing_Damage(0,40,0) 
+    TNT1 A 0 A_TakeInventory("MariaManaCharge", 50)
+	TNT1 A 0 A_FireProjectile("MariaGrimProjectile")
+	DOLL F 5
+	DOLL G 3 
+	DOLL D 2 
+	DOLL C 2
+	DOLL B 1
+    DOLL A 1
+    Goto ReadyLoop
+
+  Altfire:
+	BOOK A 1 A_jumpifinventory("Spellchange",3,"remove")
+	goto Switch
+  Remove:
+	TNT1 A 0 A_takeinventory("Spellchange",3)
+	BOOK A 2
+	BOOK BCD 2 BRIGHT
+    TNT1 A 0 A_PlaySound("Weapon/Book/Switch")
+	BOOK E 3 BRIGHT
+	BOOK DCB 2 BRIGHT
+	BOOK A 2
+	tnt1 a 0 a_print("Famine",1)
+	goto ReadyLoop
+  Switch:
+	TNT1 A 0 A_giveinventory("Spellchange",1)
+	tnt1 a 0 A_jumpifinventory("Spellchange",3,"Rune3")
+	tnt1 a 0 A_jumpifinventory("Spellchange",2,"Rune2")
+	tnt1 a 0 A_jumpifinventory("Spellchange",1,"Rune1")
+	goto ReadyLoop
+  Rune1:
+	BOOK A 2
+	BOOK FGH 2 BRIGHT
+    TNT1 A 0 A_PlaySound("Weapon/Book/Switch")
+	BOOK I 3 BRIGHT
+	BOOK HGF 2 BRIGHT
+	BOOK A 2
+	BOOK A 1 a_print("Pestilence",1)
+	goto ReadyLoop
+  Rune2:
+	BOOK A 2
+	BOOK JKL 2 BRIGHT
+    TNT1 A 0 A_PlaySound("Weapon/Book/Switch")
+	BOOK M 3 BRIGHT
+	BOOK LKJ 2 BRIGHT
+	BOOK A 2
+	BOOK A 1 a_print("War",1)
+	goto ReadyLoop
+  Rune3:
+	BOOK A 2
+	BOOK NOP 2 BRIGHT
+    TNT1 A 0 A_PlaySound("Weapon/Book/Switch")
+	BOOK Q 3 BRIGHT
+	BOOK PON 2 BRIGHT
+	BOOK A 2
+	BOOK A 1 a_print("Death",1)
+	goto ReadyLoop
+
+  Rune1_Flash:
+	BOOK A 2
+	BOOK BCD 2 BRIGHT
+	BOOK E 3 BRIGHT
+	BOOK DCB 2 BRIGHT
+	BOOK A 12	
+	//BOOK A 37 6
+	Goto LightDone
+  Rune2_Flash:
+	BOOK A 3
+	BOOK FGH 2 BRIGHT
+	BOOK I 5 BRIGHT
+	BOOK HGF 2 BRIGHT
+	BOOK A 8	
+	//BOOK A 37 9
+	Goto LightDone
+  Rune3_Flash:
+	BOOK A 8
+	BOOK JKL 2 BRIGHT
+	BOOK M 3 BRIGHT
+	BOOK LKJ 2 BRIGHT
+	BOOK A 12	
+	//BOOK A 37 
+	Goto LightDone
+  Rune4_Flash:
+	BOOK A 8
+	BOOK NOP 2 BRIGHT
+	BOOK QQQQQQQQQQQQQQQ 3 BRIGHT
+	BOOK PON 2 BRIGHT 
+	BOOK A 12	
+	//BOOK A 37 
+	Goto LightDone
+
+  DryFire:
+    TNT1 A 0
+    BOOK A 2 A_WeaponReady(WRF_NOFIRE|WRF_NOSWITCH)
+    Goto ReadyLoop
+
+  ThrowPipebomb:
+    BOOD ABCDE 1
+    TASQ ABC 1
+    TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
+    TASG DEH 1
+    TNT1 A 0 A_TakeInventory("PipebombAmmo", 1)
+    TASG I 1 A_PlayWeaponSound("Maria/Pipebomb/Miss",1)
+    TASG J 1 A_PlaySound("Maria/Pipebomb/Ignite", 2)
+    TASG KLM 1
+    TASG OPQR 1 
+    TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
+    TAHA AB 1
+    TNT1 A 0 A_JumpIfInventory("PowerQuadDamage",1,2)
+    TNT1 A 0 A_Jump(256,2)
+    TNT1 A 0 A_PlaySound("Maria/Powerup/Quad/Shoot",7)
+    TNT1 A 0 A_PlaySound("Maria/Pipebomb/Throw", 3)
+    TNT1 A 0 A_FireCustomMissile("HolyPipebomb",0,1,0,0)
+    TAHA CDE 1
+    TNT1 A 5
+    BOOS ABCDE 1
+    Goto ReadyLoop
+
+  UseStimShot:
+	TNT1 A 0 A_JumpIfHealthLower(100, 1)
+	Goto FullHealth
+    BOOD ABCDE 1
+    SYRI AB 1
+    TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
+    SYRI CD 1
+    SYRI EEFFGGG 1
+    SYRI HIJKKLLL 1
+    TNT1 A 0 A_PlaySound("Weapon/Syringe/Cap", 1)
+    SYRI MNOPQQQRR 1
+    TNT1 A 0 A_PlaySound("Weapon/Syringe/Tab", 1)
+    SYRI STUUUVV 1
+    TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
+    SYRI WXYZ 1
+    SYR2 AB 1
+    TNT1 A 0 A_TakeInventory("MariaSyringeAmmo", 1)
+    TNT1 A 0 A_PlaySound("Weapon/Syringe/Inject", 1)
+    SYR2 CD 1
+    TNT1 A 0 A_PlaySound("Weapon/Syringe/Heal", 2)
+    TNT1 A 0 A_SetBlend("BLUE",.5,25)
+    TNT1 A 0 HealThing(10, 100)
+    TNT1 A 0 A_GiveInventory("SyringeProtection")
+    TNT1 A 0 A_GiveInventory("SyringeRegeneration")
+    SYR2 EFGHIJ 2
+    SYR2 KLLMMN 1
+    TNT1 A 5
+    BOOS ABCDE 1
+    Goto ReadyLoop
+  FullHealth:
+	TNT1 A 0 A_Print("You are healthy.")
+	Goto ReadyLoop
+
+  User3:
+  EquipShield:
+	TNT1 A 0 A_ZoomFactor(1.0)
+	TNT1 A 0 A_GiveInventory("MariaShield",1)
+	TNT1 A 0 A_SelectWEapon("MariaShield")
+	Goto Deselect
+	
+  Zoom:
+    TNT1 A 0 A_JumpIfInventory("PowerQuadDamage",1,2)
+    TNT1 A 0 A_Jump(256,2)
+    TNT1 A 0 A_PlaySound("Maria/Powerup/Quad/Shoot",7)
+    TNT1 A 0 A_PlaySound("weapons/melee/fist/uppercut")
+    TNT1 A 0 A_ChangeVelocitY(2.5,0,2,CVF_RELATIVE ) 
+    TNT1 A 0 A_gunflash("PunchFlash") //PunchFlash
+    TNT1 A 2
+    HANU AB 1 A_WeaponReady(WRF_NOFIRE|WRF_NOSWITCH)
+    HANU C 0 A_FireCustomMissile("MariaPunch2",0,0)
+    HANU CCDEFGHIJK 1 A_WeaponReady(WRF_NOFIRE|WRF_NOSWITCH)
+    TNT1 A 5 //19
+    Goto PunchFinish	
+	
+  PunchFlash:
+	BOOK A 19
+	Goto LightDone
+  Spawn:
+    BOOP A -1
+    Stop
+  }
+}

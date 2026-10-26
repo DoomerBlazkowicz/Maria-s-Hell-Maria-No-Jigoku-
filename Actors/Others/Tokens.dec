@@ -1,0 +1,63 @@
+Actor MariaToken : Inventory
+{
+	Inventory.MaxAmount 1
+	+inventory.Undroppable
+	-inventory.Invbar
+	+NONETID
+	+INVISIBLE
+	+NOCLIP
+	+NOTARGET
+	+NOBLOCKMAP
+	+NOINTERACTION
+	Radius 0
+	Height 0
+	Alpha 0.0
+	Mass 0
+	RenderStyle "None"
+}
+
+
+ACTOR ShoeImpact : MariaToken
+{
+   Inventory.MaxAmount 1
+}
+
+ACTOR Zoomed : MariaToken
+{
+   Inventory.MaxAmount 1
+}
+
+Actor IsSlideKicking : MariaToken {}
+
+Actor KickHasHit : MariaToken {}
+
+Actor IsCrouching : MariaToken {}
+
+
+Actor IncineratorVerificate : MariaToken {}
+
+ACTOR FasterPlasmaToken : MariaToken
+{
+   Inventory.MaxAmount 20
+}
+
+ACTOR PistolSuppressor : MariaToken{}
+
+ACTOR GreaseSuppressor : MariaToken{}
+
+ACTOR UnmakyrModule : MariaToken{}
+
+Actor Planted : MariaToken { }
+
+Actor DetonatorCheck : Inventory { Inventory.MaxAmount 1 }
+Actor DetonateSignal : Powerup { Powerup.Duration 4 }
+
+ACTOR Spellchange : MariaToken
+{
+inventory.maxamount 3
+}
+
+/*ACTOR ShieldDurability : MariaToken
+{
+   Inventory.MaxAmount 99999 
+}*/

@@ -1,0 +1,249 @@
+// WEAPONS
+
+actor MariaSawSpawner : RandomSpawner Replaces Chainsaw
+{
+    DropItem "MariaChainsaw", 255, 50
+    DropItem "MariaCrossbow", 255, 5
+}
+
+actor MariaPistolSpawner : RandomSpawner Replaces Pistol
+{
+	DropItem "MariaRevolver", 255, 15
+	DropItem "MariaPistol", 255, 30
+}
+
+actor MariaShotgunSpawner : RandomSpawner Replaces Shotgun
+{
+	DropItem "MariaShotgun", 255, 50
+    DropItem "MariaBoomstick", 255, 5
+	DropItem "MariaRevolver", 255, 1
+}
+
+actor MariaSuperShotgunSpawner : RandomSpawner Replaces SuperShotgun
+{
+    DropItem "MariaBoomstick", 255, 50
+	DropItem "MariaRevolver", 255, 5
+}
+
+actor MariaDoubleSpawner : RandomSpawner //replaces ArtiTomeOfPower
+{
+	DropItem "MariaBoomstick", 255, 100
+    DropItem "MariaLMG", 255, 75
+    DropItem "MariaCrossbow", 255, 25
+	DropItem "MariaUnmakyr", 255, 10
+}
+
+actor MariaChaingunSpawner : RandomSpawner replaces Chaingun
+{
+	DropItem "MariaAbakan", 255, 200
+	DropItem "MariaLMG", 255, 50
+}
+
+actor MariaRocketLauncherSpawner : RandomSpawner Replaces Rocketlauncher
+{
+	DropItem "MariaThumper", 255, 100
+}
+
+actor MariaPRSpawner : RandomSpawner Replaces PlasmaRifle
+{
+	DropItem "MariaPlasmaRifle", 255, 100
+	DropItem "MariaAerosolCan", 255, 40	
+	DropItem "MariaLMG", 255, 20
+	DropItem "MariaIncinerator", 255, 1
+}
+
+/*actor MariaPRSpawner : RandomSpawner Replaces PlasmaRifle
+{
+    States
+    {
+
+	 Spawn:
+		TNT1 A 0 A_Jump(48, "Spawn2")		
+	Spawn1:
+		PLAS A 0
+		TNT1 A 0 A_SpawnItemEx ("MariaPlasmaRifle",0,0,0,0,0,0,0,0,0)
+		TNT1 A 1
+		TNT1 A -1
+		Stop
+	 Spawn2:
+		TNT1 A 0 A_JumpIfInTargetInventory("IncineratorVerificate", 1, "Spawn3")
+		PLAS A 0
+		TNT1 A 0 A_SpawnItemEx ("MariaAerosolCan",0,0,0,0,0,0,0,0,0)
+		TNT1 A 1
+		TNT1 A -1
+		Stop	
+	 Spawn3:
+		PLAS A 0
+		TNT1 A 0 A_SpawnItemEx ("MariaIncinerator",0,0,0,0,0,0,0,0,0)
+		TNT1 A 1
+		TNT1 A -1
+		Stop			
+	}
+}*/
+
+
+actor MariaPRSpawner2 : RandomSpawner //For Hexen
+{
+	DropItem "MariaPlasmaRifle", 255, 60
+	DropItem "MariaAerosolCan", 255, 25
+}
+
+actor MariaBFGSpawner : RandomSpawner Replaces BFG9000
+{
+	DropItem "MariaRocketLauncher", 255, 150
+	DropItem "MariaBFG", 255, 60
+	DropItem "MariaUnmakyr", 255, 15
+}
+
+// ITEMS
+
+Actor MariaHealthBonusSpawner : RandomSpawner replaces HealthBonus
+{
+	DropItem "MariaHealthBonus", 255, 1
+}
+
+Actor MariaArmorBonusSpawner : RandomSpawner replaces ArmorBonus
+{
+	DropItem "MariaArmorShard", 255, 1
+}
+
+Actor MariaStimpackspawner : RandomSpawner replaces Stimpack
+{
+    DropItem "MariaStimpack", 255, 15
+	DropItem "MariaSyringeAmmo", 255, 1
+}
+
+Actor MariaMedikitspawner : RandomSpawner replaces Medikit
+{
+    DropItem "MariaMedikit", 255, 10
+	DropItem "MariaSyringeCase", 255, 1
+}
+
+Actor MariaRavenStimpackspawner : RandomSpawner //replaces CrystalVial
+{
+    DropItem "MariaStimpackHeretic", 255, 15
+	DropItem "MariaSyringeAmmo", 255, 1
+}
+
+Actor MariaRavenMedikitspawner : RandomSpawner //replaces ArtiHealth
+{
+    DropItem "MariaMedikitHeretic", 255, 10
+	DropItem "MariaSyringeCase", 255, 1
+}
+
+Actor MariaBackpackspawner : RandomSpawner replaces Backpack
+{
+    DropItem "MariaAmmoBox", 255, 100
+	DropItem "MariaBackpack", 255, 50
+    DropItem "MariaBFGCell", 255, 10
+    //DropItem "MariaShield", 255, 10
+}
+
+Actor MariaBlueArmorspawner : RandomSpawner replaces BlueArmor
+{
+    DropItem "MariaHeavyArmor", 255, 10
+	DropItem "MariaSuperShield", 255, 1
+}
+
+Actor MariaEnchantedShieldspawner : RandomSpawner //replaces BlueArmor
+{
+    DropItem "MariaHeavyArmor", 255, 10
+	DropItem "MariaSuperShield", 255, 1
+}
+
+actor PortableDamageSpawner : RandomSpawner
+{
+    DropItem "MariaBerserkPortable", 255, 5
+	DropItem "MariaOnslaughtPortable", 255, 10
+}
+
+// POWERUPS
+
+actor DamageSpawner : RandomSpawner replaces Berserk
+{
+	DropItem "MariaOnslaught", 255, 100
+    DropItem "MariaBerserk", 255, 50
+    DropItem "MariaOverkill", 255, 25
+    DropItem "MariaKatana", 255, 5
+	DropItem "MariaLMG", 255, 1
+}
+
+// AMMO
+
+actor Slot2AmmoSpawnerA : RandomSpawner replaces Clip
+{
+    DropItem "MariaLightClip", 255, 250
+    DropItem "MariaLightClipSpeedloader", 255, 225
+    DropItem "MariaHeavyClip", 255, 200
+    DropItem "MariaArrowAmmo", 255, 25
+    DropItem "MariaQuiver", 255, 10
+}
+
+actor Slot2AmmoSpawnerB : RandomSpawner replaces ClipBox
+{
+    DropItem "MariaLightClipBox", 255, 200
+    DropItem "MariaHeavyClipBox", 255, 150
+    DropItem "MariaArrowBox", 255, 5
+}
+
+actor Slot3AmmoSpawnerA : RandomSpawner replaces Shell
+{
+    DropItem "MariaShell", 255, 100
+    DropItem "MariaArrowAmmo", 255, 5
+}
+
+actor Slot3AmmoSpawnerB : RandomSpawner replaces ShellBox
+{
+    DropItem "MariaShellBox", 255, 100
+    DropItem "MariaQuiver", 255, 5
+}
+
+actor Slot5AmmoSpawnerA : RandomSpawner replaces RocketAmmo
+{
+    DropItem "MariaGrenadeAmmo", 255, 100
+	DropItem "PipebombAmmo", 255, 45
+    DropItem "MariaRocketAmmo", 255, 1
+}
+
+actor Slot5AmmoSpawnerB : RandomSpawner replaces RocketBox
+{
+    DropItem "MariaGrenadeBox", 255, 100
+	DropItem "PipebombAmmo", 255, 45
+    DropItem "MariaRocketAmmo", 255, 1
+}
+
+actor Slot6AmmoSpawnerA : RandomSpawner replaces Cell
+{
+    DropItem "MariaCell", 255, 200
+    DropItem "MariaGasoline", 255, 115
+    DropItem "MariaRocketAmmo", 255, 60
+    DropItem "MariaBFGCell", 255, 10
+}
+
+actor Slot6AmmoSpawnerB : RandomSpawner replaces Cellpack
+{
+    DropItem "MariaCellPack", 255, 200
+    DropItem "MariaGasolineTank", 255, 115
+    DropItem "MariaRocketAmmo", 255, 60
+    DropItem "MariaBFGCell", 255, 10
+}
+
+//Hostiles
+
+actor MariaShocktrooperSpawner : RandomSpawner /*replaces Deh_Actor_153*/ 3010
+{
+    DropItem "MariaShocktrooper", 256, 100
+    DropItem "MariaPyro", 256, 5
+    //DropItem "MariaFoxgirl", 256, 1
+}
+
+actor OkayaSWATSpawner : RandomSpawner Replaces WolfensteinSS
+{
+    DropItem "MariaSWATPistol", 256, 200
+    DropItem "MariaSWATShotgun", 256, 175
+    DropItem "MariaSWATSMG", 256, 100
+    DropItem "MariaSWATElite", 256, 75
+    //DropItem "MariaSWATBrutus", 256, 50 
+    DropItem "MariaPyro", 256, 25
+    //DropItem "MariaFoxgirl", 256, 1
+}

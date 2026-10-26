@@ -1,0 +1,606 @@
+//==============================================================================
+// Unknown Cannon
+//==============================================================================
+// Caliber: Cell and Arrows
+//==============================================================================
+// What the fuck is this!?
+//==============================================================================
+Actor MariaUnmakyr : MariaWeapon
+{
+  Weapon.AmmoGive1 25
+  Weapon.AmmoGive2 50
+  Weapon.AmmoType1 "MariaArrowAmmo"
+  Weapon.AmmoType2 "Cell"
+  +WEAPON.PRIMARY_USES_BOTH
+  +WEAPON.NOAUTOFIRE
+  +WEAPON.AMMO_CHECKBOTH
+  Inventory.Pickupmessage "What the [REDACTED] is this!?"
+  Obituary "%o was railed by %k."
+  Inventory.PickupSound "Weapon/Railgun/Pickup"
+  Tag "Unmakyr"
+  States
+  {
+  Ready:
+    TNT1 A 0 A_JumpIfInventory("Cell", 3, 1)
+    Goto EmptyReady
+	TNT1 A 0 A_JumpIfInventory("UnmakyrModule",1,"ReadyBallista")
+    TNT1 A 0 A_PlaySound("Maria/Draw/Heavy", 1) 
+    TNT1 A 0 A_SetSpeed(0.67)
+    UNMS ABC 1
+    TNT1 A 0 //A_PlaySound("Weapon/Railgun/Select", 2) 
+    UNMS DE 1
+	Goto ReadyLoop
+  EmptyReady:
+	TNT1 A 0 A_JumpIfInventory("UnmakyrModule",1,"EmptyReadyBallista")
+    TNT1 A 0 A_SetSpeed(0.67)
+    TNT1 A 0 A_PlaySound("Maria/Draw/Heavy", 1) 
+    UNES ABC 1
+    TNT1 A 0 //A_PlaySound("Weapon/Railgun/Select", 2) 
+    UNES DE 1
+	Goto EmptyReadyLoop
+	
+  ReadyBallista:
+    TNT1 A 0 A_JumpIfInventory("MariaArrowAmmo", 5, 1)
+    Goto EmptyReadyBallista
+    TNT1 A 0 A_JumpIfInventory("Cell", 10, 1)
+    Goto EmptyReadyBallista
+    TNT1 A 0 A_JumpIfInventory("MariaArrowAmmo", 5, 2)
+    TNT1 A 0 A_JumpIfInventory("Cell", 10, 1)
+    Goto EmptyReadyBallista
+    TNT1 A 0 A_SetSpeed(0.67)
+    TNT1 A 0 A_PlaySound("Maria/Draw/Heavy", 1) 
+    BALS ABC 1
+    TNT1 A 0 //A_PlaySound("Weapon/Railgun/Select", 2) 
+    BALS DE 1
+	Goto ReadyLoopBallista
+  EmptyReadyBallista:
+    TNT1 A 0 A_SetSpeed(0.67)
+    TNT1 A 0 A_PlaySound("Maria/Draw/Heavy", 1) 
+    BAES ABC 1
+    TNT1 A 0 //A_PlaySound("Weapon/Railgun/Select", 2) 
+    BAES DE 1
+	Goto EmptyReadyLoopBallista
+
+  ReadyLoop:
+    TNT1 A 0 A_JumpIfInventory("Cell", 3, 1)
+    Goto EmptyReadyLoop
+	TNT1 A 0 A_JumpIfInventory("UnmakyrModule",1,"ReadyLoopBallista")
+    TNT1 A 0 //A_PlaySound("plasmarifle/idle", CHAN_WEAPON, 1, 1)
+    UNMG ABCD 2 A_WeaponReady(WRF_ALLOWZOOM|WRF_ALLOWUSER1|WRF_ALLOWUSER2|WRF_ALLOWUSER3)
+    Loop
+  EmptyReadyLoop:
+	TNT1 A 0 A_JumpIfInventory("UnmakyrModule",1,"EmptyReadyLoopBallista")
+    UNME A 2 A_WeaponReady(WRF_ALLOWZOOM|WRF_ALLOWUSER1|WRF_ALLOWUSER2|WRF_ALLOWUSER3)
+    Loop
+	
+  ReadyLoopBallista:
+    TNT1 A 0 A_JumpIfInventory("MariaArrowAmmo", 5, 1)
+    Goto EmptyReadyLoopBallista
+    TNT1 A 0 A_JumpIfInventory("Cell", 10, 1)
+    Goto EmptyReadyLoopBallista
+    TNT1 A 0 A_JumpIfInventory("MariaArrowAmmo", 5, 2)
+    TNT1 A 0 A_JumpIfInventory("Cell", 10, 1)
+    Goto EmptyReadyLoopBallista
+    TNT1 A 0 //A_PlaySound("plasmarifle/idle", CHAN_WEAPON, 1, 1)
+    BALG ABCD 2 A_WeaponReady(WRF_ALLOWZOOM|WRF_ALLOWUSER1|WRF_ALLOWUSER2|WRF_ALLOWUSER3)
+    Loop
+  EmptyReadyLoopBallista:
+    BALE A 2 A_WeaponReady(WRF_ALLOWZOOM|WRF_ALLOWUSER1|WRF_ALLOWUSER2|WRF_ALLOWUSER3)
+    Loop
+	
+  Deselect:
+    TNT1 A 0 A_JumpIfInventory("Cell", 3, 1)
+    Goto EmptyDeselect
+	TNT1 A 0 A_JumpIfInventory("UnmakyrModule",1,"DeselectBallista")
+    TNT1 A 0 A_SetSpeed(1.0)
+    TNT1 A 0 A_StopSound(CHAN_WEAPON)
+  	UNMD ABCDE 1
+    TNT1 AAAAAAAAAAAAAAAAAA 0 A_Lower
+    TNT1 A 1
+    Wait
+  EmptyDeselect:
+	TNT1 A 0 A_JumpIfInventory("UnmakyrModule",1,"EmptyDeselectBallista")
+    TNT1 A 0 A_SetSpeed(1.0)
+    TNT1 A 0 A_StopSound(CHAN_WEAPON)
+  	UNMD ABCDE 1
+    TNT1 AAAAAAAAAAAAAAAAAA 0 A_Lower
+    TNT1 A 1
+    Wait
+	
+  DeselectBallista:
+    TNT1 A 0 A_JumpIfInventory("MariaArrowAmmo", 5, 1)
+    Goto EmptyDeselectBallista
+    TNT1 A 0 A_JumpIfInventory("Cell", 10, 1)
+    Goto EmptyDeselectBallista
+    TNT1 A 0 A_JumpIfInventory("MariaArrowAmmo", 5, 2)
+    TNT1 A 0 A_JumpIfInventory("Cell", 10, 1)
+    Goto EmptyDeselectBallista
+    TNT1 A 0 A_SetSpeed(1.0)
+    TNT1 A 0 A_StopSound(CHAN_WEAPON)
+  	BALD ABCDE 1
+    TNT1 AAAAAAAAAAAAAAAAAA 0 A_Lower
+    TNT1 A 1
+    Wait
+  EmptyDeselectBallista:
+    TNT1 A 0 A_SetSpeed(1.0)
+    TNT1 A 0 A_StopSound(CHAN_WEAPON)
+  	BAED ABCDE 1
+    TNT1 AAAAAAAAAAAAAAAAAA 0 A_Lower
+    TNT1 A 1
+    Wait
+	
+  Select:
+    TNT1 AA 0 A_Raise
+    Loop
+  Fire:
+	//TNT1 A 0 A_JumpIfInventory("ReturnToUnmakyr",1,"FireBallista")
+    TNT1 A 0 A_JumpIfInventory("Cell", 3, 1)
+    Goto dryfire
+	TNT1 A 0 A_JumpIfInventory("UnmakyrModule",1,"FireBallista")
+	TNT1 A 0 A_AlertMonsters
+	TNT1 A 0 A_JumpIfInventory("PowerQuadDamage",1,2)
+	TNT1 A 0 A_Jump(256,2)
+	TNT1 A 0 A_PlaySound("Maria/Powerup/Quad/Shoot",7)
+	UNMF A 0 A_PlaySound("Weapon/Unmakyr/Fire/Default", CHAN_AUTO)
+    UNMF A 0 bright
+	TNT1 A 0 A_SetBlend("Cyan",0.2,16)
+    TNT1 A 0 A_TakeInventory("Cell", 3)
+	TNT1 A 0 BRIGHT A_FireCustomMissile("MariaUnmakyrLaser",0,1)
+	TNT1 A 0 BRIGHT A_FireCustomMissile("MariaUnmakyrLaser",4,0)
+	TNT1 A 0 BRIGHT A_FireCustomMissile("MariaUnmakyrLaser",-4,0)
+	UNMF A 1 BRIGHT A_SetPitch(pitch - 2)
+    UNMF B 1 bright
+	UNMF C 1
+    UNMG A 1
+    UNMG A 0 A_ReFire
+    Goto ReadyLoop
+  FireBallista:
+    TNT1 A 0 A_JumpIfInventory("MariaArrowAmmo", 5, 1)
+    Goto DryFireBallista
+    TNT1 A 0 A_JumpIfInventory("Cell", 10, 1)
+    Goto DryFireBallista
+    TNT1 A 0 A_JumpIfInventory("MariaArrowAmmo", 5, 2)
+    TNT1 A 0 A_JumpIfInventory("Cell", 10, 1)
+    Goto DryFireBallista
+	TNT1 A 0 A_AlertMonsters
+	TNT1 A 0 A_JumpIfInventory("PowerQuadDamage",1,2)
+	TNT1 A 0 A_Jump(256,2)
+	TNT1 A 0 A_PlaySound("Maria/Powerup/Quad/Shoot",7)
+	BALF A 0 A_PlaySound("Weapon/Unmakyr/Fire/Ballista", CHAN_AUTO)
+    BALF A 0 A_Recoil(2.5)
+	TNT1 A 0 A_SetBlend("Cyan",0.5,16)
+    TNT1 A 0 A_TakeInventory("MariaArrowAmmo", 5)
+    TNT1 A 0 A_TakeInventory("Cell", 10)
+	TNT1 A 0 BRIGHT A_FireCustomMissile("MariaBallistaShot",0,1)
+	BALF A 1 BRIGHT 
+    BALF B 1 bright A_SetPitch(pitch - 5)
+	BALF C 1 
+	BALF D 2 
+	BALF E 3
+	BALF EFG 4  
+    BALF HI 3
+    BALF J 2
+    UNMA C 2 A_CheckReload
+    TNT1 A 0 A_JumpIfInventory("MariaArrowAmmo", 5, 1)
+    Goto EmptyReadyLoopBallista
+    TNT1 A 0 A_JumpIfInventory("Cell", 10, 1)
+    Goto EmptyReadyLoopBallista
+    TNT1 A 0 A_JumpIfInventory("MariaArrowAmmo", 5, 2)
+    TNT1 A 0 A_JumpIfInventory("Cell", 10, 1)
+    Goto EmptyReadyLoopBallista
+	RLGG A 0 A_PlaySound("Weapon/Unmakyr/Reload",CHAN_BODY)
+  	UNMA DEFG 2
+    UNMA A 0 BRIGHT
+    RLGG A 0 A_ReFire
+    Goto ReadyLoop
+  AltFire:
+	UNMA A 0 A_JumpIfInventory("UnmakyrModule",1,"ReturnToUnmakyr")
+	UNMA A 0 A_GiveInventory("UnmakyrModule")
+    UNMA A 0 A_PrintBold ("Ballista mode selected.")
+    TNT1 A 0 A_PlaySound("Weapon/Unmakyr/Switch/1")
+  	UNMA AB 2
+    UNMA C 2 A_CheckReload
+    TNT1 A 0 A_JumpIfInventory("MariaArrowAmmo", 5, 2)
+    TNT1 A 0 A_JumpIfInventory("Cell", 10, 1)
+    Goto EmptyReadyLoopBallista
+  	UNMA DEFG 2
+    Goto ReadyLoopBallista
+  ReturnToUnmakyr:
+	UNMA A 0 A_TakeInventory("UnmakyrModule")
+    UNMA A 0 A_PrintBold ("Unmakyr mode selected.")
+    UNMA C 2
+    TNT1 A 0 A_PlaySound("Weapon/Unmakyr/Switch/2")
+    UNMA BA 2
+    Goto ReadyLoop
+  Flash:
+    TNT1 A 3 bright A_Light1
+    TNT1 A 3 bright A_Light2
+    TNT1 A 0 bright A_Light0
+    Goto LightDone
+  DryFire:
+	TNT1 A 0 A_JumpIfInventory("UnmakyrModule",1,"DryFireBallista")
+    TNT1 A 0 A_PlaySound("Weapon/BFG/Dry",0)
+    TNT1 A 0 offset(0,36)
+    UNME A 1 A_WeaponReady(WRF_NOFIRE|WRF_NOSWITCH)
+    TNT1 A 0 offset(0,35)
+    UNME A 10 A_WeaponReady(WRF_NOFIRE|WRF_NOSWITCH)
+    Goto EmptyReadyLoop
+  DryFireBallista:
+    TNT1 A 0 A_PlaySound("Weapon/BFG/Dry",0)
+    TNT1 A 0 offset(0,36)
+    BALE A 1 A_WeaponReady(WRF_NOFIRE|WRF_NOSWITCH)
+    TNT1 A 0 offset(0,35)
+    BALE A 10 A_WeaponReady(WRF_NOFIRE|WRF_NOSWITCH)
+    Goto EmptyReadyLoop
+
+  ThrowPipebomb:
+    TNT1 A 0 A_JumpIfInventory("Cell", 3, 1)
+    Goto EmptyThrowPipebomb
+	TNT1 A 0 A_JumpIfInventory("UnmakyrModule",1,"ThrowPipebombBallista")
+    UNMD ABCDE 1
+    TASQ ABC 1
+    TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
+    TASG DEH 1
+    TNT1 A 0 A_TakeInventory("PipebombAmmo", 1)
+    TASG I 1 A_PlayWeaponSound("Maria/Pipebomb/Miss",1)
+    TASG J 1 A_PlaySound("Maria/Pipebomb/Ignite", 2)
+    TASG KLM 1
+    TASG OPQR 1 
+    TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
+    TAHA AB 1
+    TNT1 A 0 A_JumpIfInventory("PowerQuadDamage",1,2)
+    TNT1 A 0 A_Jump(256,2)
+    TNT1 A 0 A_PlaySound("Maria/Powerup/Quad/Shoot",7)
+    TNT1 A 0 A_PlaySound("Maria/Pipebomb/Throw", 3)
+    TNT1 A 0 A_FireCustomMissile("HolyPipebomb",0,1,0,0)
+    TAHA CDE 1
+    TNT1 A 5
+    UNMS ABCDE 1
+    Goto ReadyLoop
+  EmptyThrowPipebomb:
+	TNT1 A 0 A_JumpIfInventory("UnmakyrModule",1,"EmptyThrowPipebombBallista")
+    UNED ABCDE 1
+    TASQ ABC 1
+    TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
+    TASG DEH 1
+    TNT1 A 0 A_TakeInventory("PipebombAmmo", 1)
+    TASG I 1 A_PlayWeaponSound("Maria/Pipebomb/Miss",1)
+    TASG J 1 A_PlaySound("Maria/Pipebomb/Ignite", 2)
+    TASG KLM 1
+    TASG OPQR 1 
+    TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
+    TAHA AB 1
+    TNT1 A 0 A_JumpIfInventory("PowerQuadDamage",1,2)
+    TNT1 A 0 A_Jump(256,2)
+    TNT1 A 0 A_PlaySound("Maria/Powerup/Quad/Shoot",7)
+    TNT1 A 0 A_PlaySound("Maria/Pipebomb/Throw", 3)
+    TNT1 A 0 A_FireCustomMissile("HolyPipebomb",0,1,0,0)
+    TAHA CDE 1
+    TNT1 A 5
+    UNES ABCDE 1
+    Goto EmptyReadyLoop
+	
+  ThrowPipebombBallista:
+    TNT1 A 0 A_JumpIfInventory("MariaArrowAmmo", 5, 1)
+    Goto EmptyThrowPipebombBallista
+    TNT1 A 0 A_JumpIfInventory("Cell", 10, 1)
+    Goto EmptyThrowPipebombBallista
+    TNT1 A 0 A_JumpIfInventory("MariaArrowAmmo", 5, 2)
+    TNT1 A 0 A_JumpIfInventory("Cell", 10, 1)
+    Goto EmptyThrowPipebombBallista
+    BALD ABCDE 1
+    TASQ ABC 1
+    TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
+    TASG DEH 1
+    TNT1 A 0 A_TakeInventory("PipebombAmmo", 1)
+    TASG I 1 A_PlayWeaponSound("Maria/Pipebomb/Miss",1)
+    TASG J 1 A_PlaySound("Maria/Pipebomb/Ignite", 2)
+    TASG KLM 1
+    TASG OPQR 1 
+    TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
+    TAHA AB 1
+    TNT1 A 0 A_JumpIfInventory("PowerQuadDamage",1,2)
+    TNT1 A 0 A_Jump(256,2)
+    TNT1 A 0 A_PlaySound("Maria/Powerup/Quad/Shoot",7)
+    TNT1 A 0 A_PlaySound("Maria/Pipebomb/Throw", 3)
+    TNT1 A 0 A_FireCustomMissile("HolyPipebomb",0,1,0,0)
+    TAHA CDE 1
+    TNT1 A 5
+    BALS ABCDE 1
+    Goto ReadyLoopBallista
+  EmptyThrowPipebombBallista:
+    BAED ABCDE 1
+    TASQ ABC 1
+    TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
+    TASG DEH 1
+    TNT1 A 0 A_TakeInventory("PipebombAmmo", 1)
+    TASG I 1 A_PlayWeaponSound("Maria/Pipebomb/Miss",1)
+    TASG J 1 A_PlaySound("Maria/Pipebomb/Ignite", 2)
+    TASG KLM 1
+    TASG OPQR 1 
+    TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
+    TAHA AB 1
+    TNT1 A 0 A_JumpIfInventory("PowerQuadDamage",1,2)
+    TNT1 A 0 A_Jump(256,2)
+    TNT1 A 0 A_PlaySound("Maria/Powerup/Quad/Shoot",7)
+    TNT1 A 0 A_PlaySound("Maria/Pipebomb/Throw", 3)
+    TNT1 A 0 A_FireCustomMissile("HolyPipebomb",0,1,0,0)
+    TAHA CDE 1
+    TNT1 A 5
+    BAES ABCDE 1
+    Goto EmptyReadyLoopBallista
+
+  UseStimShot:
+	TNT1 A 0 A_JumpIfHealthLower(100, 1)
+	Goto FullHealth
+    TNT1 A 0 A_JumpIfInventory("Cell", 3, 1)
+    Goto EmptyUseStimShot
+	TNT1 A 0 A_JumpIfInventory("UnmakyrModule",1,"UseStimShotBallista")
+    UNMD ABCDE 1
+    SYRI AB 1
+    TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
+    SYRI CD 1
+    SYRI EEFFGGG 1
+    SYRI HIJKKLLL 1
+    TNT1 A 0 A_PlaySound("Weapon/Syringe/Cap", 1)
+    SYRI MNOPQQQRR 1
+    TNT1 A 0 A_PlaySound("Weapon/Syringe/Tab", 1)
+    SYRI STUUUVV 1
+    TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
+    SYRI WXYZ 1
+    SYR2 AB 1
+    TNT1 A 0 A_TakeInventory("MariaSyringeAmmo", 1)
+    TNT1 A 0 A_PlaySound("Weapon/Syringe/Inject", 1)
+    SYR2 CD 1
+    TNT1 A 0 A_PlaySound("Weapon/Syringe/Heal", 2)
+    TNT1 A 0 A_SetBlend("BLUE",.5,25)
+    TNT1 A 0 HealThing(10, 100)
+    TNT1 A 0 A_GiveInventory("SyringeProtection")
+    TNT1 A 0 A_GiveInventory("SyringeRegeneration")
+    SYR2 EFGHIJ 2
+    SYR2 KLLMMN 1
+    TNT1 A 5
+    UNMS ABCDE 1
+    Goto ReadyLoop
+  FullHealth:
+	TNT1 A 0 A_Print("You are healthy.")
+	Goto ReadyLoop
+
+  EmptyUseStimShot:
+	TNT1 A 0 A_JumpIfHealthLower(100, 1)
+	Goto EmptyFullHealth
+	TNT1 A 0 A_JumpIfInventory("UnmakyrModule",1,"EmptyUseStimShotBallista")
+    UNED ABCDE 1
+    SYRI AB 1
+    TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
+    SYRI CD 1
+    SYRI EEFFGGG 1
+    SYRI HIJKKLLL 1
+    TNT1 A 0 A_PlaySound("Weapon/Syringe/Cap", 1)
+    SYRI MNOPQQQRR 1
+    TNT1 A 0 A_PlaySound("Weapon/Syringe/Tab", 1)
+    SYRI STUUUVV 1
+    TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
+    SYRI WXYZ 1
+    SYR2 AB 1
+    TNT1 A 0 A_TakeInventory("MariaSyringeAmmo", 1)
+    TNT1 A 0 A_PlaySound("Weapon/Syringe/Inject", 1)
+    SYR2 CD 1
+    TNT1 A 0 A_PlaySound("Weapon/Syringe/Heal", 2)
+    TNT1 A 0 A_SetBlend("BLUE",.5,25)
+    TNT1 A 0 HealThing(10, 100)
+    TNT1 A 0 A_GiveInventory("SyringeProtection")
+    TNT1 A 0 A_GiveInventory("SyringeRegeneration")
+    SYR2 EFGHIJ 2
+    SYR2 KLLMMN 1
+    TNT1 A 5
+    UNES ABCDE 1
+    Goto EmptyReadyLoop
+  EmptyFullHealth:
+	TNT1 A 0 A_Print("You are healthy.")
+	Goto EmptyReadyLoop
+	
+  UseStimShotBallista:
+	TNT1 A 0 A_JumpIfHealthLower(100, 1)
+	Goto FullHealthBallista
+    TNT1 A 0 A_JumpIfInventory("MariaArrowAmmo", 5, 1)
+    Goto EmptyUseStimShotBallista
+    TNT1 A 0 A_JumpIfInventory("Cell", 10, 1)
+    Goto EmptyUseStimShotBallista
+    TNT1 A 0 A_JumpIfInventory("MariaArrowAmmo", 5, 2)
+    TNT1 A 0 A_JumpIfInventory("Cell", 10, 1)
+    Goto EmptyUseStimShotBallista
+    BALD ABCDE 1
+    SYRI AB 1
+    TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
+    SYRI CD 1
+    SYRI EEFFGGG 1
+    SYRI HIJKKLLL 1
+    TNT1 A 0 A_PlaySound("Weapon/Syringe/Cap", 1)
+    SYRI MNOPQQQRR 1
+    TNT1 A 0 A_PlaySound("Weapon/Syringe/Tab", 1)
+    SYRI STUUUVV 1
+    TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
+    SYRI WXYZ 1
+    SYR2 AB 1
+    TNT1 A 0 A_TakeInventory("MariaSyringeAmmo", 1)
+    TNT1 A 0 A_PlaySound("Weapon/Syringe/Inject", 1)
+    SYR2 CD 1
+    TNT1 A 0 A_PlaySound("Weapon/Syringe/Heal", 2)
+    TNT1 A 0 A_SetBlend("BLUE",.5,25)
+    TNT1 A 0 HealThing(10, 100)
+    TNT1 A 0 A_GiveInventory("SyringeProtection")
+    TNT1 A 0 A_GiveInventory("SyringeRegeneration")
+    SYR2 EFGHIJ 2
+    SYR2 KLLMMN 1
+    TNT1 A 5
+    BALS ABCDE 1
+    Goto ReadyLoopBallista
+  FullHealthBallista:
+	TNT1 A 0 A_Print("You are healthy.")
+	Goto ReadyLoopBallista
+
+  EmptyUseStimShotBallista:
+	TNT1 A 0 A_JumpIfHealthLower(100, 1)
+	Goto EmptyFullHealthBallista
+    BAED ABCDE 1
+    SYRI AB 1
+    TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
+    SYRI CD 1
+    SYRI EEFFGGG 1
+    SYRI HIJKKLLL 1
+    TNT1 A 0 A_PlaySound("Weapon/Syringe/Cap", 1)
+    SYRI MNOPQQQRR 1
+    TNT1 A 0 A_PlaySound("Weapon/Syringe/Tab", 1)
+    SYRI STUUUVV 1
+    TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
+    SYRI WXYZ 1
+    SYR2 AB 1
+    TNT1 A 0 A_TakeInventory("MariaSyringeAmmo", 1)
+    TNT1 A 0 A_PlaySound("Weapon/Syringe/Inject", 1)
+    SYR2 CD 1
+    TNT1 A 0 A_PlaySound("Weapon/Syringe/Heal", 2)
+    TNT1 A 0 A_SetBlend("BLUE",.5,25)
+    TNT1 A 0 HealThing(10, 100)
+    TNT1 A 0 A_GiveInventory("SyringeProtection")
+    TNT1 A 0 A_GiveInventory("SyringeRegeneration")
+    SYR2 EFGHIJ 2
+    SYR2 KLLMMN 1
+    TNT1 A 5
+    BAES ABCDE 1
+    Goto EmptyReadyLoopBallista
+  EmptyFullHealthBallista:
+	TNT1 A 0 A_Print("You are healthy.")
+	Goto EmptyReadyLoopBallista
+	
+  User3:
+  EquipShield:
+	TNT1 A 0 A_JumpIfInventory("UnmakyrModule",1,"EquipShieldBallista")
+	TNT1 A 0 A_ZoomFactor(1.0)
+	TNT1 A 0 A_GiveInventory("MariaShield",1)
+	TNT1 A 0 A_SelectWEapon("MariaShield")
+	Goto Deselect
+  EquipShieldBallista:
+	TNT1 A 0 A_ZoomFactor(1.0)
+	TNT1 A 0 A_GiveInventory("MariaShield",1)
+	TNT1 A 0 A_SelectWEapon("MariaShield")
+	Goto DeselectBallista
+
+  Zoom:
+    TNT1 A 0 A_JumpIfInventory("PowerQuadDamage",1,2)
+    TNT1 A 0 A_Jump(256,2)
+    TNT1 A 0 A_PlaySound("Maria/Powerup/Quad/Shoot",7)
+    TNT1 A 0 A_PlaySound("weapons/melee/fist/uppercut")
+    TNT1 A 0 A_ChangeVelocitY(2.5,0,2,CVF_RELATIVE ) 
+    TNT1 A 0 A_gunflash("PunchFlash") //PunchFlash
+    TNT1 A 2
+    HANU AB 1 A_WeaponReady(WRF_NOFIRE|WRF_NOSWITCH)
+    HANU C 0 A_FireCustomMissile("MariaPunch2",0,0)
+    HANU CCDEFGHIJK 1 A_WeaponReady(WRF_NOFIRE|WRF_NOSWITCH)
+    TNT1 A 5 //19
+    Goto PunchFinish
+	
+  PunchFlash:
+    TNT1 A 0 A_JumpIfInventory("Cell", 3, 1)
+    Goto PunchFlashEmpty
+	TNT1 A 0 A_JumpIfInventory("UnmakyrModule",1,"PunchFlashBallista")
+	UNMK ABC 1
+	UNMK DEFGDEFGDEFG 1
+	UNMK CBA 1
+    UNMG A 1
+	Goto LightDone
+ PunchFlashEmpty:
+	TNT1 A 0 A_JumpIfInventory("UnmakyrModule",1,"PunchFlashEmptyBallista")
+	UNEK ABC 1
+	UNEK D 12
+	UNEK CBA 1
+    UNNE A 1
+	Goto LightDone
+
+  PunchFlashBallista:
+    TNT1 A 0 A_JumpIfInventory("MariaArrowAmmo", 5, 1)
+    Goto PunchFlashEmptyBallista
+    TNT1 A 0 A_JumpIfInventory("Cell", 10, 1)
+    Goto PunchFlashEmptyBallista
+    TNT1 A 0 A_JumpIfInventory("MariaArrowAmmo", 5, 2)
+    TNT1 A 0 A_JumpIfInventory("Cell", 10, 1)
+    Goto PunchFlashEmptyBallista
+	BALK ABC 1
+	BALK DEFGDEFGDEFG 1
+	BALK CBA 1
+    BALG A 1
+	Goto LightDone
+ PunchFlashEmptyBallista:
+	BAEK ABC 1
+	BAEK D 12
+	BAEK CBA 1
+    BALE A 1
+	Goto LightDone
+  Spawn:
+    UNMP A -1
+    Stop
+  }
+}
+
+ACTOR MariaUnmakyrPiece : WeaponPiece
+{
+	//Inventory.PickupSound "misc/w_pkup"
+	WeaponPiece.Weapon MariaUnmakyrHexen
+	+FLOATBOB
+	+NOGRAVITY
+}
+
+ACTOR MariaUnmakyrPiece1 : MariaUnmakyrPiece
+{
+	WeaponPiece.Number 1
+    Inventory.PickupMessage "You got a Calamity Arbalest Muzzle!"
+	States
+	{
+	Spawn:
+		RAI1 A -1 Bright
+		Stop
+	}
+}
+
+ACTOR MariaUnmakyrPiece2 : MariaUnmakyrPiece
+{
+	WeaponPiece.Number 2
+    Inventory.PickupMessage "You got a Calamity Arbalest Base!"
+	States
+	{
+	Spawn:
+		RAI2 A -1 Bright
+		Stop
+	}
+}
+
+ACTOR MariaUnmakyrPiece3 : MariaUnmakyrPiece
+{
+	WeaponPiece.Number 3
+    Inventory.PickupMessage "You got a Calamity Arbalest Core!"
+	States
+	{
+	Spawn:
+		RAI3 A -1 Bright
+		Stop
+	}
+}
+
+ACTOR MariaUnmakyrDrop
+{
+	States
+	{
+	Spawn:
+		TNT1 A 1
+		TNT1 A 1 A_DropWeaponPieces("MariaUnmakyrPiece1", "MariaUnmakyrPiece2", "MariaUnmakyrPiece3")
+		Stop
+	}
+}
+
+ACTOR MariaUnmakyrHexen : MariaUnmakyr
+{
+  Health 3
+  Weapon.slotnumber 7
+  +Weapon.cheatnotweapon
+  Inventory.PickupMessage "The Calamity Arbalest assembled!"
+}

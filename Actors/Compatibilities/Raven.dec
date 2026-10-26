@@ -1,0 +1,332 @@
+// Spawners for Heretic and Hexen (From Cosmobyte's Raven Patch)
+
+//==============================================================================
+// Weapons
+//==============================================================================
+// Fighter
+//==============================================================================
+ACTOR FKFWP0 : RandomSpawner replaces FWeapAxe		{DropItem "MariaShotgunSpawner"} 	 //MAP02
+ACTOR FKFWP1 : RandomSpawner replaces FWeapHammer  	{DropItem "MariaPRSpawner2"} //MAP08
+ACTOR FKFWP2 : RandomSpawner replaces FWeaponPiece1 {DropItem "MariaRocketLauncherPiece1"} 	 //MAP27
+ACTOR FKFWP3 : RandomSpawner replaces FWeaponPiece2 {DropItem "MariaRocketLauncherPiece2"} 	 //MAP12
+ACTOR FKFWP4 : RandomSpawner replaces FWeaponPiece3 {DropItem "MariaRocketLauncherPiece3"} 	 //MAP02
+
+//==============================================================================
+// Cleric
+//==============================================================================
+ACTOR FKCWP0 : RandomSpawner replaces CWeapStaff	{DropItem "MariaChaingunSpawner"} 	  //MAP02
+ACTOR FKCWP1 : RandomSpawner replaces CWeapFlame	{DropItem "MariaSuperShotgunSpawner"} //MAP08
+ACTOR FKCWP2 : RandomSpawner replaces CWeaponPiece1 {DropItem "MariaUnmakyrPiece1"} 	  //MAP27
+ACTOR FKCWP3 : RandomSpawner replaces CWeaponPiece2 {DropItem "MariaUnmakyrPiece2"} 	  //MAP12
+ACTOR FKCWP4 : RandomSpawner replaces CWeaponPiece3 {DropItem "MariaUnmakyrPiece3"} 	  //MAP02
+
+//==============================================================================
+// Mage
+//==============================================================================
+ACTOR FKMWP0 : RandomSpawner replaces MWeapFrost     {DropItem "MariaSawSpawner"} 		//MAP02
+ACTOR FKMWP1 : RandomSpawner replaces MWeapLightning {DropItem "MariaChaingunSpawner"}//MAP08
+ACTOR FKMWP2 : RandomSpawner replaces MWeaponPiece1  {DropItem "MariaBFGPiece1"} 		//MAP27
+ACTOR FKMWP3 : RandomSpawner replaces MWeaponPiece2  {DropItem "MariaBFGPiece2"} 		//MAP12
+ACTOR FKMWP4 : RandomSpawner replaces MWeaponPiece3  {DropItem "MariaBFGPiece3"} 		//MAP02
+
+//==============================================================================
+// Ammo
+//==============================================================================
+
+ACTOR HXNMana1 : RandomSpawner replaces Mana1
+{
+	DropItem "Slot2AmmoSpawnerA" 256, 2
+	DropItem "Slot3AmmoSpawnerA" 256, 2
+	DropItem "Slot5AmmoSpawnerA" 256, 2
+	DropItem "Slot6AmmoSpawnerA" 256, 2
+	DropItem "Slot2AmmoSpawnerB" 256, 1
+	DropItem "Slot3AmmoSpawnerB" 256, 1
+}
+
+ACTOR HXNMana2 : RandomSpawner replaces Mana2
+{
+	DropItem "Slot2AmmoSpawnerA" 256, 2
+	DropItem "Slot3AmmoSpawnerA" 256, 2
+	DropItem "Slot5AmmoSpawnerA" 256, 2
+	DropItem "Slot6AmmoSpawnerA" 256, 2
+	DropItem "Slot2AmmoSpawnerB" 256, 1
+	DropItem "Slot3AmmoSpawnerB" 256, 1
+	DropItem "Slot5AmmoSpawnerB" 256, 1
+	DropItem "Slot6AmmoSpawnerB" 256, 1
+}
+
+ACTOR HXNMana3 : RandomSpawner replaces Mana3
+{
+    DropItem "MariaAmmoBox", 255, 100
+	DropItem "MariaBackpack", 255, 50
+    DropItem "MariaRocketAmmo", 255, 25
+    DropItem "MariaBFGCell", 255, 10
+}
+
+//==============================================================================
+// Armor
+//==============================================================================
+ACTOR HXNArmor1 : RandomSpawner replaces PlatinumHelm 		{DropItem "MariaBallisticArmor"}
+ACTOR HXNArmor2 : RandomSpawner replaces AmuletOfWarding 	{DropItem "MariaBallisticArmor"}
+ACTOR HXNArmor3 : RandomSpawner replaces FalconShield 		{DropItem "MariaHeavyArmor"}
+ACTOR HXNArmor4 : RandomSpawner replaces MeshArmor 			{DropItem "MariaHeavyArmor"}
+ACTOR HXNArmor5 : RandomSpawner replaces ArtiBoostArmor 	{DropItem "MariaHeavyArmor"}
+//==============================================================================
+// Artifacts (Heretic and Hexen)
+//==============================================================================
+ACTOR K2Heal1 : RandomSpawner 	replaces CrystalVial 		{DropItem "MariaRavenStimpackspawner"}
+ACTOR K2Heal2 : RandomSpawner 	replaces ArtiHealth  		{DropItem "MariaRavenMedikitspawner"}
+ACTOR K2Heal3 : RandomSpawner	replaces ArtiSuperHealth 	{DropItem "PortableDamageSpawner"}
+
+ACTOR K2HPower1 : RandomSpawner	replaces ArtiPork		  	{DropItem "MariaBerserkPortable"}
+ACTOR K2HPower2 : RandomSpawner	replaces ArtiDarkServant   	{DropItem "MariaCellpack"}
+ACTOR K2HPower3 : RandomSpawner	replaces ArtiSpeedBoots 	{DropItem "PortableDamageSpawner"}
+ACTOR K2HPower4 : RandomSpawner	replaces ArtiBlastRadius 	{DropItem "PortableDamageSpawner"}
+ACTOR K2HPower5 : RandomSpawner	replaces SuperMap 	   		{DropItem "MariaMapScroll"}
+ACTOR K2HPower6 : RandomSpawner	replaces ArtiBoostMana 		{DropItem "Backpack"}
+ACTOR K2HPower7 : RandomSpawner Replaces ArtiInvisibility	{DropItem "MariaInvisibilityCloak"} 
+ACTOR K2HPower8 : RandomSpawner Replaces ArtiTeleport	    {DropItem "MariaArtiTeleport"} 
+ACTOR K2HPower9 : RandomSpawner Replaces ArtiFly	        {DropItem "MariaWings"}
+ACTOR K2HPower8 : RandomSpawner Replaces ArtiTeleportOther  {DropItem "MariaArtiTeleportOther"}
+
+//==============================================================================
+// Heretic Spawners - Credits to wildweasel's nazis basis and Deii
+//==============================================================================
+// Weapons
+//==============================================================================
+ACTOR HTCWeapon1 : RandomSpawner replaces Gauntlets	    	{DropItem "MariaSawSpawner"}
+ACTOR HTCWeapon2 : RandomSpawner replaces GoldWand 	    	{DropItem "MariaRevolver"}
+ACTOR HTCWeapon3 : RandomSpawner replaces Crossbow        	{DropItem "MariaShotgunSpawner"}
+ACTOR HTCWeapon4 : RandomSpawner replaces ArtiTomeOfPower 	{DropItem "MariaDoubleSpawner"}
+ACTOR HTCWeapon5 : RandomSpawner replaces Blaster 	    	{DropItem "MariaChaingunSpawner"}
+ACTOR HTCWeapon6 : RandomSpawner replaces PhoenixRod      	{DropItem "MariaLauncher"}
+ACTOR HTCWeapon7 : RandomSpawner replaces SkullRod    		{DropItem "MariaPRSpawner"}
+ACTOR HTCWeapon8 : RandomSpawner replaces Mace 	  	    	{DropItem "MariaBFGSpawner"}
+
+//==============================================================================
+// Ammo (Spawners)
+//==============================================================================
+ACTOR HTCAmmo1  : RandomSpawner replaces GoldWandAmmo  {DropItem "Slot2AmmoSpawnerA"}
+ACTOR HTCAmmo2  : RandomSpawner replaces GoldWandHefty {DropItem "Slot2AmmoSpawnerB"}
+
+ACTOR HTCAmmo3  : RandomSpawner replaces CrossbowAmmo  {DropItem "Slot3AmmoSpawnerA"}
+ACTOR HTCAmmo4  : RandomSpawner replaces CrossbowHefty {DropItem "Slot3AmmoSpawnerB"}
+
+ACTOR HTCAmmo5  : RandomSpawner replaces MaceAmmo  	   {DropItem "Slot6AmmoSpawnerA"}
+ACTOR HTCAmmo6  : RandomSpawner replaces MaceHefty 	   {DropItem "Slot6AmmoSpawnerB"}
+
+ACTOR HTCAmmo7  : RandomSpawner replaces BlasterAmmo   {DropItem "Slot2AmmoSpawnerA"}
+ACTOR HTCAmmo8  : RandomSpawner replaces BlasterHefty  {DropItem "Slot2AmmoSpawnerB"}
+
+ACTOR HTCAmmo9  : RandomSpawner replaces SkullRodAmmo  {DropItem "Slot6AmmoSpawnerA"}
+ACTOR HTCAmmo10 : RandomSpawner replaces SkullRodHefty {DropItem "Slot6AmmoSpawnerB"}
+
+ACTOR HTCAmmo11 : RandomSpawner replaces PhoenixRodAmmo  {DropItem "Slot5AmmoSpawnerA"}
+ACTOR HTCAmmo12 : RandomSpawner replaces PhoenixRodHefty {DropItem "Slot5AmmoSpawnerB"}
+
+ACTOR HTCAmmo13 : RandomSpawner replaces BagOfHolding {DropItem "MariaBackpackspawner"}
+
+//==============================================================================
+// Armor
+//==============================================================================
+ACTOR HTCArmor1 : RandomSpawner replaces SilverShield	 {DropItem "MariaBallisticArmor"}
+ACTOR HTCArmor2 : RandomSpawner replaces EnchantedShield {DropItem "MariaEnchantedShieldspawner"}
+
+//==============================================================================
+// Power-ups
+//==============================================================================
+ACTOR HTCPower1 : RandomSpawner replaces SuperMap		        {DropItem "MariaMapScroll"}
+ACTOR HTCPower2 : RandomSpawner Replaces ArtiTorch		        {DropItem "MariaCandlePortable"} 
+ACTOR HTCPower3 : RandomSpawner Replaces ArtiTimeBomb	        {DropItem "PipebombAmmo"} 
+ACTOR HTCPower4 : RandomSpawner Replaces ArtiInvulnerability    {DropItem "MariaRosaryPortable"} 
+ACTOR HTCPower5 : RandomSpawner Replaces ArtiEgg                {DropItem "MariaEgg"} 
+ACTOR HTCPower6 : RandomSpawner Replaces ArtiInvulnerability2   {DropItem "MariaRosaryPortable"} 
+
+Actor MariaBerserkPortable : Custominventory
+{
+	+COUNTITEM
+	+INVENTORY.INVBAR
+    +INVENTORY.FANCYPICKUPSOUND
+	Inventory.Icon "BERHA0"
+	Inventory.MaxAmount 15
+	Inventory.PickupMessage "Berserk added in your inventory!"
+	tag "Berserk"
+	States
+	{
+	Spawn:
+    BERH A -1
+	Stop
+	Use:
+	TNT1 A 0 A_SpawnItem("MariaBerserk")
+	Stop
+	}
+}
+
+Actor MariaOnslaughtPortable : Custominventory
+{
+	+COUNTITEM
+	+INVENTORY.INVBAR
+	Inventory.Icon "QDMHA"
+	Inventory.MaxAmount 15
+	Inventory.PickupMessage "Quad Damage added in your inventory!"
+	tag "Quad Damage"
+	States
+	{
+	Spawn:
+    QDMH A -1
+	Stop
+	Use:
+	TNT1 A 0 A_SpawnItem("MariaOnslaught")
+	Stop
+	}
+}
+
+ACTOR MariaCandlePortable : Custominventory
+{
+	+COUNTITEM
+	+INVENTORY.INVBAR
+	Inventory.Icon "INVCA0"
+	Inventory.MaxAmount 15	
+	Inventory.PickupMessage "Candle of Holy Light added in your inventory!"
+	Tag "Candle of Holy Light"
+	States
+	{
+	Spawn:
+		COHL ABCD 3 Bright
+		Loop
+	Use:
+    	TNT1 A 0 A_SpawnItem("MariaCandle")
+     	Stop
+	}
+}
+
+ACTOR MariaRosaryPortable : Custominventory
+{
+	+COUNTITEM
+    +FLOATBOB
+	+INVENTORY.INVBAR
+	Inventory.Icon "INVRO0"
+	Inventory.MaxAmount 15	
+	Inventory.PickupMessage "Rosary of Protection added in your inventory!"
+	Tag "Rosary of Protection"
+	States
+	{
+	Spawn:
+		ROSA ABCDCB 5 Bright
+		Loop
+	Use:
+    	TNT1 A 0 A_SpawnItem("MariaRosary")
+     	Stop
+	}
+}
+
+ACTOR MariaArtiTeleportOther : ArtiTeleportOther
+{
+    Inventory.PickupSound "misc/i_pkup"
+	Inventory.MaxAmount 15
+	Inventory.PickupMessage "Banishment Device added in your inventory!"
+}
+
+ACTOR MariaArtiTeleport : ArtiTeleport
+{
+    Inventory.PickupSound "misc/i_pkup"
+	Inventory.MaxAmount 15
+	Inventory.PickupMessage "Chaos Device added in your inventory!"
+}
+
+actor Salvate : ArtiTeleport
+{
+  +INVENTORY.AUTOACTIVATE
+  +INVENTORY.ALWAYSPICKUP
+}
+
+ACTOR MariaEgg : CustomInventory
+{
+	+COUNTITEM
+	+INVENTORY.INVBAR
+	Inventory.Icon "ARTIEGGC"
+	Inventory.PickupMessage "A big EGG added in your inventory...?"
+	Inventory.MaxAmount 15
+	Tag "$TAG_ARTIEGG"
+	States
+	{
+	Spawn:
+		EGGC ABCB 6
+		Loop
+	Use:
+		TNT1 A 0 A_FireCustomMissile("EggFX", -15, 0, 0, 0, 1)
+		TNT1 A 0 A_FireCustomMissile("EggFX", -7.5, 0, 0, 0, 1)
+		TNT1 A 0 A_FireCustomMissile("EggFX", 0, 0, 0, 0, 1)
+		TNT1 A 0 A_FireCustomMissile("EggFX", 7.5, 0, 0, 0, 1)
+		TNT1 A 0 A_FireCustomMissile("EggFX", 15, 0, 0, 0, 1)
+		Stop
+	}
+}
+
+ACTOR MariaWings : ArtiFly
+{
+    Inventory.PickupSound "misc/i_pkup"
+	Inventory.MaxAmount 15
+	Inventory.Icon "ANWIA0"
+	Inventory.PickupMessage "Wings of Angel added in your inventory!"
+	States
+	{
+	Spawn:
+		ANWI ABCDCB 5
+		Loop
+    }
+}
+
+ACTOR MariaStimpackHeretic : Health //Replaces Stimpack
+{
+	Tag "Stimpack"
+	Inventory.Amount 10
+    Inventory.PickupSound "Maria/Health/Stimpack"
+    Inventory.PickupMessage "$GOTSTIM"
+	Health.LowMessage 25, "$GOTSTIMNEED"
+	States
+	{
+	Spawn:
+		HTIM A -1
+		Stop
+	}
+}
+
+ACTOR MariaMedikitHeretic : Health //Replaces Medikit
+{
+	Tag "Medikit"
+    Inventory.PickupSound "Maria/Health/Medkit"
+	Inventory.Amount 25
+	Inventory.PickupMessage "$GOTMEDIKIT"
+	Health.LowMessage 25, "$GOTMEDINEED"	
+  	States
+	{
+	Spawn:
+		HEDI A -1
+		Stop
+	}
+}
+
+ACTOR CosmobyteBombSpawner replaces ArtiPoisonBag //just so nobody uses an obvious name
+{
+	+DONTSPLASH
+	+NOGRAVITY
+	+NOINTERACTION
+	States
+	{
+	Spawn:
+		TNT1 A 0
+		TNT1 A 0 A_JumpIf(ACS_NamedExecuteWithResult("RKAmmoToggle")==0, "SpawnPipebomb")
+		TNT1 A 0 A_JumpIf(ACS_NamedExecuteWithResult("RKAmmoToggle")==1, "SpawnGrenade")
+		Goto Death
+	SpawnPipebomb:
+		TNT1 A 1 A_SpawnItem("PipebombAmmo",0,0,1,0)
+		Goto Death
+	SpawnGrenade:
+		TNT1 A 1 A_SpawnItem("Slot5AmmoSpawnerA",0,0,1,0)
+		Goto Death
+	Death:
+		TNT1 A 1
+		Stop
+	}
+}

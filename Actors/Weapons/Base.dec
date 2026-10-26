@@ -1,0 +1,68 @@
+ACTOR MariaWeapon : DoomWeapon
+{
+	+WEAPON.NOALERT
+	+WEAPON.NOAUTOAIM
+	+INVENTORY.UNDROPPABLE
+	+WEAPON.NOAUTOFIRE
+	//+WEAPON.AMMO_OPTIONAL
+	Weapon.Kickback 100
+    Weapon.BobStyle 		"Smooth"
+    Weapon.BobSpeed 		1.5
+    Weapon.BobRangeX 		0.75
+    Weapon.BobRangeY 		0.5
+	Weapon.SelectionOrder 	9999
+	States
+	{
+	Spawn:
+	Select:
+	Deselect:
+	Ready:
+	ReadyLoop:
+	Fire:
+    Zoom:
+        TNT1 A 0 A_JumpIfInventory("PowerQuadDamage",1,2)
+        TNT1 A 0 A_Jump(256,2)
+        TNT1 A 0 A_PlaySound("Maria/Powerup/Quad/Shoot",7)
+        TNT1 A 0 A_PlaySound("weapons/melee/fist/uppercut")
+        TNT1 A 0 A_ChangeVelocitY(2.5,0,2,CVF_RELATIVE ) 
+        TNT1 A 0 A_gunflash("PunchFlash") //PunchFlash
+        TNT1 A 2
+        RANU AB 1 A_WeaponReady(WRF_NOFIRE|WRF_NOSWITCH)
+        RANU C 0 A_FireCustomMissile("MariaPunch2",0,0)
+        RANU CCDEFGHIJK 1 A_WeaponReady(WRF_NOFIRE|WRF_NOSWITCH)
+        TNT1 A 5 //19
+        Goto PunchFinish
+	PunchFinish:
+		TNT1 A 0 A_Jump(256,"ReadyLoop")
+
+    User1: //Quick Pipebomb Throw
+        TNT1 A 0 A_JumpIfInventory("PipebombAmmo", 1, "ThrowPipebomb")
+    NoPipebomb:
+        TNT1 A 0 A_Print("No Pipebombs left.")
+		TNT1 A 0 A_Jump(256,"ReadyLoop")
+        goto ReadyLoop
+
+    User2: //Stim Shot
+        TNT1 A 0 A_JumpIfInventory("MariaSyringeAmmo", 1, "UseStimShot")
+	NoSyringes:
+		TNT1 A 0 A_Print("No Stim Shots left.")
+        TNT1 A 0 A_Jump(256,"ReadyLoop")
+		Goto ReadyLoop
+
+	User3:
+	EquipPDA:
+		TNT1 A 0 A_ZoomFactor(1.0)
+		TNT1 A 0 A_GiveInventory("MariaAmmoDisplayer",1)
+		TNT1 A 0 A_SelectWEapon("MariaAmmoDisplayer")
+		Goto Deselect
+
+	User4:
+	EquipShield:
+		TNT1 A 0 A_ZoomFactor(1.0)
+		TNT1 A 0 A_GiveInventory("MariaShield",1)
+		TNT1 A 0 A_SelectWEapon("MariaShield")
+		Goto Deselect
+
+		}
+}
+

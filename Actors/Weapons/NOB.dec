@@ -1,0 +1,258 @@
+//==============================================================================
+// Nozomu Okaya's Bane
+//==============================================================================
+// Caliber: Specialized 12 Gauge
+//==============================================================================
+// A Earth design double barreled shotgun but... Alienating modifications.
+// With such ornate look, modified and uses special shell's for it's purpose.
+// It's calling me and strikes fear to Devil Reincarnate Okaya himself and his
+// assosiates. And not gonna lie, it not only looks both Earth design and Alien
+// design, I sense... Kiri-kun's presence?
+//==============================================================================
+actor MariaBoomstick : MariaWeapon //Replaces SuperShotgun
+{
+  	Weapon.AmmoGive2 2
+  	Weapon.AmmoType1 "MariaBoomstickAmmo"
+  	Weapon.AmmoType2 "Shell"
+    Inventory.PickupSound "Weapon/NOB/Pickup"
+  	Inventory.PickupMessage "Nozomu Okaya's Bane Obtained! Unleash the fear!"
+  	Obituary "%o was splattered by %k."
+  	Tag "Nozomu Okaya's Bane"
+    +WEAPON.AMMO_CHECKBOTH
+    +WEAPON.NOALERT
+    +WEAPON.NOAUTOFIRE
+	States
+	{
+	Ready:
+        TNT1 A 0 A_PlaySound("Maria/Draw/Primary")
+        SSGS ABCD 1
+	    Goto ReadyLoop
+	ReadyLoop:
+        NULL A 0 A_JumpIfInventory("MariaBoomstickAmmo", 2, 1)
+        Goto EmptyReadyLoop
+	    SSGG A 1 A_WeaponReady(WRF_ALLOWZOOM|WRF_ALLOWRELOAD|WRF_ALLOWUSER1|WRF_ALLOWUSER2|WRF_ALLOWUSER3)
+	    Loop
+	EmptyReadyLoop:
+	    SSGE A 1 A_WeaponReady(WRF_ALLOWZOOM|WRF_ALLOWRELOAD|WRF_ALLOWUSER1|WRF_ALLOWUSER2|WRF_ALLOWUSER3)
+	    Loop
+	Deselect:
+     	SSGD ABCD 1
+        TNT1 AAAAAAAAAAAAAAAAAA 0 A_Lower
+        TNT1 A 1
+        Wait
+	Select:
+	    TNT1 AA 0 A_Raise
+    	Loop
+	Fire:
+
+    Fire:
+        NULL A 0 A_JumpIfInventory("MariaBoomstickAmmo", 2, 1)
+        Goto DryFire
+	    SSGG A 1 Offset(0,33)
+	    SSGG A 1 Offset(0,34)
+        TNT1 A 0 A_PlaySound("Weapon/Shinigami/Dry",0)
+	    SSGG A 1
+	    SSGE A 1
+	FireCounted:
+        NULL A 0 A_JumpIfInventory("MariaBoomstickAmmo", 2, 1)
+        Goto dryfire	
+		TNT1 A 0 A_JumpIfInventory("PowerQuadDamage",1,2)
+		TNT1 A 0 A_Jump(256,2)
+		TNT1 A 0 A_PlaySound("Maria/Powerup/Quad/Shoot",7)
+	    SSGF A 0 A_PlaySound ("Weapon/NOB/Fire", CHAN_WEAPON, 7, 0, 0, 0.20)
+		TNT1 A 0 A_PlaySound("Weapon/NOB/Distant", 6)
+        TNT1 A 0 A_TakeInventory("MariaBoomstickAmmo", 2)
+        TNT1 A 0 A_FireBullets (12, 6, 10, 7, "MariaNOBPuff")
+        TNT1 A 0 A_FireBullets (12, 6, 10, 7, "MariaNOBPuff")
+        TNT1 A 0 A_FireCustomMissile("MariaFlareOrange",0,0,0,8)
+	    SSGF A 1 BRIGHT A_SetPitch(pitch - 1.0)
+	    SSGF B 1 BRIGHT A_SetPitch(pitch - 9.0)
+        TNT1 B 0 radius_quake (10, 2, 0, 1, 0)
+        TNT1 AAA 0 A_FireCustomMissile("MariaMuzzleSmoke",3,0,0,8)
+        TNT1 AAA 0 A_FireCustomMissile("MariaMuzzleSmoke",-3,0,0,8)
+		TNT1 A 0 A_AlertMonsters
+	    SSGF A 0 A_Light2
+		SSGF C 1 A_SetPitch(pitch - 7.0)
+	    SSGF D 2 A_SetPitch(pitch - 5.0)
+	    SSGF E 3
+	    SSGF F 3		
+	    SSGF G 2
+	    SSGF A 0 A_Light1
+	    SSGF HHI 1
+        SSGF IJKLL 1 
+	    SSGE A 0 A_Light0
+	    SSGE A 2
+	    SHT2 A 0 A_CheckReload
+        TNT1 A 0 //A_ReFire
+        Goto EmptyReadyLoop		
+	Reload:
+        TNT1 A 0 A_JumpIfInventory("MariaBoomstickAmmo", 2, 2)
+        TNT1 A 0 A_JumpIfInventory("Shell", 2, "ReloadWork")
+        SSGE A 0 A_WeaponReady(WRF_NOFIRE)
+        Goto ReadyLoop
+    ReloadWork:
+	    SSGR ABC 1 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)	
+	    TNT1 A 0 A_PlaySound ("Weapon/NOB/Switch", 1)
+	    SSGR D 1 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)	
+		TNT1 A 0 A_StartSound("Foley/NOB/Raise", CHAN_AUTO)
+	    SSGR EF 1 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)	
+	    SSGR GHI 2 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
+		TNT1 A 0 A_StartSound("Foley/NOB/Lower", CHAN_AUTO)
+	    SSGR JKL 1 
+	    TNT1 A 0 A_PlaySound ("Weapon/NOB/Open", 2)
+	    SSGR LMMMN 2 
+	    TNT1 A 0 A_PlaySound ("Weapon/NOB/Shake", 3)
+	    SSGR OPQQ 1 
+		TNT1 A 0 A_StartSound("Foley/NOB/Eject", CHAN_AUTO)
+	    //TNT1 A 0 A_PlaySound ("Weapon/NOB/Eject")
+        TNT1 A 0 A_SpawnItemEx("ShotgunCasingNOB", 0, 0, 0, 0, random(2,4), random(2,4)) //forward, right, up, v-forward, v-right, v-up
+        TNT1 A 0 A_SpawnItemEx("ShotgunCasingNOB", 0, 0, 0, 0, random(3,6), random(3,6)) //forward, right, up, v-forward, v-right, v-up
+	    SSGR RRST 1 			
+	    SSGR UV 1 
+	    SSGR WWXXYYZ 1 
+	    SS2R A 1 
+	    SS2R B 10 
+	    SS2R CDEFFGG 1 
+		TNT1 A 0 A_PlaySound ("Weapon/NOB/Load", 1)
+		TNT1 A 0 A_StartSound("Foley/NOB/Insert", CHAN_AUTO)
+	    SS2R HIJKL 1 
+        TNT1 A 4
+	    Goto ReloadingLoop
+	ReloadingLoop:
+        TNT1 A 0 A_TakeInventory("Shell", 1)
+        TNT1 A 0 A_GiveInventory("MariaBoomstickAmmo", 1)
+        TNT1 A 0 A_JumpIfInventory("MariaBoomstickAmmo", 2, "FinishReload")
+        TNT1 A 0 A_JumpIfInventory("Shell", 1, "ReloadingLoop")		
+		Goto FinishReload	     
+	FinishReload:	
+		TNT1 A 0 A_StartSound("Foley/NOB/Raise", CHAN_AUTO)
+	    SS2R MNO 1 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
+	    TNT1 A 0 A_PlaySound ("Weapon/NOB/Close", 2)				
+	    SS2R PQQ 1 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
+	    SS2R R 4 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
+	    SS2R SSTTUV 1 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
+	    SS2R WXY 1 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
+		SSGH ABC 1 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
+        TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
+		SSGH DEFFGG 1 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
+	    TNT1 A 0 A_PlaySound ("Weapon/NOB/Hammer", 3)	
+		SSGH HIJ 1 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
+		SSGH KKL 1 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
+	    SSGG AA 1 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
+	    SSGG A 1 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
+        Goto ReadyLoop
+	AltFire:
+        //SSGG A 0 A_JumpIfInventory("PowerStrength",1,"BerserkedAlt")
+	    SSGG A 1
+	    SSGM A 1
+        TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
+	    SSGM B 1
+	    SSGM C 1
+		TNT1 A 0 A_JumpIfInventory("PowerQuadDamage",1,2)
+		TNT1 A 0 A_Jump(256,2)
+		TNT1 A 0 A_PlaySound("Maria/Powerup/Quad/Shoot",7)
+	    SSGM D 1 A_PlaySound ("Weapon/NOB/Melee", CHAN_WEAPON, 7, 0, 0, 0.20)
+	    SSGM DEF 1
+	    SSGM G 1 A_FireCustomMissile("MariaNOBStockPuff",0,0,0,6)
+	    SSGM GHHII 2
+	    SSGM JJKKLM 1
+	    SSGM CCBB 1
+	    SSGG A 0 A_ReFire		
+	    Goto ReadyLoop
+    DryFire:
+        TNT1 A 0 A_PlaySound("Weapon/NOB/Dry",0)
+        TNT1 A 0 offset(0,36)
+        SSGE A 1 A_WeaponReady(WRF_NOFIRE|WRF_NOSWITCH)
+        TNT1 A 0 offset(0,35)
+        SSGE A 10 A_WeaponReady(WRF_NOFIRE|WRF_NOSWITCH)
+        Goto EmptyReadyLoop
+    ThrowPipebomb:
+        SSGD ABCD 1
+        TASQ ABC 1
+        TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
+        TASG DEH 1
+        TNT1 A 0 A_TakeInventory("PipebombAmmo", 1)
+        TASG I 1 A_PlayWeaponSound("Maria/Pipebomb/Miss",1)
+        TASG J 1 A_PlaySound("Maria/Pipebomb/Ignite", 2)
+        TASG KLM 1
+        TASG OPQR 1 
+        TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
+        TAHA AB 1
+        TNT1 A 0 A_JumpIfInventory("PowerQuadDamage",1,2)
+        TNT1 A 0 A_Jump(256,2)
+        TNT1 A 0 A_PlaySound("Maria/Powerup/Quad/Shoot",7)
+        TNT1 A 0 A_PlaySound("Maria/Pipebomb/Throw", 3)
+        TNT1 A 0 A_FireCustomMissile("HolyPipebomb",0,1,0,0)
+        TAHA CDE 1
+        TNT1 A 5
+        SSGS ABCD 1
+        Goto ReadyLoop
+
+	UseStimShot:
+		TNT1 A 0 A_JumpIfHealthLower(100, 1)
+		Goto FullHealth
+        SSGD ABCD 1
+        SYRI AB 1
+        TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
+        SYRI CD 1
+        SYRI EEFFGGG 1
+        SYRI HIJKKLLL 1
+        TNT1 A 0 A_PlaySound("Weapon/Syringe/Cap", 1)
+        SYRI MNOPQQQRR 1
+        TNT1 A 0 A_PlaySound("Weapon/Syringe/Tab", 1)
+        SYRI STUUUVV 1
+        TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
+        SYRI WXYZ 1
+        SYR2 AB 1
+        TNT1 A 0 A_TakeInventory("MariaSyringeAmmo", 1)
+        TNT1 A 0 A_PlaySound("Weapon/Syringe/Inject", 1)
+        SYR2 CD 1
+        TNT1 A 0 A_PlaySound("Weapon/Syringe/Heal", 2)
+        TNT1 A 0 A_SetBlend("BLUE",.5,25)
+        TNT1 A 0 HealThing(10, 100)
+        TNT1 A 0 A_GiveInventory("SyringeProtection")
+        TNT1 A 0 A_GiveInventory("SyringeRegeneration")
+        SYR2 EFGHIJ 2
+        SYR2 KLLMMN 1
+        TNT1 A 5
+        SSGS ABCD 1
+	    Goto ReadyLoop
+	FullHealth:
+		TNT1 A 0 A_Print("You are healthy.")
+		Goto ReadyLoop
+
+	User3:
+	EquipShield:
+		TNT1 A 0 A_ZoomFactor(1.0)
+		TNT1 A 0 A_GiveInventory("MariaShield",1)
+		TNT1 A 0 A_SelectWEapon("MariaShield")
+		Goto Deselect	
+	
+   PunchFlash:
+        NULL A 0 A_JumpIfInventory("MariaBoomstickAmmo", 2, 1)
+        Goto PunchFlashEmpty
+	    SSGK ABC 1
+     	SSGK D 12
+     	SSGK CBA 1
+        SSGG A 1
+		Goto LightDone
+   PunchFlashEmpty:
+	    SSGK EBC 1
+     	SSGK D 12
+     	SSGK CBE 1
+        SSGE A 1
+		Goto LightDone
+	Spawn:
+		SGN2 A -1
+		Stop
+	}
+}
+
+ACTOR MariaBoomstickAmmo : Ammo
+{
+   Inventory.Amount 0
+   Inventory.MaxAmount 2
+   Ammo.BackpackAmount 0
+   Ammo.BackpackMaxAmount 2
+   Inventory.Icon ""
+}

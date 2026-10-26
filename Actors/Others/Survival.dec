@@ -1,0 +1,50 @@
+// Spawners and altered item's and ammo for Maria's Nightmare and Survival
+
+actor MariaSurvivalItemBlank : HealthBonus
+{ 
+   Inventory.PickupMessage "How the fuck you picked up that?"
+	-COUNTITEM
+	+NOINTERACTION
+	States
+	{
+	Spawn:
+		TNT1 A 1
+		Stop
+	}
+}
+
+// Spawners
+
+Actor MariaHealthBonusSpawnerHarder : RandomSpawner //replaces HealthBonus
+{
+	DropItem "MariaSurvivalItemBlank", 255, 1
+}
+
+Actor MariaArmorBonusSpawnerHarder : RandomSpawner //replaces ArmorBonus
+{
+	DropItem "MariaSurvivalItemBlank", 255, 1
+}
+
+Actor MariaStimpackspawnerHarder : RandomSpawner //replaces Stimpack
+{
+    DropItem "MariaSurvivalItemBlank", 255, 10
+    DropItem "MariaSyringeAmmo", 255, 5
+}
+
+Actor MariaMedikitspawnerHarder : RandomSpawner //replaces Medikit
+{
+    DropItem "MariaSurvivalItemBlank", 255, 25
+    DropItem "MariaSyringeCase", 255, 5
+}
+
+Actor MariaBallisticArmorspawnerHarder : RandomSpawner //replaces GreenArmor
+{
+    DropItem "MariaSurvivalItemBlank", 255, 10
+    DropItem "MariaArmourPlate", 255, 5
+}
+
+Actor MariaHeavyArmorspawnerHarder : RandomSpawner //replaces BlueArmor
+{
+    DropItem "MariaSurvivalItemBlank", 255, 5
+    DropItem "MariaArmourPlate", 255, 5
+}

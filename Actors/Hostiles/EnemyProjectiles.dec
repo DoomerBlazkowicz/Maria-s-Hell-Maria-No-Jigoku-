@@ -1,0 +1,91 @@
+
+ACTOR MariaHostileTracer : FastProjectile
+{
+	Alpha 0.90
+	RenderStyle Add
+	Radius 2
+	Height 2
+	Speed 50
+    Damage (random (3,5))
+	PROJECTILE
+    +THRUGHOST
+    +THRUSPECIES
+    +NOTIMEFREEZE
+    +NOEXTREMEDEATH
+    +BLOODSPLATTER
+    DamageType Bullet
+	MissileHeight 8
+	Decal BulletChip
+	DeathSound "booletricochet"
+	States
+	{
+	Spawn:
+		INCB A 1 BRIGHT A_SpawnItem("MariaBulletTrail")
+		Loop
+	Death:
+		PUFF A 0 BRIGHT
+	Crash:
+        TNT1 A 0 A_SetScale(0.3)
+	    TNT1 A 0 A_SetTranslucent(0.8)
+        TNT1 A 0 A_PlaySound("booletricochet")	  
+        MUFF AABCDE 1 BRIGHT
+		Stop
+	XDeath:
+		TNT1 A 3 A_PlaySound("hitflesh")
+		Stop
+	}
+}
+
+ACTOR MariaHostilePistolTracer : MariaHostileTracer
+{
+	Damage (random(4,6))
+	DamageType "Bullet"
+}
+
+ACTOR MariaHostileShotgunTracer : MariaHostileTracer
+{
+	Damage (random(2,4))
+	DamageType "Bullet"
+}
+
+ACTOR MariaHostileSMGTracer : MariaHostileTracer
+{
+	Damage (random(3,6))
+	DamageType "Bullet"
+}
+
+ACTOR MariaHostileARTracer : MariaHostileTracer
+{
+	Damage (random(7,8))
+	DamageType "Bullet"
+}
+
+ACTOR MariaHostileChaingunTracer : MariaHostileTracer
+{
+	Damage (random(10,12))
+	DamageType "Bullet"
+}
+
+Actor MariaBulletTrail : MariaArrowTrail
+{
+  +ForceXYBillBoard
+  +NoInteraction
+  Radius 4
+  Height 8
+  Renderstyle "Add"
+  Alpha 0.75
+  //Scale 0.65
+  States
+  {
+  Spawn:
+    ARTR ABCDEF 1 Bright
+    Stop
+  }
+}
+
+Actor MariaRocketHostile : MariaRocketPlayer
+{
+	Speed 25
+	Damage 30
+    Gravity 0.2
+}
