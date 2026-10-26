@@ -1,0 +1,24 @@
+//death/stinger			dethstng
+
+Maria/Death/Music GAMEOVER
+
+/*$random death/music { death/music01 death/music02 death/music03 death/music04 death/music05 death/music06 death/music07 death/music08 death/music09
+					  death/music10 death/music11 death/music12 death/music13 death/music14 death/music15 death/music16 death/music17 }
+death/music01	m_dead01
+death/music02	m_dead02
+death/music03	m_dead03
+death/music04	m_dead04
+death/music05	m_dead05
+death/music06	m_dead06
+death/music07	m_dead07
+death/music08	m_dead08
+death/music09	m_dead09
+death/music10	m_dead10
+death/music11	m_dead11
+death/music12	m_dead12
+death/music13	m_dead13
+death/music14	m_dead14
+death/music15	m_dead15
+death/music16	m_dead16
+death/music17	m_dead17
+

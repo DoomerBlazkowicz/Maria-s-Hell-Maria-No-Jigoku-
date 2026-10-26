@@ -1,0 +1,32 @@
+Weapon/Valmer/Pickup                   MAVALUP
+Weapon/Sword/Pickup                    MASWDUP
+Weapon/Chainsaw/Pickup                 MASAWPIC
+Weapon/Pistol/Pickup                   MASIGPIC
+Weapon/Revolver/Pickup                 MAREVPIC
+//Weapon/Greaser/Pickup
+Weapon/Shotgun/Pickup                  MASHTPIC
+Weapon/NOB/Pickup                      NOBPICK
+$random Weapon/Abakan/Pickup {MAWPNU1 MAWPNU2 MAWPNU3 MAWPNU4 MAWPNU5}
+MAWPNU1 MAWPNU1
+MAWPNU2 MAWPNU2 
+MAWPNU3 MAWPNU3
+MAWPNU4 MAWPNU4 
+MAWPNU5 MAWPNU5
+Weapon/LMG/Pickup                      MALMGFWD
+Weapon/GrenadeLauncher/Pickup          MAGRCLOS
+Weapon/PlasmaRifle/Pickup              MAPLAPK
+Weapon/Spray/Pickup                    MASPRAYP
+Weapon/Incinerator/Pickup              MAINCPIC
+Weapon/RocketLauncher/Pickup           MAROKPK
+Weapon/BFG/Pickup                      BFGPICK
+Weapon/Unmakyr/Pickup                  MABALIPK
+Weapon/Crossbow/Pickup                 MABOWPK
+
+//Reward/Secret
+
+//Weapon/Usas/Pickup
+//Weapon/Sniper/Pickup
+Weapon/Nailgun/Pickup                  NAILPUP
+//Weapon/MicroRocketLauncher/Pickup
+Weapon/Book/Pickup                     MABOOKUP
+Weapon/MP5/Pickup                      MASMGR4

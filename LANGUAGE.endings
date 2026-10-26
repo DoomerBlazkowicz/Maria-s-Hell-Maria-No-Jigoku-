@@ -1,0 +1,140 @@
+[enu default]
+
+// Ending Texts //
+
+//Doom
+E1TEXT =
+	"The reward for my survival in this...\n"
+	"Demon infested base should be fair... Right?\n"
+	"\n"
+	"WRONG! The portal sent me to a isolated ambush zone\n"
+	"Getting assaulted left and right.\n"
+	"At least... I managed to survive\n"
+	"But... Where am I? It smells like...\n"
+	"Blood, Sulfur, Death.\n"	
+	"\n"
+	"Whenever am I, I'll get over it.\n"
+	"Just like Kiri-Kun did.\n"
+	"\n"
+	"To be continued at The Shores of Hell\n";
+E2TEXT =
+	"Augmented guardian let the last roar\n"
+	"before the massive explosion.\n"
+	"\n"
+	"And... What now?\n"
+	"I need to rest, but I'm not in a safe area...\n"
+	"But what's that? What the!?"1
+	"...\n"
+	"How the fuck Deimos floats above Hell itself!?\n"
+	"It's... Impossible.\n"
+	"How UAC's experiments caused such...\n"
+	"Anomalies.\n"
+	"\n"
+	"Whatever, I have nowhere to go\n"
+	"But descent to the Hell's surface.\n"
+	"\n"
+	"To be continued at Inferno.";
+E3TEXT =
+	"The machinery protrude out of the corpse\n"
+	"of the spider demon I fought.\n"
+	"Assuming that she's the mastermind of\n"
+	"the assaults that happened at Phobos and Deimos.\n"
+	"\n"
+	"The wall nearby lowered, reveal the portal\n"
+	"Nowhere to go and thus\n"
+	"I heed the ''voice'' of Kiri-Kun\n"
+	"And so, I step in the portal.\n"
+	"\n"
+	"Where am I?\n"
+	"Is this... Home?\n"
+	"I think I'm back home.\n"
+	"I'm glad that the nightmare is over\n"
+	"I was looking around for help, and...\n"
+	"\n"
+	"... I was wrong.";
+E4TEXT =
+	"Again... dealing with hellpigs\n"
+	"I thought all done, but no!\n"
+	"They invaded the lands\n"
+	"Invaded the Earth!\n"
+	"\n"
+	"The longer I kill, I gotten used  to it\n"
+	"even more than exterminating Kiritaka's tormentors.\n"
+	"\n"
+	"They promised me to see my dead son, Kiritaka.\n"
+	"Are they decieving me? Or something else?\n"
+	"\n"
+	"Either way, I have to follow their ''demands''\n"
+	"\n"
+	"Time to welcome Hell on Earth.";
+
+//Doom II	
+C1TEXT =
+	"The world I knew changed drastically\n"
+	"how long I've been dead?\n"
+	"It seems it's been...\n"
+	"Two decades???\n"
+	"\n"
+	"Definetly world changed so much\n"
+	"but either way, I need to move foward.\n"
+	"\n"
+	"Need to escape from this station\n"
+	"ASAP!";
+C2TEXT =
+	"For once, you find yourself at peace,\n"
+	"knowing that humanity has been evacuated\n"
+	"into the cold comforts of space with the\n"
+	"push of a button.\n"
+	"Carnivorous mutants, bloodthirsty demons,\n"
+	"and damned spirits are now your friends.\n"
+	"You decided that you've performed your duty\n"
+	"and proceed to stuff the barrel in your mouth.\n"
+	"\n"
+	"But, control calls you for your next task:\n"
+	"\"A way to avert the invasion has been found\n"
+	"At the city's center.......main gate\n"
+	"If you destroy the entryway, th....\n"
+	"...ion will slow....destroy....icon....\n"
+	"invas.....will cease\"\n"
+	"Looks like you haven't done your duty."
+	"You're not out of the forest just yet.";
+C3TEXT =
+	"In the blackened heart of the thrashing city,\n"
+	"your friends give off that familiar stench.\n"
+	"It doesn't seem like you'll be able to\n"
+	"destroy the gateway from here, so the only\n"
+	"thing left to do is go through it.\n"
+	"\n"
+	"\n"
+	"Welcome home.";
+C4TEXT =
+	"The godlike demon you've just slain\n"
+	"bellows in pain and disintegrates\n"
+	"before her eyes as you pump the\n"
+	"last of your military payload into its\n"
+	"diseased brain, causing the icon to\n"
+	"thrash wildly and demolish untold miles\n"
+	"of its own dimension.\n"
+	"\n"
+	"You've done it. Hell is no more.\n"
+	"Humanity is saved, albeit in a damaged\n"
+	"condition. Having done your duty, instead\n"
+	"of eating your gun, you decide to start\n"
+	"your trek back home, wanting to rebuild\n"
+	"knowing no demon shall rise anytime soon.\n";
+C5TEXT =
+	"Where am I?\n"
+	"This place seems to be... Familiar.\n"
+	"Wait... I know that insignia\n"
+	"\n"
+	"Evil hasn't ravaged but rather\n"
+	"Owned by the Evil.\n"
+	"Related to those behind Kiri-Kun's death\n"
+	"And blaming to my family.\n"
+	"\n"
+	"Shizuka... Nozomu... Okaya...\n"
+	"FUCK YOU TWO!";
+C6TEXT =
+	"The alternate path took me to ground floor\n"
+	"feeling that her fellow men waiting for me to strike.\n"
+	"Time to clean the garbage yet again.\n";

@@ -1,0 +1,542 @@
+
+/////////////////////////////
+////////Weapon sounds////////
+/////////////////////////////
+
+//Mighty Heel/Kick
+Kick/Miss KICKGO
+Kick/Hit KICKHIT
+Kick/Wall KICKMISS
+
+//Pipebombs
+Maria/Pipebomb/Pull           BOMBPULL
+Maria/Pipebomb/Miss           BOMBMISS
+Maria/Pipebomb/Ignite         BOMBIGNI
+Maria/Pipebomb/Throw          BOMBYEET
+$random Maria/Pipebomb/Boom {PIPBOOM1 PIPBOOM2 PIPBOOM3 PIPBOOM4}
+PIPBOOM1 PIPBOOM1
+PIPBOOM2 PIPBOOM2
+PIPBOOM3 PIPBOOM3
+PIPBOOM4 PIPBOOM4
+
+//Crowbar
+weapons/melee/crowbarselect  MACROWUP
+$random weapons/melee/crowbarswing {CROWS1 CROWS2}
+CROWS1 CROWS1
+CROWS2 CROWS2
+$random weapons/melee/crowbarhit {CROWH1 CROWH2}
+CROWH1 CROWH1
+CROWH2 CROWH2
+CROWH3 CROWH3
+$random weapons/melee/crowbarwall {CROWW1 CROWW2}
+CROWW1 CROWW1
+CROWW2 CROWW2
+
+//Fists
+$random weapons/melee/fist/swing {MAFIST1 MAFIST2 MAFIST3 MAFIST4}
+MAFIST1 MAFIST1
+MAFIST2 MAFIST2
+MAFIST3 MAFIST3
+MAFIST4 MAFIST4
+$volume weapons/melee/fist/swing 0.5
+$random weapons/melee/fist/uppercut {MAFIST5 MAFIST6}
+MAFIST5 MAFIST5
+MAFIST6 MAFIST6
+$random weapons/melee/fist/hit {MAPUNCH1 MAPUNCH2 MAPUNCH3}
+MAPUNCH1 MAPUNCH1
+MAPUNCH2 MAPUNCH2
+MAPUNCH3 MAPUNCH3
+$random weapons/melee/fist/strongerhit {MAPUNCH4 MAPUNCH5 MAPUNCH6}
+MAPUNCH4 MAPUNCH4
+MAPUNCH5 MAPUNCH5
+MAPUNCH6 MAPUNCH6
+$random weapons/melee/fist/wall {MAWUNCH1 MAWUNCH2 MAWUNCH3 MAWUNCH4 MAWUNCH5 MAWUNCH6}
+MAWUNCH1 MAWUNCH1
+MAWUNCH2 MAWUNCH2
+MAWUNCH3 MAWUNCH3
+MAWUNCH4 MAWUNCH4
+MAWUNCH5 MAWUNCH5
+MAWUNCH6 MAWUNCH6
+$random weapons/melee/fist/berserkedhit {BEPUNCH1 BEPUNCH2 BEPUNCH3 BEPUNCH4}
+BEPUNCH1 BEPUNCH1
+BEPUNCH2 BEPUNCH2
+BEPUNCH3 BEPUNCH3
+BEPUNCH4 BEPUNCH4
+weapons/berserk/loop  BZKNOIS
+weapons/berserk/stop  BZKSTOP
+
+//Knife
+$random Weapon/Valmer/Select {VALSEL1 VALSEL2 VALSEL3 VALSEL4}
+VALSEL1 VALSEL1
+VALSEL2 VALSEL2
+VALSEL3 VALSEL3
+VALSEL4 VALSEL4
+
+$random Weapon/Valmer/Swing {VALSWI1 VALSWI2 VALSWI3 VALSWI4}
+VALSWI1 VALSWI1
+VALSWI2 VALSWI2
+VALSWI3 VALSWI3
+VALSWI4 VALSWI4
+
+$random Weapon/Valmer/Slice {VALHIT1 VALHIT2 VALHIT3 VALHIT4}
+VALHIT1 VALHIT1
+VALHIT2 VALHIT2
+VALHIT3 VALHIT3
+VALHIT4 VALHIT4
+
+$random Weapon/Valmer/Wall {VALWAL1 VALWAL2 VALWAL3 VALWAL4}
+VALWAL1 VALWAL1
+VALWAL2 VALWAL2
+VALWAL3 VALWAL3
+VALWAL4 VALWAL4
+
+Weapon/Valmer/Stab  VALSTAB
+
+//Saber of Virgin Mary (Melee Upgrade)
+Weapon/Sword/Draw   MASWDDRA
+$random Weapon/Sword/Hit {MASWDHT1 MASWDHT2 MASWDHT3}
+MASWDHT1 MASWDHT1
+MASWDHT2 MASWDHT2
+MASWDHT3 MASWDHT3
+$random Weapon/Sword/Wall {MASWDWL1 MASWDWL2}
+MASWDWL1 MASWDWL1
+MASWDWL2 MASWDWL2
+$random Weapon/Sword/Swing {MASWDSW1 MASWDSW2 MASWDSW3 MASWDSW4}
+MASWDSW1 MASWDSW1
+MASWDSW2 MASWDSW2
+MASWDSW3 MASWDSW3
+MASWDSW4 MASWDSW4
+$random Weapon/Sword/Unsheat {MASWDUS1 MASWDUS2 MASWDUS3 MASWDUS4}
+MASWDUS1 MASWDUS1
+MASWDUS2 MASWDUS2
+MASWDUS3 MASWDUS3
+MASWDUS4 MASWDUS4
+$random Weapon/Sword/Sheat {MASWDSH1 MASWDSH2 MASWDSH3}
+MASWDSH1 MASWDSH1
+MASWDSH2 MASWDSH2
+MASWDSH3 MASWDSH3
+Weapon/Sword/Unleash MASWDPRO
+Weapon/Sword/Projectile MASWDIMP
+
+//Chainsaw
+Weapon/Chainsaw/Pull     MASAWZIP
+Weapon/Chainsaw/Select   MASAWUP
+Weapon/Chainsaw/Idle     MASAWIDL
+Weapon/Chainsaw/Start    MASAWSTA
+Weapon/Chainsaw/Attack   MASAWFUL
+Weapon/Chainsaw/Stop     MASAWSTP
+Weapon/Chainsaw/Swing    MASAWSWI
+Weapon/Chainsaw/Dequip   MASAWDEQ
+Weapon/Chainsaw/Hit      MASAWHIT
+//$volume Weapon/Chainsaw/Idle 1.5
+
+//Makarov
+Weapon/Pistol/Fire              MASIGFIR
+Weapon/Pistol/Silencer/Fire     MASILFIR
+Weapon/Pistol/Select            MASIGSEL
+Weapon/Pistol/Dry               MASIGDRY
+Weapon/Pistol/Eject             MASIGRD1
+Weapon/Pistol/Load              MASIGRD2
+Weapon/Pistol/Rack              MASIGRD3
+Weapon/Pistol/Silencer/Attach   MASILIN
+Weapon/Pistol/Silencer/Deattach MASILOUT
+
+//Revolver
+Weapon/Revolver/Fire   REVFIRE
+Weapon/Revolver/Select REVSELE
+Weapon/Revolver/Cock   REVCOCK
+Weapon/Revolver/Dry    REVDRY
+Weapon/Revolver/Open   REVOPEN
+Weapon/Revolver/Eject  REVEJEC
+Weapon/Revolver/Load   REVLOAD
+Weapon/Revolver/Close  REVCLOS
+//Weapon/Revolver/Melee
+
+//M3 Grease 
+Weapon/Greaser/Fire                MAGREFI
+Weapon/Greaser/Silenced            MAGRESI
+Weapon/Greaser/Reload/Out          MAGREOU
+Weapon/Greaser/Reload/In           MAGREIN
+Weapon/Greaser/Reload/Bolt/Back    MAGREBC
+Weapon/Greaser/Reload/Bolt/Foward  MAGREFW
+Weapon/SMG/Dry                 SMGDRY
+//Weapon/Greaser/Cooldown            MAMACCD
+
+//Shotgun (Default, Remington 870)
+$random Weapon/Shotgun/Fire {MAREMIF1 MAREMIF2 MAREMIF3}     
+MAREMIF1 MAREMIF1
+MAREMIF2 MAREMIF2
+MAREMIF3 MAREMIF3
+Weapon/Shotgun/Rack/Back        MAREPUBC
+Weapon/Shotgun/Rack/Foward      MAREPUFW
+$random Weapon/Shotgun/Insert {MARELOA1 MARELOA2 MARELOA3 MARELOA4}     
+MARELOA1 MARELOA1
+MARELOA2 MARELOA2
+MARELOA3 MARELOA3
+MARELOA4 MARELOA4
+Weapon/Shotgun/Dry  SHOTDRY
+TearBomb/Bounce		    TEARBNCE	
+TearBomb/Gas		    STEMLOOP
+TearBomb/End	    STEMFIRE
+
+//Shotgun (Legacy, Spas 12)
+$random Weapon/LegacyShotgun/Fire {MASPASF1 MASPASF2 MASPASF3}         
+MASPASF1 MASPASF1
+MASPASF2 MASPASF2
+MASPASF3 MASPASF3 
+Weapon/LegacyShotgun/Rack/Back         MASPPUBC
+Weapon/LegacyShotgun/Rack/Foward       MASPPUFW
+Weapon/LegacyShotgun/Flip              MASPASFL
+$random Weapon/LegacyShotgun/Insert {MASPASL1 MASPASL2 MASPASL3}     
+MASPASL1 MASPASL1
+MASPASL2 MASPASL2
+MASPASL3 MASPASL3
+
+//Nozomu Okaya's Bane
+$random Weapon/NOB/Fire {NOBFIRE1 NOBFIRE2 NOBFIRE3}  
+NOBFIRE1 NOBFIRE1
+NOBFIRE2 NOBFIRE2
+NOBFIRE3 NOBFIRE3
+Weapon/NOB/Switch       NOBSWIT
+Weapon/NOB/Open         NOBOPEN
+Weapon/NOB/Shake        NOBSHAK
+Weapon/NOB/Load         NOBLOAD
+Weapon/NOB/Close        NOBCLOS
+Weapon/NOB/Hammer       NOBHAMM
+Weapon/NOB/Dry          SSGDRY
+Weapon/NOB/Melee        NOBMELE
+Weapon/NOB/Bonk/Wall    MASSGMW
+$random Weapon/NOB/Bonk/Flesh {MASSGM1 MASSGM2 MASSGM3 MASSGM4 MASSGM5 MASSGM6}
+MASSGM1 MASSGM1
+MASSGM2 MASSGM2
+MASSGM3 MASSGM3
+MASSGM4 MASSGM4
+MASSGM5 MASSGM5
+MASSGM6 MASSGM6
+
+//Maria's Crossbow
+Weapon/Crossbow/Select MABOWSL
+Weapon/Crossbow/Fire MABOWFR
+Weapon/Crossbow/Pull     MABOWR1
+Weapon/Crossbow/Load     MABOWR2
+Weapon/Crossbow/Empty    MACBOWE
+Weapon/Crossbow/Arrow/Splatter MAVALM5
+Weapon/Crossbow/Arrow/Hit      NAILHIT
+
+//Abakan/Assault Rifle         
+$random Weapon/Shinigami/Fire {MARIFF1 MARIFF2 MARIFF3}
+MARIFF1 MARIFF1
+MARIFF2 MARIFF2
+MARIFF3 MARIFF3
+$random Weapon/Shinigami/Grenade/Fire {MAUGLF1 MAUGLF2} 
+MAUGLF1 MAUGLF1
+MAUGLF2 MAUGLF2
+Weapon/Shinigami/Reload/MagOut        MARIFR1
+Weapon/Shinigami/Reload/MagIn         MARIFR2
+Weapon/Shinigami/Reload/Bolt/Back     MARIFR3
+Weapon/Shinigami/Reload/Bolt/Release  MARIFR4
+Weapon/Shinigami/Grenade/Open         MAUGLOP
+Weapon/Shinigami/Grenade/Load         MAUGLLO
+Weapon/Shinigami/Grenade/Close        MAUGLCL
+Weapon/Shinigami/Grenade/Bounce       UGLBOUN
+Weapon/Shinigami/Grenade/Boom         UGLBOOM
+Weapon/Shinigami/Dry                  RIFDRY
+
+//M249 LMG         
+Weapon/LMG/Fire                 MALMGFIR
+Weapon/LMG/Reload/Open          MALMGOPN
+Weapon/LMG/Reload/BoxOut        MALMGOUT
+Weapon/LMG/Reload/BoxOut/Full   MALMGOU2
+Weapon/LMG/Reload/BoxIn         MALMGBIN
+Weapon/LMG/Reload/Belt          MALMGBLT
+Weapon/LMG/Reload/Belt/Remove   MALMGBL2
+Weapon/LMG/Reload/Close         MALMGCLS
+Weapon/LMG/Reload/Bolt/Back     MALMGBCK
+Weapon/LMG/Reload/Bolt/Release  MALMGFWD
+
+// Thumper Grenade Launcher
+Weapon/GrenadeLauncher/Fire                  MAGLFIRE
+Weapon/GrenadeLauncher/Open	                 MAGROPEN
+Weapon/GrenadeLauncher/Load	                 MAGRLOAD
+Weapon/GrenadeLauncher/Close	             MAGRCLOS
+//Weapon/GrenadeLauncher/Select	             MAGLSELE
+Weapon/GrenadeLauncher/Dryfire               MAGLDRYF
+
+//Plasma Rifle (Default)
+Weapon/PlasmaRifle/Fire MAPLAFI
+Weapon/PlasmaRifle/Fire/Heated MARLAFI
+Weapon/PlasmaRifle/Altfire MACRYOF
+$random Weapon/PlasmaRifle/Ball {MABALL1 MABALL2 MABALL3 MABALL4}
+MABALL1 MABALL1
+MABALL2 MABALL2
+MABALL3 MABALL3
+MABALL4 MABALL4
+Weapon/PlasmaRifle/Reload/Out MAPLAR1
+Weapon/PlasmaRifle/Reload/In  MAPLAR2
+Weapon/PlasmaRifle/Cooldown   MAPCOOL
+Weapon/PlasmaRifle/Idle       MAPLIDL 
+Weapon/PlasmaRifle/Select     MAPSELE
+Weapon/PlasmaRifle/Charged    MACHARG  
+Weapon/PlasmaRifle/Overheat   MAOVERH
+Weapon/PlasmaRifle/Dry        MAPLDRY
+// Plasma Rifle (PewPewGun)
+Weapon/PewPewGun/Fire          PEWFIRE
+Weapon/PewPewGun/Fire/Heated   REWFIRE
+Weapon/PewPewGun/Reload/Out    PEWOUT
+Weapon/PewPewGun/Reload/In     PEWIN
+
+//Aerosol Can
+Weapon/Spray/Zippo/Open      MAZIPOPE
+Weapon/Spray/Zippo/Lit       MAZIPLIT
+Weapon/Spray/Zippo/Close     MAZIPCLO
+Weapon/Spray/Fire            MAAERLOP 
+Weapon/Spray/Ignite          MAAERCAN 
+Weapon/Spray/Bomb/Ignite     MAAERLIT
+Weapon/Spray/Bomb/Throw      MAAERTHR
+Weapon/Spray/Flames/Loop     MAPBBURN
+$random Weapon/Spray/Flames/End {MAPBEND1 MAPBEND2}
+MAPBEND1 MAPBEND1
+MAPBEND2 MAPBEND2
+
+//Incinerator
+Weapon/Incinerator/Select        MAINCRED
+Weapon/Incinerator/Idle          MAINCIDL
+Weapon/Incinerator/Fire/Start    MAINCSTA
+Weapon/Incinerator/Fire/Loop     MAINCLOP
+Weapon/Incinerator/Fire/End      MAINCSTO
+Weapon/Incinerator/Turnoff       MAINCCL1
+Weapon/Incinerator/Turnon        MAINCCL2
+
+//Rocket Launcher
+Weapon/RocketLauncher/Fire             MARPGPR
+Weapon/RocketLauncher/Reload/Open      MARPGOP 
+Weapon/RocketLauncher/Reload/Insert    MARPGLD 
+Weapon/RocketLauncher/Reload/Close     MARPGCL 
+Weapon/RocketLauncher/Zoom/In          MAZOOM3
+Weapon/RocketLauncher/Zoom/Beep        MAZOOMB
+Weapon/RocketLauncher/Zoom/Out         MAZOOM4
+Weapon/RocketLauncher/Dry              ROCKDRY
+$random Weapon/RocketLauncher/Boom {MAROCX1 MAROCX2 MAROCX3}
+MAROCX1 MAROCX1
+MAROCX2 MAROCX2
+MAROCX3 MAROCX3
+
+//BFG
+Weapon/BFG/Fly         BFGFLY
+Weapon/BFG/Explode     BFGEXP
+Weapon/BFG/Charge      BFGCHRG
+Weapon/BFG/Fire        BFGFIRE
+Weapon/BFG/Raise       BFGRAIS
+Weapon/BFG/Idle        BFGIDLE
+Weapon/BFG/Dry         BFGDRY
+
+//Unmakyr/Ballista
+Weapon/Unmakyr/Fire/Default     MAUNMAFI
+Weapon/Unmakyr/Fire/Ballista    MABALIFI
+Weapon/Unmakyr/Reload           MABALIRL 
+Weapon/Unmakyr/Switch/1         MABALISW 
+Weapon/Unmakyr/Switch/2         MAUNMASW 
+Weapon/Unmakyr/Select           MABALISE  
+Weapon/Unmakyr/ProjectileFlyBy  BLSTAFLY
+Weapon/Unmakyr/ProjectileHit    BLSTAHIT
+
+// Automatic Shotgun
+Weapon/Usas/Select      MAUSASSL
+$random Weapon/Usas/Fire	{MAUSASF1 MAUSASF2}
+MAUSASF1 MAUSASF1
+MAUSASF2 MAUSASF2
+Weapon/Usas/Reload/Out  MAUSASOU
+Weapon/Usas/Reload/In   MAUSASIN
+Weapon/Usas/Reload/Bolt/Pull    MAUSASB1
+Weapon/Usas/Reload/Bolt/Release MAUSASB2
+
+// Sniper Rifle
+Weapon/Sniper/Fire MASNIPFI
+Weapon/Sniper/Bolt/Back MABOLBC
+Weapon/Sniper/Bolt/Foward MABOLFW
+Weapon/Sniper/Mag/Out MASNIPOU
+Weapon/Sniper/Mag/In  MASNIPIN
+
+// Oscillator (Nailgun)
+Weapon/Nailgun/Fire	        NAILFIRE
+Weapon/Nailgun/Select	    NAILSEL
+Weapon/Nailgun/Hit/Wall		NAILWALL
+Weapon/Nailgun/Hit/Bleed	NAILHIT
+Weapon/Nailgun/Fly      	NAILFLY
+
+// Micro Rocket Launcher 
+Weapon/MicroRocketLauncher/Fire	                 MARPGPR
+Weapon/MicroRocketLauncher/Rechamber             MMRLCHA
+Weapon/MicroRocketLauncher/Unload	             MMRLREL1
+Weapon/MicroRocketLauncher/Load	                 MMRLREL2
+
+//Book of Sacraments
+Weapon/Book/Open                MABOOKOP
+Weapon/Book/Close               MABOOKCL
+Weapon/Book/Attack/Rune1        MABOOKA1
+Weapon/Book/Attack/Rune2        MABOOKA2
+Weapon/Book/Attack/Rune3        MABOOKA3
+Weapon/Book/Attack/Rune4        MABOOKA4
+Weapon/Book/Switch              MABOOKSW
+Weapon/Book/Chanting            MADOLLCH
+Weapon/Book/DarkCloud/Impact    DCLDIMP
+Weapon/Book/DarkCloud/Loop      DCLDLOOP
+Weapon/Book/DarkCloud/End       DCLDEND
+Weapon/Book/Pestilence/Active   DSVULSH1
+Weapon/Book/Pestilence/Death    DSVULSH2
+Weapon/Book/Spirits/Active      MASPIRAC
+Weapon/Book/Spirits/Attack      MASPIRAT
+Weapon/Book/Spirits/Death       MASPIRDT            
+
+//MP5/SWAT SMG
+Weapon/MP5/Select        MASMGS
+$random Weapon/MP5/Fire {MASMGF1 MASMGF2 MASMGF3}          
+MASMGF1 MASMGF1
+MASMGF2 MASMGF2
+MASMGF3 MASMGF3
+Weapon/MP5/Reload/MagOut   MASMGR1
+Weapon/MP5/Reload/MagIn    MASMGR2
+Weapon/MP5/Reload/Pull     MASMGR3
+Weapon/MP5/Reload/Slap     MASMGR4
+
+
+//Death Machine
+Weapon/Chaingun/Fire     DTHMFIRE
+Weapon/Chaingun/Post     DTHMSTOP
+Weapon/Chaingun/Start    DTHMAGO
+Weapon/Chaingun/Loop     DTHMALP
+Weapon/Chaingun/Stop     DTHMASTP
+Weapon/Chaingun/Select   DTHMAUP
+Weapon/Chaingun/Deselect DTHMADWN
+
+/////////////////////////////
+/////////Tool sounds/////////
+/////////////////////////////
+
+//Syringe
+Weapon/Syringe/Cap    STIMCAP
+Weapon/Syringe/Tab    STIMTAB
+Weapon/Syringe/Inject STIMINSE
+Weapon/Syringe/Heal   STIMHEAL
+
+// Ballistic Shield
+Weapon/Shield/Equip    MASHISEL
+Weapon/Shield/Defend   MASHIDRW 
+Weapon/Shield/Bash     MASHIBSH
+Weapon/Shield/Break    MASHIBRK
+$volume Weapon/Shield/Break 2.0
+$random Weapon/Shield/Impact {MASHIIMP1 MASHIIMP2 MASHIIMP3 MASHIIMP4}
+MASHIIMP1 MASHIIMP1
+MASHIIMP2 MASHIIMP2
+MASHIIMP3 MASHIIMP3
+MASHIIMP4 MASHIIMP4
+$volume Weapon/Shield/Impact 0.5
+
+//////////////////////////////
+////////Distant sounds////////
+//////////////////////////////
+
+// Pistol (Default)
+$random Weapon/Pistol/Distant {FARPIS1 FARPIS2 FARPIS3}
+FARPIS1 FARPIS1
+FARPIS2 FARPIS2
+FARPIS3 FARPIS3 
+$limit Weapon/Pistol/Distant 80
+$rolloff Weapon/Pistol/Distant 3000 6000
+
+// Pistol (Silenced)
+$random Weapon/Pistol/Silencer/Distant {FARSIS1 FARSIS2 FARSIS3}
+FARSIS1 FARSIS1
+FARSIS2 FARSIS2
+FARSIS3 FARSIS3 
+$limit Weapon/Pistol/Silencer/Distant 40
+$rolloff Weapon/Pistol/Silencer/Distant 3000 6000
+
+// M3 Grease (Default)
+$random Weapon/Greaser/Distant {FARGRE1 FARGRE2 FARGRE3}
+FARGRE1 FARGRE1
+FARGRE2 FARGRE2
+FARGRE3 FARGRE3
+$limit Weapon/Greaser/Distant 80
+$rolloff  Weapon/Greaser/Distant 3000 6000
+
+// M3 Grease (Supressed)
+$random Weapon/Greaser/Supressed/Distant {FARGSE1 FARGSE2 FARGSE3}
+FARGSE1 FARGSE1
+FARGSE2 FARGSE2
+FARGSE3 FARGSE3
+$limit Weapon/Greaser/Supressed/Distant 80
+$rolloff  Weapon/Greaser/Supressed/Distant 3000 6000
+
+
+// Revolver
+$random Weapon/Revolver/Distant {FARREV1 FARREV2 FARREV3}
+FARREV1 FARREV1
+FARREV2 FARREV2
+FARREV3 FARREV3 
+$limit Weapon/Revolver/Distant 80
+$rolloff  Weapon/Revolver/Distant 3000 6000
+
+// Shotgun & Usas 12
+$random Weapon/Shotgun/Distant {FARSHT1 FARSHT2 FARSHT3}
+FARSHT1 FARSHT1
+FARSHT2 FARSHT2
+FARSHT3 FARSHT3 
+$limit Weapon/Shotgun/Distant 80
+$rolloff  Weapon/Shotgun/Distant 3000 6000
+
+// NOB
+$random Weapon/NOB/Distant {FARNOB1 FARNOB2 FARNOB3}
+FARNOB1 FARNOB1
+FARNOB2 FARNOB2
+FARNOB3 FARNOB3 
+$limit Weapon/NOB/Distant 80
+$rolloff  Weapon/NOB/Distant 3000 6000
+
+// Assault Rifle
+$random Weapon/Shinigami/Distant {FARM4A1 FARM4A2 FARM4A3}
+FARM4A1 FARM4A1
+FARM4A2 FARM4A2
+FARM4A3 FARM4A3
+$limit Weapon/Shinigami/Distant 80
+$rolloff  Weapon/Shinigami/Distant 3000 6000
+
+// LMG
+$random Weapon/LMG/Distant {FARLMG1 FARLMG2 FARLMG3 FARLMG4}
+FARLMG1 FARLMG1
+FARLMG2 FARLMG2
+FARLMG3 FARLMG3
+FARLMG4 FARLMG4
+$limit Weapon/LMG/Distant 80
+$rolloff  Weapon/LMG/Distant 3000 6000
+
+// Rocket Launcher
+$random Weapon/RocketLauncher/Distant {FARBAZ1 FARBAZ2 FARBAZ3 FARBAZ4}
+FARBAZ1 FARBAZ1
+FARBAZ2 FARBAZ2
+FARBAZ3 FARBAZ3
+FARBAZ4 FARBAZ4
+$limit Weapon/RocketLauncher/Distant 80
+$rolloff  Weapon/RocketLauncher/Distant 3000 6000
+
+// MP5
+$random Weapon/MP5/Distant {FARMP51 FARMP52 FARMP53}
+FARMP51 FARMP51
+FARMP52 FARMP52
+FARMP53 FARMP53
+$limit Weapon/MP5/Distant 80
+$rolloff  Weapon/MP5/Distant 3000 6000
+
+// Sniper Rifle
+$random Weapon/Sniper/Distant {FARAWP1 FARAWP2 FARAWP3}
+FARAWP1 FARAWP1
+FARAWP2 FARAWP2
+FARAWP3 FARAWP3
+$limit Weapon/Sniper/Distant 80
+$rolloff  Weapon/Sniper/Distant 3000 6000
+
+/* Grenade Launcher
+xxx xxx
+$limit xxx 80
+$rolloff  FARRIF 3000 6000
+

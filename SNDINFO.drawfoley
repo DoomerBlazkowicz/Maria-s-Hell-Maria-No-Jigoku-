@@ -1,0 +1,171 @@
+////////////////////////////////////
+////////////////Zoom///////////////
+////////////////////////////////////
+
+$random Maria/Zoom/In   {MAADSU1 MAADSU2 MAADSU3}
+MAADSU1 MAADSU1
+MAADSU2 MAADSU2
+MAADSU3 MAADSU3
+$volume Maria/Zoom/In 0.5
+
+$random Maria/Zoom/Out  {MAADSD1 MAADSD2 MAADSD3}
+MAADSD1 MAADSD1
+MAADSD2 MAADSD2
+MAADSD3 MAADSD3
+$volume Maria/Zoom/Out 0.5
+
+////////////////////////////////////
+///////////////Clicks///////////////
+////////////////////////////////////
+
+$random Weapon/Magclick {MAGCLK01 MAGCLK02 MAGCLK03 MAGCLK04}
+MAGCLK01 MAGCLK01
+MAGCLK02 MAGCLK02
+MAGCLK03 MAGCLK03
+MAGCLK04 MAGCLK04
+
+////////////////////////////////////
+////////////////Draws///////////////
+////////////////////////////////////
+
+$random Maria/Draw/Primary {MADRPR1 MADRPR2 MADRPR3}
+MADRPR1 MADRPR1
+MADRPR2 MADRPR2
+MADRPR3 MADRPR3
+$volume Maria/Draw/Primary 0.3
+
+$random Maria/Draw/Sidearm {MADRSD1 MADRSD2 MADRSD3}
+MADRSD1 MADRSD1
+MADRSD2 MADRSD2
+MADRSD3 MADRSD3
+$volume Maria/Draw/Sidearm 0.3
+
+$random Maria/Draw/Heavy {MADRHV1 MADRHV2 MADRHV3}
+MADRHV1 MADRHV1
+MADRHV2 MADRHV2
+MADRHV3 MADRHV3
+$volume Maria/Draw/Heavy 0.3
+
+$random Maria/Draw/Flamethrower {MADRFL1 MADRFL2 MADRFL3}
+MADRFL1 MADRFL1
+MADRFL2 MADRFL2
+MADRFL3 MADRFL3
+$volume Maria/Draw/Flamethrower 0.3
+
+$random Maria/Draw/Equipment {MADREQ1 MADREQ2 MADREQ3}
+MADREQ1 MADREQ1
+MADREQ2 MADREQ2
+MADREQ3 MADREQ3
+$volume Maria/Draw/Equipment 0.3
+
+////////////////////////////////////
+////////////////Foley///////////////
+////////////////////////////////////
+
+//Pistol
+$random Foley/Pistol/Raise {PISTFOL1 PISTFOL2 PISTFOL3}
+PISTFOL1 PISTFOL1
+PISTFOL2 PISTFOL2 
+PISTFOL3 PISTFOL3
+Foley/Pistol/Lower PISTFOL4
+
+//PDW
+Foley/PDW/Raise   PDWFOL1
+Foley/PDW/Lower   PDWFOL2
+Foley/PDW/Mag/Out PDWFOL3
+Foley/PDW/Mag/In  PDWFOL4
+
+//Shotguns
+$random Foley/Shotgun/Movement {PMPFOL1 PMPFOL2 PMPFOL3}
+PMPFOL1 PMPFOL1
+PMPFOL2 PMPFOL2 
+PMPFOL3 PMPFOL3 
+$random Foley/Shotgun/Reload/Raise {PMPFOL4 PMPFOL5 PMPFOL6}
+PMPFOL4 PMPFOL4
+PMPFOL5 PMPFOL5
+PMPFOL6 PMPFOL6
+$volume Foley/Shotgun/Reload/Raise 1.0
+$random Foley/Shotgun/Reload/Lower {PMPFOL7 PMPFOL8 PMPFOL9}
+PMPFOL7 PMPFOL7
+PMPFOL8 PMPFOL8 
+PMPFOL9 PMPFOL9 
+$volume Foley/Shotgun/Reload/Lower 1.0
+$random Foley/Shotgun/Reload/Load {PMPFOL10 PMPFOL11 PMPFOL12 PMPFOL13 PMPFOL14 PMPFOL15}
+PMPFOL10 PMPFOL10
+PMPFOL11 PMPFOL11
+PMPFOL12 PMPFOL12
+PMPFOL13 PMPFOL13
+PMPFOL14 PMPFOL14
+PMPFOL15 PMPFOL15
+
+
+//NOB
+$random Foley/NOB/Eject {NOBFOL1 NOBFOL2 NOBFOL3 NOBFOL4}
+NOBFOL1 NOBFOL1 
+NOBFOL2 NOBFOL2 
+NOBFOL3 NOBFOL3 
+NOBFOL4 NOBFOL4 
+$random Foley/NOB/Insert {NOBFOL5 NOBFOL6}
+NOBFOL5 NOBFOL5
+NOBFOL6 NOBFOL6 
+$random Foley/NOB/Lower {NOBFOL7 NOBFOL8}
+NOBFOL7 NOBFOL7 
+NOBFOL8 NOBFOL8 
+$volume Foley/NOB/Lower 1.0
+$random Foley/NOB/Raise {NOBFOL9 NOBFOL10}
+NOBFOL9 NOBFOL9 
+NOBFOL10 NOBFOL10
+$volume Foley/NOB/Raise 1.0
+
+//Assault Rifle/Sniper Rifle
+Foley/Rifle/Raise RIFFOL1 
+Foley/Rifle/Lower RIFFOL2 
+$random Foley/Rifle/Misc {RIFFOL3 RIFFOL4}
+RIFFOL3 RIFFOL3 
+RIFFOL4 RIFFOL4 
+$volume Foley/Rifle/Misc 0.6
+
+//LMG
+$random Foley/LMG/Movement {LMGFOL1 LMGFOL2 LMGFOL3 }
+LMGFOL1 LMGFOL1 
+LMGFOL2 LMGFOL2 
+LMGFOL3 LMGFOL3 
+$volume Foley/LMG/Movement 0.8
+
+//Thumper
+Foley/Thumper/Lower GLFOL1
+Foley/Thumper/Raise GLFOL2
+Foley/Thumper/Open  GLFOL3
+Foley/Thumper/Close GLFOL4
+Foley/Thumper/Eject GLFOL5
+Foley/Thumper/Load  GLFOL6
+
+//Plasma Rifle/???
+$random Foley/PlasmaRifle/Misc {PLAFOL1 PLAFOL2}
+PLAFOL1 PLAFOL1
+PLAFOL2 PLAFOL2
+
+//Panzerfaust-3
+$random Foley/RocketLauncher/Movement {PANFOL1 PANFOL2 PANFOL3}
+PANFOL1 PANFOL1
+PANFOL2 PANFOL2
+PANFOL3 PANFOL3
+$volume Foley/RocketLauncher/Movement 0.75
+
+//Sleeves
+$random Foley/Sleeves/Movement {CTHFOL1 CTHFOL2 CTHFOL3}
+CTHFOL1 CTHFOL1 
+CTHFOL2 CTHFOL2 
+CTHFOL3 CTHFOL3 
+$volume Foley/Sleeves/Movement 0.50
+
+//Mags
+$random Foley/MagPouch/In {MAPIN1 MAPIN2}
+MAPIN1 MAPIN1 
+MAPIN2 MAPIN2 
+$volume Foley/MagPouch/In 0.45
+
+$random Foley/MagPouch/Out {MAPOU1 MAPOU2}
+MAPOU1 MAPOU1 
+MAPOU2 MAPOU2
+$volume Foley/MagPouch/Out 0.45

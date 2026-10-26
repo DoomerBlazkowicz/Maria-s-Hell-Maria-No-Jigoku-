@@ -1,0 +1,580 @@
+//Edit's of normal menu
+
+DEFAULTLISTMENU
+{
+	Font "64BIGFONT", "Purple"
+	Linespacing 20
+}
+
+LISTMENU "MainMenu"
+{
+	IfGame(Doom, Heretic, Hexen, Chex)
+	{
+		StaticPatch 94, 2, "M_MARIA"
+		Position 97, 72
+		IfOption(ReadThis)
+		{
+			Position 97, 64
+		}
+		TextItem "New Judgement", "n", "PlayerclassMenu", 0
+		TextItem "Load Judgement", "l", "LoadGameMenu", 0
+		TextItem "Save Judgement", "s", "SaveGameMenu",0
+    	TextItem "Maria's Infirmary","m", "MHSettings",0
+		TextItem "Options", "o", "OptionsMenu", 0
+		TextItem "Abandon", "q", "QuitMenu", 0
+		//AnimatedTransition 
+     }
+}
+
+ListMenu "PlayerclassMenu"
+{
+	IfGame(Doom, Heretic, Hexen, Strife)
+	{
+		NetgameMessage "$NEWGAME"
+	}
+	IfGame(Chex)
+	{
+		NetgameMessage "$CNEWGAME"
+	}
+
+	IfGame(Doom, Heretic, Hexen, Strife, Chex)
+	{
+		StaticTextCentered 160, 15, "" 
+        ForceList
+		Position -30, 75 //48, 95
+        Font "64BIGFONT", "Purple", "Selected"
+		PlayerDisplay 185, 50, "20 00 00", "80 00 40"
+		MouseWindow 0, 220
+	}
+	// The rest of this menu will be set up based on the actual player definitions.
+}
+
+ListMenu "EpisodeMenu"
+{
+	IfGame(Doom, Heretic, Hexen, Chex)
+	{
+   Position 48, 63
+   Font "64BIGFONT", "Purple", "Selected"
+   //AnimatedTransition 
+	}
+}
+
+ListMenu "SkillMenu"
+{
+  class "StaticIconListMenu"
+    IfGame(Doom, Heretic, Hexen, Chex)
+    {
+        StaticText 54, 38, "How Tough Are You?"
+        Position 48, 63
+        Font "64BIGFONT", "Purple"
+   //AnimatedTransition 
+    }
+}
+
+//Maria's Hell only
+
+OptionMenu "MHSettings"
+{
+	Title "Maria's Hell Options"
+	StaticText " "
+	Submenu "Cosmetic Options",	"MHCosmetic"
+	StaticText " "
+	Submenu "Gameplay Options",	"MHGameplay"
+	StaticText " "	
+	Submenu "HUD Options",	"MHHUD"
+	StaticText " "	
+	Submenu "Credits",	"MHCredits"
+	StaticText " "
+}
+
+OptionMenu "MHCosmetic"
+{
+	Title "Weapon and Item Skins"
+	StaticText " "
+	option "Shotgun Look", "shotguntoggle", "ShotgunStyle"
+	StaticText " "
+	option "Plasma Rifle Look", "plasmarifletoggle", "PlasmaRifleSkinToggler" 
+	StaticText " "
+	option "Kick Look", "legtoggle", "LegStyle"
+	StaticText " "
+	option "Bonus Item Looks", "bonusitemtoggle", "BonusItemStyle"
+	StaticText " "
+
+	StaticText "Sound Options", 1
+	StaticText " "
+	option "Ear Ringings", "antitinnitus", "AntiTinnitus" 
+	StaticText " "
+	option "Magazine Clicks", "magclicking", "MagClicking" 
+	StaticText " " 
+}
+
+OptionMenu "MHGameplay"
+{
+	Title "Gameplay Options"
+	StaticText " "
+	StaticText "Ammunition Settings (Hexen Exclusive)", 1
+	StaticText ""
+	Option "Flechette spots", "RKAmmoEffects", "RKAmmoValues"
+	StaticText ""
+	StaticText "Gameplay Settings", 1
+    Option "Enable Sliding", "jpm_enable_slide", "OnOff"
+	StaticText ""
+	StaticText "Intro Scripts", 1
+	Option "Intro Options", "introtoggle", "IntroOptions"
+	StaticText ""
+	StaticText "Tilt++ v1.65", 1
+	StaticText ""
+	Submenu "$OPTMNU_TILTPLUSPLUS", "TiltPlusPlusMenu"
+	StaticText ""
+	StaticText "Flashlight++", 1
+	StaticText ""
+	Submenu "$FPP_TITOP", "FlashlightPlusOptions"
+	StaticText ""
+	StaticText "Use To Pickup", 1
+	StaticText ""
+	Submenu "$U2P_OptionsMenu_Title", "UseToPickupOptions"
+	StaticText ""
+}
+
+OptionMenu "MHHUD"
+{
+	Title "HUD options"
+
+	StaticText "Torso Skins", 1
+	StaticText " " 
+	Option "TorsoBar Torso Type", "MH_TorsoType", "MH_TorsoType"
+	//Slider "TorsoBar Torso Type", "MH_TorsoType", 0, 5, 1
+	StaticText " "
+	
+	statictext ""
+}
+
+OptionMenu "MHCredits"
+{
+   Title "Maria's Hell by DoomerBlazkowicz"
+   StaticText ""
+   StaticText "[LEAD DEV]", 1
+   StaticText "DoomerBlazkowicz"
+   StaticText ""
+   StaticText "[GRAPHICS/SPRITES]",1
+   StaticText "ID Software, Raven Software, Midway, Captain J, Tesefy, TG5,"
+   StaticText "Zrrion, Neoworm, Craneo, LossForWords, Skelegant, Kinsie,"
+   StaticText "Nathan Silver, ChopBlock223, OSJClatchford, Scalliano,"
+   StaticText "Ganbare Lucifer, DoomNukem, SwagMaster, DrPyspy, PGE, Ang3ll0pr0duct,"
+   StaticText "Wocht11k, Warhawk, Adventure Dude, iamcarrotmaster/Carrot," 
+   StaticText "Uchi Ixos, Potetobloke"
+   StaticText ""
+   StaticText "[SOUNDS]",1
+   StaticText "ID Software, Raven Software, Monolith, Valve, Crowbar Collective,"
+   StaticText "Captain J, MachineGames, Tripwire Interactive, miHoYo/Hoyoverse,"
+   StaticText "Konami, Skelegant, Toei, Frictional Games, Aubrey Hodges,"
+   StaticText "Draugr/Ravik, OneShot, Magmacow, Patis, rose-engine, Team Psykskallar"
+   StaticText "Infinity Ward, Kevin Sherwood, Treyarch"
+   StaticText ""
+   StaticText "[VOICES]",1
+   StaticText "Sayaka Ohara (For Maria)"
+   StaticText "Ellen McLain (For berserked Maria screams)"
+   StaticText "Atsushi Imaruoka (For Okaya SWAT's)"
+   StaticText "Julie Nathanson (For Death Machine announcer)"
+   StaticText ""
+   StaticText "[DECORATIONS/PROPS]",1
+   StaticText "KeksDose (Ultimate Torment 'n' Torture torches)"
+   StaticText ""
+   StaticText "[FEEDBACKERS/SUGGESTERS]",1
+   StaticText "IDDQD_1337 (Option for mag clickings)"
+   StaticText "SallieEX (CoF styled syringe and some sound suggestions)"
+   StaticText "katherinecode (Spriting stuff)"
+   StaticText "Allie Leyley420 (Option for disabling ear ringing sound)"
+   StaticText "SwagMaster (Quick Pipebomb throw)"
+   StaticText "Patis (Mag clicking and some sound suggestions)"
+   StaticText ""
+   StaticText "[ACS/Zscript/Additional Coders]",1
+   StaticText "popguy12 (HUD, PVT Stone styled torso options)"
+   StaticText "Nash Muhandes (Tilt +)"
+   StaticText "Blade of Agony Team (Low health system, difficulty faces and death script)"
+   StaticText "Skelegant (Kill Tracker from PVT Stone and GD_Echidna)"
+   StaticText "Xenfar (Updated Kill tracker and addition of Secret and Item variants)"
+   StaticText "DrCosmobyte (Creating the Raven Patch and Chex comp)"
+   StaticText "generic_name_guy (Flashlight++)"
+   StaticText "LossForWords (Doom 3 styled Berserk)"
+   StaticText "Vortex (Level stats for the HUD)" 
+   StaticText "Jetplane (JPMobility)"
+   StaticText ""
+   StaticText "[PLAYTESTERS]",1
+   StaticText "Uchi Ixos"
+   StaticText "Allie Leyley420"
+   StaticText "Patis"
+   StaticText "Linok_Games"
+   StaticText "popguy12"
+   StaticText ""
+   StaticText "[MUSIC]",1
+   StaticText "Gravity Well (From Quake 2) by Sonic Mayhem"
+   StaticText "When Darkness Falls by Killswitch Engage"
+   StaticText "Conquerer by Marc A. Pullen"
+   StaticText "Quake theme (Ambience part cut) by Nine Inch Nails"
+   StaticText ""
+   StaticText "[OTHERS]",1
+   StaticText "Massacred Fool (For Maria arts)"
+   StaticText "Kazuki (For creating Maria no Danzai, read the manga!)"
+   StaticText "Kamejima Junto (For illustrating Maria no Danzai)"
+   StaticText "John Romero (For Creating DOOM)"
+   StaticText "And YOU! ... For playing it."
+   StaticText " "
+   StaticText " "
+   StaticText " "
+   StaticText " "
+   StaticText " "
+   StaticText " "
+   StaticText " "
+   StaticText " "
+   StaticText " "
+}
+
+
+OptionValue ShotgunStyle
+{
+	0, "Default (Remington 870)"
+	1, "Legacy (Spas 12)"
+}
+
+OptionValue PlasmaRifleSkinToggler
+{
+	0, "Default"
+	1, "PewPewGun (Bunny Maze)"
+}
+
+OptionValue LegStyle
+{
+	0, "Default"
+	1, "Huntress"
+}
+
+OptionValue BonusItemStyle
+{
+	0, "Default (Rosarys)"
+	1, "Alternative (Capsule and Shards)"
+	2, "Classic (Vials and Helmets)"
+}
+
+OptionValue AntiTinnitus
+{
+   0, "Enabled"
+   1, "Disabled"
+}
+
+OptionValue MagClicking
+{
+   0, "Enabled"
+   1, "Disabled"
+}
+
+OptionValue RKAmmoValues
+{
+   0, "Pipebomb"
+   1, "Grenades"
+}
+
+OptionValue IntroOptions
+{
+   0, "Both"
+   1, "Hallucination"
+   2, "Knuckle Cracking"
+   3, "None"
+ //4, "Helmet"
+}
+
+OptionValue MH_TorsoType
+{
+   0, "Empty"
+   1, "School Nurse"
+   2, "Casual"
+   3, "Huntress"
+   4, "School Festival"   
+   5, "Nude"
+   6, "Bunny Slayer"
+   7, "Killswitch Engage"
+}
+
+OptionValue MH_HUDType
+{
+   0, "The Dark Ages"
+   //1, "Eternal"
+   //2, "Doom 64"
+   //3, ""
+}
+
+// Tilt++ (Courtest to Nash Muhandes)
+
+OptionMenu "TiltPlusPlusMenu"
+{
+	Class "TiltPlusPlusMenu"
+	Title "$TILTPLUSPLUSMNU_TITLE"
+	Position -32
+
+	StaticText ""
+	StaticText "$TILTPLUSPLUSMNU_STRAFETILT_TITLE", 1
+
+	TiltPlusPlusOption "$TILTPLUSPLUSMNU_ENABLED",					"$TILTPLUSPLUSMNU_HELPTEXT_STRAFETILT",				"sv_strafetilt", "YesNo"
+	TiltPlusPlusOption "$TILTPLUSPLUSMNU_INVERT",					"$TILTPLUSPLUSMNU_HELPTEXT_STRAFETILT_INVERT",		"sv_strafetiltinvert", "YesNo"
+	TiltPlusPlusSlider "$TILTPLUSPLUSMNU_SPEED",					"$TILTPLUSPLUSMNU_HELPTEXT_STRAFETILT_SPEED",		"sv_strafetiltspeed", 0.1, 2.0, 0.01, 2
+	TiltPlusPlusSlider "$TILTPLUSPLUSMNU_ANGLE",					"$TILTPLUSPLUSMNU_HELPTEXT_STRAFETILT_ANGLE",		"sv_strafetiltangle", 0.1, 1.0, 0.01, 2
+
+	StaticText ""
+	StaticText "$TILTPLUSPLUSMNU_MOVETILT_TITLE", 1
+
+	TiltPlusPlusOption "$TILTPLUSPLUSMNU_ENABLED",					"$TILTPLUSPLUSMNU_HELPTEXT_MOVETILT",				"sv_movetilt", "YesNo"
+	TiltPlusPlusSlider "$TILTPLUSPLUSMNU_SPEED",					"$TILTPLUSPLUSMNU_HELPTEXT_MOVETILT_SPEED",			"sv_movetiltspeed", 0.1, 20.0, 0.1, 2
+	TiltPlusPlusSlider "$TILTPLUSPLUSMNU_ANGLE",					"$TILTPLUSPLUSMNU_HELPTEXT_MOVETILT_ANGLE",			"sv_movetiltangle", 0.01, 0.10, 0.01, 2
+	TiltPlusPlusSlider "$TILTPLUSPLUSMNU_SCALAR",					"$TILTPLUSPLUSMNU_HELPTEXT_MOVETILT_SCALAR",		"sv_movetiltscalar", 0.0, 1.0, 0.1
+
+	StaticText ""
+	StaticText "$TILTPLUSPLUSMNU_TURNTILT_TITLE", 1
+
+	TiltPlusPlusOption "$TILTPLUSPLUSMNU_ENABLED",					"$TILTPLUSPLUSMNU_HELPTEXT_TURNTILT",				"sv_turntilt", "YesNo"
+	TiltPlusPlusOption "$TILTPLUSPLUSMNU_INVERT",					"$TILTPLUSPLUSMNU_HELPTEXT_TURNTILT_INVERT",		"sv_turntiltinvert", "YesNo"
+	TiltPlusPlusSlider "$TILTPLUSPLUSMNU_SCALAR",					"$TILTPLUSPLUSMNU_HELPTEXT_TURNTILT_SCALAR",		"sv_turntiltscalar", 0.0, 20.0, 0.1
+
+	StaticText ""
+	StaticText "$TILTPLUSPLUSMNU_UNDERWATERTILT_TITLE", 1
+	TiltPlusPlusOption "$TILTPLUSPLUSMNU_ENABLED",					"$TILTPLUSPLUSMNU_HELPTEXT_UNDERWATERTILT",			"sv_underwatertilt", "YesNo"
+	TiltPlusPlusSlider "$TILTPLUSPLUSMNU_SPEED",					"$TILTPLUSPLUSMNU_HELPTEXT_UNDERWATERTILT_SPEED",	"sv_underwatertiltspeed", 0.1, 20.0, 0.1, 2
+	TiltPlusPlusSlider "$TILTPLUSPLUSMNU_ANGLE",					"$TILTPLUSPLUSMNU_HELPTEXT_UNDERWATERTILT_ANGLE",	"sv_underwatertiltangle", 0.01, 0.5, 0.01, 2
+	TiltPlusPlusSlider "$TILTPLUSPLUSMNU_SCALAR",					"$TILTPLUSPLUSMNU_HELPTEXT_UNDERWATERTILT_SCALAR",	"sv_underwatertiltscalar", 0.0, 1.0, 0.1
+
+	StaticText ""
+	StaticText "$TILTPLUSPLUSMNU_DEATHTILT_TITLE", 1
+	TiltPlusPlusOption "$TILTPLUSPLUSMNU_ENABLED",					"$TILTPLUSPLUSMNU_HELPTEXT_DEATHTILT",				"sv_deathtilt", "YesNo"
+}
+
+// Flashlight++
+
+OptionValue LocationOptions 
+{
+	0, "$FPP_HELM"
+	1, "$FPP_RSHO"
+	2, "$FPP_LSHO"
+	3, "$FPP_CENT"
+	4, "$FPP_GUN"
+	5, "$FPP_CUSTPOS"
+}
+
+OptionValue SwayOptions 
+{
+	0, "$FPP_NOSWAY"
+	1, "$FPP_SPRINGY"
+	2, "$FPP_STIFF"
+	3, "$FPP_SWAYCUSTOM"
+}
+
+OptionValue FlashlightSoundOptions 
+{
+	-1, "$FPP_NOSOUND"
+	0, "$FPP_DEFCLICK"
+	1, "$FPP_OLDCLICK"
+	2, "$FPP_ALTCLICK"
+	3, "$FPP_FUUUTURE"
+	4, "$FPP_HL1TOGGLE"
+	5, "$FPP_DDZTOGGLE"
+	6, "$FPP_OP4NVSND"
+	7, "$FPP_PREYFLME"
+	8, "$FPP_FUUTURE2"
+	9, "$FPP_LITFRONG"
+	10, "$FPP_BDV21SOUND"
+}
+
+OptionMenu "FlashlightPlusOptions" 
+{
+	Title "$FPP_TITL"
+
+	StaticText ""
+    
+    Submenu "$FPP_PRST","FlashlightPlusPresets"
+
+	StaticText ""
+    
+    Control "$FPP_TGLE","FPP_Toggle"
+   
+    StaticText ""
+	
+	ColorPicker "$FPP_CLR", "cl_flashlight_plus_color"
+	
+	StaticText ""
+    
+    Option "$FPP_SNDCHOICE", "cl_fpp_sound", "FlashlightSoundOptions"
+
+	StaticText ""
+	
+	Slider "$FPP_RNGE", "cl_flashlight_plus_intensity", 0, 1024, 1, 0
+
+	StaticText ""
+
+	Slider "$FPP_IANG", "cl_flashlight_plus_inner", 0, 180, 1, 0
+	Slider "$FPP_OANG", "cl_flashlight_plus_outer", 0, 180, 1, 0
+
+	StaticText ""
+
+	Option "$FPP_SECBEM", "cl_flashlight_plus_second_beam", "OnOff"
+
+	StaticText ""
+
+	Slider "$FPP_SCBMUL", "cl_flashlight_plus_color_2_mult", 0, 5, 0.05, 2, "cl_flashlight_plus_second_beam"
+
+	StaticText ""
+
+	Slider "$FPP_SCRNGE", "cl_flashlight_plus_intensity_2", 0, 1024, 1, 0, "cl_flashlight_plus_second_beam"
+
+	StaticText ""
+
+	Slider "$FPP_IAN2", "cl_flashlight_plus_inner_2", 0, 180, 1, 0, "cl_flashlight_plus_second_beam"
+	Slider "$FPP_OAN2", "cl_flashlight_plus_outer_2", 0, 180, 1, 0, "cl_flashlight_plus_second_beam"
+
+	StaticText ""
+
+    Option "$FPP_ALERT", "cl_fpp_alertmonsters", "YesNo"
+	
+	StaticText ""
+	
+	Option "$FPP_POS", "cl_flashlight_plus_location", "LocationOptions"
+	Submenu "$FPP_TWEAKPOS", "TweakPosition"
+	
+	StaticText ""
+	
+	Option "$FPP_SWAY", "cl_fpp_sway_type", "SwayOptions"
+	Submenu "$FPP_TWEAKSWAY", "TweakSway"
+	
+	StaticText ""
+
+	SafeCommand "$FPP_UINS","netevent flashlight_plus_uninstall", "$FPP_YUSURE2"
+	StaticText "$FPP_WARN","DarkRed"
+	StaticText ""
+	
+	Submenu "$FPP_ADVANCED", "AdvancedFlashlightSettings"
+}
+
+OptionMenu "FlashlightPlusPresets" {
+	Title "Flashlight Presets"
+	
+    SafeCommand "$FPP_DEFA", "cl_flashlight_defaultpreset", "$FPP_YOUSURE"
+	
+	StaticText ""
+	
+	SafeCommand "$FPP_OLDDEFAULT", "cl_flashlight_olddefaultpreset", "$FPP_YOUSURE"
+	
+	StaticText ""
+	
+	SafeCommand "Half-Life 2", "cl_flashlight_hl2preset", "$FPP_YOUSURE"
+
+    StaticText ""
+
+    SafeCommand "Doom 3 BFG Edition", "cl_flashlight_d3preset", "$FPP_YOUSURE"
+    
+    StaticText ""
+    
+    SafeCommand "$FPP_GRNMGK", "cl_flashlight_magicpreset", "$FPP_YOUSURE"
+    SafeCommand "$FPP_BLUMGK", "cl_flashlight_magicbluepreset", "$FPP_YOUSURE"
+    
+    StaticText ""
+    
+    SafeCommand "$FPP_LAMP", "cl_flashlight_lamppreset", "$FPP_YOUSURE"
+    
+    StaticText ""
+    
+    SafeCommand "$FPP_HDLI", "cl_flashlight_minerpreset", "$FPP_YOUSURE"
+    
+    StaticText ""
+    
+    SafeCommand "$FPP_FULL", "cl_flashlight_fullbrightpreset", "$FPP_YOUSURE"
+    
+    StaticText ""
+    
+    SafeCommand "$FPP_GENE", "cl_flashlight_basicpreset", "$FPP_YOUSURE"
+    
+    StaticText ""
+    
+    SafeCommand "$FPP_HARD", "cl_flashlight_hardpreset", "$FPP_YOUSURE"
+    
+    StaticText ""
+    
+    SafeCommand "$FPP_METADOOM", "cl_flashlight_metadoompreset", "$FPP_YOUSURE"
+    
+    StaticText ""
+    
+    SafeCommand "$FPP_OP4NVG", "cl_flashlight_op4nvgpreset", "$FPP_YOUSURE"
+}
+
+optionmenu TweakSway
+{
+	Title "$FPP_TWEAKSWAY"
+	
+	Slider "$FPP_SPRING", "cl_fpp_sway_spring", 0.1, 1.0, 0.01, 2
+	StaticText "$FPP_SPRINGDESC"
+	statictext ""
+	
+	Slider "$FPP_DAMPING", "cl_fpp_sway_damping", 0.1, 1.0, 0.01, 2
+	StaticText "$FPP_DAMPINGDESC"
+	statictext ""
+	
+	Slider "$FPP_INERTIA", "cl_fpp_sway_inertia", -10, 10, 1, 0
+	StaticText "$FPP_INERTIADESC"
+}
+
+OptionMenu TweakPosition
+{
+	Title "$FPP_TWEAKPOS"
+	
+	Slider "$FPP_XPOS", "cl_fpp_custpos_x", -32, 32, 1
+	StaticText "$FPP_XDESC"
+	statictext ""
+	
+	Slider "$FPP_YPOS", "cl_fpp_custpos_y", -32, 32, 1
+	StaticText "$FPP_YDESC"
+	statictext ""
+	
+	Slider "$FPP_ZPOS", "cl_fpp_custpos_z", -32, 32, 1
+	StaticText "$FPP_ZDESC"
+}
+
+optionmenu AdvancedFlashlightSettings
+{
+	Title "$FPP_ADVANCED"
+	
+	Option "$FPP_ATTENUATED", "cl_fpp_attenuated", "YesNo"
+	StaticText "$FPP_ATTENUATED_DESC"
+	StaticText ""
+	Option "$FPP_NOISE", "cl_fpp_noise", "YesNo"
+	StaticText "$FPP_NOISE_DESC"
+	slider "$FPP_NOISE_MIN", "cl_fpp_noise_min", 0.5, 0.99, 0.01, 2
+	StaticText ""
+	Option "$FPP_INTERPOLATE", "cl_fpp_interpolate", "YesNo"
+	StaticText "$FPP_INTERPOLATE_DESC"
+	StaticText "$FPP_INTERPOLATE_DESC2"
+}
+
+// Use To Pickup (Courtesy of argv minus one)
+
+OptionMenu "UseToPickupOptions" {
+	Title "$U2P_OptionsMenu_Title"
+	
+	StaticText "$NETMNU_HOSTOPTIONS", "Gold"
+	StaticText ""
+	Option "$U2P_OptionsMenu_FullUseRange", "usetopickup_fulluserange", "YesNo"
+	Slider "$U2P_OptionsMenu_ScanFreq", "usetopickup_scanfreq", 1, 10, 1, 0
+	StaticText ""
+	StaticText "$OPTMNU_PLAYER", "Gold"
+	StaticText ""
+	Option "$U2P_OptionsMenu_Enable", "usetopickup_enabled", "YesNo"
+	ColorPicker "$U2P_OptionsMenu_HighlightColor", "usetopickup_highlight_color"
+	Slider "$U2P_OptionsMenu_HighlightOpacity", "usetopickup_highlight_opacity", 0, 1, 0.125, 3
+	Slider "$U2P_OptionsMenu_HighlightOpacityUnfocused", "usetopickup_highlight_opacity_unfocused", 0, 1, 0.125, 3
+	Slider "$U2P_OptionsMenu_FadeInTime", "usetopickup_fadeintime", 0, 2, 0.1, 1
+	Slider "$U2P_OptionsMenu_FadeOutTime", "usetopickup_fadeouttime", 0, 2, 0.1, 1
+	Slider "$U2P_OptionsMenu_PickupDelay", "usetopickup_pickupdelay", 0, 2, 0.1, 1
+	ScaleSlider "$U2P_OptionsMenu_HighlightRange", "usetopickup_highlight_range", 0, 2048, 16, "$U2P_OptionsMenu_FocusedOnly"
+	StaticText ""
+	StaticText "$OPTMNU_CONTROLS", "Gold"
+	StaticText ""
+	Control "$U2P_KeyBindMenu_EnableToggle", "toggle usetopickup_enabled"
+	Control "$U2P_KeyBindMenu_Push", "usetopickup_push"
+	StaticText ""
+	SafeCommand "$OPTMNU_DEFAULTS", "event UseToPickup_ResetAllCVars", "$U2P_OptionsMenu_ResetDefaultConfirm"
+}

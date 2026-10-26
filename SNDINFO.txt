@@ -1,0 +1,177 @@
+$volume plasmarifle/idle 0.5
+DSTAUNT	 DSTAUNT
+MAHEALUP MAHEALUP
+MACRATUP MACRATUP
+MABPAKUP MABPAKUP
+Maria/Health/Stimpack MAHEALU1
+Maria/Health/Medkit   MAHEALU2
+Maria/Health/Syringe  MASYRPIC
+Maria/Health/Case     MASYRBOX
+Maria/Armour/Vest     MAARMOUR
+Maria/Armour/Heavy    MABODARM
+Maria/Armour/Holy     MACELARM
+
+Maria/Prop/Lamp  MAFLHUM
+$limit Maria/Prop/Lamp 0
+Maria/Prop/Torch MATORCH
+$limit Maria/Prop/Torch 0
+
+Maria/Bonus/Health       MAHELBON
+Maria/Bonus/Armour       MAARMBON
+Maria/Powerup/Mega       MARIMEGA
+Maria/Powerup/Berserk    MABERSER
+Maria/Powerup/Quad       MAQUADDM
+Maria/Powerup/Quad/Shoot MAQUADSH
+Maria/Powerup/Invul MAINVULP
+Maria/Powerup/Cape MAINCAPE
+Maria/Powerup/Diary MARIAMAP
+Maria/Powerup/Hazmat MAHAZSUT
+Maria/Powerup/Candle MACANDLE
+Maria/Powerup/Minigun MADEAMAC
+
+Maria/Keys/Card   KCRPKUP
+Maria/Keys/Skull  SKLPKUP
+
+Maria/Glass/Breaking DSBOTTLE
+
+MOBILITY/SLIDE PSLIDE
+MOBILITY/DOUBLE PDJUMP
+MOBILITY/CLING PCLING
+
+Maria/Plate/Pickup MAPLATEU
+$random Maria/Plate/Insert {MAPLATE1 MAPLATE2 MAPLATE3}
+MAPLATE1 MAPLATE1
+MAPLATE2 MAPLATE2
+MAPLATE3 MAPLATE3
+
+$random Maria/Ammo/LightBullets/Single {MAPAMOM1 MAPAMOM2 MAPAMOM3}
+MAPAMOM1 MAPAMOM1
+MAPAMOM2 MAPAMOM2
+MAPAMOM3 MAPAMOM3
+
+Maria/Ammo/LightBullets/Box           MAPAMOBX
+Maria/Ammo/LightBullets/SpeedLoader   MAAMMOSL
+
+Maria/Ammo/HeavyBullets/Single        MAAMMOUP
+Maria/Ammo/HeavyBullets/Box           MAMBOXUP
+
+Maria/Ammo/Shell/Multi      MASHELUP
+Maria/Ammo/Shell/Box        MASBOXUP
+
+Maria/Ammo/Arrow/Single     MAARROUP
+Maria/Ammo/Arrow/Quiver     MAQUIVUP
+Maria/Ammo/Arrow/Box        MAABOXUP
+
+Maria/Ammo/Grenade/Single   MAGRENUP
+Maria/Ammo/Grenade/Crate    MAGBOXUP
+
+Maria/Ammo/Fuel/Jug         MAFUELUP
+Maria/Ammo/Fuel/Tank        MACANIUP
+
+Maria/Ammo/Cell/Single      MACELLUP
+Maria/Ammo/Cell/Large       MACPAKUP
+
+Maria/Ammo/Rocket/Single    MAROCKUP
+
+Maria/Ammo/BFGCell          MABFGCUP
+
+$random Pipebomb/Up  {MAPIPEU1 MAPIPEU2}
+MAPIPEU1 MAPIPEU1
+MAPIPEU2 MAPIPEU2
+Pipebomb/Box/Up    MARBOXUP
+
+Maria/Medikit/Use1         MKITUSE1
+Maria/Medikit/Use2         MKITUSE2
+
+Maria/Explosion/Far   EXPOFAR
+Maria/Explosion/Ear	  MAEXPEAR
+
+$volume Maria/Explosion/Ear 0.5
+
+$random Maria/Barrel/Explosion {MABAREX1 MABAREX2 MABAREX3 MABAREX4 MABAREX5 MABAREX6 MABAREX7}
+MABAREX1 MABAREX1
+MABAREX2 MABAREX2
+MABAREX3 MABAREX3
+MABAREX4 MABAREX4
+MABAREX5 MABAREX5
+MABAREX6 MABAREX6
+MABAREX7 MABAREX7
+$random Maria/Barrel/Shrapnel {MADEBRS1 MADEBRS2 MADEBRS3}
+MADEBRS1 MADEBRS1
+MADEBRS2 MADEBRS2
+MADEBRS3 MADEBRS3
+
+Maria/Intro/Knuckles KNUCKLED
+Maria/Intro/GameTip  MATIP
+
+$random booletricochet {DSRICCO1 DSRICCO2 DSRICCO3 DSRICCO4 DSRICCO5 DSRICCO6 DSRICCO7 DSRICCO8 DSRICCO9}
+DSRICCO1 DSRICCO1
+DSRICCO2 DSRICCO2
+DSRICCO3 DSRICCO3
+DSRICCO4 DSRICCO4
+DSRICCO5 DSRICCO5
+DSRICCO6 DSRICCO6
+DSRICCO7 DSRICCO7
+DSRICCO8 DSRICCO8
+DSRICCO9 DSRICCO9
+$volume booletricochet 0.50
+
+$random shieldricochet {SHRICCO1 SHRICCO2 SHRICCO3 SHRICCO4 SHRICCO5}
+SHRICCO1 SHRICCO1
+SHRICCO2 SHRICCO2
+SHRICCO3 SHRICCO3
+SHRICCO4 SHRICCO4
+SHRICCO5 SHRICCO5
+$volume shieldricochet 0.75
+
+$random boolethit {MAFHIT01 MAFHIT02 MAFHIT03 MAFHIT04 MAFHIT05 MAFHIT06 MAFHIT07 MAFHIT08 MAFHIT09}
+MAFHIT01 MAFHIT01
+MAFHIT02 MAFHIT02
+MAFHIT03 MAFHIT03
+MAFHIT04 MAFHIT04
+MAFHIT05 MAFHIT05
+MAFHIT06 MAFHIT06
+MAFHIT07 MAFHIT07
+MAFHIT08 MAFHIT08
+MAFHIT09 MAFHIT09
+$volume boolethit 3.0
+
+$random Maria/Chainsaw/Ricochet {MASAWWA1 MASAWWA2 MASAWWA3 MASAWWA4}
+MASAWWA1 MASAWWA1
+MASAWWA2 MASAWWA2
+MASAWWA3 MASAWWA3
+MASAWWA4 MASAWWA4
+//$volume sawricochet 0.65
+
+Maria/Checks/Kills       MACLEAR
+Maria/Checks/Items       MAFOUND
+Maria/Checks/Secrets     MACOLLE
+Maria/Checks/LowHealth   MALOWHP
+Maria/HeartBeat          MAHBEAT
+$volume Maria/HeartBeat 1.0
+
+//Dry Fires
+Maria/Dryfire GUNDRY
+misc/w_pkup         MAWPNUP
+misc/secret         MASECRET
+misc/p_pkup			magetpow	// Pickup powerup
+misc/i_pkup			maitemup	// Pickup item
+misc/k_pkup			MAGETKEY	// Pickup key
+misc/keytry         MANOKEY
+misc/ammo_pkup 		MAAMMOUP    //Pickup Ammo
+
+//Slide Kicks
+$random SlideKick/Start { SLYDSTRT1 SLYDSTRT2 SLYDSTRT3 }
+SLYDSTRT1	SLIDSTR1
+SLYDSTRT2	SLIDSTR2
+SLYDSTRT3	SLIDSTR3
+
+$random SlideKick/Loop { SLYDLUP1 SLYDLUP2 SLYDLUP3 SLYDLUP4 }
+SLYDLUP1	SLIDLUP1
+SLYDLUP2	SLIDLUP2
+SLYDLUP3	SLIDLUP3
+SLYDLUP4	SLIDLUP4
+
+$random SlideKick/End { SLYDEND1 SLYDEND2 }
+SLYDEND1	SLIDEND1
+SLYDEND2	SLIDEND2

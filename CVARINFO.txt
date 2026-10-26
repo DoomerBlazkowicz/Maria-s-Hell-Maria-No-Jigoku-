@@ -1,0 +1,110 @@
+// Maria HUD
+server float MH_HUDTrans = 1.0;
+server int MH_HUDType = 1;
+server int MH_TorsoType = 1;
+
+// Sounds
+server int antitinnitus = 0;
+server int magclicking = 0;
+
+// Skins
+server int shotguntoggle = 0;
+server int plasmarifletoggle = 0;
+server int legtoggle = 0;
+server int bonusitemtoggle = 0;
+
+server int introtoggle = 0;
+
+//toggles
+server int jpm_enable_djump = 1;
+server int jpm_enable_slide = 1;
+server int jpm_enable_latch = 1;
+
+//velocity control
+server float jpm_pref_slidevel = 12.0;
+
+//drawing
+user int jpm_draw_staminabar = 1;
+
+// Tilt++ CVars
+
+// Strafe tilting
+server bool sv_strafetilt = true;
+server bool sv_strafetiltinvert = false;
+server float sv_strafetiltspeed = 1.0;
+server float sv_strafetiltangle = 0.5;
+
+// Movement tilting
+server bool sv_movetilt = false;
+server float sv_movetiltspeed = 15.000;
+server float sv_movetiltangle = 0.015;
+server float sv_movetiltscalar = 0.2;
+
+// Turn tilting
+server bool sv_turntilt = true;
+server float sv_turntiltscalar = 1.5;
+server bool sv_turntiltinvert = false;
+
+// Underwater tilting
+server bool sv_underwatertilt = true;
+server float sv_underwatertiltspeed = 0.8;
+server float sv_underwatertiltangle = 0.2;
+server float sv_underwatertiltscalar = 1.0;
+
+// Death tilting
+server bool sv_deathtilt = true;
+
+// Flashlight+
+
+user color cl_flashlight_plus_color = "78 78 B4";
+user int cl_flashlight_plus_intensity = 512;
+
+user float cl_flashlight_plus_inner = 32.0;
+user float cl_flashlight_plus_outer = 40.0;
+
+user bool cl_flashlight_plus_second_beam = true;
+
+user float cl_flashlight_plus_color_2_mult = 2.0;
+
+user int cl_flashlight_plus_intensity_2 = 512;
+
+user float cl_flashlight_plus_inner_2 = 0.0;
+user float cl_flashlight_plus_outer_2 = 15.0;
+
+user int cl_flashlight_plus_location = 2;
+
+// Flashlight++
+
+user int cl_fpp_sound = 0;
+
+user int cl_fpp_custpos_x = 0;
+user int cl_fpp_custpos_y = 0;
+user int cl_fpp_custpos_z = 0;
+
+user bool cl_fpp_alertmonsters = true;
+
+user int cl_fpp_sway_type = 0;
+user float cl_fpp_sway_spring = 1.0;
+user float cl_fpp_sway_damping = 1.0;
+user int cl_fpp_sway_inertia = 1;
+
+user bool cl_fpp_attenuated = false;
+user bool cl_fpp_noise = false;
+user float cl_fpp_noise_min = 0.9;
+
+user bool cl_fpp_interpolate = true;
+
+// Universal Raven CVARs
+SERVER INT RKAmmoEffects = 0;
+
+// Use To Pickup
+server bool usetopickup_fulluserange = true;
+server int usetopickup_scanfreq = 1;
+user bool usetopickup_enabled = true;
+user color usetopickup_highlight_color = "ff ff ff";
+user float usetopickup_highlight_opacity = 1;
+user float usetopickup_highlight_opacity_unfocused = .4;
+user float usetopickup_highlight_range = 160;
+user float usetopickup_fadeintime = .2;
+user float usetopickup_fadeouttime = .4;
+user float usetopickup_pickupdelay = .2;

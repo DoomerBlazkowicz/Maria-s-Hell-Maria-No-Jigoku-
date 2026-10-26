@@ -1,0 +1,506 @@
+//ITEMS
+
+//Health bonus (Crosses)
+brightmap sprite BON1A0		{map "Brightmaps/Items/Bonus/CROSS1_BM.png"}
+brightmap sprite BON1B0		{map "Brightmaps/Items/Bonus/CROSS2_BM.png"}
+brightmap sprite BON1C0		{map "Brightmaps/Items/Bonus/CROSS3_BM.png"}
+brightmap sprite BON1D0		{map "Brightmaps/Items/Bonus/CROSS4_BM.png"}
+
+//Armour bonus (Crosses)
+brightmap sprite BON2A0		{map "Brightmaps/Items/Bonus/CROSS1_BM.png"}
+brightmap sprite BON2B0		{map "Brightmaps/Items/Bonus/CROSS2_BM.png"}
+brightmap sprite BON2C0		{map "Brightmaps/Items/Bonus/CROSS3_BM.png"}
+brightmap sprite BON2D0		{map "Brightmaps/Items/Bonus/CROSS4_BM.png"}
+
+//Health bonus (Alternative)
+brightmap sprite AON1A0		{map "Brightmaps/Items/Bonus/AON1A0_BM.png"}
+brightmap sprite AON1B0		{map "Brightmaps/Items/Bonus/AON1A0_BM.png"}
+brightmap sprite AON1C0		{map "Brightmaps/Items/Bonus/AON1A0_BM.png"}
+brightmap sprite AON1D0		{map "Brightmaps/Items/Bonus/AON1A0_BM.png"}
+
+//Armour bonus (Alternative)
+brightmap sprite AON2A0		{map "Brightmaps/Items/Bonus/AON2A0_BM.png"}
+brightmap sprite AON2B0		{map "Brightmaps/Items/Bonus/AON2A0_BM.png"}
+brightmap sprite AON2C0		{map "Brightmaps/Items/Bonus/AON2A0_BM.png"}
+brightmap sprite AON2D0		{map "Brightmaps/Items/Bonus/AON2A0_BM.png"}
+
+//Health bonus (Classic)
+brightmap sprite CON1B0		{map "Brightmaps/Items/Bonus/CON1B0_BM.png"}
+brightmap sprite CON1C0		{map "Brightmaps/Items/Bonus/CON1C0_BM.png"}
+brightmap sprite CON1D0		{map "Brightmaps/Items/Bonus/CON1D0_BM.png"}
+
+//Armour bonus (Classic)
+brightmap sprite CON2B0		{map "Brightmaps/Items/Bonus/CON2B0_BM.png"}
+brightmap sprite CON2C0		{map "Brightmaps/Items/Bonus/CON2C0_BM.png"}
+brightmap sprite CON2D0		{map "Brightmaps/Items/Bonus/CON2D0_BM.png"}
+
+//Health
+brightmap sprite MEDIA0		{map "Brightmaps/Items/Health/MEDIA0_BM.png"}//Medikit
+brightmap sprite STIMA0		{map "Brightmaps/Items/Health/STIMA0_BM.png"}//Stimpack
+brightmap sprite SRBPA0		{map "Brightmaps/Items/Health/SRBPA0_BM.png"}//Stim Shot Pack
+
+//Heretic/Hexen Health
+brightmap sprite HEDIA0		{map "Brightmaps/Items/Health/TDABOX_BM.png"}//Medikit
+brightmap sprite HTIMA0		{map "Brightmaps/Items/Health/TDASTM_BM.png"}//Stimpack
+brightmap sprite BERHA0		{map "Brightmaps/Items/Health/TDABOX_BM.png"}//Berserk
+brightmap sprite QDMHA0		{map "Brightmaps/Items/Health/TDABOX_BM.png"}//Quad Damage
+
+//POWERUP
+
+//Candle
+brightmap sprite COHLA0		{map "Brightmaps/Items/Power/COHLA0_BM.png"}
+brightmap sprite COHLB0		{map "Brightmaps/Items/Power/COHLB0_BM.png"}
+brightmap sprite COHLC0		{map "Brightmaps/Items/Power/COHLC0_BM.png"}
+brightmap sprite COHLD0		{map "Brightmaps/Items/Power/COHLD0_BM.png"}
+
+//Rosary
+brightmap sprite ROSAA0		{map "Brightmaps/Items/Power/ROSAA0_BM.png"}
+brightmap sprite ROSAB0		{map "Brightmaps/Items/Power/ROSAB0_BM.png"}
+brightmap sprite ROSAC0		{map "Brightmaps/Items/Power/ROSAC0_BM.png"}
+brightmap sprite ROSAD0		{map "Brightmaps/Items/Power/ROSAD0_BM.png"}
+
+//Anti Hazmat
+brightmap sprite SUITA0		{map "Brightmaps/Items/Power/SUITA0_BM.png"}
+brightmap sprite SUITB0		{map "Brightmaps/Items/Power/SUITB0_BM.png"}
+brightmap sprite SUITC0		{map "Brightmaps/Items/Power/SUITC0_BM.png"}
+brightmap sprite SUITD0		{map "Brightmaps/Items/Power/SUITD0_BM.png"}
+
+//Onslaught
+brightmap sprite QDMGA0		{map "Brightmaps/Items/Power/QDMGA0_BM.png"}
+brightmap sprite QDMGB0		{map "Brightmaps/Items/Power/QDMGB0_BM.png"}
+brightmap sprite QDMGC0		{map "Brightmaps/Items/Power/QDMGC0_BM.png"}
+brightmap sprite QDMGD0		{map "Brightmaps/Items/Power/QDMGD0_BM.png"}
+
+//Berserk
+brightmap sprite BERSA0		{map "Brightmaps/Items/Power/BERSA0_BM.png"}
+brightmap sprite BERSB0		{map "Brightmaps/Items/Power/BERSB0_BM.png"}
+brightmap sprite BERSC0		{map "Brightmaps/Items/Power/BERSC0_BM.png"}
+brightmap sprite BERSD0		{map "Brightmaps/Items/Power/BERSD0_BM.png"}
+
+//Overkill
+/*brightmap sprite SUITA0		{map "Brightmaps/Items/Power/SUITA0_BM.png"}
+brightmap sprite SUITB0		{map "Brightmaps/Items/Power/SUITB0_BM.png"}
+brightmap sprite SUITC0		{map "Brightmaps/Items/Power/SUITC0_BM.png"}
+brightmap sprite SUITD0		{map "Brightmaps/Items/Power/SUITD0_BM.png"}*/
+
+//Megastone
+brightmap sprite MGSTA0		{map "Brightmaps/Items/Power/MGSTA0_BM.png"}
+brightmap sprite MGSTB0		{map "Brightmaps/Items/Power/MGSTB0_BM.png"}
+brightmap sprite MGSTC0		{map "Brightmaps/Items/Power/MGSTC0_BM.png"}
+brightmap sprite MGSTD0		{map "Brightmaps/Items/Power/MGSTD0_BM.png"} 
+brightmap sprite MGSTE0		{map "Brightmaps/Items/Power/MGSTE0_BM.png"}
+brightmap sprite MGSTF0		{map "Brightmaps/Items/Power/MGSTF0_BM.png"}
+
+//Meow
+brightmap sprite PL11A0		{map "Brightmaps/Items/Power/PL11A0_BM.png"}
+
+//AMMOS
+
+//Cell
+brightmap sprite BATTA0		{map "Brightmaps/Items/Ammo/BATTA0_BM.png"}
+brightmap sprite BATTB0		{map "Brightmaps/Items/Ammo/BATTB0_BM.png"}
+brightmap sprite BATTC0		{map "Brightmaps/Items/Ammo/BATTC0_BM.png"}
+brightmap sprite BATTD0		{map "Brightmaps/Items/Ammo/BATTD0_BM.png"}
+brightmap sprite BATTE0		{map "Brightmaps/Items/Ammo/BATTE0_BM.png"}
+brightmap sprite BATTF0		{map "Brightmaps/Items/Ammo/BATTF0_BM.png"}
+
+//Cell Pack
+brightmap sprite BATPA0		{map "Brightmaps/Items/Ammo/BATPA0_BM.png"}
+brightmap sprite BATPB0		{map "Brightmaps/Items/Ammo/BATPB0_BM.png"}
+brightmap sprite BATPC0		{map "Brightmaps/Items/Ammo/BATPC0_BM.png"}
+brightmap sprite BATPD0		{map "Brightmaps/Items/Ammo/BATPD0_BM.png"}
+brightmap sprite BATPE0		{map "Brightmaps/Items/Ammo/BATPE0_BM.png"}
+brightmap sprite BATPF0		{map "Brightmaps/Items/Ammo/BATPF0_BM.png"}
+
+//BFG Cell
+brightmap sprite BFGAA0		{map "Brightmaps/Items/Ammo/BFGAA0_BM.png"}
+brightmap sprite BFGAB0		{map "Brightmaps/Items/Ammo/BFGAA0_BM.png"}
+brightmap sprite BFGAC0		{map "Brightmaps/Items/Ammo/BFGAA0_BM.png"}
+brightmap sprite BFGAD0		{map "Brightmaps/Items/Ammo/BFGAA0_BM.png"}
+
+
+//WEAPON PICKUPS
+brightmap sprite PLZPA0		{map "Brightmaps/Weapons/Pickups/PLZPA0_BM.png"}
+brightmap sprite ALZPA0		{map "Brightmaps/Weapons/Pickups/ALZPA0_BM.png"}
+
+//WEAPONS
+
+//Rifle
+brightmap sprite RGUNA0		{map "Brightmaps/Weapons/4.1-Abakan/RGUNA0_BM.png"disablefullbright}
+brightmap sprite ZGUNA0		{map "Brightmaps/Weapons/4.1-Abakan/ZGUNA0_BM.png"disablefullbright}
+brightmap sprite RGUFB0		{map "Brightmaps/Weapons/4.1-Abakan/Fire/RGUFB0_BM.png"disablefullbright}
+brightmap sprite RGUFC0		{map "Brightmaps/Weapons/4.1-Abakan/Fire/RGUFC0_BM.png"disablefullbright}
+brightmap sprite RGUFD0		{map "Brightmaps/Weapons/4.1-Abakan/Fire/RGUFD0_BM.png"disablefullbright}
+brightmap sprite ZGUFB0		{map "Brightmaps/Weapons/4.1-Abakan/Fire/Zoomed/ZGUFB0_BM.png"disablefullbright}
+brightmap sprite ZGUFC0		{map "Brightmaps/Weapons/4.1-Abakan/Fire/Zoomed/ZGUFC0_BM.png"disablefullbright}
+brightmap sprite ZGUFD0		{map "Brightmaps/Weapons/4.1-Abakan/Fire/Zoomed/ZGUFD0_BM.png"disablefullbright}
+brightmap sprite RGUSA0		{map "Brightmaps/Weapons/4.1-Abakan/Zoom/RGUZA0_BM.png"disablefullbright}
+brightmap sprite RGUSB0		{map "Brightmaps/Weapons/4.1-Abakan/Zoom/RGUZB0_BM.png"disablefullbright}
+brightmap sprite RGUSC0		{map "Brightmaps/Weapons/4.1-Abakan/Zoom/RGUZC0_BM.png"disablefullbright}
+brightmap sprite RGUSA0		{map "Brightmaps/Weapons/4.1-Abakan/Select/RGUSA0_BM.png"disablefullbright}
+brightmap sprite RGUSB0		{map "Brightmaps/Weapons/4.1-Abakan/Select/RGUSB0_BM.png"disablefullbright}
+brightmap sprite RGUSC0		{map "Brightmaps/Weapons/4.1-Abakan/Select/RGUSC0_BM.png"disablefullbright}
+brightmap sprite RGUSD0		{map "Brightmaps/Weapons/4.1-Abakan/Select/RGUSD0_BM.png"disablefullbright}
+brightmap sprite RGUSE0		{map "Brightmaps/Weapons/4.1-Abakan/Select/RGUSE0_BM.png"disablefullbright}
+brightmap sprite RGUDA0		{map "Brightmaps/Weapons/4.1-Abakan/Deselect/RGUDA0_BM.png"disablefullbright}
+brightmap sprite RGUDB0		{map "Brightmaps/Weapons/4.1-Abakan/Deselect/RGUDB0_BM.png"disablefullbright}
+brightmap sprite RGUDC0		{map "Brightmaps/Weapons/4.1-Abakan/Deselect/RGUDC0_BM.png"disablefullbright}
+brightmap sprite RGUDD0		{map "Brightmaps/Weapons/4.1-Abakan/Deselect/RGUDD0_BM.png"disablefullbright}
+brightmap sprite RGUDE0		{map "Brightmaps/Weapons/4.1-Abakan/Deselect/RGUDE0_BM.png"disablefullbright}
+brightmap sprite RGUKA0		{map "Brightmaps/Weapons/4.1-Abakan/Melee/RGUKA0_BM.png"disablefullbright}
+brightmap sprite RGUKB0		{map "Brightmaps/Weapons/4.1-Abakan/Melee/RGUKB0_BM.png"disablefullbright}
+brightmap sprite RGUKC0		{map "Brightmaps/Weapons/4.1-Abakan/Melee/RGUKC0_BM.png"disablefullbright}
+brightmap sprite RGUKD0		{map "Brightmaps/Weapons/4.1-Abakan/Melee/RGUKD0_BM.png"disablefullbright}
+brightmap sprite RGURA0		{map "Brightmaps/Weapons/4.1-Abakan/Reload/RGURA0_BM.png"disablefullbright}
+brightmap sprite RGURB0		{map "Brightmaps/Weapons/4.1-Abakan/Reload/RGURB0_BM.png"disablefullbright}
+brightmap sprite RGURC0		{map "Brightmaps/Weapons/4.1-Abakan/Reload/RGURC0_BM.png"disablefullbright}
+brightmap sprite RGURD0		{map "Brightmaps/Weapons/4.1-Abakan/Reload/RGURD0_BM.png"disablefullbright}
+brightmap sprite RGURE0		{map "Brightmaps/Weapons/4.1-Abakan/Reload/RGURE0_BM.png"disablefullbright}
+brightmap sprite RGURF0		{map "Brightmaps/Weapons/4.1-Abakan/Reload/RGURF0_BM.png"disablefullbright}
+brightmap sprite RGURG0		{map "Brightmaps/Weapons/4.1-Abakan/Reload/RGURG0_BM.png"disablefullbright}
+brightmap sprite RGURH0		{map "Brightmaps/Weapons/4.1-Abakan/Reload/RGURH0_BM.png"disablefullbright}
+brightmap sprite RGURI0		{map "Brightmaps/Weapons/4.1-Abakan/Reload/RGURI0_BM.png"disablefullbright}
+brightmap sprite RGURJ0		{map "Brightmaps/Weapons/4.1-Abakan/Reload/RGURJ0_BM.png"disablefullbright}
+brightmap sprite RGURK0		{map "Brightmaps/Weapons/4.1-Abakan/Reload/RGURK0_BM.png"disablefullbright}
+brightmap sprite RGURL0		{map "Brightmaps/Weapons/4.1-Abakan/Reload/RGURL0_BM.png"disablefullbright}
+brightmap sprite RGURM0		{map "Brightmaps/Weapons/4.1-Abakan/Reload/RGURM0_BM.png"disablefullbright}
+brightmap sprite RGURN0		{map "Brightmaps/Weapons/4.1-Abakan/Reload/RGURN0_BM.png"disablefullbright}
+brightmap sprite RGURO0		{map "Brightmaps/Weapons/4.1-Abakan/Reload/RGURO0_BM.png"disablefullbright}
+brightmap sprite RGURP0		{map "Brightmaps/Weapons/4.1-Abakan/Reload/RGURP0_BM.png"disablefullbright}
+brightmap sprite RGURQ0		{map "Brightmaps/Weapons/4.1-Abakan/Reload/RGURQ0_BM.png"disablefullbright}
+brightmap sprite RGURR0		{map "Brightmaps/Weapons/4.1-Abakan/Reload/RGURR0_BM.png"disablefullbright}
+brightmap sprite RGURS0		{map "Brightmaps/Weapons/4.1-Abakan/Reload/RGURS0_BM.png"disablefullbright}
+brightmap sprite RGURT0		{map "Brightmaps/Weapons/4.1-Abakan/Reload/RGURT0_BM.png"disablefullbright}
+brightmap sprite RGURU0		{map "Brightmaps/Weapons/4.1-Abakan/Reload/RGURU0_BM.png"disablefullbright}
+brightmap sprite RGURV0		{map "Brightmaps/Weapons/4.1-Abakan/Reload/RGURV0_BM.png"disablefullbright}
+brightmap sprite RGURW0		{map "Brightmaps/Weapons/4.1-Abakan/Reload/RGURW0_BM.png"disablefullbright}
+brightmap sprite RGURX0		{map "Brightmaps/Weapons/4.1-Abakan/Reload/RGURX0_BM.png"disablefullbright}
+brightmap sprite RGURY0		{map "Brightmaps/Weapons/4.1-Abakan/Reload/RGURY0_BM.png"disablefullbright}
+brightmap sprite RGURZ0		{map "Brightmaps/Weapons/4.1-Abakan/Reload/RGURZ0_BM.png"disablefullbright}
+brightmap sprite RG2RA0  	{map "Brightmaps/Weapons/4.1-Abakan/Reload/RG2RA0_BM.png"disablefullbright}
+brightmap sprite RG2RB0  	{map "Brightmaps/Weapons/4.1-Abakan/Reload/RG2RB0_BM.png"disablefullbright}
+brightmap sprite RG2RC0  	{map "Brightmaps/Weapons/4.1-Abakan/Reload/RG2RC0_BM.png"disablefullbright}
+brightmap sprite RG2RD0  	{map "Brightmaps/Weapons/4.1-Abakan/Reload/RG2RD0_BM.png"disablefullbright}
+brightmap sprite RG2RE0  	{map "Brightmaps/Weapons/4.1-Abakan/Reload/RG2RE0_BM.png"disablefullbright}
+brightmap sprite RG2RF0  	{map "Brightmaps/Weapons/4.1-Abakan/Reload/RG2RF0_BM.png"disablefullbright}
+brightmap sprite RG2RG0  	{map "Brightmaps/Weapons/4.1-Abakan/Reload/RG2RG0_BM.png"disablefullbright}
+brightmap sprite RG2RH0  	{map "Brightmaps/Weapons/4.1-Abakan/Reload/RG2RH0_BM.png"disablefullbright}
+brightmap sprite RG2RI0  	{map "Brightmaps/Weapons/4.1-Abakan/Reload/RG2RI0_BM.png"disablefullbright}
+brightmap sprite RG2RJ0  	{map "Brightmaps/Weapons/4.1-Abakan/Reload/RG2RJ0_BM.png"disablefullbright}
+brightmap sprite RG2RK0  	{map "Brightmaps/Weapons/4.1-Abakan/Reload/RG2RK0_BM.png"disablefullbright}
+brightmap sprite RG2RL0  	{map "Brightmaps/Weapons/4.1-Abakan/Reload/RG2RL0_BM.png"disablefullbright}
+brightmap sprite RG2RM0  	{map "Brightmaps/Weapons/4.1-Abakan/Reload/RG2RM0_BM.png"disablefullbright}
+brightmap sprite RG2RN0  	{map "Brightmaps/Weapons/4.1-Abakan/Reload/RG2RN0_BM.png"disablefullbright}
+brightmap sprite RG2RO0  	{map "Brightmaps/Weapons/4.1-Abakan/Reload/RG2RO0_BM.png"disablefullbright}
+brightmap sprite RG2RP0  	{map "Brightmaps/Weapons/4.1-Abakan/Reload/RG2RP0_BM.png"disablefullbright}
+brightmap sprite RG2RQ0  	{map "Brightmaps/Weapons/4.1-Abakan/Reload/RG2RQ0_BM.png"disablefullbright}
+brightmap sprite RG2RR0  	{map "Brightmaps/Weapons/4.1-Abakan/Reload/RG2RR0_BM.png"disablefullbright}
+brightmap sprite RG2RS0  	{map "Brightmaps/Weapons/4.1-Abakan/Reload/RG2RS0_BM.png"disablefullbright}
+brightmap sprite RG2RT0  	{map "Brightmaps/Weapons/4.1-Abakan/Reload/RG2RT0_BM.png"disablefullbright}
+brightmap sprite RG2RU0  	{map "Brightmaps/Weapons/4.1-Abakan/Reload/RG2RU0_BM.png"disablefullbright}
+brightmap sprite RG2RV0  	{map "Brightmaps/Weapons/4.1-Abakan/Reload/RG2RV0_BM.png"disablefullbright}
+brightmap sprite RG2RW0  	{map "Brightmaps/Weapons/4.1-Abakan/Reload/RG2RW0_BM.png"disablefullbright}
+brightmap sprite RG2RX0  	{map "Brightmaps/Weapons/4.1-Abakan/Reload/RG2RX0_BM.png"disablefullbright}
+
+//Plasma Rifle
+brightmap sprite PLZMA0		{map "Brightmaps/Weapons/6.1-Plasma Rifle/PLZMA0_BM.png"}
+
+brightmap sprite PLZKA0		{map "Brightmaps/Weapons/6.1-Plasma Rifle/Melee/PLZKA0_BM.png"}
+brightmap sprite PLZKB0		{map "Brightmaps/Weapons/6.1-Plasma Rifle/Melee/PLZKB0_BM.png"}
+
+brightmap sprite PLZDA0		{map "Brightmaps/Weapons/6.1-Plasma Rifle/Deselect/PLZDA0_BM.png"}
+brightmap sprite PLZDB0		{map "Brightmaps/Weapons/6.1-Plasma Rifle/Deselect/PLZDB0_BM.png"}
+brightmap sprite PLZDC0		{map "Brightmaps/Weapons/6.1-Plasma Rifle/Deselect/PLZDC0_BM.png"}
+brightmap sprite PLZDD0		{map "Brightmaps/Weapons/6.1-Plasma Rifle/Deselect/PLZDD0_BM.png"}
+brightmap sprite PLZDE0		{map "Brightmaps/Weapons/6.1-Plasma Rifle/Deselect/PLZDE0_BM.png"}
+
+brightmap sprite PLZSC0		{map "Brightmaps/Weapons/6.1-Plasma Rifle/Select/PLZSC0_BM.png"}
+brightmap sprite PLZSD0		{map "Brightmaps/Weapons/6.1-Plasma Rifle/Select/PLZSD0_BM.png"}
+brightmap sprite PLZSE0		{map "Brightmaps/Weapons/6.1-Plasma Rifle/Select/PLZSE0_BM.png"}
+
+brightmap sprite PLZFB0		{map "Brightmaps/Weapons/6.1-Plasma Rifle/Fire/PLZFB0_BM.png"}
+brightmap sprite PLZFC0		{map "Brightmaps/Weapons/6.1-Plasma Rifle/Fire/PLZFC0_BM.png"}
+brightmap sprite PLZSD0		{map "Brightmaps/Weapons/6.1-Plasma Rifle/Fire/PLZMA0_BM.png"}
+
+brightmap sprite RLZFB0		{map "Brightmaps/Weapons/6.1-Plasma Rifle/Fire/PLZFB0_BM.png"}
+brightmap sprite RLZFC0		{map "Brightmaps/Weapons/6.1-Plasma Rifle/Fire/PLZFC0_BM.png"}
+
+brightmap sprite PLZCA0		{map "Brightmaps/Weapons/6.1-Plasma Rifle/Cooldown/PLZCA0_BM.png"}
+brightmap sprite PLZCB0		{map "Brightmaps/Weapons/6.1-Plasma Rifle/Cooldown/PLZCB0_BM.png"}
+brightmap sprite PLZCC0		{map "Brightmaps/Weapons/6.1-Plasma Rifle/Cooldown/PLZCC0_BM.png"}
+brightmap sprite PLZCG0		{map "Brightmaps/Weapons/6.1-Plasma Rifle/Cooldown/PLZCC0_BM.png"}
+brightmap sprite PLZCH0		{map "Brightmaps/Weapons/6.1-Plasma Rifle/Cooldown/PLZCB0_BM.png"}
+brightmap sprite PLZCI0		{map "Brightmaps/Weapons/6.1-Plasma Rifle/Cooldown/PLZCA0_BM.png"}
+
+//PewPewGun
+
+brightmap sprite ALPDA0		{map "Brightmaps/Weapons/6.1.2-PewPewGun/Deselect/ALPDA0_BM.png"}
+brightmap sprite ALPDB0		{map "Brightmaps/Weapons/6.1.2-PewPewGun/Deselect/ALPDB0_BM.png"}
+brightmap sprite ALPDC0		{map "Brightmaps/Weapons/6.1.2-PewPewGun/Deselect/ALPDC0_BM.png"}
+brightmap sprite ALRDD0		{map "Brightmaps/Weapons/6.1.2-PewPewGun/Deselect/ALPDD0_BM.png"}
+brightmap sprite ALRDE0		{map "Brightmaps/Weapons/6.1.2-PewPewGun/Deselect/ALPDE0_BM.png"}
+
+brightmap sprite ALPSA0		{map "Brightmaps/Weapons/6.1.2-PewPewGun/Select/ALPSA0_BM.png"}
+brightmap sprite ALPSB0		{map "Brightmaps/Weapons/6.1.2-PewPewGun/Select/ALPSB0_BM.png"}
+brightmap sprite ALPSC0		{map "Brightmaps/Weapons/6.1.2-PewPewGun/Select/ALPSC0_BM.png"}
+brightmap sprite ALRSD0		{map "Brightmaps/Weapons/6.1.2-PewPewGun/Select/ALPSD0_BM.png"}
+brightmap sprite ALRSE0		{map "Brightmaps/Weapons/6.1.2-PewPewGun/Select/ALPSE0_BM.png"}
+
+brightmap sprite ALPLA0		{map "Brightmaps/Weapons/6.1.2-PewPewGun/ALPLA0_BM.png"}
+brightmap sprite ALPEA0		{map "Brightmaps/Weapons/6.1.2-PewPewGun/ALPLA0_BM.png"}
+
+brightmap sprite ALPCA0		{map "Brightmaps/Weapons/6.1.2-PewPewGun/Cooldown/ALPCA0_BM.png"}
+brightmap sprite ALPCB0		{map "Brightmaps/Weapons/6.1.2-PewPewGun/Cooldown/ALPCB0_BM.png"}
+brightmap sprite ALPCC0		{map "Brightmaps/Weapons/6.1.2-PewPewGun/Cooldown/ALPCC0_BM.png"}
+brightmap sprite ALPCD0		{map "Brightmaps/Weapons/6.1.2-PewPewGun/Cooldown/ALPCC0_BM.png"}
+brightmap sprite ALPCE0		{map "Brightmaps/Weapons/6.1.2-PewPewGun/Cooldown/ALPCB0_BM.png"}
+brightmap sprite ALPCF0		{map "Brightmaps/Weapons/6.1.2-PewPewGun/Cooldown/ALPCA0_BM.png"}
+
+brightmap sprite ALPFB0		{map "Brightmaps/Weapons/6.1.2-PewPewGun/Fire/ALPFB0_BM.png"}
+brightmap sprite ALPFC0		{map "Brightmaps/Weapons/6.1.2-PewPewGun/Fire/ALPFC0_BM.png"}
+brightmap sprite ALPFD0		{map "Brightmaps/Weapons/6.1.2-PewPewGun/Fire/ALPLA0_BM.png"}
+brightmap sprite ALRFB0		{map "Brightmaps/Weapons/6.1.2-PewPewGun/Fire/ALPFB0_BM.png"}
+brightmap sprite ALRFC0		{map "Brightmaps/Weapons/6.1.2-PewPewGun/Fire/ALPFC0_BM.png"}
+
+brightmap sprite ALPRA0		{map "Brightmaps/Weapons/6.1.2-PewPewGun/Reload/ALPRA0_BM.png"}
+brightmap sprite ALPRB0		{map "Brightmaps/Weapons/6.1.2-PewPewGun/Reload/ALPRB0_BM.png"}
+brightmap sprite ALPRC0		{map "Brightmaps/Weapons/6.1.2-PewPewGun/Reload/ALPRC0_BM.png"}
+brightmap sprite ALPRD0		{map "Brightmaps/Weapons/6.1.2-PewPewGun/Reload/ALPRD0_BM.png"}
+brightmap sprite ALPRE0		{map "Brightmaps/Weapons/6.1.2-PewPewGun/Reload/ALPRE0_BM.png"}
+brightmap sprite ALPRF0		{map "Brightmaps/Weapons/6.1.2-PewPewGun/Reload/ALPRF0_BM.png"}
+brightmap sprite ALPRG0		{map "Brightmaps/Weapons/6.1.2-PewPewGun/Reload/ALPRG0_BM.png"}
+brightmap sprite ALPRH0		{map "Brightmaps/Weapons/6.1.2-PewPewGun/Reload/ALPRH0_BM.png"}
+brightmap sprite ALPRI0		{map "Brightmaps/Weapons/6.1.2-PewPewGun/Reload/ALPRI0_BM.png"}
+brightmap sprite ALPRJ0		{map "Brightmaps/Weapons/6.1.2-PewPewGun/Reload/ALPRJ0_BM.png"}
+brightmap sprite ALPRK0		{map "Brightmaps/Weapons/6.1.2-PewPewGun/Reload/ALPRK0_BM.png"}
+brightmap sprite ALPRL0		{map "Brightmaps/Weapons/6.1.2-PewPewGun/Reload/ALPRL0_BM.png"}
+brightmap sprite ALPRM0		{map "Brightmaps/Weapons/6.1.2-PewPewGun/Reload/ALPRM0_BM.png"}
+brightmap sprite ALPRN0		{map "Brightmaps/Weapons/6.1.2-PewPewGun/Reload/ALPRN0_BM.png"}
+brightmap sprite ALPRO0		{map "Brightmaps/Weapons/6.1.2-PewPewGun/Reload/ALPRO0_BM.png"}
+
+brightmap sprite ALPKA0		{map "Brightmaps/Weapons/6.1.2-PewPewGun/Melee/ALPKA0_BM.png"}
+brightmap sprite ALPKB0		{map "Brightmaps/Weapons/6.1.2-PewPewGun/Melee/ALPKB0_BM.png"}
+brightmap sprite ALPKC0		{map "Brightmaps/Weapons/6.1.2-PewPewGun/Melee/ALPKC0_BM.png"}
+brightmap sprite ALPKD0		{map "Brightmaps/Weapons/6.1.2-PewPewGun/Melee/ALPKD0_BM.png"}
+
+//Rocket Launcher
+brightmap sprite MISGA0		{map "Brightmaps/Weapons/7.1-Rocket Launcher/MISGA0_BM.png"}
+brightmap sprite MISGB0		{map "Brightmaps/Weapons/7.1-Rocket Launcher/MISGA0_BM.png"}
+
+brightmap sprite MISDA0		{map "Brightmaps/Weapons/7.1-Rocket Launcher/Deselect/MISDA0_BM.png"}
+brightmap sprite MISDB0		{map "Brightmaps/Weapons/7.1-Rocket Launcher/Deselect/MISDB0_BM.png"}
+brightmap sprite MISDC0		{map "Brightmaps/Weapons/7.1-Rocket Launcher/Deselect/MISDC0_BM.png"}
+brightmap sprite MISDD0		{map "Brightmaps/Weapons/7.1-Rocket Launcher/Deselect/MISDD0_BM.png"}
+brightmap sprite MISDE0		{map "Brightmaps/Weapons/7.1-Rocket Launcher/Deselect/MISDE0_BM.png"}
+brightmap sprite MIEDA0		{map "Brightmaps/Weapons/7.1-Rocket Launcher/Deselect/MISDA0_BM.png"}
+brightmap sprite MIEDB0		{map "Brightmaps/Weapons/7.1-Rocket Launcher/Deselect/MISDB0_BM.png"}
+brightmap sprite MIEDC0		{map "Brightmaps/Weapons/7.1-Rocket Launcher/Deselect/MISDC0_BM.png"}
+brightmap sprite MIEDD0		{map "Brightmaps/Weapons/7.1-Rocket Launcher/Deselect/MISDD0_BM.png"}
+brightmap sprite MIEDE0		{map "Brightmaps/Weapons/7.1-Rocket Launcher/Deselect/MISDE0_BM.png"}
+
+brightmap sprite MISSA0		{map "Brightmaps/Weapons/7.1-Rocket Launcher/Select/MISSA0_BM.png"}
+brightmap sprite MISSB0		{map "Brightmaps/Weapons/7.1-Rocket Launcher/Select/MISSB0_BM.png"}
+brightmap sprite MISSC0		{map "Brightmaps/Weapons/7.1-Rocket Launcher/Select/MISSC0_BM.png"}
+brightmap sprite MISSD0		{map "Brightmaps/Weapons/7.1-Rocket Launcher/Select/MISSD0_BM.png"}
+brightmap sprite MISSE0		{map "Brightmaps/Weapons/7.1-Rocket Launcher/Select/MISSE0_BM.png"}
+brightmap sprite MIESA0		{map "Brightmaps/Weapons/7.1-Rocket Launcher/Select/MISSA0_BM.png"}
+brightmap sprite MIESB0		{map "Brightmaps/Weapons/7.1-Rocket Launcher/Select/MISSB0_BM.png"}
+brightmap sprite MIESC0		{map "Brightmaps/Weapons/7.1-Rocket Launcher/Select/MISSC0_BM.png"}
+brightmap sprite MIESD0		{map "Brightmaps/Weapons/7.1-Rocket Launcher/Select/MISSD0_BM.png"}
+brightmap sprite MIESE0		{map "Brightmaps/Weapons/7.1-Rocket Launcher/Select/MISSE0_BM.png"}
+
+brightmap sprite MISRA0		{map "Brightmaps/Weapons/7.1-Rocket Launcher/Loading/MISRA0_BM.png"}
+brightmap sprite MISRB0		{map "Brightmaps/Weapons/7.1-Rocket Launcher/Loading/MISRB0_BM.png"}
+brightmap sprite MISRC0		{map "Brightmaps/Weapons/7.1-Rocket Launcher/Loading/MISRB0_BM.png"}
+brightmap sprite MISRD0		{map "Brightmaps/Weapons/7.1-Rocket Launcher/Loading/MISRA0_BM.png"}
+
+brightmap sprite MISKA0		{map "Brightmaps/Weapons/7.1-Rocket Launcher/Melee/MISKA0_BM.png"}
+brightmap sprite MISKB0		{map "Brightmaps/Weapons/7.1-Rocket Launcher/Melee/MISKB0_BM.png"}
+brightmap sprite MISKC0		{map "Brightmaps/Weapons/7.1-Rocket Launcher/Melee/MISKC0_BM.png"}
+brightmap sprite MISKD0		{map "Brightmaps/Weapons/7.1-Rocket Launcher/Melee/MISKD0_BM.png"}
+brightmap sprite MIEKA0		{map "Brightmaps/Weapons/7.1-Rocket Launcher/Melee/MISKA0_BM.png"}
+brightmap sprite MIEKB0		{map "Brightmaps/Weapons/7.1-Rocket Launcher/Melee/MISKB0_BM.png"}
+brightmap sprite MIEKC0		{map "Brightmaps/Weapons/7.1-Rocket Launcher/Melee/MISKC0_BM.png"}
+brightmap sprite MIEKD0		{map "Brightmaps/Weapons/7.1-Rocket Launcher/Melee/MISKD0_BM.png"}
+
+brightmap sprite MISFA0		{map "Brightmaps/Weapons/7.1-Rocket Launcher/Fire/MISFA0_BM.png"}
+brightmap sprite MISFB0		{map "Brightmaps/Weapons/7.1-Rocket Launcher/Fire/MISFB0_BM.png"}
+brightmap sprite MISFC0		{map "Brightmaps/Weapons/7.1-Rocket Launcher/Fire/MISFC0_BM.png"}
+brightmap sprite MISFD0		{map "Brightmaps/Weapons/7.1-Rocket Launcher/Fire/MISFD0_BM.png"}
+brightmap sprite MISFE0		{map "Brightmaps/Weapons/7.1-Rocket Launcher/Fire/MISFE0_BM.png"}
+brightmap sprite MISFF0		{map "Brightmaps/Weapons/7.1-Rocket Launcher/Fire/MISFF0_BM.png"}
+brightmap sprite MISFG0		{map "Brightmaps/Weapons/7.1-Rocket Launcher/Fire/MISFG0_BM.png"}
+brightmap sprite MISFH0		{map "Brightmaps/Weapons/7.1-Rocket Launcher/Fire/MISFH0_BM.png"}
+brightmap sprite MISFI0		{map "Brightmaps/Weapons/7.1-Rocket Launcher/Fire/MISFI0_BM.png"}
+brightmap sprite MISFJ0		{map "Brightmaps/Weapons/7.1-Rocket Launcher/Fire/MISFJ0_BM.png"}
+
+brightmap sprite MISZA0		{map "Brightmaps/Weapons/7.1-Rocket Launcher/Zoom/MISZA0_BM.png"}
+brightmap sprite MISZB0		{map "Brightmaps/Weapons/7.1-Rocket Launcher/Zoom/MISZB0_BM.png"}
+brightmap sprite MISZC0		{map "Brightmaps/Weapons/7.1-Rocket Launcher/Zoom/MISZC0_BM.png"}
+brightmap sprite MISZD0		{map "Brightmaps/Weapons/7.1-Rocket Launcher/Zoom/MISZD0_BM.png"}
+brightmap sprite MISZE0		{map "Brightmaps/Weapons/7.1-Rocket Launcher/Zoom/MISZE0_BM.png"}
+brightmap sprite MISZF0		{map "Brightmaps/Weapons/7.1-Rocket Launcher/Zoom/MISZF0_BM.png"}
+
+//BFG
+
+brightmap sprite BFGGA0		{map "Brightmaps/Weapons/7.2-BFG/BFGGA0_BM.png"}
+
+brightmap sprite BFGDA0		{map "Brightmaps/Weapons/7.2-BFG/Deselect/BFGDA0_BM.png"}
+brightmap sprite BFGDB0		{map "Brightmaps/Weapons/7.2-BFG/Deselect/BFGDB0_BM.png"}
+brightmap sprite BFGDC0		{map "Brightmaps/Weapons/7.2-BFG/Deselect/BFGDC0_BM.png"}
+brightmap sprite BFGDD0		{map "Brightmaps/Weapons/7.2-BFG/Deselect/BFGDD0_BM.png"}
+brightmap sprite BFGDE0		{map "Brightmaps/Weapons/7.2-BFG/Deselect/BFGDE0_BM.png"}
+brightmap sprite BFGDF0		{map "Brightmaps/Weapons/7.1-BFG/Deselect/BFGDF0_BM.png"}
+brightmap sprite BFGDG0		{map "Brightmaps/Weapons/7.1-BFG/Deselect/BFGDG0_BM.png"}
+brightmap sprite BFGDH0		{map "Brightmaps/Weapons/7.2-BFG/Deselect/BFGDH0_BM.png"}
+brightmap sprite BFGDI0		{map "Brightmaps/Weapons/7.1-BFG/Deselect/BFGDI0_BM.png"}
+brightmap sprite BFGDJ0		{map "Brightmaps/Weapons/7.1-BFG/Deselect/BFGDJ0_BM.png"}
+
+brightmap sprite BFGSA0		{map "Brightmaps/Weapons/7.2-BFG/Select/BFGSA0_BM.png"}
+brightmap sprite BFGSB0		{map "Brightmaps/Weapons/7.2-BFG/Select/BFGSB0_BM.png"}
+brightmap sprite BFGSC0		{map "Brightmaps/Weapons/7.2-BFG/Select/BFGSC0_BM.png"}
+brightmap sprite BFGSD0		{map "Brightmaps/Weapons/7.2-BFG/Select/BFGSD0_BM.png"}
+brightmap sprite BFGSE0		{map "Brightmaps/Weapons/7.2-BFG/Select/BFGSE0_BM.png"}
+brightmap sprite BFGSF0		{map "Brightmaps/Weapons/7.1-BFG/Select/BFGSF0_BM.png"}
+brightmap sprite BFGSG0		{map "Brightmaps/Weapons/7.1-BFG/Select/BFGSG0_BM.png"}
+brightmap sprite BFGSH0		{map "Brightmaps/Weapons/7.2-BFG/Select/BFGSH0_BM.png"}
+brightmap sprite BFGSI0		{map "Brightmaps/Weapons/7.1-BFG/Select/BFGSI0_BM.png"}
+brightmap sprite BFGSJ0		{map "Brightmaps/Weapons/7.1-BFG/Select/BFGSJ0_BM.png"}
+
+brightmap sprite BFGCA0		{map "Brightmaps/Weapons/7.2-BFG/Charge/BFGCA0_BM.png"}
+brightmap sprite BFGCB0		{map "Brightmaps/Weapons/7.2-BFG/Charge/BFGCB0_BM.png"}
+brightmap sprite BFGCC0		{map "Brightmaps/Weapons/7.2-BFG/Charge/BFGCC0_BM.png"}
+brightmap sprite BFGCD0		{map "Brightmaps/Weapons/7.2-BFG/Charge/BFGCD0_BM.png"}
+brightmap sprite BFGCE0		{map "Brightmaps/Weapons/7.2-BFG/Charge/BFGCE0_BM.png"}
+brightmap sprite BFGCF0		{map "Brightmaps/Weapons/7.2-BFG/Charge/BFGCF0_BM.png"}
+brightmap sprite BFGCG0		{map "Brightmaps/Weapons/7.2-BFG/Charge/BFGCG0_BM.png"}
+brightmap sprite BFGCH0		{map "Brightmaps/Weapons/7.2-BFG/Charge/BFGCH0_BM.png"}
+
+brightmap sprite BFGFD0		{map "Brightmaps/Weapons/7.2-BFG/Fire/BFGFD0_BM.png"}
+brightmap sprite BFGFE0		{map "Brightmaps/Weapons/7.2-BFG/Fire/BFGFE0_BM.png"}
+brightmap sprite BFGFF0		{map "Brightmaps/Weapons/7.2-BFG/Fire/BFGFF0_BM.png"}
+brightmap sprite BFGFG0		{map "Brightmaps/Weapons/7.2-BFG/Fire/BFGFG0_BM.png"}
+brightmap sprite BFGFH0		{map "Brightmaps/Weapons/7.2-BFG/Fire/BFGFH0_BM.png"}
+brightmap sprite BFGFI0		{map "Brightmaps/Weapons/7.1-BFG/Fire/BFGFI0_BM.png"}
+brightmap sprite BFGFJ0		{map "Brightmaps/Weapons/7.1-BFG/Fire/BFGFJ0_BM.png"}
+brightmap sprite BFGFK0		{map "Brightmaps/Weapons/7.1-BFG/Fire/BFGFK0_BM.png"}
+brightmap sprite BFGFL0		{map "Brightmaps/Weapons/7.1-BFG/Fire/BFGFL0_BM.png"}
+
+brightmap sprite BFGKA0		{map "Brightmaps/Weapons/7.2-BFG/Kick/BFGKA0_BM.png"}
+brightmap sprite BFGKB0		{map "Brightmaps/Weapons/7.2-BFG/Kick/BFGKB0_BM.png"}
+brightmap sprite BFGKC0		{map "Brightmaps/Weapons/7.2-BFG/Kick/BFGKC0_BM.png"}
+brightmap sprite BFGKD0		{map "Brightmaps/Weapons/7.2-BFG/Kick/BFGKD0_BM.png"}
+
+//Unmakyr
+
+brightmap sprite UNMGA0		{map "Brightmaps/Weapons/7.3-Unmakyr/UNMGA0_BM.png"}
+brightmap sprite UNMGB0		{map "Brightmaps/Weapons/7.3-Unmakyr/UNMGB0_BM.png"}
+brightmap sprite UNMGC0		{map "Brightmaps/Weapons/7.3-Unmakyr/UNMGC0_BM.png"}
+brightmap sprite UNMGD0		{map "Brightmaps/Weapons/7.3-Unmakyr/UNMGD0_BM.png"}
+brightmap sprite BALGA0		{map "Brightmaps/Weapons/7.3-Unmakyr/BALGA0_BM.png"}
+brightmap sprite BALGB0		{map "Brightmaps/Weapons/7.3-Unmakyr/BALGB0_BM.png"}
+brightmap sprite BALGC0		{map "Brightmaps/Weapons/7.3-Unmakyr/BALGC0_BM.png"}
+brightmap sprite BALGD0		{map "Brightmaps/Weapons/7.3-Unmakyr/BALGD0_BM.png"}
+
+brightmap sprite UNMEA0		{map "Brightmaps/Weapons/7.3-Unmakyr/UNMEA0_BM.png"}
+brightmap sprite BALEA0		{map "Brightmaps/Weapons/7.3-Unmakyr/BALEA0_BM.png"}
+
+brightmap sprite UNMFC0		{map "Brightmaps/Weapons/7.3-Unmakyr/Fire/UNMFC0_BM.png"}
+
+brightmap sprite UNMSA0		{map "Brightmaps/Weapons/7.3-Unmakyr/Select/UNMSA0_BM.png"}
+brightmap sprite UNMSB0		{map "Brightmaps/Weapons/7.3-Unmakyr/Select/UNMSB0_BM.png"}
+brightmap sprite UNMSC0		{map "Brightmaps/Weapons/7.3-Unmakyr/Select/UNMSC0_BM.png"}
+brightmap sprite UNMSD0		{map "Brightmaps/Weapons/7.3-Unmakyr/Select/UNMSD0_BM.png"}
+brightmap sprite UNMSE0		{map "Brightmaps/Weapons/7.3-Unmakyr/Select/UNMSE0_BM.png"}
+brightmap sprite UNESA0		{map "Brightmaps/Weapons/7.3-Unmakyr/Select/UNESA0_BM.png"}
+brightmap sprite UNESB0		{map "Brightmaps/Weapons/7.3-Unmakyr/Select/UNESB0_BM.png"}
+brightmap sprite UNESC0		{map "Brightmaps/Weapons/7.3-Unmakyr/Select/UNESC0_BM.png"}
+brightmap sprite UNESD0		{map "Brightmaps/Weapons/7.3-Unmakyr/Select/UNESD0_BM.png"}
+brightmap sprite UNESE0		{map "Brightmaps/Weapons/7.3-Unmakyr/Select/UNESE0_BM.png"}
+brightmap sprite BALSA0		{map "Brightmaps/Weapons/7.3-Unmakyr/Select/BALSA0_BM.png"}
+brightmap sprite BALSB0		{map "Brightmaps/Weapons/7.3-Unmakyr/Select/BALSB0_BM.png"}
+brightmap sprite BALSC0		{map "Brightmaps/Weapons/7.3-Unmakyr/Select/BALSC0_BM.png"}
+brightmap sprite BALSD0		{map "Brightmaps/Weapons/7.3-Unmakyr/Select/BALSD0_BM.png"}
+brightmap sprite BALSE0		{map "Brightmaps/Weapons/7.3-Unmakyr/Select/BALSE0_BM.png"}
+brightmap sprite BAESA0		{map "Brightmaps/Weapons/7.3-Unmakyr/Select/BAESA0_BM.png"}
+brightmap sprite BAESB0		{map "Brightmaps/Weapons/7.3-Unmakyr/Select/BAESB0_BM.png"}
+brightmap sprite BAESC0		{map "Brightmaps/Weapons/7.3-Unmakyr/Select/BAESC0_BM.png"}
+brightmap sprite BAESD0		{map "Brightmaps/Weapons/7.3-Unmakyr/Select/BAESD0_BM.png"}
+brightmap sprite BAESE0		{map "Brightmaps/Weapons/7.3-Unmakyr/Select/BAESE0_BM.png"}
+
+brightmap sprite UNMDA0		{map "Brightmaps/Weapons/7.3-Unmakyr/Deselect/UNMDA0_BM.png"}
+brightmap sprite UNMDB0		{map "Brightmaps/Weapons/7.3-Unmakyr/Deselect/UNMDB0_BM.png"}
+brightmap sprite UNMDC0		{map "Brightmaps/Weapons/7.3-Unmakyr/Deselect/UNMDC0_BM.png"}
+brightmap sprite UNMDD0		{map "Brightmaps/Weapons/7.3-Unmakyr/Deselect/UNMDD0_BM.png"}
+brightmap sprite UNMDE0		{map "Brightmaps/Weapons/7.3-Unmakyr/Deselect/UNMDE0_BM.png"}
+brightmap sprite UNEDA0		{map "Brightmaps/Weapons/7.3-Unmakyr/Deselect/UNEDA0_BM.png"}
+brightmap sprite UNEDB0		{map "Brightmaps/Weapons/7.3-Unmakyr/Deselect/UNEDB0_BM.png"}
+brightmap sprite UNEDC0		{map "Brightmaps/Weapons/7.3-Unmakyr/Deselect/UNEDC0_BM.png"}
+brightmap sprite UNEDD0		{map "Brightmaps/Weapons/7.3-Unmakyr/Deselect/UNEDD0_BM.png"}
+brightmap sprite UNEDE0		{map "Brightmaps/Weapons/7.3-Unmakyr/Deselect/UNEDE0_BM.png"}
+brightmap sprite BALDA0		{map "Brightmaps/Weapons/7.3-Unmakyr/Deselect/BALDA0_BM.png"}
+brightmap sprite BALDB0		{map "Brightmaps/Weapons/7.3-Unmakyr/Deselect/BALDB0_BM.png"}
+brightmap sprite BALDC0		{map "Brightmaps/Weapons/7.3-Unmakyr/Deselect/BALDC0_BM.png"}
+brightmap sprite BALDD0		{map "Brightmaps/Weapons/7.3-Unmakyr/Deselect/BALDD0_BM.png"}
+brightmap sprite BALDE0		{map "Brightmaps/Weapons/7.3-Unmakyr/Deselect/BALDE0_BM.png"}
+brightmap sprite BAEDA0		{map "Brightmaps/Weapons/7.3-Unmakyr/Deselect/BAEDA0_BM.png"}
+brightmap sprite BAEDB0		{map "Brightmaps/Weapons/7.3-Unmakyr/Deselect/BAEDB0_BM.png"}
+brightmap sprite BAEDC0		{map "Brightmaps/Weapons/7.3-Unmakyr/Deselect/BAEDC0_BM.png"}
+brightmap sprite BAEDD0		{map "Brightmaps/Weapons/7.3-Unmakyr/Deselect/BAEDD0_BM.png"}
+brightmap sprite BAEDE0		{map "Brightmaps/Weapons/7.3-Unmakyr/Deselect/BAEDE0_BM.png"}
+
+brightmap sprite UNMKA0		{map "Brightmaps/Weapons/7.3-Unmakyr/Melee/UNMKA0_BM.png"}
+brightmap sprite UNMKB0		{map "Brightmaps/Weapons/7.3-Unmakyr/Melee/UNMKB0_BM.png"}
+brightmap sprite UNMKC0		{map "Brightmaps/Weapons/7.3-Unmakyr/Melee/UNMKC0_BM.png"}
+brightmap sprite UNMKD0		{map "Brightmaps/Weapons/7.3-Unmakyr/Melee/UNMKD0_BM.png"}
+brightmap sprite UNMKE0		{map "Brightmaps/Weapons/7.3-Unmakyr/Melee/UNMKE0_BM.png"}
+brightmap sprite UNMKF0		{map "Brightmaps/Weapons/7.3-Unmakyr/Melee/UNMKF0_BM.png"}
+brightmap sprite UNMKG0		{map "Brightmaps/Weapons/7.3-Unmakyr/Melee/UNMKG0_BM.png"}
+
+brightmap sprite UNEKA0		{map "Brightmaps/Weapons/7.3-Unmakyr/Melee/UNEKA0_BM.png"}
+brightmap sprite UNEKB0		{map "Brightmaps/Weapons/7.3-Unmakyr/Melee/UNEKB0_BM.png"}
+brightmap sprite UNEKC0		{map "Brightmaps/Weapons/7.3-Unmakyr/Melee/UNEKC0_BM.png"}
+brightmap sprite UNEKD0		{map "Brightmaps/Weapons/7.3-Unmakyr/Melee/UNEKD0_BM.png"}
+
+brightmap sprite BALKA0		{map "Brightmaps/Weapons/7.3-Unmakyr/Melee/BALKA0_BM.png"}
+brightmap sprite BALKB0		{map "Brightmaps/Weapons/7.3-Unmakyr/Melee/BALKB0_BM.png"}
+brightmap sprite BALKC0		{map "Brightmaps/Weapons/7.3-Unmakyr/Melee/BALKC0_BM.png"}
+brightmap sprite BALKD0		{map "Brightmaps/Weapons/7.3-Unmakyr/Melee/BALKD0_BM.png"}
+brightmap sprite BALKE0		{map "Brightmaps/Weapons/7.3-Unmakyr/Melee/BALKE0_BM.png"}
+brightmap sprite BALKF0		{map "Brightmaps/Weapons/7.3-Unmakyr/Melee/BALKF0_BM.png"}
+brightmap sprite BALKG0		{map "Brightmaps/Weapons/7.3-Unmakyr/Melee/BALKG0_BM.png"}
+
+brightmap sprite BAEKA0		{map "Brightmaps/Weapons/7.3-Unmakyr/Melee/BAEKA0_BM.png"}
+brightmap sprite BAEKB0		{map "Brightmaps/Weapons/7.3-Unmakyr/Melee/BAEKB0_BM.png"}
+brightmap sprite BAEKC0		{map "Brightmaps/Weapons/7.3-Unmakyr/Melee/BAEKC0_BM.png"}
+brightmap sprite BAEKD0		{map "Brightmaps/Weapons/7.3-Unmakyr/Melee/BAEKD0_BM.png"}
+
+//Death Machine
+brightmap sprite DMGGA0		{map "Brightmaps/Weapons/P.2-Death Machine/DMGGA0_BM.png"}
+brightmap sprite DMGGB0		{map "Brightmaps/Weapons/P.2-Death Machine/DMGGA0_BM.png"}
+brightmap sprite DMGGC0		{map "Brightmaps/Weapons/P.2-Death Machine/DMGGA0_BM.png"}
+brightmap sprite DMGGD0		{map "Brightmaps/Weapons/P.2-Death Machine/DMGGD0_BM.png"}
+brightmap sprite DMGGE0		{map "Brightmaps/Weapons/P.2-Death Machine/DMGGA0_BM.png"}
+brightmap sprite DMGGF0		{map "Brightmaps/Weapons/P.2-Death Machine/DMGGA0_BM.png"}
+
+brightmap sprite DMGFB0		{map "Brightmaps/Weapons/P.2-Death Machine/Fire/DMGFB0_BM.png"}
+brightmap sprite DMGFC0		{map "Brightmaps/Weapons/P.2-Death Machine/Fire/DMGFC0_BM.png"}
+brightmap sprite DMGFD0		{map "Brightmaps/Weapons/P.2-Death Machine/Fire/DMGFD0_BM.png"}
+
+brightmap sprite DMGDA0		{map "Brightmaps/Weapons/P.2-Death Machine/Deselect/DMGDA0_BM.png"}
+brightmap sprite DMGDB0		{map "Brightmaps/Weapons/P.2-Death Machine/Deselect/DMGDB0_BM.png"}
+brightmap sprite DMGDC0		{map "Brightmaps/Weapons/P.2-Death Machine/Deselect/DMGDC0_BM.png"}
+brightmap sprite DMGDD0		{map "Brightmaps/Weapons/P.2-Death Machine/Deselect/DMGDD0_BM.png"}
+brightmap sprite DMGDE0		{map "Brightmaps/Weapons/P.2-Death Machine/Deselect/DMGDE0_BM.png"}
+brightmap sprite DMGDF0		{map "Brightmaps/Weapons/P.2-Death Machine/Deselect/DMGDF0_BM.png"}
+brightmap sprite DMGDG0		{map "Brightmaps/Weapons/P.2-Death Machine/Deselect/DMGDG0_BM.png"}
+brightmap sprite DMGDH0		{map "Brightmaps/Weapons/P.2-Death Machine/Deselect/DMGDH0_BM.png"}
+
+brightmap sprite DMGSA0		{map "Brightmaps/Weapons/P.2-Death Machine/Select/DMGSA0_BM.png"}
+brightmap sprite DMGSB0		{map "Brightmaps/Weapons/P.2-Death Machine/Select/DMGSB0_BM.png"}
+brightmap sprite DMGSC0		{map "Brightmaps/Weapons/P.2-Death Machine/Select/DMGSC0_BM.png"}
+brightmap sprite DMGSD0		{map "Brightmaps/Weapons/P.2-Death Machine/Select/DMGSD0_BM.png"}
+brightmap sprite DMGSE0		{map "Brightmaps/Weapons/P.2-Death Machine/Select/DMGSE0_BM.png"}
+brightmap sprite DMGSF0		{map "Brightmaps/Weapons/P.2-Death Machine/Select/DMGSF0_BM.png"}
+brightmap sprite DMGSG0		{map "Brightmaps/Weapons/P.2-Death Machine/Select/DMGSG0_BM.png"}
+brightmap sprite DMGSH0		{map "Brightmaps/Weapons/P.2-Death Machine/Select/DMGSH0_BM.png"}

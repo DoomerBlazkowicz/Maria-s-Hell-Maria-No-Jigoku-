@@ -1,0 +1,12 @@
+texture sfall1 Range sfall4 Tics 4
+texture bfall1 Range bfall4 Tics 4
+Flat gate1 Range gate1h Tics 4 
+Flat gate2 Range gate2h Tics 4 
+Flat gate3 Range gate3h Tics 4 
+Flat gate4 Range gate4h Tics 4 
+Flat FWATER1 Range FWATERF Tics 2 
+Flat nukage1 Range nukageF Tics 2 
+Flat blood1 Range bloodF Tics 2 
+Flat lava1 Range lavaF Tics 2 
+Flat slime01 Range slime04k Tics 2 
+Flat slime05 Range slime08k Tics 2 
