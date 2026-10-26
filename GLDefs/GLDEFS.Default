@@ -1,0 +1,126 @@
+// Doom's Lights ported for Heretic/Hexen/Chex
+
+object BulletPuff
+{
+    frame PUFFA { light BPUFF1 }
+    frame PUFFB { light BPUFF2 }
+}
+
+object Rocket
+{
+    frame MISLA { light ROCKET    }
+
+    frame MISLB { light ROCKET_X1 }
+    frame MISLC { light ROCKET_X2 }
+    frame MISLD { light ROCKET_X3 }
+}
+
+object PlasmaBall
+{
+    frame PLSSA { light PLASMABALL }
+    frame PLSSB { light PLASMABALL }
+
+    frame PLSEA { light PLASMA_X1 }
+    frame PLSEB { light PLASMA_X2 }
+    frame PLSEC { light PLASMA_X2 }
+    frame PLSED { light PLASMA_X3 }
+    frame PLSEE { light PLASMA_X4 }
+}
+
+object PlasmaBall1
+{
+    frame PLS1A { light PLASMABALL1 }
+    frame PLS1B { light PLASMABALL1 }
+
+    frame PLS1C { light PLASMA1_X1 }
+    frame PLS1D { light PLASMA1_X2 }
+    frame PLS1E { light PLASMA1_X2 }
+    frame PLS1F { light PLASMA1_X3 }
+    frame PLS1G { light PLASMA1_X4 }
+}
+
+object PlasmaBall2
+{
+    frame PLS2A { light PLASMABALL2 }
+    frame PLS2B { light PLASMABALL2 }
+
+    frame PLS2C { light PLASMA2_X1 }
+    frame PLS2D { light PLASMA2_X2 }
+    frame PLS2E { light PLASMA2_X3 }
+}
+
+object MariaBFGBall
+{
+    frame BFGBA { light BFGBALL }
+    frame BFGBB { light BFGBALL }
+    frame BFGBC { light BFGBALL }
+    frame BFGBD { light BFGBALL }
+    frame BFGBE { light BFGBALL }
+
+    frame BFBEA { light BFGBALL_X1 }
+    frame BFBEB { light BFGBALL_X2 }
+    frame BFBEC { light BFGBALL_X5 }
+    frame BFBED { light BFGBALL_X1 }
+    frame BFBEE { light BFGBALL_X3 }
+    frame BFBEF { light BFGBALL_X5 }
+	frame BFBEG { light BFGBALL_X1 }
+	frame BFBEH { light BFGBALL_X4 }
+	frame BFBEI { light BFGBALL_X4 }
+	frame BFBEJ { light BFGBALL_X5 }
+	frame BFBEK { light BFGBALL_X5 }
+}
+
+object BFGExtra
+{
+    frame BFE2A { light BFGBALL    }
+    frame BFE2B { light BFGBALL_X1 }
+    frame BFE2C { light BFGBALL_X1 }
+    frame BFE2D { light BFGBALL_X2 }
+    frame BFE2E { light BFGBALL_X2 }
+    frame BFE2F { light BFGBALL_X3 }
+    frame BFE2G { light BFGBALL_X3 }
+    frame BFE2H { light BFGBALL_X4 }
+    frame BFE2I { light BFGBALL_X4 }
+    frame BFE2J { light BFGBALL_X5 }
+    frame BFE2K { light BFGBALL_X5 }
+}
+
+object MariaSprayFlame
+{
+    frame HONOA { light ROCKET_X1 }
+    frame HONOB { light ROCKET_X1 }
+    frame HONOC { light ROCKET_X1 }
+    frame HONOD { light ROCKET_X1 }
+    frame HONOE { light ROCKET_X1 }
+    frame HONOF { light ROCKET_X2 }
+    frame HONOG { light ROCKET_X2 }
+    frame HONOH { light ROCKET_X2 }
+    frame HONOI { light ROCKET_X2 }
+    frame HONOJ { light ROCKET_X2 }
+    frame HONOK { light ROCKET_X3 }
+    frame HONOL { light ROCKET_X3 }
+    frame HONOM { light ROCKET_X3 }
+    frame HONON { light ROCKET_X3 }
+    frame HONOO { light ROCKET_X3 }
+    frame HONOP { light ROCKET_X3 }
+}
+
+object MariaIncineratorFlame
+{
+    frame HONOA { light ROCKET_X1 }
+    frame HONOB { light ROCKET_X1 }
+    frame HONOC { light ROCKET_X1 }
+    frame HONOD { light ROCKET_X1 }
+    frame HONOE { light ROCKET_X1 }
+    frame HONOF { light ROCKET_X2 }
+    frame HONOG { light ROCKET_X2 }
+    frame HONOH { light ROCKET_X2 }
+    frame HONOI { light ROCKET_X2 }
+    frame HONOJ { light ROCKET_X2 }
+    frame HONOK { light ROCKET_X3 }
+    frame HONOL { light ROCKET_X3 }
+    frame HONOM { light ROCKET_X3 }
+    frame HONON { light ROCKET_X3 }
+    frame HONOO { light ROCKET_X3 }
+    frame HONOP { light ROCKET_X3 }
+}

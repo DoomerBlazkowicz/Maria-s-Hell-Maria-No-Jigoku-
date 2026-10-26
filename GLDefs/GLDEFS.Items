@@ -1,0 +1,85 @@
+// Bonus Items
+
+object MariaHealthBonus
+{
+    frame BON1A { light BLUEITEM }
+    frame BON1B { light BLUEITEM }
+	frame BON1C { light BLUEITEM }
+	frame BON1D { light BLUEITEM } 
+    frame AON1A { light BLUEITEM }
+    frame AON1B { light BLUEITEM }
+	frame AON1C { light BLUEITEM }
+	frame AON1D { light BLUEITEM } 
+    frame CON1A { light BLUEITEM }
+    frame CON1B { light BLUEITEM }
+	frame CON1C { light BLUEITEM }
+	frame CON1D { light BLUEITEM }
+}
+ 
+object MariaArmorShard
+{
+    frame BON2A { light GREENITEM2 }
+    frame BON2B { light GREENITEM2 }
+	frame BON2C { light GREENITEM1 }
+	frame BON2D { light GREENITEM1 }
+    frame AON2A { light GREENITEM2 }
+    frame AON2B { light GREENITEM2 }
+	frame AON2C { light GREENITEM1 }
+	frame AON2D { light GREENITEM1 } 
+    frame CON2A { light GREENITEM2 }
+    frame CON2B { light GREENITEM2 }
+	frame CON2C { light GREENITEM1 }
+	frame CON2D { light GREENITEM1 }
+}
+ 
+object MariaCell
+{
+    frame BATTA { light BLUEITEM }
+    frame BATTB { light BLUEITEM }
+	frame BATTC { light BLUEITEM }
+	frame BATTD { light BLUEITEM }
+	frame BATTE { light BLUEITEM }
+} 
+ 
+object MariaCellPack
+{
+    frame BATPA { light BLUEITEM }
+    frame BATPB { light BLUEITEM }
+	frame BATPC { light BLUEITEM }
+	frame BATPD { light BLUEITEM }
+	frame BATPE { light BLUEITEM }	
+} 
+ 
+object MariaBFGCell
+{
+    frame BFGAA { light GREENITEM1 }
+    frame BFGAB { light GREENITEM1 }
+	frame BFGAC { light GREENITEM1 }
+	frame BFGAD { light GREENITEM1 }
+}
+
+// Powerups
+
+object MariaBerserk
+{
+    frame BERSA { light REDITEM }
+    frame BERSB { light REDITEM }
+	frame BERSC { light REDITEM }
+	frame BERSD { light REDITEM }
+}
+
+object MariaOnslaught
+{
+    frame QDMGA { light MAGENTAITEM }
+    frame QDMGB { light MAGENTAITEM }
+	frame QDMGC { light MAGENTAITEM }
+	frame QDMGD { light MAGENTAITEM }
+}
+
+object MariaOverkill
+{
+    frame OVKIA { light REDITEM }
+    frame OVKIB { light REDITEM }
+	frame OVKIC { light REDITEM }
+	frame OVKID { light REDITEM }
+}

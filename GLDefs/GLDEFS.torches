@@ -1,0 +1,160 @@
+//LIGHT SOURCES//
+
+FlickerLight2 Torch_RedLight
+{
+    color 1.0 0.3 0.0
+    size 110
+    secondarySize 120
+    interval 0.1
+    offset 0 80 0}
+
+FlickerLight2 Torch_GreenLight
+{
+    color 0.2 1.0 0.0
+    size 110
+    secondarySize 120
+    interval 0.1
+    offset 0 80 0
+}
+
+FlickerLight2 Torch_BlueLight
+{
+    color 0.0 0.3 1.0
+    size 110
+    secondarySize 120
+    interval 0.1
+    offset 0 80 0
+}
+
+FlickerLight2 Torch_OrangeLight
+{
+	Color 0.7 0.3 0.1
+	Offset 0 0 0
+    size 110
+    secondarySize 120
+	Interval 1
+}
+
+FlickerLight2 Torch_OrangeLight_Small
+{
+	Color 0.7 0.3 0.1
+	Offset 0 0 0
+    size 67
+    secondarySize 69
+	Interval 1
+}
+
+pulselight BIGLAMP
+{
+    color 0.8 0.8 1.0
+    size 100
+    secondarySize 110
+    interval 0.4
+    offset 0 72 0
+}
+
+pulselight SMALLLAMP
+{
+    color 0.8 0.8 1.0
+    size 60
+    secondarySize 66
+    interval 0.4
+    offset 0 44 0
+}
+
+pointlight YELLOWLAMP
+{
+    color 1.0 1.0 0.0
+    size 56
+    offset 0 44 0
+}
+
+//LIGHT PROPS//
+
+Object MariaTorchFlareRed   { Frame RFLRA { Light Torch_RedLight    } }
+Object MariaTorchFlareGreen { Frame GFLRA { Light Torch_GreenLight  } }
+Object MariaTorchFlareBlue  { Frame BFLRA { Light Torch_BlueLight   } }
+Object MariaBarrelFlare     { Frame RFLRA { Light Torch_OrangeLight } }
+
+object MariaTallRedTorch
+{
+    frame TRCHA { light BIGLAMP }
+    frame TRCHB { light BIGLAMP }
+    frame TRCHC { light BIGLAMP }
+    frame TRCHD { light BIGLAMP }
+}
+
+object MariaTechLamp1
+{
+    frame LAMPA { light BIGLAMP }
+    frame LAMPB { light BIGLAMP }
+    frame LAMPC { light BIGLAMP }
+    frame LAMPD { light BIGLAMP }
+}
+
+object MariaTechLamp1
+{
+    frame LAMPA { light BIGLAMP }
+    frame LAMPB { light BIGLAMP }
+    frame LAMPC { light BIGLAMP }
+    frame LAMPD { light BIGLAMP }
+}
+
+object MariaTechLamp2
+{
+    frame LAM2A { light SMALLLAMP }
+    frame LAM2B { light SMALLLAMP }
+    frame LAM2C { light SMALLLAMP }
+    frame LAM2D { light SMALLLAMP }
+}
+
+
+object MariaColumn
+{
+    frame LAM3A { light YELLOWLAMP }
+}
+
+object MariaCandelabra
+{
+    frame SAMDA { light Torch_OrangeLight }
+    frame SAMDB { light Torch_OrangeLight }
+    frame SAMDC { light Torch_OrangeLight }
+    frame SAMDD { light Torch_OrangeLight }
+}
+
+object MariaCandlestick
+{
+frame CIERA { light Torch_OrangeLight_Small }
+frame CIERB { light Torch_OrangeLight_Small }
+}
+
+object MariaTallTorchRed
+{
+    frame TRCH { light Torch_RedLight }
+}
+
+object MariaTallTorchGreen
+{
+    frame TRCH { light Torch_GreenLight }
+}
+
+object MariaTallTorchBlue
+{
+    frame TRCH { light Torch_BlueLight }
+}
+
+object MariaShortTorchRed
+{
+    frame STRB { light Torch_RedLight }
+}
+
+object MariaShortTorchGreen
+{
+    frame STRB { light Torch_GreenLight }
+}
+
+object MariaShortTorchBlue
+{
+    frame STRB { light Torch_BlueLight }
+}
+

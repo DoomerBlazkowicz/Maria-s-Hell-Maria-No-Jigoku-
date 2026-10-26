@@ -1,0 +1,145 @@
+
+object MariaFlameTracer
+{
+    frame INCBA { light MBPUFF1 }
+    frame MUFFA { light MBPUFF1 }
+    frame MUFFB { light MBPUFF1 }
+    frame MUFFC { light MBPUFF2 }
+    frame MUFFD { light MBPUFF2 }
+    frame MUFFE { light MBPUFF2 }
+}
+
+object MariaFlameTracerTrail
+{
+    frame FRPRA { light ROCKET_X1 }
+    frame FRPRB { light ROCKET_X1 }
+    frame FRPRC { light ROCKET_X1 }
+    frame FRPRD { light ROCKET_X2 }
+    frame FRPRE { light ROCKET_X2 }
+    frame FRPRF { light ROCKET_X3 }
+    frame FRPRG { light ROCKET_X3 }
+}
+
+object MariaRocketPlayer
+{
+    frame RCKTA { light MARIROCKET }
+}
+
+object MariaRocketTrail
+{ 
+	frame MTRLA { light IMPBALL_X1 }
+	frame MTRLB { light IMPBALL_X1 }
+	frame MTRLC { light IMPBALL_X1 }
+	frame MTRLD { light IMPBALL_X2 }
+	frame MTRLE { light IMPBALL_X2 }
+	frame MTRLF { light IMPBALL_X3 }
+	frame MTRLG { light IMPBALL_X3 }
+}
+
+object MariaPlasmaBall
+{
+    frame PLPBA { light PLASMABALL }
+    frame PLPBB { light PLASMABALL }	
+    frame PLPBC { light PLASMABALL }
+    frame PLPBD { light PLASMABALL }
+
+    frame PLPEA { light PLASMA_X1 }
+    frame PLPEB { light PLASMA_X1 }
+    frame PLPEC { light PLASMA_X2 }
+    frame PLPED { light PLASMA_X3 }
+    frame PLPEE { light PLASMA_X4 }
+}
+
+object MariaRedPlasmaBall
+{
+    frame REBBA { light REDPLASMABALL }
+    frame REBBB { light REDPLASMABALL }	
+    frame REBBC { light REDPLASMABALL }
+    frame REBBD { light REDPLASMABALL }
+
+    frame REBEA { light REDPLASMA_X1 }
+    frame REBEB { light REDPLASMA_X1 }
+    frame REBEC { light REDPLASMA_X2 }
+    frame REBED { light REDPLASMA_X3 }
+    frame REBEE { light REDPLASMA_X3 }
+}
+
+object MariaLunarPlasmaBall
+{
+    frame BLPBA { light MAGENTAPLASMABALL }
+    frame BLPBB { light MAGENTAPLASMABALL }	
+    frame BLPBC { light MAGENTAPLASMABALL }
+    frame BLPBD { light MAGENTAPLASMABALL }
+
+    frame BLPEA { light MAGENTAPLASMA_X1 }
+    frame BLPEB { light MAGENTAPLASMA_X1 }
+    frame BLPEC { light MAGENTAPLASMA_X2 }
+    frame BLPED { light MAGENTAPLASMA_X3 }
+    frame BLPEE { light MAGENTAPLASMA_X3 }
+}
+
+object MariaCryoProjectile
+{
+    frame CRYOA { light BallistaProj6 }
+    frame CRYOB { light BallistaProj6 }	
+    frame CRYOC { light BallistaProj6 }
+    frame CRYOD { light BallistaProj6 }
+    frame CRYOE { light BallistaProj5 }
+    frame CRYOF { light BallistaProj5 }
+    frame CRYOG { light BallistaProj4 }
+    frame CRYOH { light BallistaProj4 }
+    frame CRYOI { light BallistaProj3 }
+    frame CRYOJ { light BallistaProj3 }
+    frame CRYOK { light BallistaProj2 }
+    frame CRYOL { light BallistaProj2 }
+    frame CRYOM { light BallistaProj1 }
+    frame CRYON { light BallistaProj1 }
+}
+ 
+Object MariaBallistaTrail
+{
+Frame ABPRA { light BallistaProj6 }
+Frame ABPRB { light BallistaProj6 }
+Frame ABPRC { light BallistaProj5 }
+Frame ABPRD { light BallistaProj4 }
+Frame ABPRE { light BallistaProj3 }
+Frame ABPRF { light BallistaProj2 }
+Frame ABPRG { light BallistaProj1 }
+}
+
+Object MariaBallistaCalamityWave
+{
+Frame RGCBA { light BallistaProj6 }
+Frame RGCBB { light BallistaProj6 }
+Frame RGCBC { light BallistaProj6 }
+
+Frame RGCBD { light BallistaProj5 }
+Frame RGCBE { light BallistaProj4 }
+Frame RGCBF { light BallistaProj3 }
+Frame RGCBG { light BallistaProj2 }
+Frame RGCBH { light BallistaProj1 }
+Frame RGCBI { light BallistaProj1 }
+}
+
+object MariaBFGExtra
+{
+    frame BFE2A { light BFGBALL    }
+    frame BFE2B { light BFGBALL_X1 }
+    frame BFE2C { light BFGBALL_X4 }
+    frame BFE2D { light BFGBALL_X5 }
+}
+
+Object MariaFamineCloud
+{
+	Frame TNT1A { light DCLOUD }
+	Frame ECLFA { light DCLOUD_FACE }
+	Frame ECLDA { light DCLOUD_X1 }
+	Frame ECLDB { light DCLOUD_X1 }
+	Frame ECLDC { light DCLOUD_X1 }
+	Frame ECLDD { light DCLOUD_X2 }
+	Frame ECLDE { light DCLOUD_X2 }
+	Frame ECLDF { light DCLOUD_X3 }
+	Frame ECLDG { light DCLOUD_X4 }
+	Frame ECLDH { light DCLOUD_X5 }
+	Frame ECLDI { light DCLOUD_X6 }
+}

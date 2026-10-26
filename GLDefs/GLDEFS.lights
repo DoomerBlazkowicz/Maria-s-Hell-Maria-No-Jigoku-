@@ -1,0 +1,518 @@
+//Muzzle Lights
+
+flickerlight MBFLAREORANGE
+{
+    color 0.5 0.5 0.0
+    size 72
+    secondarySize 84
+    Offset 0 40 0
+}
+
+flickerlight MBFLAREPURPLE
+{
+    color .18 0.0 0.4
+    size 72
+    secondarySize 84
+    Offset 0 40 0
+}
+
+flickerlight MBFLAREBLUE
+{
+    color 0.5 0.5 1.0
+    size 72
+    secondarySize 84
+    Offset 0 40 0
+}
+
+//Bullet Puffs
+
+flickerlight MBPUFF1
+{
+    color 0.5 0.5 0.0
+    size 16
+    secondarySize 12
+    chance 0.8
+}
+
+flickerlight MBPUFF2
+{
+    color 0.5 0.5 0.0
+    size 10
+    secondarySize 8
+    chance 0.8
+}
+
+flickerlight MBPPUFF1
+{
+    color .18 0.0 0.4
+    size 16
+    secondarySize 12
+    chance 0.8
+}
+
+flickerlight MBPPUFF2
+{
+    color .18 0.0 0.4
+    size 10
+    secondarySize 8
+    chance 0.8
+}
+
+pointlight MARIROCKET
+{
+    color 1.0 0.3 0.0
+    size 64
+}	
+
+pointlight REDPLASMABALL
+{
+	color 1.0 0.2 0.2
+	size 56
+	attenuate 1
+}
+
+flickerlight REDPLASMA_X1
+{
+	color 0.8 0.2 0.2
+	size 62
+	secondarySize 70
+	chance 0.25
+	attenuate 1
+}
+
+flickerlight REDPLASMA_X2
+{
+	color 0.6 0.2 0.2
+	size 78
+	secondarySize 86
+	chance 0.25
+	attenuate 1
+}
+
+flickerlight REDPLASMA_X3
+{
+	color 0.2 0.1 0.1
+	size 94
+	secondarySize 102
+	chance 0.25
+	attenuate 1
+}
+
+pointlight MAGENTAPLASMABALL
+{
+	color 1.0 0.2 1.0
+	size 56
+	attenuate 1
+}
+
+flickerlight MAGENTAPLASMA_X1
+{
+	color 0.8 0.2 0.2
+	size 62
+	secondarySize 70
+	chance 0.25
+	attenuate 1
+}
+
+flickerlight MAGENTAPLASMA_X2
+{
+	color 0.6 0.2 0.2
+	size 78
+	secondarySize 86
+	chance 0.25
+	attenuate 1
+}
+
+flickerlight MAGENTAPLASMA_X3
+{
+	color 0.2 0.1 0.1
+	size 94
+	secondarySize 102
+	chance 0.25
+	attenuate 1
+}
+
+pointlight BallistaProj1
+{
+color 0.5 0.5 1.0
+size 24
+}
+flickerlight BallistaProj2
+{
+color 0.2 0.2 1.0
+size 32
+secondarySize 40
+chance 0.2
+}
+flickerlight BallistaProj3
+{
+color 0.4 0.4 1.0
+size 40
+secondarySize 48
+chance 0.2
+}
+flickerlight BallistaProj4
+{
+color 0.4 0.4 1.0
+size 48
+secondarySize 56
+chance 0.2
+}
+flickerlight BallistaProj5
+{
+color 0.5 0.5 1.0
+size 56
+secondarySize 64
+chance 0.2
+}
+flickerlight BallistaProj6
+{
+color 0.5 0.5 1.0
+size 64
+secondarySize 72
+chance 0.2
+}
+
+PointLight DCLOUD
+{
+Color 1.0 1.0 1.0
+Size 72
+Subtractive 1
+}
+
+PulseLight DCLOUD_FACE
+{
+Color 1.0 1.0 1.0
+Size 116
+SecondarySize 120
+Interval 0.4
+Subtractive 1
+}
+
+PointLight DCLOUD_X1
+{
+Color 0.9 0.9 0.9
+Size 116
+Subtractive 1
+}
+
+PointLight DCLOUD_X2
+{
+Color 0.8 0.8 0.8
+Size 112
+Subtractive 1
+}
+
+PointLight DCLOUD_X3
+{
+Color 0.7 0.7 0.7
+Size 92
+Subtractive 1
+}
+
+PointLight DCLOUD_X4
+{
+Color 0.6 0.6 0.6
+Size 80
+Subtractive 1
+}
+
+PointLight DCLOUD_X5
+{
+Color 0.5 0.5 0.5
+Size 68
+Subtractive 1
+}
+
+PointLight DCLOUD_X6
+{
+Color 0.4 0.4 0.4
+Size 56
+Subtractive 1
+}
+
+// Items
+
+pulselight QUAD
+{
+    color 0.25 0.25 1.0
+    size 112
+    secondarySize 128
+    //chance 0.4
+	offset 0 32 0
+}
+
+pulselight REDITEM
+{
+    color 1.0 0.1 0.1
+    size 14
+    secondarySize 16
+    interval 0.1
+    offset 0 5 0
+}
+
+pulselight MAGENTAITEM
+{
+    color 0.25 0.25 1.0
+    size 14
+    secondarySize 16
+    interval 0.1
+    offset 0 5 0
+}
+
+pulselight BLUEITEM
+{
+    color 0.1 0.1 1.0
+    size 14
+    secondarySize 16
+    interval 0.1
+    offset 0 5 0
+}
+
+pulselight GREENITEM1
+{
+    color 0.3 1.0 0.0
+    size 14
+    secondarySize 16
+    interval 0.1
+    offset 0 5 0
+}
+
+pulselight GREENITEM2
+{
+    color 0.3 1.0 0.0
+    size 14
+    secondarySize 16
+    interval 0.1
+    offset 0 5 0
+	dontlightself 1
+}
+
+pointlight CANDELABRASTAND
+{
+    color 1.0 1.0 0.3
+    size 67
+    offset 0 52 0
+	// attenuate 1	// disabled for Zandronum compatibility
+}
+
+// Doom's Lights ported for Heretic/Hexen
+
+flickerlight BPUFF1
+{
+    color 0.5 0.5 0.0
+    size 6
+    secondarySize 8
+    chance 0.8
+}
+
+flickerlight BPUFF2
+{
+    color 0.5 0.5 0.0
+    size 3
+    secondarySize 4
+    chance 0.8
+}
+
+pointlight ROCKET
+{
+    color 1.0 0.7 0.0
+    size 56
+}
+
+flickerlight ROCKET_X1
+{
+    color 1.0 0.7 0.0
+    size 64
+    secondarySize 72
+    chance 0.3
+}
+
+flickerlight ROCKET_X2
+{
+    color 0.5 0.1 0.0
+    size 80
+    secondarySize 88
+    chance 0.3
+}
+
+flickerlight ROCKET_X3
+{
+    color 0.3 0.0 0.0
+    size 96
+    secondarySize 104
+    chance 0.3
+}
+
+pointlight PLASMABALL
+{
+    color 0.5 0.5 1.0
+    size 84
+	attenuate 1
+}
+
+flickerlight PLASMA_X1
+{
+    color 0.5 0.5 1.0
+    size 96
+    secondarySize 108
+    chance 0.4
+	attenuate 1
+}
+
+flickerlight PLASMA_X2
+{
+    color 0.4 0.4 0.8
+    size 120
+    secondarySize 132
+    chance 0.4
+	attenuate 1
+}
+
+flickerlight PLASMA_X3
+{
+    color 0.25 0.25 0.5
+    size 96
+    secondarySize 108
+    chance 0.4
+	attenuate 1
+}
+
+flickerlight PLASMA_X4
+{
+    color 0.1 0.1 0.2
+    size 12
+    secondarySize 24
+    chance 0.4
+	attenuate 1
+}
+
+pointlight PLASMABALL1
+{
+    color 0.1 1.0 0.0
+    size 56
+}
+
+flickerlight PLASMA1_X1
+{
+    color 0.2 1.0 0.2
+    size 64
+    secondarySize 72
+    chance 0.4
+}
+
+flickerlight PLASMA1_X2
+{
+    color 0.2 0.8 0.2
+    size 80
+    secondarySize 88
+    chance 0.4
+}
+
+flickerlight PLASMA1_X3
+{
+    color 0.1 0.5 0.1
+    size 64
+    secondarySize 72
+    chance 0.4
+}
+
+flickerlight PLASMA1_X4
+{
+    color 0.0 0.2 0.0
+    size 8
+    secondarySize 16
+    chance 0.4
+}
+
+pointlight PLASMABALL2
+{
+    color 1.0 0.1 0.0
+    size 56
+}
+
+flickerlight PLASMA1_X1
+{
+    color 0.9 0.2 0.2
+    size 64
+    secondarySize 72
+    chance 0.4
+}
+
+flickerlight PLASMA1_X2
+{
+    color 0.6 0.2 0.2
+    size 80
+    secondarySize 88
+    chance 0.4
+}
+
+flickerlight PLASMA1_X3
+{
+    color 0.2 0.0 0.0
+    size 8
+    secondarySize 16
+    chance 0.4
+}
+
+pointlight BFGBALL
+{
+    color 0.5 1.0 0.5
+    size 120
+	attenuate 1
+}
+
+flickerlight BFGBALL_X1
+{
+    color 0.5 1.0 0.5
+    size 120
+    secondarySize 132
+    chance 0.3
+	attenuate 1
+}
+
+flickerlight BFGBALL_X2
+{
+    color 0.6 1.0 0.6
+    size 156
+    secondarySize 168
+    chance 0.3
+	attenuate 1
+}
+
+flickerlight BFGBALL_X3
+{
+    color 0.7 1.0 0.7
+    size 180
+    secondarySize 192
+    chance 0.3
+	attenuate 1
+}
+
+flickerlight BFGBALL_X4
+{
+    color 0.4 0.7 0.4
+    size 84
+    secondarySize 96
+    chance 0.3
+	attenuate 1
+}
+
+flickerlight BFGBALL_X5
+{
+    color 0.1 0.3 0.1
+    size 72
+    secondarySize 84
+    chance 0.3
+	attenuate 1
+}
+
+flickerlight2 WEAPLIGHT2
+{
+	// This light attaches to the Chaingun only
+	color 0.5733 0.2925 0.858
+	size 88
+	secondarySize 104
+	interval 0.005
+	offset 0 48 0
+}
