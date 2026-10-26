@@ -1,0 +1,12 @@
+#library "sounds"
+#include "zcommon.acs"
+
+script "AntiTinnitus" (void)
+{
+    SetResultValue(GetCVar("antitinnitus"));
+} 
+
+script "MagClicking" (void)
+{
+    SetResultValue(GetCVar("magclicking"));
+}

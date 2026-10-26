@@ -1,0 +1,27 @@
+#library "AltSkins"
+#include "zcommon.acs"
+
+script "ShotgunSkinToggler" (void)
+{
+    SetResultValue(GetCVar("shotguntoggle"));
+}
+
+script "PlasmaRifleSkinToggler" (void)
+{
+    SetResultValue(GetCVar("plasmarifletoggle"));
+}
+
+script "KickSkinToggler" (void)
+{
+    SetResultValue(GetCVar("legtoggle"));
+}
+
+script "IntroOptions" (void)
+{
+    SetResultValue(GetCVar("introtoggle"));
+}
+
+script "BonusItemSkinToggler" (void)
+{
+    SetResultValue(GetCVar("bonusitemtoggle"));
+}

@@ -1,0 +1,143 @@
+#library "GameplayTips"
+#include "zcommon.acs"
+
+Script "GameplayTips" OPEN
+{
+    Delay(5);
+	AmbientSound("Maria/Intro/GameTip",2.0);
+	SetFont("DBIGFONT");
+	HudMessage(s:"Tip:";HUDMSG_Typeon,2,Cr_Black,0.5,0.85,2.0,0.05);
+	delay(5);
+	switch(random(1,32))
+	
+	{
+	Case 1:
+	Hudmessage(s:"100% Kills certain times rewards you with secret weapons."; HUDMSG_Typeon,1,Cr_White,0.5,0.9,2.0,0.05);
+	Break;
+	
+	Case 2:
+	Hudmessage(s:"Kill everyone and earn your rewards."; HUDMSG_Typeon,1,Cr_white,0.5,0.9,2.0,0.05);
+	Break;
+	
+	Case 3:
+	Hudmessage(s:"Room dark? No problem, activate your flaslight."; HUDMSG_Typeon,1,Cr_white,0.5,0.9,2.0,0.05);
+	Break;
+	
+	Case 4:
+	Hudmessage(s:"Shizuka Okaya sent her men to exterminate you."; HUDMSG_Typeon,1,Cr_white,0.5,0.9,2.0,0.05);
+	Break;
+	
+	Case 5:
+	Hudmessage(s:"Sliding also ideal for attacking an hostile aside from mobility purposes."; HUDMSG_Typeon,1,Cr_white,0.5,0.9,2.0,0.05);
+	Break;
+	
+	Case 6:
+	Hudmessage(s:"Some heavy weapons reduces your movement speed."; HUDMSG_Typeon,1,Cr_white,0.5,0.9,2.0,0.05);
+	Break;
+	
+	Case 7:
+	Hudmessage(s:"Pipebombs are pretty strong, watch your foot and don't blow yourself up."; HUDMSG_Typeon,1,Cr_white,0.5,0.9,2.0,0.05);
+	Break;
+	
+	Case 8:
+	Hudmessage(s:"Mind the loaded ammo in your weapons, you don't wanna get jumped with a empty gun, don't you?"; HUDMSG_Typeon,1,Cr_white,0.5,0.9,2.0,0.05);
+	Break;
+	
+	Case 9:
+	Hudmessage(s:"Hammer fanning good for weak enemies that are close."; HUDMSG_Typeon,1,Cr_white,0.5,0.9,2.0,0.05);
+	Break;
+	
+	Case 10:
+	Hudmessage(s:"Crossbow is sniper type weapon, it's weak but silent and causes bleeding to enemies."; HUDMSG_Typeon,1,Cr_white,0.5,0.9,2.0,0.05);
+	Break;
+	
+	Case 11:
+	Hudmessage(s:"Gas Shells not only stuns enemies but also cause damage. And no, players are NOT immune to tear gas."; HUDMSG_Typeon,1,Cr_white,0.5,0.9,2.0,0.05);
+	Break;
+	
+	Case 12:
+	Hudmessage(s:"Play Bunny Maze by Malintala Studios."; HUDMSG_Typeon,1,Cr_white,0.5,0.9,2.0,0.05);
+	Break;
+	
+	Case 13:
+	Hudmessage(s:"NOB can gib enemies."; HUDMSG_Typeon,1,Cr_white,0.5,0.9,2.0,0.05);
+	Break;
+	
+	Case 14:
+	Hudmessage(s:"Always prepare the Rocket Launcher when you need it."; HUDMSG_Typeon,1,Cr_White,0.5,0.9,2.0,0.05);
+	Break;
+
+	Case 15:
+	Hudmessage(s:"Rocket Launcher comes with a seeker scope for seeking rockets but at cost of rocket velocity."; HUDMSG_Typeon,1,Cr_white,0.5,0.9,2.0,0.05);
+	Break;
+	
+	Case 16:
+	Hudmessage(s:"Aerosol Can is good for conserving Fuel while Flamethrover is good for damage."; HUDMSG_Typeon,1,Cr_white,0.5,0.9,2.0,0.05);
+	Break;
+	
+	Case 17:
+	Hudmessage(s:"Igniting and throwing Aerosol Can causes to lose your weapon unless you pick another one."; HUDMSG_Typeon,1,Cr_white,0.5,0.9,2.0,0.05);
+	Break;
+	
+	Case 18:
+	Hudmessage(s:"Plasma Rifle can heat it's projectiles for more damage, hold longer to overheat it. But at cost of cooldown."; HUDMSG_Typeon,1,Cr_white,0.5,0.9,2.0,0.05);
+	Break;
+	
+	Case 19:
+	Hudmessage(s:"Keep your distance while using Plasma Rifle, it has splash damage. Not fatal unless heated."; HUDMSG_Typeon,1,Cr_white,0.5,0.9,2.0,0.05);
+	Break;
+	
+	Case 20:
+	Hudmessage(s:"Unamkyr's Arbalest attack can pierce through enemies and causes explosion once impacts to a surface."; HUDMSG_Typeon,1,Cr_white,0.5,0.9,2.0,0.05);
+	Break;
+	
+	Case 21: 
+	Hudmessage(s:"Always use PDA to check your ammo reserves."; HUDMSG_Typeon,1,Cr_white,0.5,0.9,2.0,0.05);
+	Break;
+	
+	Case 22:
+	Hudmessage(s:"BFG balls has tendrils once fired, either shoot directly of let it slide against enemies."; HUDMSG_Typeon,1,Cr_white,0.5,0.9,2.0,0.05);
+	Break;
+	
+	Case 23:
+	Hudmessage(s:"Backpack's are now rarer compared to original Doom, most of the time players come across Ammo Boxes that grant ammo instead."; HUDMSG_Typeon,1,Cr_white,0.5,0.9,2.0,0.05);
+	Break;
+	
+	Case 24: 
+	Hudmessage(s:"Sometimes a Celestial Armour replaces Body Armour, grant's 300 AP to player and higher protection."; HUDMSG_Typeon,1,Cr_white,0.5,0.9,2.0,0.05);
+	Break;
+	
+	Case 25:
+	Hudmessage(s:"Sometimes Stimpacks and Medkits are replaced with Stim Shots, for emergency cases."; HUDMSG_Typeon,1,Cr_white,0.5,0.9,2.0,0.05);
+	Break;
+	
+	Case 26:
+	Hudmessage(s:"You're NOT immune to Tear Gas."; HUDMSG_Typeon,1,Cr_white,0.5,0.9,2.0,0.05);
+	Break;
+	
+	Case 27:
+	Hudmessage(s:"Shoot them until they die."; HUDMSG_Typeon,1,Cr_white,0.5,0.9,2.0,0.05);
+	Break;
+	
+	Case 28:
+	Hudmessage(s:"Silencer's aren't good enough to make gunshots silent."; HUDMSG_Typeon,1,Cr_white,0.5,0.9,2.0,0.05);
+	Break;
+	
+	Case 29:
+	Hudmessage(s:"The Katana replaces Crowbar/Knife/Fists."; HUDMSG_Typeon,1,Cr_white,0.5,0.9,2.0,0.05);
+	Break;
+	
+	Case 30:
+	Hudmessage(s:"Rune of Onslaught (Quad Damage) is like a double edged sword, mind the splash damage."; HUDMSG_Typeon,1,Cr_white,0.5,0.9,2.0,0.05);
+	Break;
+	
+	Case 31:
+	Hudmessage(s:"Rune of Berserk grants not only grants excessive melee damage, but also increased movement speed and much faster Pipebomb throw and velocity."; HUDMSG_Typeon,1,Cr_white,0.5,0.9,2.0,0.05);
+	Break;
+	
+	Case 32:
+	Hudmessage(s:"Rune of Overkill temporarily gives you the Death Machine."; HUDMSG_Typeon,1,Cr_white,0.5,0.9,2.0,0.05);
+	Break;
+
+	}
+}

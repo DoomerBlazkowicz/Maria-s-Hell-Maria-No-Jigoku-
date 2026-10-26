@@ -1,0 +1,30 @@
+#library "LFWStuff"
+#include "zcommon.acs"
+
+//Sourced from Red Spiral '93 by LossForWords
+
+script "MariaSecretNotifier" ENTER
+{
+	int stotal;
+	int sfound;
+	int sfound2;
+	
+	stotal = GetLevelInfo(LEVELINFO_TOTAL_SECRETS); // Dunno if secret number can increase, though.
+	sfound2 = sfound;
+	sfound = GetLevelInfo(LEVELINFO_FOUND_SECRETS);
+	// Found a secret.
+	if (sfound > sfound2)
+	{
+			if (sfound == stotal)
+			{
+			LocalAmbientSound("TRSCR2", 127);
+			HudMessage(s:"\c[Green]There's nothing left to discover here."; HUDMSG_TYPEON, 0, "PD_DigiGreen", 0.5, 0.8, 1.5, 0.02);
+			} else 
+			{
+			LocalAmbientSound("TRSCRT", 127);
+			HudMessage(s:"\c[White]A secret place is found!  \n       (\c[Red]",i:sfound,s:" \c[White]/\c[Green]",i:stotal,s:")"; HUDMSG_TYPEON, 0, "PD_DigiTeal", 0.5, 0.8, 1.5, 0.02);
+			}
+		}
+	delay(1);
+	restart;
+}

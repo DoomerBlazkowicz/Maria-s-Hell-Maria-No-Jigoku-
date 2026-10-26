@@ -1,0 +1,84 @@
+#library "Trackers"
+#include "zcommon.acs"
+
+// ACS code found on the ZDoom wiki, edited by 392doomer and DoomerBlazkowicz
+// https://zdoom.org/wiki/GetLevelInfo
+
+Script "KillTracker" ENTER
+{	
+    int mtotal = GetLevelInfo (LEVELINFO_TOTAL_MONSTERS),
+        mkilled = GetLevelInfo (LEVELINFO_KILLED_MONSTERS);
+
+	if (mtotal == 0) //don't display this shit if there's nothing
+	{
+		terminate;
+	}
+    if (mkilled == mtotal)
+    {
+		delay(20);
+		GiveInventory("Maria_Level_Clear",1);
+		AmbientSound("Maria/Checks/Kills",2.0);
+		SetFont("HBIGFONT");
+		HudMessage(s:"\c[Red]Mother, the devils are neutralised."; HUDMSG_TYPEON, 0, "PD_DigiGreen", 0.5, 0.45, 2.5, 0.02);
+		delay(20);
+		terminate;
+    }
+    else
+    {
+		// don't display anything
+		Delay(30);
+		Restart; // needed so the script won't terminate itself
+    }
+}
+
+Script "ItemTracker" ENTER
+{	
+    int itotal = GetLevelInfo (LEVELINFO_TOTAL_ITEMS),
+        icollected = GetLevelInfo (LEVELINFO_FOUND_ITEMS);
+
+	if (itotal == 0) //don't display this shit if there's nothing
+	{
+		terminate;
+	}
+    if (icollected == itotal)
+    {
+		delay(20);
+		AmbientSound("Maria/Checks/Items",2.0);
+		SetFont("HBIGFONT");
+		HudMessage(s:"\c[Green]Mother, all items are looted."; HUDMSG_TYPEON, 0, "PD_DigiGreen", 0.5, 0.45, 2.5, 0.02);
+		delay(20);
+		terminate;
+    }
+    else
+    {
+		// don't display anything
+		Delay(30);
+		Restart; // needed so the script won't terminate itself
+    }
+}
+
+Script "SecretTracker" ENTER
+{	
+    int stotal = GetLevelInfo (LEVELINFO_TOTAL_SECRETS),
+        sfound = GetLevelInfo (LEVELINFO_FOUND_SECRETS);
+
+	if (stotal == 0) //don't display this shit if there's nothing
+	{
+		terminate;
+	}
+    if (sfound == stotal)
+    {
+		delay(20);
+		AmbientSound("Maria/Checks/Secrets",2.0);
+		SetFont("HBIGFONT");
+		HudMessage(s:"\c[Purple]Mother, all secrets are found."; HUDMSG_TYPEON, 0, "PD_DigiGreen", 0.5, 0.45, 2.5, 0.02);
+		delay(20);
+		terminate;
+    }
+    else
+    {
+		// don't display anything
+		Delay(30);
+		Restart; // needed so the script won't terminate itself
+    }
+}
