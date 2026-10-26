@@ -1,0 +1,91 @@
+
+
+// For an icon that swaps out in place, like the Wolf3D skill menu
+class StaticIconListMenu : ListMenu
+{
+	double iconOffset;
+	String lookupBase;
+	
+	override void Init(Menu parent, ListMenuDescriptor desc)
+	{
+		// Some logic to determine the rightmost pixel point of the middle skill values
+		//  Used for default positioning a la Wolf3D
+		double maxWidth;
+		int min;
+
+		mDesc = desc;
+
+		// Find the middle skill menu entry (with rounding if odd number of entries)
+		double median = (mDesc.mItems.Size() - 1) / 2;
+		if (median < int(median) + 0.5) { min = int(median); }
+		else { min = int(median) + 1; }
+
+		// Figure out the widest skill name...
+		for (int i = min; i < min + 2; i++)
+		{
+			int width = mDesc.mItems[i].GetWidth();
+			if (width > maxWidth) { maxWidth = width; }
+		}
+
+		// ... And use it's length to calculate the default x offset
+		iconOffset = mDesc.mXPos + maxWidth;
+		
+		// Allow generic lookups - strip "menu" off of the menu name, and use that stub as the lookup base (e.g., SKILL, EPISODE, etc.)
+		String MenuName = ToUpper(mDesc.mMenuName);
+		MenuName.Replace("MENU", "");
+
+		lookupBase = MenuName;
+		
+		Super.Init(parent, desc);
+	}
+
+
+	override void Drawer()
+	{
+		// Draw the icon for the currently selected item
+		DrawItemIcon(mDesc.mSelectedItem, -1, -1, 1.0);
+
+		Super.Drawer();
+	}
+
+	virtual void DrawItemIcon(int index, double x, double y, double alpha)
+	{
+		if (index < 0) { return; }
+
+		double fontheight = mDesc.mFont.GetHeight();
+
+		// Again, semi-hard-coded, unfortunately - Icons must be named [Menu name]1, [Menu name]2, etc.
+		TextureID tex = TexMan.CheckForTexture(lookupBase .. index, TexMan.Type_Any);
+		if (tex.IsValid())
+		{
+			Vector2 texsize = TexMan.GetScaledSize(tex);
+
+			// Default to Wolf3D-style positioning, roughly vertically centered on the skill list,
+			//  horizontally centered between the screen edge and the longest of the middle skill names.
+			if (x == -1) { x = (320 + iconOffset) / 2; }
+			if (y == -1) { y = mDesc.mYpos + ((mDesc.mItems.Size() - 1) * mDesc.mLinespacing) / 2; }
+
+			// Use the center of the image for positioning
+			x -= texsize.x / 2;
+			y -= texsize.y / 2;
+
+			screen.DrawTexture(tex, true, x, y, DTA_Clean, true, DTA_Alpha, alpha);
+		}
+	}
+	
+	String ToUpper(String input)
+	{
+		String output;
+
+		for (int i = 0; i < input.length(); i++)
+		{
+			int c = input.CharCodeAt(i);
+
+			if (c >= 97 && c <= 122) { c -= 32; }
+
+			output.AppendFormat("%c", c);
+		}
+
+		return output;
+	}
+}

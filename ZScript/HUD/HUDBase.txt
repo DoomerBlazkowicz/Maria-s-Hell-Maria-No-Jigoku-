@@ -1,0 +1,180 @@
+Class StatusBarMod : BaseStatusBar
+{
+	HUDFont hfntS;
+	HUDFont hfnt;
+	HUDFont hfntB;
+	
+	DynamicValueInterpolator mArmorBar;
+	
+	double HUDBarType;
+	int HUDBarTrans;
+	int HUDTorsoType;
+	
+    Override void Init()
+    {
+		//[Pop] this codeblock sets up the actual HUD space itself, and assigns
+		//fonts to stuff. Change the font called here to whatever you want it to be
+		//do not mess with the SetSize unless youre redoin somethings, its 
+		//basically just creating the canvas the HUD is gonna be drawn to.
+        SetSize(0, 520, 325); 
+		
+		mArmorBar = DynamicValueInterpolator.Create(0, 0.25, 1, 10);
+		
+		hfntS = HUDFont.Create("SMALLFNT");
+		hfnt = HUDFont.Create("SMALLFNT");
+		hfntB = HUDFont.Create("DBIGFONT");
+		Super.Init();
+	}
+	
+	override void Tick()
+	{
+		Super.Tick();
+		
+		mArmorBar.Update(GetArmorAmount());
+	}
+	
+    Override void Draw (int state, double TicFrac)
+    {
+        Super.Draw (state, TicFrac);
+
+        BeginStatusBar(true); //Force scale
+		
+		HUDBarTrans = CVar.GetCVAR("MH_HUDTrans").GetFloat();
+		HUDBarType = CVar.GetCVAR("MH_HUDType").GetInt();
+		HUDTorsoType = CVar.GetCVAR("MH_TorsoType").GetInt();
+		
+		switch(HUDBarType)
+		{
+			default:
+			case 0:
+				BeginHUD();
+				
+				//[Pop] Debug Center Line
+				//DrawImage("graphics/HUD/DEBGHUD.png", (0,0), DI_SCREEN_CENTER_BOTTOM | DI_ITEM_BOTTOM, 1.0);
+				DrawTorsoBar();
+				break;
+			case 1:
+				if(state == HUD_StatusBar)
+				{
+					BeginStatusBar();
+					
+					//[Pop] Debug Center Line
+					//DrawImage("graphics/HUD/DEBGHUD.png", (260,300), DI_SCREEN_CENTER_BOTTOM | DI_ITEM_BOTTOM, 1.0);
+					DrawDoomBar();
+				}
+				else if(state == HUD_Fullscreen)
+				{
+					BeginHUD();
+					
+					//[Pop] Debug Center Line
+					//DrawImage("graphics/HUD/DEBGHUD.png", (0,0), DI_SCREEN_CENTER_BOTTOM | DI_ITEM_BOTTOM, 1.0);
+					DrawFullScreenBar();
+				}
+				break;
+		}
+    }
+	
+	//Helper function to get the appropriate mugshot based on player state
+	TextureID GetBerserkMugshot()
+	{
+		let plr = CPlayer.mo;
+		
+		//Check if player has berserk powerup
+		if(plr.FindInventory("BerserkStrength"))
+		{
+			//Calculate which MOMRAGE sprite to show based on health
+			int health = plr.health;
+			int faceIndex;
+			
+			if(health > 80)
+				faceIndex = 0;
+			else if(health > 60)
+				faceIndex = 1;
+			else if(health > 40)
+				faceIndex = 2;
+			else if(health > 20)
+				faceIndex = 3;
+			else
+				faceIndex = 4;
+			
+			//Return the appropriate MOMRAGE sprite
+			return TexMan.CheckForTexture(String.Format("MOMRAGE%d", faceIndex), TexMan.Type_Any);
+		}
+		else
+		{
+			//Return normal mugshot
+			return GetMugShot(5);
+		}
+	}
+
+	//[Pop] This is the second one, with a different BAR graphic
+	void DrawDoomBar()
+    {   
+		let plr = PlayerPawn(CPlayer.mo);
+		//[Pop] simple null check here to check that the player exists, else 
+		//something funky might happen. These are mainly the only
+		//things that you need to worry about over SBARINFO.
+		if(plr)
+		{
+		
+			DrawImage("graphics/HUD/MARHUD.png", (250,325), DI_ITEM_BOTTOM, HUDBarTrans);
+			//DrawImage("graphics/HUD/MARHUD.png", (250,325), DI_SCREEN_CENTER_BOTTOM | DI_ITEM_BOTTOM, HUDBarTrans);
+		
+			//here we handle ammo
+			Inventory ammotype1, ammotype2;
+			[ammotype1, ammotype2] = GetCurrentAmmo();
+			//[Pop] specifically for mods that have reloading, these can be 
+			//swapped around if its swapped, i personally try to use ammotype1
+			//for whats actually being shot, and ammotype2 for the reserve
+			if (CPlayer.ReadyWeapon != NULL)
+			{
+				If(ammotype1!=null){DrawString(hfntB, FormatNumber(ammotype1.Amount, 1, 3), (290, 300), DI_TEXT_ALIGN_CENTER,Font.CR_GOLD);}
+				If(ammotype2!=null){DrawString(hfntB, FormatNumber(ammotype2.Amount, 3, 3), (340, 300), DI_TEXT_ALIGN_CENTER,Font.CR_WHITE);}
+				
+			}
+			//[Pop] this is less than ideal but i cant find any examples for doing it
+			//the correct way for some reason??? should probably just write a function
+			//for grabbing the ammo tho
+			
+			//also THIS HUD doesnt have MaxAmmo display, so gutting it for this variant
+
+			/*int ShellAmmo = GetAmount("Shell");
+			If(ShellAmmo)
+			{
+				DrawString(hfntS, FormatNumber(ShellAmmo, 1, 3), (404, 304), DI_TEXT_ALIGN_CENTER,Font.CR_RED, scale:(0.7, 0.7));
+			}*/
+			
+			int PipeBombAmmo = GetAmount("PipeBombAmmo");
+			If(PipeBombAmmo)
+			{
+				DrawString(hfntS, FormatNumber(PipeBombAmmo, 1, 3), (470, 299), DI_TEXT_ALIGN_CENTER,Font.CR_CREAM, scale:(1.0, 1.0));
+			}
+
+			int MariaSyringeAmmo = GetAmount("MariaSyringeAmmo");
+			If(MariaSyringeAmmo)
+			{
+				DrawString(hfntS, FormatNumber(MariaSyringeAmmo, 1, 3), (470, 311), DI_TEXT_ALIGN_CENTER,Font.CR_BLUE, scale:(1.0, 1.0));
+			}
+			
+			//here we handle armor/health
+			DrawString(hfntB, FormatNumber(GetArmorAmount(), 1, 3), (157, 300), DI_TEXT_ALIGN_CENTER, Font.CR_GREEN);
+			DrawString(hfntB, FormatNumber(plr.health, 1, 3), (206, 300), DI_TEXT_ALIGN_CENTER, Font.CR_BLUE);
+			
+			//heres the mugshot and inventory
+			DrawTexture(GetBerserkMugshot(), (234, 293), DI_ITEM_OFFSETS);
+			DrawInventoryIcon(plr.InvSel, (112, 316));
+			if (plr.InvSel)
+			{
+				DrawString(hfnt, FormatNumber(Cplayer.mo.InvSel.amount, 0, 3), (100, 310), DI_ITEM_OFFSETS, Font.CR_YELLOW);
+			}
+			
+			//[Pop] Now, these can technically draw more than 3, and itd be a good idea
+			//to allow it to for custom mapsets that have more, but they arent
+			//drawn from the center out, its strictly left to right or right to left
+			//so theyd need to be moved around slightly for it.
+			DrawKeys("Card", (67, 310), 3, -8);
+			DrawKeys("Skull", (75, 316), 3, -8);
+			DrawKeys("Key", (85, 314), 3, -8);
+		}
+    }
+	
