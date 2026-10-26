@@ -1,0 +1,4 @@
+1-3: Movement
+4-6: Raising shotgun before loading
+7-9: Lowering shotgun after loading
+10-15: Shell loading
