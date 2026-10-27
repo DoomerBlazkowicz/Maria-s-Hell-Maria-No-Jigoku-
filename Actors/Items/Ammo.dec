@@ -1,9 +1,9 @@
 ACTOR MariaHeavyClip : Ammo //replaces Clip
 {
 	Inventory.PickupMessage "$GOTCLIP2"
-	Inventory.Amount 10
+	Inventory.Amount 30
 	Inventory.MaxAmount 200
-	Ammo.BackpackAmount 10
+	Ammo.BackpackAmount 60
 	Ammo.BackpackMaxAmount 400
 	Inventory.Icon "CLIPA0"
     Inventory.PickupSound "Maria/Ammo/HeavyBullets/Single"
@@ -18,7 +18,7 @@ ACTOR MariaHeavyClip : Ammo //replaces Clip
 ACTOR MariaHeavyClipBox : MariaHeavyClip //replaces ClipBox
 {
 	Inventory.PickupMessage "$GOTCLIPBOX2"
-	Inventory.Amount 30
+	Inventory.Amount 90
     Inventory.PickupSound "Maria/Ammo/HeavyBullets/Box"
 	States
 	{
@@ -31,9 +31,9 @@ ACTOR MariaHeavyClipBox : MariaHeavyClip //replaces ClipBox
 ACTOR MariaLightClip : Ammo //replaces Clip
 {
 	Inventory.PickupMessage "$GOTCLIP1"
-	Inventory.Amount 10
+	Inventory.Amount 8
 	Inventory.MaxAmount 300
-	Ammo.BackpackAmount 10
+	Ammo.BackpackAmount 16
 	Ammo.BackpackMaxAmount 600
 	Inventory.Icon "PLIPA0"
     Scale 0.75
@@ -49,7 +49,7 @@ ACTOR MariaLightClip : Ammo //replaces Clip
 ACTOR MariaLightClipBox : MariaLightClip //replaces ClipBox
 {
 	Inventory.PickupMessage "$GOTCLIPBOX1"
-	Inventory.Amount 30
+	Inventory.Amount 32
     Inventory.PickupSound "Maria/Ammo/LightBullets/Box"
 	States
 	{
