@@ -516,15 +516,15 @@ ACTOR MariaPlasmaBall : PlasmaBall //Replaces PlasmaBall
 	TNT1 A 0 A_SpawnItemEx("MariaPlasmaBallTrail8",(24*momx)/-35.0,-(24*momy)/-35.0,0+(24*momz)/-35.0,0,0,0,0,SXF_ABSOLUTEANGLE)
 	TNT1 A 0 A_SpawnItemEx("MariaPlasmaBallTrail9",(27*momx)/-35.0,-(27*momy)/-35.0,0+(27*momz)/-35.0,0,0,0,0,SXF_ABSOLUTEANGLE)
 	Loop
-  Death:
+  Death: //Impact Surface 
     TNT1 A 0 A_SetScale (1.0)
-    TNT1 A 0 //A_Explode(6,50)
+    TNT1 A 0 A_Explode(6,50,1)
     TNT1 AAA 0 A_SpawnProjectile("MariaMiniSmoke", 1, 0, random(0, 360), CMF_AIMDIRECTION, random(0, -160))
 	PLPE ABCDE 2 Bright
 	Stop
-  XDeath:
+  XDeath: //Impact Hostile 
     TNT1 A 0 A_SetScale (1.0)
-    TNT1 A 0 //A_Explode(6,50)
+    TNT1 A 0 A_Explode(6,50)
     TNT1 AAA 0 A_SpawnProjectile("MariaMiniSmoke", 1, 0, random(0, 360), CMF_AIMDIRECTION, random(0, -160))
 	PLPE ABCDE 2 Bright
 	Stop
@@ -641,15 +641,15 @@ ACTOR MariaRedPlasmaBall : MariaPlasmaBall //Replaces PlasmaBall
 	TNT1 A 0 A_SpawnItemEx("MariaRedPlasmaBallTrail8",(24*momx)/-35.0,-(24*momy)/-35.0,0+(24*momz)/-35.0,0,0,0,0,SXF_ABSOLUTEANGLE)
 	TNT1 A 0 A_SpawnItemEx("MariaRedPlasmaBallTrail9",(27*momx)/-35.0,-(27*momy)/-35.0,0+(27*momz)/-35.0,0,0,0,0,SXF_ABSOLUTEANGLE)
 	Loop
-  Death:
+  Death: //Impact Surface 
     TNT1 A 0 A_SetScale (1.0)
-    TNT1 A 0 //A_Explode(9,55)
+    TNT1 A 0 A_Explode(9,55,1)
     TNT1 AAAAAA 0 A_SpawnProjectile("MariaMiniSmoke", 1, 0, random(0, 360), CMF_AIMDIRECTION, random(0, -160))
 	REBE ABCDE 2 Bright
 	Stop
-  XDeath:
+  XDeath: //Impact Hostile 
     TNT1 A 0 A_SetScale (1.0)
-    TNT1 A 0 //A_Explode(9,55)
+    TNT1 A 0 A_Explode(9,55)
     TNT1 AAAAAA 0 A_SpawnProjectile("MariaMiniSmoke", 1, 0, random(0, 360), CMF_AIMDIRECTION, random(0, -160))
 	REBE ABCDE 2 Bright
 	Stop
@@ -783,15 +783,15 @@ ACTOR MariaLunarPlasmaBall : MariaPlasmaBall //Replaces PlasmaBall
 	TNT1 A 0 A_SpawnItemEx("MariaLunarPlasmaBallTrail8",(24*momx)/-35.0,-(24*momy)/-35.0,0+(24*momz)/-35.0,0,0,0,0,SXF_ABSOLUTEANGLE)
 	TNT1 A 0 A_SpawnItemEx("MariaLunarPlasmaBallTrail9",(27*momx)/-35.0,-(27*momy)/-35.0,0+(27*momz)/-35.0,0,0,0,0,SXF_ABSOLUTEANGLE)
 	Loop
-  Death:
+  Death://Impact Surface 
     TNT1 A 0 A_SetScale (1.0)
-    TNT1 A 0 //A_Explode(6,50)
+    TNT1 A 0 A_Explode(6,50,1)
     TNT1 AAA 0 A_SpawnProjectile("MariaMiniSmoke", 1, 0, random(0, 360), CMF_AIMDIRECTION, random(0, -160))
 	BLPE ABCDE 2 Bright
 	Stop
-  XDeath:
+  XDeath: //Impact Hostile 
     TNT1 A 0 A_SetScale (1.0)
-    TNT1 A 0 //A_Explode(6,50)
+    TNT1 A 0 A_Explode(6,50)
     TNT1 AAA 0 A_SpawnProjectile("MariaMiniSmoke", 1, 0, random(0, 360), CMF_AIMDIRECTION, random(0, -160))
 	BLPE ABCDE 2 Bright
 	Stop
@@ -1017,16 +1017,32 @@ ACTOR MariaBFGBall : BFGBall //replaces BFGBall
   States
   {
   Spawn:
-    BFGB A 2 Bright A_SpawnItemEx("MariaBFGAlpha",0,0,0)
-    TNT1 A 0 A_SpawnItem("MariaGreenFlareMedium")
-    BFGB B 2 Bright A_SpawnItemEx("MariaBFGAlpha",0,0,0)
-    TNT1 A 0 A_SpawnItem("MariaGreenFlareMedium")
-    BFGB C 2 Bright A_SpawnItemEx("MariaBFGAlpha",0,0,0)
-    TNT1 A 0 A_SpawnItem("MariaGreenFlareMedium")
-    BFGB D 2 Bright A_SpawnItemEx("MariaBFGAlpha",0,0,0)
-    TNT1 A 0 A_SpawnItem("MariaGreenFlareMedium")
-    BFGB E 2 Bright A_SpawnItemEx("MariaBFGAlpha",0,0,0)
-    TNT1 A 0 A_SpawnItem("MariaGreenFlareMedium")
+	BFGB ABCDE 2 Bright 
+	{
+		A_LoopActiveSound ;
+		A_SpawnProjectile("MariaBFGAlpha",0,0,0,CMF_AIMDIRECTION|CMF_TRACKOWNER|CMF_OFFSETPITCH|CMF_ABSOLUTEANGLE,0,AAPTR_NULL);
+        A_SpawnItem("MariaGreenFlareMedium");
+		A_SpawnProjectile("MariaBFGAlpha",0,0,30,CMF_AIMDIRECTION|CMF_TRACKOWNER|CMF_OFFSETPITCH|CMF_ABSOLUTEANGLE,0,AAPTR_NULL);
+        A_SpawnItem("MariaGreenFlareMedium");
+		A_SpawnProjectile("MariaBFGAlpha",0,0,60,CMF_AIMDIRECTION|CMF_TRACKOWNER|CMF_OFFSETPITCH|CMF_ABSOLUTEANGLE,0,AAPTR_NULL);
+        A_SpawnItem("MariaGreenFlareMedium");
+		A_SpawnProjectile("MariaBFGAlpha",0,0,90,CMF_AIMDIRECTION|CMF_TRACKOWNER|CMF_OFFSETPITCH|CMF_ABSOLUTEANGLE,0,AAPTR_NULL);
+        A_SpawnItem("MariaGreenFlareMedium");
+		A_SpawnProjectile("MariaBFGAlpha",0,0,120,CMF_AIMDIRECTION|CMF_TRACKOWNER|CMF_OFFSETPITCH|CMF_ABSOLUTEANGLE,0,AAPTR_NULL);
+        A_SpawnItem("MariaGreenFlareMedium");
+		A_SpawnProjectile("MariaBFGAlpha",0,0,150,CMF_AIMDIRECTION|CMF_TRACKOWNER|CMF_OFFSETPITCH|CMF_ABSOLUTEANGLE,0,AAPTR_NULL);
+        A_SpawnItem("MariaGreenFlareMedium");
+		A_SpawnProjectile("MariaBFGAlpha",0,0,180,CMF_AIMDIRECTION|CMF_TRACKOWNER|CMF_OFFSETPITCH|CMF_ABSOLUTEANGLE,0,AAPTR_NULL);
+        A_SpawnItem("MariaGreenFlareMedium");
+		A_SpawnProjectile("MariaBFGAlpha",0,0,210,CMF_AIMDIRECTION|CMF_TRACKOWNER|CMF_OFFSETPITCH|CMF_ABSOLUTEANGLE,0,AAPTR_NULL);
+        A_SpawnItem("MariaGreenFlareMedium");
+		A_SpawnProjectile("MariaBFGAlpha",0,0,240,CMF_AIMDIRECTION|CMF_TRACKOWNER|CMF_OFFSETPITCH|CMF_ABSOLUTEANGLE,0,AAPTR_NULL);
+        A_SpawnItem("MariaGreenFlareMedium");
+		A_SpawnProjectile("MariaBFGAlpha",0,0,270,CMF_AIMDIRECTION|CMF_TRACKOWNER|CMF_OFFSETPITCH|CMF_ABSOLUTEANGLE,0,AAPTR_NULL);
+        A_SpawnItem("MariaGreenFlareMedium");
+		A_SpawnProjectile("MariaBFGAlpha",0,0,300,CMF_AIMDIRECTION|CMF_TRACKOWNER|CMF_OFFSETPITCH|CMF_ABSOLUTEANGLE,0,AAPTR_NULL);
+        A_SpawnItem("MariaGreenFlareMedium");
+	}
     Loop
   Death:
     TNT1 A 0 A_JumpIf(CallACS("AntiTinnitus")==1, "NoRinging")
@@ -1098,13 +1114,12 @@ ACTOR MariaBFGAlpha
     States
     {
     Spawn:
-       TNT1 A 0 Bright
        TNT1 A 1 Bright A_SpawnItemEx("MariaBFGTurn",0,0,0,3,0,0,  0,SXF_NOCHECKPOSITION|SXF_TRANSFERPOINTERS)
        TNT1 A 1 Bright A_SpawnItemEx("MariaBFGTurn",0,0,0,3,0,0,  60,SXF_NOCHECKPOSITION|SXF_TRANSFERPOINTERS)
        TNT1 A 1 Bright A_SpawnItemEx("MariaBFGTurn",0,0,0,3,0,0,  120,SXF_NOCHECKPOSITION|SXF_TRANSFERPOINTERS) 
-       TNT1 A 1 Bright A_SpawnItemEx("MariaBFGTurn",0,0,0,3,0,0,  0,SXF_NOCHECKPOSITION|SXF_TRANSFERPOINTERS)
+       /*TNT1 A 1 Bright A_SpawnItemEx("MariaBFGTurn",0,0,0,3,0,0,  0,SXF_NOCHECKPOSITION|SXF_TRANSFERPOINTERS)
        TNT1 A 1 Bright A_SpawnItemEx("MariaBFGTurn",0,0,0,3,0,0,  60,SXF_NOCHECKPOSITION|SXF_TRANSFERPOINTERS)
-       TNT1 A 1 Bright A_SpawnItemEx("MariaBFGTurn",0,0,0,3,0,0,  120,SXF_NOCHECKPOSITION|SXF_TRANSFERPOINTERS) 
+       TNT1 A 1 Bright A_SpawnItemEx("MariaBFGTurn",0,0,0,3,0,0,  120,SXF_NOCHECKPOSITION|SXF_TRANSFERPOINTERS)*/
 	   Stop
     }
 }
@@ -1147,7 +1162,7 @@ ACTOR MariaBFGTurn
        XXXX A 0 A_Chase
     Missile:
        XXXX A 0 A_FaceTarget
-       XXXX A 0 A_CustomRailgun(30,0,none,"Green",1,10,3,"NopainBFG",0,0,600,1,4.0,0,"NopainBFG",-15)
+       XXXX A 0 A_CustomRailgun(30,0,none,"Green",1,10,3,"NopainBFG",0,0,9999,1,4.0,0,"NopainBFG",-15)
        Stop 
     }
 }
