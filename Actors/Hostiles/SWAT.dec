@@ -1,14 +1,14 @@
 
 //===========================================================================
 //
-// Okaya Police (Pistol)
+// Okaya Police (Revolver)
 //
 //===========================================================================
-ACTOR MariaSWATPistol //Replaces WolfensteinSS
+ACTOR MariaSWATRevolver //Replaces WolfensteinSS
 {
   Game Doom
   //$Category Monsters
-  //$Title "SWAT (Pistol)"
+  //$Title "SWAT (Revolver)"
   obituary "Shizuka Okaya succeeded."
   health 60
   radius 20
@@ -22,8 +22,8 @@ ACTOR MariaSWATPistol //Replaces WolfensteinSS
   //attacksound ""
   painsound "Shizuka/SWAT/Pain"
   deathsound "Shizuka/SWAT/Death"
-  dropitem "MariaPistol"
-  dropitem "MariaLightClip"
+  dropitem "MariaRevolver"
+  dropitem "MariaLightClipSpeedloader"
   MONSTER
   +NOINFIGHTING
   +NOTARGET
@@ -46,19 +46,8 @@ ACTOR MariaSWATPistol //Replaces WolfensteinSS
 	CDL9 E 0 A_Jump(150, "BurstFire")
 	goto SemiFire
   SemiFire:
-	TNT1 A 0 A_Playsound("Weapon/Pistol/Fire")	
-    CDL9 F 2 bright A_custommissile("MariaHostilePistolTracer",43,5,frandom(-4, 4),CMF_AIMDIRECTION,pitch+frandom(-3, 3))
-	CDL9 E 15 //A_CPosRefire
-	goto See
-  BurstFire:
-	TNT1 A 0 A_Playsound("Weapon/Pistol/Fire")	
-	CDL9 F 2 bright A_custommissile("MariaHostilePistolTracer",43,5,frandom(-4, 4),CMF_AIMDIRECTION,pitch+frandom(-3, 3))
-	CDL9 E 4 A_FaceTarget
-	TNT1 A 0 A_Playsound("Weapon/Pistol/Fire")	
-	CDL9 F 2 bright A_custommissile("MariaHostilePistolTracer",43,5,frandom(-4, 4),CMF_AIMDIRECTION,pitch+frandom(-3, 3))
-	CDL9 E 4 A_FaceTarget
-	TNT1 A 0 A_Playsound("Weapon/Pistol/Fire")	
-	CDL9 F 2 bright A_custommissile("MariaHostilePistolTracer",43,5,frandom(-4, 4),CMF_AIMDIRECTION,pitch+frandom(-3, 3))
+	TNT1 A 0 A_Playsound("Weapon/Revolver/Fire")	
+    CDL9 F 2 bright A_custommissile("MariaHostileRevolverTracer",43,5,frandom(-4, 4),CMF_AIMDIRECTION,pitch+frandom(-3, 3))
 	CDL9 E 15 //A_CPosRefire
 	goto See
   Pain:

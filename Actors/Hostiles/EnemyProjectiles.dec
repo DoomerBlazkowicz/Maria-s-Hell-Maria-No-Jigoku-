@@ -36,7 +36,7 @@ ACTOR MariaHostileTracer : FastProjectile
 	}
 }
 
-ACTOR MariaHostilePistolTracer : MariaHostileTracer
+ACTOR MariaHostileRevolverTracer : MariaHostileTracer
 {
 	Damage (random(4,6))
 	DamageType "Bullet"
