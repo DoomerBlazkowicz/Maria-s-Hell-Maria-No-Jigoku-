@@ -141,7 +141,7 @@ ACTOR MariaGrenadeLauncherGrenade : ShinigamiGrenade //For Thumper
         TNT1 A 0 A_JumpIf(CallACS("AntiTinnitus")==1, "NoRinging")
 		GLXP A 0 Bright A_NoGravity
 		TNT1 A 0 Bright radius_quake(7,16,0,960,0)
-		GLXP A 0 bright A_Explode(200,256,1,1)
+		GLXP A 0 bright A_Explode(200,192,1,1)
 		GLXP A 0 A_SetTranslucent(0.75,1)
 		//RCKT A 2 Bright 
 		TNT1 A 0 A_PlaySound("Maria/Explosion/Ear",5,1,0,1)
@@ -948,7 +948,7 @@ Actor MariaRocketPlayer : Rocket
 		Loop
 	Death:
         TNT1 A 0 A_JumpIf(CallACS("AntiTinnitus")==1, "NoRinging")
-		TNT1 A 0 A_Explode(300,192,1,1,128)
+		TNT1 A 0 A_Explode(300,256,1,1,128)
 		TNT1 A 0 Bright A_NoGravity
 		TNT1 A 0 Bright radius_quake(11,20,0,1200,0)
 		GLXP A 0 A_PlaySound("Weapon/Barrel/Explosion")
@@ -966,7 +966,7 @@ Actor MariaRocketPlayer : Rocket
         TNT1 AAAAAAAAAAAAAAA 0 A_SpawnItemEx("MariaExplosionSmoke",0,0,0,Random(-10,10),Random(-10,10),Random(-10,10))
 		Stop
 	NoRinging:
-		TNT1 A 0 A_Explode(300,192,1,1,128)
+		TNT1 A 0 A_Explode(300,256,1,1,128) 
 		TNT1 A 0 Bright A_NoGravity
 		TNT1 A 0 Bright radius_quake(11,20,0,1200,0) 
 		GLXP A 0 A_PlaySound("Weapon/Barrel/Explosion")
@@ -1013,6 +1013,7 @@ ACTOR MariaBFGBall : BFGBall //replaces BFGBall
   +NODAMAGETHRUST
   +FORCERADIUSDMG
   +MTHRUSPECIES
+  ActiveSound "Weapon/BFG/Fly"
   DeathSound "Weapon/BFG/Explode"
   States
   {
@@ -1064,8 +1065,8 @@ ACTOR MariaBFGBall : BFGBall //replaces BFGBall
 	BFE1 A 0 BRIGHT //A_Explode(1024,192)
     TNT1 A 0 radius_quake(11,20,0,1200,0)
     BFE1 A 0 Bright //A_Explode
-    TNT1 A 0 A_BFGSpray("MariaBFGExtra",255,200)    
-    TNT1 AAAA 0 A_BFGSpray("MariaBFGExtra")    
+    TNT1 AAAAAAAA 0 A_BFGSpray("MariaBFGExtra",255,200)    
+    //TNT1 AAAAAAAA 0 A_BFGSpray("MariaBFGExtra")    
 	TNT1 A 0 A_SpawnItemEx("MariaShockWave")
     /*TNT1 AAAAA 0 A_SpawnProjectile("MariaBFGFlames", 0, 0, random(0, 360), CMF_AIMDIRECTION, random(0, -360))*/
     TNT1 AAAAA 0 A_SpawnProjectile("MariaExplosionSmoke", 0, 0, random(0, 360), CMF_AIMDIRECTION, random(0, -360))
