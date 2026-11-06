@@ -202,6 +202,89 @@ brightmap sprite RG2RV0  	{map "Brightmaps/Weapons/4.1-Abakan/Reload/RG2RV0_BM.p
 brightmap sprite RG2RW0  	{map "Brightmaps/Weapons/4.1-Abakan/Reload/RG2RW0_BM.png"disablefullbright}
 brightmap sprite RG2RX0  	{map "Brightmaps/Weapons/4.1-Abakan/Reload/RG2RX0_BM.png"disablefullbright}
 
+//Micro Rocket Launcher
+brightmap sprite MAGLA0		{map "Brightmaps/Weapons/5.R-Micro Missile Launcher/MAGLA0_BM.png"}
+brightmap sprite MAGLB0		{map "Brightmaps/Weapons/5.R-Micro Missile Launcher/MAGLA0_BM.png"}
+brightmap sprite MAGLC0		{map "Brightmaps/Weapons/5.R-Micro Missile Launcher/MAGLA0_BM.png"}
+
+brightmap sprite MAGCA0		{map "Brightmaps/Weapons/5.R-Micro Missile Launcher/MAGLA0_BM.png"}
+brightmap sprite MAGCB0		{map "Brightmaps/Weapons/5.R-Micro Missile Launcher/MAGLA0_BM.png"}
+brightmap sprite MAGCC0		{map "Brightmaps/Weapons/5.R-Micro Missile Launcher/MAGLA0_BM.png"}
+brightmap sprite MAGCD0		{map "Brightmaps/Weapons/5.R-Micro Missile Launcher/MAGLA0_BM.png"}
+brightmap sprite MAGCE0		{map "Brightmaps/Weapons/5.R-Micro Missile Launcher/MAGLA0_BM.png"}
+brightmap sprite MAGCF0		{map "Brightmaps/Weapons/5.R-Micro Missile Launcher/MAGLA0_BM.png"}
+
+brightmap sprite MAGFA0		{map "Brightmaps/Weapons/5.R-Micro Missile Launcher/Fire/MAGFA0_BM.png"}
+brightmap sprite MAGFB0		{map "Brightmaps/Weapons/5.R-Micro Missile Launcher/Fire/MAGFB0_BM.png"}
+brightmap sprite MAGFC0		{map "Brightmaps/Weapons/5.R-Micro Missile Launcher/Fire/MAGFC0_BM.png"}
+brightmap sprite MAGFD0		{map "Brightmaps/Weapons/5.R-Micro Missile Launcher/Fire/MAGFD0_BM.png"}
+brightmap sprite MAGFE0		{map "Brightmaps/Weapons/5.R-Micro Missile Launcher/Fire/MAGFE0_BM.png"}
+brightmap sprite MAGFF0		{map "Brightmaps/Weapons/5.R-Micro Missile Launcher/Fire/MAGFF0_BM.png"}
+brightmap sprite MAGFG0		{map "Brightmaps/Weapons/5.R-Micro Missile Launcher/Fire/MAGFG0_BM.png"} 
+brightmap sprite MAGFH0		{map "Brightmaps/Weapons/5.R-Micro Missile Launcher/Fire/MAGFA0_BM.png"}
+brightmap sprite MAGFI0		{map "Brightmaps/Weapons/5.R-Micro Missile Launcher/Fire/MAGFB0_BM.png"}
+brightmap sprite MAGFJ0		{map "Brightmaps/Weapons/5.R-Micro Missile Launcher/Fire/MAGFC0_BM.png"}
+brightmap sprite MAGFK0		{map "Brightmaps/Weapons/5.R-Micro Missile Launcher/Fire/MAGFD0_BM.png"}
+brightmap sprite MAGFL0		{map "Brightmaps/Weapons/5.R-Micro Missile Launcher/Fire/MAGFE0_BM.png"}
+brightmap sprite MAGFM0		{map "Brightmaps/Weapons/5.R-Micro Missile Launcher/Fire/MAGFF0_BM.png"}
+brightmap sprite MAGFN0		{map "Brightmaps/Weapons/5.R-Micro Missile Launcher/Fire/MAGFG0_BM.png"} 
+brightmap sprite MAGFO0		{map "Brightmaps/Weapons/5.R-Micro Missile Launcher/Fire/MAGFA0_BM.png"}
+brightmap sprite MAGFP0		{map "Brightmaps/Weapons/5.R-Micro Missile Launcher/Fire/MAGFB0_BM.png"}
+brightmap sprite MAGFQ0		{map "Brightmaps/Weapons/5.R-Micro Missile Launcher/Fire/MAGFC0_BM.png"}
+brightmap sprite MAGFR0		{map "Brightmaps/Weapons/5.R-Micro Missile Launcher/Fire/MAGFD0_BM.png"}
+brightmap sprite MAGFS0		{map "Brightmaps/Weapons/5.R-Micro Missile Launcher/Fire/MAGFE0_BM.png"}
+brightmap sprite MAGFT0		{map "Brightmaps/Weapons/5.R-Micro Missile Launcher/Fire/MAGFF0_BM.png"}
+brightmap sprite MAGFU0		{map "Brightmaps/Weapons/5.R-Micro Missile Launcher/Fire/MAGFG0_BM.png"} 
+
+brightmap sprite MAGSA0		{map "Brightmaps/Weapons/5.R-Micro Missile Launcher/Select/MAGSA0_BM.png"}
+brightmap sprite MAGSB0		{map "Brightmaps/Weapons/5.R-Micro Missile Launcher/Select/MAGSB0_BM.png"}
+brightmap sprite MAGSC0		{map "Brightmaps/Weapons/5.R-Micro Missile Launcher/Select/MAGSC0_BM.png"}
+brightmap sprite MAGSD0		{map "Brightmaps/Weapons/5.R-Micro Missile Launcher/Select/MAGSD0_BM.png"}
+brightmap sprite MAGSE0		{map "Brightmaps/Weapons/5.R-Micro Missile Launcher/Select/MAGSE0_BM.png"}
+brightmap sprite MAGSF0		{map "Brightmaps/Weapons/5.R-Micro Missile Launcher/Select/MAGSA0_BM.png"}
+brightmap sprite MAGSG0		{map "Brightmaps/Weapons/5.R-Micro Missile Launcher/Select/MAGSB0_BM.png"}
+brightmap sprite MAGSH0		{map "Brightmaps/Weapons/5.R-Micro Missile Launcher/Select/MAGSC0_BM.png"}
+brightmap sprite MAGSI0		{map "Brightmaps/Weapons/5.R-Micro Missile Launcher/Select/MAGSD0_BM.png"}
+brightmap sprite MAGSJ0		{map "Brightmaps/Weapons/5.R-Micro Missile Launcher/Select/MAGSE0_BM.png"}
+brightmap sprite MAGSK0		{map "Brightmaps/Weapons/5.R-Micro Missile Launcher/Select/MAGSA0_BM.png"}
+brightmap sprite MAGSL0		{map "Brightmaps/Weapons/5.R-Micro Missile Launcher/Select/MAGSB0_BM.png"}
+brightmap sprite MAGSM0		{map "Brightmaps/Weapons/5.R-Micro Missile Launcher/Select/MAGSC0_BM.png"}
+brightmap sprite MAGSN0		{map "Brightmaps/Weapons/5.R-Micro Missile Launcher/Select/MAGSD0_BM.png"}
+brightmap sprite MAGSO0		{map "Brightmaps/Weapons/5.R-Micro Missile Launcher/Select/MAGSE0_BM.png"}
+
+brightmap sprite MAGDA0		{map "Brightmaps/Weapons/5.R-Micro Missile Launcher/Deselect/MAGDA0_BM.png"}
+brightmap sprite MAGDB0		{map "Brightmaps/Weapons/5.R-Micro Missile Launcher/Deselect/MAGDB0_BM.png"}
+brightmap sprite MAGDC0		{map "Brightmaps/Weapons/5.R-Micro Missile Launcher/Deselect/MAGDC0_BM.png"}
+brightmap sprite MAGDD0		{map "Brightmaps/Weapons/5.R-Micro Missile Launcher/Deselect/MAGDD0_BM.png"}
+brightmap sprite MAGDE0		{map "Brightmaps/Weapons/5.R-Micro Missile Launcher/Deselect/MAGDE0_BM.png"}
+brightmap sprite MAGDF0		{map "Brightmaps/Weapons/5.R-Micro Missile Launcher/Deselect/MAGDA0_BM.png"}
+brightmap sprite MAGDG0		{map "Brightmaps/Weapons/5.R-Micro Missile Launcher/Deselect/MAGDB0_BM.png"}
+brightmap sprite MAGDH0		{map "Brightmaps/Weapons/5.R-Micro Missile Launcher/Deselect/MAGDC0_BM.png"}
+brightmap sprite MAGDI0		{map "Brightmaps/Weapons/5.R-Micro Missile Launcher/Deselect/MAGDD0_BM.png"}
+brightmap sprite MAGDJ0		{map "Brightmaps/Weapons/5.R-Micro Missile Launcher/Deselect/MAGDE0_BM.png"}
+brightmap sprite MAGDK0		{map "Brightmaps/Weapons/5.R-Micro Missile Launcher/Deselect/MAGDA0_BM.png"}
+brightmap sprite MAGDL0		{map "Brightmaps/Weapons/5.R-Micro Missile Launcher/Deselect/MAGDB0_BM.png"}
+brightmap sprite MAGDM0		{map "Brightmaps/Weapons/5.R-Micro Missile Launcher/Deselect/MAGDC0_BM.png"}
+brightmap sprite MAGDN0		{map "Brightmaps/Weapons/5.R-Micro Missile Launcher/Deselect/MAGDD0_BM.png"}
+brightmap sprite MAGDO0		{map "Brightmaps/Weapons/5.R-Micro Missile Launcher/Deselect/MAGDE0_BM.png"}
+
+brightmap sprite MAGRA0		{map "Brightmaps/Weapons/5.R-Micro Missile Launcher/Reload/MAGRA0_BM.png"}
+brightmap sprite MAGRB0		{map "Brightmaps/Weapons/5.R-Micro Missile Launcher/Reload/MAGRB0_BM.png"}
+brightmap sprite MAGRC0		{map "Brightmaps/Weapons/5.R-Micro Missile Launcher/Reload/MAGRC0_BM.png"}
+brightmap sprite MAGRD0		{map "Brightmaps/Weapons/5.R-Micro Missile Launcher/Reload/MAGRD0_BM.png"}
+brightmap sprite MAGRE0		{map "Brightmaps/Weapons/5.R-Micro Missile Launcher/Reload/MAGRE0_BM.png"}
+brightmap sprite MAGRX0		{map "Brightmaps/Weapons/5.R-Micro Missile Launcher/Reload/MAGRX0_BM.png"}
+brightmap sprite MAGRY0		{map "Brightmaps/Weapons/5.R-Micro Missile Launcher/Reload/MAGRY0_BM.png"}
+
+brightmap sprite MAGKA0		{map "Brightmaps/Weapons/5.R-Micro Missile Launcher/Melee/MAGKA0_BM.png"}
+brightmap sprite MAGKB0		{map "Brightmaps/Weapons/5.R-Micro Missile Launcher/Melee/MAGKB0_BM.png"}
+brightmap sprite MAGKC0		{map "Brightmaps/Weapons/5.R-Micro Missile Launcher/Melee/MAGKC0_BM.png"}
+brightmap sprite MAGKD0		{map "Brightmaps/Weapons/5.R-Micro Missile Launcher/Melee/MAGKD0_BM.png"}
+
+brightmap sprite MAGZA0		{map "Brightmaps/Weapons/5.R-Micro Missile Launcher/Zoom/MAGZA0_BM.png"}
+brightmap sprite MAGZB0		{map "Brightmaps/Weapons/5.R-Micro Missile Launcher/Zoom/MAGZB0_BM.png"}
+brightmap sprite MAGZC0		{map "Brightmaps/Weapons/5.R-Micro Missile Launcher/Zoom/MAGZC0_BM.png"}
+
 //Plasma Rifle
 brightmap sprite PLZMA0		{map "Brightmaps/Weapons/6.1-Plasma Rifle/PLZMA0_BM.png"}
 
