@@ -12,6 +12,35 @@ actor MariaPistolSpawner : RandomSpawner Replaces Pistol
 	DropItem "MariaPistol", 255, 30
 }
 
+/*actor MariaPistolSpawner : RandomSpawner Replaces Pistol
+{
+    States
+    {
+
+	 Spawn:
+		TNT1 A 0 A_Jump(48, "Spawn2")		
+	Spawn1:
+		PLAS A 0
+		TNT1 A 0 A_SpawnItemEx ("MariaRevolver",0,0,0,0,0,0,0,0,0)
+		TNT1 A 1
+		TNT1 A -1
+		Stop
+	 Spawn2:
+		TNT1 A 0 A_JumpIfInTargetInventory("IncineratorVerificate", 1, "Spawn3")
+		PLAS A 0
+		TNT1 A 0 A_SpawnItemEx ("MariaPistol",0,0,0,0,0,0,0,0,0)
+		TNT1 A 1
+		TNT1 A -1
+		Stop	
+	 Spawn3:
+		PLAS A 0
+		TNT1 A 0 A_SpawnItemEx ("MariaGrease",0,0,0,0,0,0,0,0,0)
+		TNT1 A 1
+		TNT1 A -1
+		Stop			
+	}
+}*/
+
 actor MariaShotgunSpawner : RandomSpawner Replaces Shotgun
 {
 	DropItem "MariaShotgun", 255, 50
@@ -234,16 +263,14 @@ actor MariaShocktrooperSpawner : RandomSpawner /*replaces Deh_Actor_153*/ 3010
 {
     DropItem "MariaShocktrooper", 256, 100
     DropItem "MariaPyro", 256, 5
-    //DropItem "MariaFoxgirl", 256, 1
 }
 
 actor OkayaSWATSpawner : RandomSpawner Replaces WolfensteinSS
 {
-    DropItem "MariaSWATPistol", 256, 200
+    DropItem "MariaSWATRevolver", 256, 200
     DropItem "MariaSWATShotgun", 256, 175
     DropItem "MariaSWATSMG", 256, 100
     DropItem "MariaSWATElite", 256, 75
     //DropItem "MariaSWATBrutus", 256, 50 
-    DropItem "MariaPyro", 256, 25
-    //DropItem "MariaFoxgirl", 256, 1
+    DropItem "MariaPyro", 256, 1
 }
