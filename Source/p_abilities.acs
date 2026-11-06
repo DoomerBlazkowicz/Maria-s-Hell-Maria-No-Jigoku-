@@ -9,8 +9,7 @@
 
 #DEFINE SLIDEPOWER 1.0
 
-#DEFINE STAMINATAKESLIDE 20
-#DEFINE STAMINATAKEJUMP 30
+#DEFINE STAMINATAKESLIDE 50
 #DEFINE CAMLOWER 6.0
 
 global int 56:camheight;
@@ -45,8 +44,6 @@ Script "JPMobilityInit" (void)
 	GiveInventory("MobilityStamina",100);
 	
 	ACS_NamedExecuteAlways("SpectreSlide",0,0,0,0);
-	ACS_NamedExecuteAlways("SpectreJump",0,0,0,0);
-	ACS_NamedExecuteAlways("SpectreLatch",0,0,0,0);
 	
 	ACS_NamedExecuteAlways("SpectreDishStam",0,0,0,0);
 	ACS_NamedExecuteAlways("SpectreDrawStam",0,0,0,0);
@@ -99,7 +96,7 @@ Script "SpectreSlide" (void)
 				
 				PlaySound(0,"MOBILITY/SLIDE");
 				
-				TakeInventory("MobilityStamina",STAMINATAKEJUMP);
+				TakeInventory("MobilityStamina",STAMINATAKESLIDE);
 			
 			}
 			
