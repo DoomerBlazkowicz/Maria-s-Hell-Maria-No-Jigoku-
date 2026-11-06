@@ -143,3 +143,11 @@ Object MariaFamineCloud
 	Frame ECLDH { light DCLOUD_X5 }
 	Frame ECLDI { light DCLOUD_X6 }
 }
+
+object MariaKatanaSlash
+{
+    frame BWAVA { light BFGBALL }
+    frame BWAVB { light BFGBALL_X1 }
+    frame BWAVC { light BFGBALL_X4 }
+    frame BWAVD { light BFGBALL_X5 }
+}
