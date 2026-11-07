@@ -1,0 +1,87 @@
+extend class StatusBarMod
+{
+	void DrawTorsoBar()
+    {   
+		let plr = PlayerPawn(CPlayer.mo);
+		let armortype = CPlayer.mo.FindInventory("BasicArmor");
+		int armor = mArmorBar.GetValue();
+		
+		//[Pop] simple null check here to check that the player exists, else 
+		//something funky might happen. These are mainly the only
+		//things that you need to worry about over SBARINFO.
+		if(plr)
+		{	
+			//DrawImage("graphics/HUD/TDA Inspired HUD Concept.png", (-2,0), DI_SCREEN_CENTER_BOTTOM | DI_ITEM_BOTTOM, 0.5);
+			
+			//here we handle ammo
+			Inventory ammotype1, ammotype2;
+			[ammotype1, ammotype2] = GetCurrentAmmo();
+			//[Pop] specifically for mods that have reloading, these can be 
+			//swapped around if its swapped, i personally try to use ammotype1
+			//for whats actually being shot, and ammotype2 for the reserve
+			If(ammotype1!=null){DrawString(hfntB, FormatNumber(ammotype1.Amount, 1, 3), (130, -16), DI_SCREEN_CENTER_BOTTOM | DI_TEXT_ALIGN_RIGHT,Font.CR_GOLD);}
+			If(ammotype2!=null){DrawString(hfntB, FormatNumber(ammotype2.Amount, 3, 3), (150, -16), DI_SCREEN_CENTER_BOTTOM | DI_TEXT_ALIGN_LEFT,Font.CR_WHITE);}
+			DrawString(hfnt, CPlayer.ReadyWeapon.GetTag(), (140, -28), DI_SCREEN_CENTER_BOTTOM | DI_TEXT_ALIGN_CENTER, Font.CR_WHITE);
+			
+			//here we handle armor/health
+			DrawString(hfntB, FormatNumber(GetArmorAmount(), 1, 3), (50, -35), DI_SCREEN_CENTER_BOTTOM | DI_TEXT_ALIGN_LEFT, Font.CR_GREEN);
+			DrawString(hfntB, FormatNumber(plr.health, 1, 3), (-50, -35), DI_SCREEN_CENTER_BOTTOM | DI_TEXT_ALIGN_RIGHT, Font.CR_BLUE);
+			
+			//DrawImage("graphics/HUD/MARHEALTH.png", (-50,-20), DI_SCREEN_CENTER_BOTTOM | DI_ITEM_BOTTOM, 1.0);
+			DrawBar("Graphics/HUD/The Dark Ages/TDAHEALT1.png", "Graphics/HUD/The Dark Ages/TDAHEALT2.png", health, 100, (-50, -20), 0, SHADER_VERT | SHADER_REVERSE, DI_SCREEN_CENTER_BOTTOM | DI_ITEM_BOTTOM);
+			//DrawImage("graphics/HUD/MARARMOR.png", (50,-20), DI_SCREEN_CENTER_BOTTOM | DI_ITEM_BOTTOM, 1.0);
+			DrawBar("Graphics/HUD/The Dark Ages/TDAARMOR1.png", "Graphics/HUD/The Dark Ages/TDAARMOR2.png", armor, 200, (50, -20), 0, SHADER_VERT | SHADER_REVERSE, DI_SCREEN_CENTER_BOTTOM | DI_ITEM_BOTTOM);
+			
+			//heres the mugshot and inventory
+			
+			//Back hair
+			//Super Armor Wings ONLY
+			DrawTorso((0,0), DI_SCREEN_CENTER_BOTTOM | DI_ITEM_BOTTOM, (1.5, 1.5));
+			
+			//Do check if Super Armor, draw differenly from Blue and Green Armor
+			if (armor) DrawInventoryIcon(armortype, (0, 0), DI_SCREEN_CENTER_BOTTOM | DI_ITEM_BOTTOM, 1.0, (-1, -1), (1.5,1.5));
+			DrawTexture(GetBerserkMugshot(), (0.7, -24.2), DI_SCREEN_CENTER_BOTTOM | DI_ITEM_BOTTOM, 1.0, (-1,-1), (1.5, 1.5));
+			
+			DrawImage("Graphics/HUD/Icons/Pipebomb.png", (-130, -5), DI_SCREEN_CENTER_BOTTOM | DI_ITEM_BOTTOM);
+			DrawString(hfntS, FormatNumber(GetAmountOnly("PipebombAmmo"), 0, 3), (-120, -8), DI_SCREEN_CENTER_BOTTOM | DI_TEXT_ALIGN_CENTER, Font.CR_YELLOW);
+
+			DrawImage("Graphics/HUD/Icons/Stim.png", (-150, -5), DI_SCREEN_CENTER_BOTTOM | DI_ITEM_BOTTOM);
+			DrawString(hfntS, FormatNumber(GetAmountOnly("MariaSyringeAmmo"), 0, 3), (-140, -8), DI_SCREEN_CENTER_BOTTOM | DI_TEXT_ALIGN_CENTER, Font.CR_BLUE);
+
+			DrawImage("Graphics/HUD/Icons/Rocket.png", (-170, -5), DI_SCREEN_CENTER_BOTTOM | DI_ITEM_BOTTOM);
+			DrawString(hfntS, FormatNumber(GetAmountOnly("MariaRocketAmmo"), 0, 3), (-160, -8), DI_SCREEN_CENTER_BOTTOM | DI_TEXT_ALIGN_CENTER, Font.CR_ORANGE);
+
+			DrawImage("Graphics/HUD/Icons/BFG Cell.png", (-190, -5), DI_SCREEN_CENTER_BOTTOM | DI_ITEM_BOTTOM);
+			DrawString(hfntS, FormatNumber(GetAmountOnly("MariaBFGCell"), 0, 3), (-180, -8), DI_SCREEN_CENTER_BOTTOM | DI_TEXT_ALIGN_CENTER, Font.CR_GREEN);
+			
+			DrawInventoryIcon(plr.InvSel, (220, -5), DI_SCREEN_CENTER_BOTTOM | DI_ITEM_BOTTOM);
+			if (plr.InvSel)
+			{
+				DrawString(hfntS, FormatNumber(Cplayer.mo.InvSel.amount, 0, 3), (210, -8), DI_SCREEN_CENTER_BOTTOM | DI_TEXT_ALIGN_CENTER, Font.CR_YELLOW);
+			}
+			
+			if(GetAirTime() < 700)
+				DrawString(hfnt, "OXYGEN: "..(Formatnumber(((GetAirTime() / 7.0) * 100.0) / 100.0)).."%", (0, 45), DI_SCREEN_CENTER_TOP | DI_TEXT_ALIGN_CENTER, Font.CR_BLUE);
+			
+			//[Pop] Now, these can technically draw more than 3, and itd be a good idea
+			//to allow it to for custom mapsets that have more, but they arent
+			//drawn from the center out, its strictly left to right or right to left
+			//so theyd need to be moved around slightly for it.
+			DrawString(hfnt, "Keys", (-50, 15), DI_SCREEN_RIGHT_TOP | DI_TEXT_ALIGN_CENTER, Font.CR_WHITE);
+			DrawKeys("Key", (-40, 45), 25, -8, DI_SCREEN_RIGHT_TOP | DI_ITEM_OFFSETS);
+			//[Pop] So this actually handles EVERY HeXen/Heretic key at once, you
+			//wont need to add more lines for each individual key.
+			
+			//kills
+			DrawString(hfnt, "KILLS: "..FormatNumber(Level.killed_monsters,0,5).." / "..FormatNumber(Level.total_monsters,0,5), (35, 20), DI_SCREEN_LEFT_TOP, Font.CR_RED);
+			
+			//items
+			DrawString(hfnt, "ITEMS: "..FormatNumber(Level.found_items,0,5).." / "..FormatNumber(Level.total_items,0,5), (35, 30), DI_SCREEN_LEFT_TOP, Font.CR_GREEN);
+			
+			//secrets
+			DrawString(hfnt, "SECRET: "..FormatNumber(Level.found_secrets,0,5).." / "..FormatNumber(Level.total_secrets,0,5), (35, 40), DI_SCREEN_LEFT_TOP, Font.CR_PURPLE);
+			
+			//DrawImage("graphics/HUD/DEBGHUD.png", (0,0), DI_SCREEN_CENTER_BOTTOM | DI_ITEM_BOTTOM, 1.0);
+		}
+    }
+}

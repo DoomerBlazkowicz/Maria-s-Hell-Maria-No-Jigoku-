@@ -1,0 +1,81 @@
+extend class StatusBarMod
+{
+    void DrawFullscreenBar()
+    {   
+		let plr = PlayerPawn(CPlayer.mo);
+		let armortype = CPlayer.mo.FindInventory("BasicArmor");
+		int armor = mArmorBar.GetValue();
+		//[Pop] simple null check here to check that the player exists, else 
+		//something funky might happen. These are mainly the only
+		//things that you need to worry about over SBARINFO.
+		if(plr)
+		{
+			
+			//here we handle ammo
+			Inventory ammotype1, ammotype2;
+			[ammotype1, ammotype2] = GetCurrentAmmo();
+			//[Pop] specifically for mods that have reloading, these can be 
+			//swapped around if its swapped, i personally try to use ammotype1
+			//for whats actually being shot, and ammotype2 for the reserve
+			DrawImage("graphics/HUD/Eternal/ETRAMMO.png", (-125,-19), DI_SCREEN_RIGHT_BOTTOM | DI_ITEM_BOTTOM, 1.0, scale: (1.25, 1.25));
+			
+			If(ammotype1!=null){DrawString(hfntB, FormatNumber(ammotype1.Amount, 1, 3), (-140, -36), DI_SCREEN_RIGHT_BOTTOM | DI_TEXT_ALIGN_CENTER,Font.CR_GOLD);}
+			If(ammotype2!=null){DrawString(hfntB, FormatNumber(ammotype2.Amount, 3, 3), (-100, -36), DI_SCREEN_RIGHT_BOTTOM | DI_TEXT_ALIGN_CENTER,Font.CR_WHITE);}
+			
+			
+			DrawTorso((50,0), DI_SCREEN_LEFT_BOTTOM | DI_ITEM_BOTTOM, (1.5, 1.5));
+			
+			//heres the mugshot
+			if (armor) DrawInventoryIcon(armortype, (50, 0), DI_SCREEN_LEFT_BOTTOM | DI_ITEM_BOTTOM, 1.0, (-1, -1), (1.5,1.5));
+			DrawTexture(GetBerserkMugshot(), (50.7, -24.2), DI_SCREEN_LEFT_BOTTOM | DI_ITEM_BOTTOM, 1.0, (-1,-1), (1.5, 1.5));
+			
+			
+			
+			//here we handle armor/health
+			DrawString(hfntB, FormatNumber(GetArmorAmount(), 1, 3), (160, -59), DI_SCREEN_LEFT_BOTTOM | DI_TEXT_ALIGN_CENTER, Font.CR_GREEN);
+			DrawString(hfntB, FormatNumber(plr.health, 1, 3), (160, -36), DI_SCREEN_LEFT_BOTTOM | DI_TEXT_ALIGN_CENTER, Font.CR_BLUE);
+			
+			DrawImage("graphics/HUD/Eternal/ETRHEALTHPAN.png", (175,-19), DI_SCREEN_LEFT_BOTTOM | DI_ITEM_BOTTOM, 1.0, scale: (1.25, 1.25));
+			DrawBar("Graphics/HUD/Eternal/ETRHLTBAR.png", "Graphics/HUD/Eternal/ETRHEALTH.png", health, 100, (205, -27), 0, 0, DI_SCREEN_LEFT_BOTTOM | DI_ITEM_BOTTOM);
+			DrawImage("graphics/HUD/Eternal/ETRARMORPAN.png", (175,-41), DI_SCREEN_LEFT_BOTTOM | DI_ITEM_BOTTOM, 1.0, scale: (1.25, 1.25));
+			DrawBar("Graphics/HUD/Eternal/ETRARMBAR.png", "Graphics/HUD/Eternal/ETRARMOR.png", armor, 200, (205, -48), 0, 0, DI_SCREEN_LEFT_BOTTOM | DI_ITEM_BOTTOM);
+			
+			//and here the inventory
+			DrawInventoryIcon(plr.InvSel, (-50, -15), DI_SCREEN_RIGHT_BOTTOM | DI_ITEM_BOTTOM);
+			if (plr.InvSel)
+			{
+				DrawString(hfnt, FormatNumber(Cplayer.mo.InvSel.amount, 0, 3), (-45, -15), DI_SCREEN_RIGHT_BOTTOM | DI_ITEM_OFFSETS, Font.CR_YELLOW);
+			}
+			
+			
+			DrawImage("Graphics/HUD/Icons/Pipebomb.png", (-20, -50), DI_SCREEN_RIGHT_BOTTOM | DI_ITEM_BOTTOM);
+			DrawString(hfntS, FormatNumber(GetAmountOnly("PipebombAmmo"), 0, 3), (-10, -53), DI_SCREEN_RIGHT_BOTTOM | DI_TEXT_ALIGN_CENTER, Font.CR_YELLOW);
+
+			DrawImage("Graphics/HUD/Icons/Stim.png", (-40, -50), DI_SCREEN_RIGHT_BOTTOM | DI_ITEM_BOTTOM);
+			DrawString(hfntS, FormatNumber(GetAmountOnly("MariaSyringeAmmo"), 0, 3), (-30, -53), DI_SCREEN_RIGHT_BOTTOM | DI_TEXT_ALIGN_CENTER, Font.CR_BLUE);
+
+			DrawImage("Graphics/HUD/Icons/Rocket.png", (-60, -50), DI_SCREEN_RIGHT_BOTTOM | DI_ITEM_BOTTOM);
+			DrawString(hfntS, FormatNumber(GetAmountOnly("MariaRocketAmmo"), 0, 3), (-50, -53), DI_SCREEN_RIGHT_BOTTOM | DI_TEXT_ALIGN_CENTER, Font.CR_ORANGE);
+
+			DrawImage("Graphics/HUD/Icons/BFG Cell.png", (-80, -50), DI_SCREEN_RIGHT_BOTTOM | DI_ITEM_BOTTOM);
+			DrawString(hfntS, FormatNumber(GetAmountOnly("MariaBFGCell"), 0, 3), (-70, -53), DI_SCREEN_RIGHT_BOTTOM | DI_TEXT_ALIGN_CENTER, Font.CR_GREEN);
+			
+			
+			//[Pop] Now, these can technically draw more than 3, and itd be a good idea
+			//to allow it to for custom mapsets that have more, but they arent
+			//drawn from the center out, its strictly left to right or right to left
+			//so theyd need to be moved around slightly for it.
+			DrawKeys("Key", (-95, -45), 10, -8, DI_SCREEN_RIGHT_BOTTOM | DI_ITEM_BOTTOM);
+
+			//Level Stats
+			//kills
+			DrawString(hfnt, "KILLS: "..FormatNumber(Level.killed_monsters,0,5).." / "..FormatNumber(Level.total_monsters,0,5), (35, 20), DI_SCREEN_LEFT_TOP, Font.CR_RED);
+			
+			//items
+			DrawString(hfnt, "ITEMS: "..FormatNumber(Level.found_items,0,5).." / "..FormatNumber(Level.total_items,0,5), (35, 30), DI_SCREEN_LEFT_TOP, Font.CR_GREEN);
+			
+			//secrets
+			DrawString(hfnt, "SECRET: "..FormatNumber(Level.found_secrets,0,5).." / "..FormatNumber(Level.total_secrets,0,5), (35, 40), DI_SCREEN_LEFT_TOP, Font.CR_PURPLE);
+		}
+    }
+}

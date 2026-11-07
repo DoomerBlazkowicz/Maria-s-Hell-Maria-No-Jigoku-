@@ -8,7 +8,11 @@ version "4.1.3"
 #include "ZScript/FPP_Light.zsc"
 #include "ZScript/StepEventHandler.zsc"
 #include "ZScript/WolfSkill.zsc"
-#include "ZScript/HUD.zsc"
+#include "ZScript/HUD/HUDBase.zsc"
+#include "ZScript/HUD/HUDType.TDA.zsc"
+#include "ZScript/HUD/HUDType.D64.zsc"
+#include "ZScript/HUD/HUDType.Alt.zsc"
+#include "ZScript/HUD/HUDScreen.Automap.zsc"
 
 //Use To Pickup
 #include "ZScript/UseToPickup/INIFile.zsc"
