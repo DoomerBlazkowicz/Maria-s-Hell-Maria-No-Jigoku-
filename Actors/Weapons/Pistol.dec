@@ -27,91 +27,60 @@ ACTOR MariaPistol : MariaWeapon
 	Spawn:
 		SIGP A -1
 		Stop
+
 	Select:
 		TNT1 AA 0 A_Raise
-        Loop
+		Loop
 
 	Deselect:
-	    TNT1 A 0 A_JumpIfInventory("MariaPistolLoaded", 1, 1)
-	    Goto EmptyDeselect
-        TNT1 A 0 A_JumpIfInventory("PistolSuppressor",1,"DeselectSilent")
-     	SIGD ABCDE 1
-        TNT1 AAAAAAAAAAAAAAAAAA 0 A_Lower
-        TNT1 A 1
-        Wait
-	EmptyDeselect:
-        TNT1 A 0 A_JumpIfInventory("PistolSuppressor",1,"EmptyDeselectSilent")
-     	SEGD ABCDE 1
-        TNT1 AAAAAAAAAAAAAAAAAA 0 A_Lower
-        TNT1 A 1
-        Wait
+		SISD A 0 A_JumpIfInventory("PistolSuppressor",1,"DeselectSilent")
+		SEGD A 0 A_JumpIf(CountInv("MariaPistolLoaded") < 1, 2)
+		SIGD A 0
+		"####" ABCDE 1
+		Goto DeselectFinish
 	DeselectSilent:
-	    TNT1 A 0 A_JumpIfInventory("MariaPistolLoaded", 1, 1)
-	    Goto EmptyDeselectSilent
-     	SISD ABCDE 1
-        TNT1 AAAAAAAAAAAAAAAAAA 0 A_Lower
-        TNT1 A 1
-        Wait
-	EmptyDeselectSilent:
-     	SESD ABCDE 1
-        TNT1 AAAAAAAAAAAAAAAAAA 0 A_Lower
-        TNT1 A 1
-        Wait
+		SESD A 0 A_JumpIf(CountInv("MariaPistolLoaded") < 1, 2) 
+		SISD A 0
+		"####" ABCDE 1
+	DeselectFinish:
+		TNT1 AAAAAAAAAAAAAAAAAA 0 A_Lower
+		TNT1 A 1
+		Wait
 
 	Ready:
-	    TNT1 A 0 A_JumpIfInventory("MariaPistolLoaded", 1, 1)
-	    Goto EmptyReady
+		TNT1 A 0 A_PlaySound("Maria/Draw/Sidearm")
 		TNT1 A 0 A_JumpIfInventory("PistolSuppressor",1,"ReadySilent")
-        TNT1 A 0 A_PlaySound("Maria/Draw/Sidearm")
-        SIGS ABCDE 1
-        Goto ReadyLoop
-	EmptyReady:
-		TNT1 A 0 A_JumpIfInventory("PistolSuppressor",1,"EmptyReadySilentLoop")
-        TNT1 A 0 A_PlaySound("Maria/Draw/Sidearm")
-        SEGS ABCDE 1
-        Goto EmptyReadyLoop
+		SEGS A 0 A_JumpIf(CountInv("MariaPistolLoaded") < 1, 2) 
+		SIGS A 0
+		"####" ABCDE 1
+		Goto ReadyLoop
 	ReadySilent:
-	    TNT1 A 0 A_JumpIfInventory("MariaPistolLoaded", 1, 1)
-	    Goto EmptyReadySilent
-        TNT1 A 0 A_PlaySound("Maria/Draw/Sidearm")
-        SISS ABCDE 1
-        Goto ReadySilentLoop
-	EmptyReadySilent:
-        TNT1 A 0 A_PlaySound("Maria/Draw/Sidearm")
-        SISS ABCDE 1
-        Goto EmptyReadySilentLoop
+		SESS A 0 A_JumpIf(CountInv("MariaPistolLoaded") < 1, 2) 
+		SISS A 0
+		"####" ABCDE 1
+		Goto ReadyLoop
 
-    ReadyLoop:
-	    TNT1 A 0 A_JumpIfInventory("MariaPistolLoaded", 1, 1)
-	    Goto EmptyReadyLoop
+	ReadyLoop:
 		TNT1 A 0 A_JumpIfInventory("PistolSuppressor",1,"ReadySilentLoop")
-        SIGG A 1 A_WeaponReady(WRF_ALLOWZOOM|WRF_ALLOWRELOAD|WRF_ALLOWUSER1|WRF_ALLOWUSER2|WRF_ALLOWUSER3)
-        Loop
-    EmptyReadyLoop:
-		TNT1 A 0 A_JumpIfInventory("PistolSuppressor",1,"EmptyReadySilent")
-        SIGG C 1 A_WeaponReady(WRF_ALLOWZOOM|WRF_ALLOWRELOAD|WRF_ALLOWUSER1|WRF_ALLOWUSER2|WRF_ALLOWUSER3)
-        Loop
-    ReadySilentLoop:
-	    TNT1 A 0 A_JumpIfInventory("MariaPistolLoaded", 1, 1)
-	    Goto EmptyReadySilentLoop
-        SISG A 1 A_WeaponReady(WRF_ALLOWZOOM|WRF_ALLOWRELOAD|WRF_ALLOWUSER1|WRF_ALLOWUSER2|WRF_ALLOWUSER3)
-        Loop
-    EmptyReadySilentLoop:
-        SISG C 1 A_WeaponReady(WRF_ALLOWZOOM|WRF_ALLOWRELOAD|WRF_ALLOWUSER1|WRF_ALLOWUSER2|WRF_ALLOWUSER3)
-        Loop
+		SIGG C 0 A_JumpIf(CountInv("MariaPistolLoaded") < 1, 2)
+		SIGG A 0
+		SIGG "#" 1 A_WeaponReady(WRF_ALLOWZOOM|WRF_ALLOWRELOAD|WRF_ALLOWUSER1|WRF_ALLOWUSER2|WRF_ALLOWUSER3)
+		Loop
+	ReadySilentLoop:
+		SISG C 0 A_JumpIf(CountInv("MariaPistolLoaded") < 1, 2)
+		SISG A 0
+		SISG "#" 1 A_WeaponReady(WRF_ALLOWZOOM|WRF_ALLOWRELOAD|WRF_ALLOWUSER1|WRF_ALLOWUSER2|WRF_ALLOWUSER3)
+		Loop
 
 	Fire:
-		TNT1 A 0 A_JumpIfInventory("PistolSuppressor",1,"FireSilent")
-	    TNT1 A 0 A_JumpIfInventory("MariaPistolLoaded", 1, 1)
-	    Goto DryFire
-        TNT1 A 0 A_PlaySound("Weapon/Shinigami/Dry",0)
-	    SIGG A 0 Offset(0,33)
+		"####" "#" 0 A_JumpIf(CountInv("MariaPistolLoaded") < 1, "DryFire")
+		"####" "#" 0 A_PlaySound("Weapon/Shinigami/Dry",0)
+		"####" "#" 0 Offset(0,33)
 	FireCounted:
-		TNT1 A 0 A_JumpIfInventory("PistolSuppressor",1,"FireCountedSilent")
-	    TNT1 A 0 A_JumpIfInventory("MariaPistolLoaded", 1, 1)
-	    Goto DryFire
-        TNT1 A 0 A_JumpIfInventory("MariaPistolLoaded", 2, 2)
-        TNT1 A 0 A_PlaySound("Weapon/Magclick", 1)
+		"####" "#" 0 A_JumpIfInventory("PistolSuppressor",1,"FireCountedSilent")
+		"####" "#" 0 A_JumpIf(CountInv("MariaPistolLoaded") < 1, "DryFire")
+		TNT1 A 0 A_JumpIfInventory("MariaPistolLoaded", 2, 2)
+		TNT1 A 0 A_PlaySound("Weapon/Magclick", 1)
 		SIGG B 1
 		SIGG A 0 A_GunFlash
 		TNT1 A 0 A_JumpIfInventory("PowerQuadDamage",1,2)
@@ -119,14 +88,14 @@ ACTOR MariaPistol : MariaWeapon
 		TNT1 A 0 A_PlaySound("Maria/Powerup/Quad/Shoot",7)
 		SIGG A 0 A_PlayWeaponSound("Weapon/Pistol/Fire", CHAN_AUTO)
 		TNT1 A 0 A_PlaySound("Weapon/Pistol/Distant", 6)
-        TNT1 A 0 A_TakeInventory("MariaPistolLoaded", 1)
+		TNT1 A 0 A_TakeInventory("MariaPistolLoaded", 1)
 		SIGG B 0 BRIGHT A_AlertMonsters
-        TNT1 B 0 radius_quake (1.5, 2, 0, 1, 0)
+		TNT1 B 0 radius_quake (1.5, 2, 0, 1, 0)
 		SIGF A 1 BRIGHT A_FireBullets (1, 1, -1, 10, "MariaPuff")
-        TNT1 A 0 A_FireCustomMissile("MariaFlareOrange",0,0,0,8)
-        TNT1 A 0 A_FireCustomMissile("MariaMuzzleSmoke",0,0,0,8)
+		TNT1 A 0 A_FireCustomMissile("MariaFlareOrange",0,0,0,8)
+		TNT1 A 0 A_FireCustomMissile("MariaMuzzleSmoke",0,0,0,8)
 		SIGF B 1 A_SetPitch (pitch - 0.6)
-        TNT1 B 0 Offset(0, 33) A_SpawnItemEx("9mmBulletCasing", 17, 3, 35, 0, random(3,6), random(3,7))
+		TNT1 B 0 Offset(0, 33) A_SpawnItemEx("9mmBulletCasing", 17, 3, 35, 0, random(3,6), random(3,7))
 		SIGF C 1 
 		SIGF D 1 A_WeaponReady(WRF_NOBOB | WRF_ALLOWRELOAD)
 		SIGG C 1 A_WeaponReady(WRF_NOBOB | WRF_ALLOWRELOAD)
@@ -134,16 +103,11 @@ ACTOR MariaPistol : MariaWeapon
 		SIGG A 1 A_WeaponReady(WRF_NOBOB | WRF_ALLOWRELOAD)
 		SIGG A 0 //A_Refire
 		Goto ReadyLoop
-	FireSilent:
-	    TNT1 A 0 A_JumpIfInventory("MariaPistolLoaded", 1, 1)
-	    Goto SilentDryFire
-        TNT1 A 0 A_PlaySound("Weapon/Shinigami/Dry",0)
-	    SISG B 0 Offset(0,33)
+
 	FireCountedSilent:
-	    TNT1 A 0 A_JumpIfInventory("MariaPistolLoaded", 1, 1)
-	    Goto DryFire
-        TNT1 A 0 A_JumpIfInventory("MariaPistolLoaded", 2, 2)
-        TNT1 A 0 A_PlaySound("Weapon/Magclick", 1)
+		"####" "#" 0 A_JumpIf(CountInv("MariaPistolLoaded") < 1, "DryFire")
+		TNT1 A 0 A_JumpIfInventory("MariaPistolLoaded", 2, 2)
+		TNT1 A 0 A_PlaySound("Weapon/Magclick", 1)
 		SISG B 1
 		SISG A 0 A_GunFlash
 		TNT1 A 0 A_JumpIfInventory("PowerQuadDamage",1,2)
@@ -151,78 +115,67 @@ ACTOR MariaPistol : MariaWeapon
 		TNT1 A 0 A_PlaySound("Maria/Powerup/Quad/Shoot",7)
 		SISG A 0 A_PlayWeaponSound("Weapon/Pistol/Silencer/Fire", CHAN_AUTO)
 		TNT1 A 0 A_PlaySound("Weapon/Pistol/Silencer/Distant", 6)
-        TNT1 A 0 radius_quake (3, 2, 0, 1, 0)
-     	TNT1 A 0 A_AlertMonsters(384)
-        TNT1 A 0 A_TakeInventory("MariaPistolLoaded", 1)
-		SISG B 0 BRIGHT //A_AlertMonsters
-        TNT1 B 0 radius_quake (1, 1, 0, 1, 0)
-		SISF A 1 BRIGHT A_FireBullets (1, 1, -1, 13, "MariaPuff")
-        TNT1 A 0 A_FireCustomMissile("MariaMuzzleSmoke",0,0,0,8)
+		TNT1 A 0 radius_quake (3, 2, 0, 1, 0)
+		TNT1 A 0 A_AlertMonsters(384)
+		TNT1 A 0 A_TakeInventory("MariaPistolLoaded", 1)
+		SISG B 0 //A_AlertMonsters
+		TNT1 B 0 radius_quake (1, 1, 0, 1, 0)
+		SISF A 1 A_FireBullets (1, 1, -1, 13, "MariaPuff")
+		TNT1 A 0 A_FireCustomMissile("MariaMuzzleSmoke",0,0,0,8)
 		SISF B 1 A_SetPitch (pitch - 1.0)
-        TNT1 B 0 Offset(0, 33) A_SpawnItemEx("9mmBulletCasing", 17, 3, 35, 0, random(3,6), random(3,7))
+		TNT1 B 0 Offset(0, 33) A_SpawnItemEx("9mmBulletCasing", 17, 3, 35, 0, random(3,6), random(3,7))
 		SISF CD 1
 		SIGG C 1
 		SISG AAAA 1 
 		SISG A 1
 		SISG A 0 //A_Refire
-		Goto ReadySilentLoop
-	AltFire:
-	    TNT1 A 0 A_JumpIfInventory("MariaPistolLoaded", 1, 1)
-	    Goto AltFireEmpty
-		SIGG A 0 A_JumpIfInventory("PistolSuppressor",1,"SuppressorOut")
-		SIGG A 0 A_GiveInventory("PistolSuppressor")
-        SIGG H 0 A_PrintBold ("Silencer attaching.")
-     	SIGD ABCDE 1
-        TNT1 A 5
-        TNT1 A 0 A_PlaySound("Weapon/Pistol/Silencer/Attach")
-        TNT1 A 10
-        SISD EDCBA 1
-		Goto ReadySilentLoop
-	AltFireEmpty:
-		SEGG A 0 A_JumpIfInventory("PistolSuppressor",1,"SuppressorOut")
-		SEGG A 0 A_GiveInventory("PistolSuppressor")
-        SEGG H 0 A_PrintBold ("Silencer attaching.")
-     	SEGD ABCDE 1
-        TNT1 A 5
-        TNT1 A 0 A_PlaySound("Weapon/Pistol/Silencer/Attach")
-        TNT1 A 10
-        SESD EDCBA 1
-		Goto ReadySilentLoop
-	SuppressorOut:
-	    TNT1 A 0 A_JumpIfInventory("MariaPistolLoaded", 1, 1)
-	    Goto SuppressorOutEmpty
-		SISG A 0 A_TakeInventory("PistolSuppressor")
-        SISG A 0 A_PrintBold ("Silencer deattaching.")
-     	SISD ABCDE 1
-        TNT1 A 5
-        TNT1 A 0 A_PlaySound("Weapon/Pistol/Silencer/Deattach")
-        TNT1 A 10
-        SIGD EDCBA 1
-		Goto ReadyLoop
-	SuppressorOutEmpty:
-		SESG A 0 A_TakeInventory("PistolSuppressor")
-        SESG A 0 A_PrintBold ("Silencer deattaching.")
-     	SESD ABCDE 1
-        TNT1 A 5
-        TNT1 A 0 A_PlaySound("Weapon/Pistol/Silencer/Deattach")
-        TNT1 A 10
-        SEGD EDCBA 1
 		Goto ReadyLoop
 
-    DryFire:
-        TNT1 A 0 A_PlaySound("Weapon/Pistol/Dry",0)
-        TNT1 A 0 offset(0,36)
-        SIGG C 1 A_WeaponReady(WRF_NOFIRE|WRF_NOSWITCH)
-        TNT1 A 0 offset(0,35)
-        SIGG C 1 A_WeaponReady(WRF_NOFIRE|WRF_NOSWITCH)
-        Goto ReadyLoop
-    SilentDryFire:
-        TNT1 A 0 A_PlaySound("Weapon/Pistol/Dry",0)
-        TNT1 A 0 offset(0,36)
-        SISG C 1 A_WeaponReady(WRF_NOFIRE|WRF_NOSWITCH)
-        TNT1 A 0 offset(0,35)
-        SISG C 1 A_WeaponReady(WRF_NOFIRE|WRF_NOSWITCH)
-        Goto ReadySilentLoop
+	AltFire:
+		SIGG A 0
+		SIGG H 0 
+		{
+		If(CountInv("PistolSuppressor") == 1)
+			{
+			A_TakeInventory("PistolSuppressor");
+			A_PrintBold("Silencer deattaching.");
+			}
+			else
+			{
+			A_GiveInventory("PistolSuppressor");
+			A_PrintBold("Silencer attaching.");
+			}
+		}
+		SISD A 0 A_JumpIfInventory("PistolSuppressor",1,1)
+		Goto SuppressorOut
+		SIGD A 0 A_JumpIf(CountInv("MariaPistolLoaded") < 1, 2)
+		SEGD A 0
+		"####" ABCDE 1
+		TNT1 A 5
+		TNT1 A 0 A_PlaySound("Weapon/Pistol/Silencer/Attach")
+		TNT1 A 10
+		SISD A 0 A_JumpIf(CountInv("MariaPistolLoaded") < 1, 2)
+		SESD A 0
+		"####" EDCBA 1
+		Goto ReadyLoop
+	SuppressorOut:
+		SISD A 0 A_JumpIf(CountInv("MariaPistolLoaded") < 1, 2)
+		SESD A 0
+		"####" ABCDE 1
+		TNT1 A 5
+		TNT1 A 0 A_PlaySound("Weapon/Pistol/Silencer/Deattach")
+		TNT1 A 10
+		SIGD A 0 A_JumpIf(CountInv("MariaPistolLoaded") < 1, 2)
+		SEGD A 0
+		"####" EDCBA 1
+		Goto ReadyLoop
+
+	DryFire:
+		"####" "#" 0 A_PlaySound("Weapon/Pistol/Dry",0)
+		"####" "#" 1 { A_WeaponOffset(0,36); A_WeaponReady(WRF_NOFIRE|WRF_NOSWITCH); }
+		"####" "#" 1 { A_WeaponOffset(0,35); A_WeaponReady(WRF_NOFIRE|WRF_NOSWITCH); }
+		Goto ReadyLoop
+
 	Flash:
 		TNT1 A 2 BRIGHT A_Light2
 		TNT1 A 2 BRIGHT A_Light1
@@ -231,410 +184,336 @@ ACTOR MariaPistol : MariaWeapon
 		
 	Reload:
 		SIGG A 0 A_JumpIfInventory("PistolSuppressor",1,"ReloadSilent")
-        SIGG A 0 A_JumpIfInventory("MariaPistolLoaded", 8, 2)
-        SIGG A 0 A_JumpIfInventory("MariaLightClip", 1, "ReloadWork")
-        SIGG A 0 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
-        Goto ReadyLoop
-    ReloadWork:
+		SIGG A 0 A_JumpIfInventory("MariaPistolLoaded", 0, 2)
+		SIGG A 0 A_JumpIfInventory("MariaLightClip", 1, "ReloadWork")
+		SIGG A 0 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
+		Goto ReadyLoop
+	ReloadWork:
 		SIGG A 0 A_JumpIfInventory("PistolSuppressor",1,"ReloadWorkSilent")
-	    TNT1 A 0 A_JumpIfInventory("MariaPistolLoaded", 1,"ReloadWork2")
 		TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
-		SEGR ABCD 1 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
-        TNT1 A 0 A_Playsound("Weapon/Pistol/Eject")
-		SEGR D 2 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
-        TNT1 A 0 A_SpawnItemEx("EmptyPistolMagazine", 17, 2, 35, 0, random(3,6), 4)
-		SEGR D 4 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
-		SEGR E 1 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
-		TNT1 A 0 A_StartSound("Foley/Pistol/Raise", CHAN_AUTO)
-		SEGR EFF 1 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
-		SEGR GH 2 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
-		TNT1 A 0 A_StartSound("Foley/MagPouch/Out", CHAN_AUTO)
-		SEGR IJKKK 2 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
-		SEGR LMN 2 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
-        TNT1 A 0 A_Playsound("Weapon/Pistol/Load")
-		SEGR OPP 2 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
-	    Goto ReloadingLoop    
+		SEGR A 0 A_JumpIf(CountInv("MariaPistolLoaded") < 1,2)
+		SIGR A 0
+		"####" ABCD 1 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
+		"####" A 0 A_Playsound("Weapon/Pistol/Eject")
+		"####" D 2 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
+		"####" A 0 A_SpawnItemEx("EmptyPistolMagazine", 17, 2, 35, 0, random(3,6), 4)
+		"####" D 4 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
+		"####" E 1 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
+		"####" A 0 A_StartSound("Foley/Pistol/Raise", CHAN_AUTO)
+		"####" EFF 1 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
+		"####" GH 2 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
+		"####" A 0 A_StartSound("Foley/MagPouch/Out", CHAN_AUTO)
+		"####" IJKKK 2 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
+		"####" LMN 2 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
+		"####" A 0 A_Playsound("Weapon/Pistol/Load")
+		"####" OPP 2 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
+		"####" A 0 A_JumpIf(CountInv("MariaPistolLoaded") < 1, "ReloadingLoop")
+		Goto ReloadingLoop2
 	ReloadingLoop:
-		SEGG A 0 A_JumpIfInventory("PistolSuppressor",1,"ReloadingLoopSilent")
-        TNT1 A 0 A_TakeInventory("MariaLightClip", 1)
-        TNT1 A 0 A_GiveInventory("MariaPistolLoaded", 1)
-        TNT1 A 0 A_JumpIfInventory("MariaPistolLoaded", 8, "FinishReload")
-        TNT1 A 0 A_JumpIfInventory("MariaLightClip", 1, "ReloadingLoop")		
-	    Goto FinishReload
-	 FinishReload:
-		SEGG A 0 A_JumpIfInventory("PistolSuppressor",1,"FinishReloadSilent")
-        TNT1 A 0 A_Playsound("Weapon/Pistol/Rack")
-		SEGR QRS 1 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
-		TNT1 A 0 A_StartSound("Foley/Pistol/Lower", CHAN_AUTO)
-		SEGR SSTUVW 2 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
-	    Goto ReadyLoop
+		"####" A 0 A_TakeInventory("MariaLightClip", 1)
+		"####" A 0 A_GiveInventory("MariaPistolLoaded", 1)
+		"####" A 0 A_JumpIfInventory("MariaPistolLoaded", 8, "FinishReload")
+		"####" A 0 A_JumpIfInventory("MariaLightClip", 1, "ReloadingLoop")
+		Goto FinishReload
+	FinishReload:
+		TNT1 A 0 A_Playsound("Weapon/Pistol/Rack")
+		SESR A 0 A_JumpIfInventory("PistolSuppressor",1,2)	
+		SEGR A 0
+		"####" QRS 1 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
+		"####" A 0 A_StartSound("Foley/Pistol/Lower", CHAN_AUTO)
+		"####" SSTUVW 2 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
+		Goto ReadyLoop
 
-    ReloadWork2:
-		SIGG A 0 A_JumpIfInventory("PistolSuppressor",1,"ReloadWork2Silent")
-		TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
-		SIGR ABCD 1 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
-        TNT1 A 0 A_Playsound("Weapon/Pistol/Eject")
-		SIGR D 2 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
-		TNT1 A 0 A_StartSound("Foley/MagPouch/In", CHAN_AUTO)
-		SIGR D 4 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
-		SIGR E 1 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
-		TNT1 A 0 A_StartSound("Foley/Pistol/Raise", CHAN_AUTO)
-		SIGR EFF 1 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
-		SIGR GH 2 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
-		TNT1 A 0 A_StartSound("Foley/MagPouch/Out", CHAN_AUTO)
-		SIGR IJKKK 2 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
-		SIGR LMN 2 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
-        TNT1 A 0 A_Playsound("Weapon/Pistol/Load")
-		SIGR OPP 2 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
-	    Goto ReloadingLoop2    
 	ReloadingLoop2:
-		SIGG A 0 A_JumpIfInventory("PistolSuppressor",1,"ReloadingLoop2Silent")
-        TNT1 A 0 A_TakeInventory("MariaLightClip", 1)
-        TNT1 A 0 A_GiveInventory("MariaPistolLoaded", 1)
-        TNT1 A 0 A_JumpIfInventory("MariaPistolLoaded", 9, "FinishReload2")
-        TNT1 A 0 A_JumpIfInventory("MariaLightClip", 1, "ReloadingLoop2")		
-	    Goto FinishReload2
-	 FinishReload2:
-		SIGG A 0 A_JumpIfInventory("PistolSuppressor",1,"FinishReload2Silent")
+		"####" A 0 A_TakeInventory("MariaLightClip", 1)
+		"####" A 0 A_GiveInventory("MariaPistolLoaded", 1)
+		"####" A 0 A_JumpIfInventory("MariaPistolLoaded", 0, "FinishReload2")
+		"####" A 0 A_JumpIfInventory("MariaLightClip", 1, "ReloadingLoop2")
+		Goto FinishReload2
+	FinishReload2:
 		TNT1 A 0 A_StartSound("Foley/Pistol/Lower", CHAN_AUTO)
-		SIGR QQRST 2 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
-	    Goto ReadyLoop
-		
-	ReloadSilent:
-        SIGG A 0 A_JumpIfInventory("MariaPistolLoaded", 8, 2)
-        SIGG A 0 A_JumpIfInventory("MariaLightClip", 1, "ReloadWorkSilent")
-        SISG A 0 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
-        Goto ReadySilentLoop
-    ReloadWorkSilent:
-	    TNT1 A 0 A_JumpIfInventory("MariaPistolLoaded", 1,"ReloadWork2Silent")
-		TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
-		SESR ABCD 1 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
-        TNT1 A 0 A_Playsound("Weapon/Pistol/Eject")
-		SESR D 2 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
-        TNT1 A 0 A_SpawnItemEx("EmptyPistolMagazine", 17, 2, 35, 0, random(3,6), 4)
-		SESR D 4 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
-		SESR E 1 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
-		TNT1 A 0 A_StartSound("Foley/Pistol/Raise", CHAN_AUTO)
-		SESR EFF 1 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
-		SESR GH 2 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
-		TNT1 A 0 A_StartSound("Foley/MagPouch/Out", CHAN_AUTO)
-		SESR IJKKK 2 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
-		SESR LMN 2 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
-        TNT1 A 0 A_Playsound("Weapon/Pistol/Load")
-		SESR OPP 2 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
-	    Goto ReloadingLoopSilent    
-	ReloadingLoopSilent:
-        TNT1 A 0 A_TakeInventory("MariaLightClip", 1)
-        TNT1 A 0 A_GiveInventory("MariaPistolLoaded", 1)
-        TNT1 A 0 A_JumpIfInventory("MariaPistolLoaded", 8, "FinishReloadSilent")
-        TNT1 A 0 A_JumpIfInventory("MariaLightClip", 1, "ReloadingLoopSilent") 	
-	    Goto FinishReloadSilent	    
-	 FinishReloadSilent:
-        TNT1 A 0 A_Playsound("Weapon/Pistol/Rack")
-		SESR QRS 1 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
-		TNT1 A 0 A_StartSound("Foley/Pistol/Lower", CHAN_AUTO)
-		SESR SSTUVW 2 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
-	    Goto ReadySilentLoop
+		SISR A 0 A_JumpIfInventory("PistolSuppressor",1,2)
+		SIGR A 0
+		"####" QQRST 2 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
+		Goto ReadyLoop
 
-    ReloadWork2Silent:
+	ReloadWorkSilent:
 		TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
-		SISR ABCD 1 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
-        TNT1 A 0 A_Playsound("Weapon/Pistol/Eject")
-		SISR D 2 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
-		TNT1 A 0 A_StartSound("Foley/MagPouch/In", CHAN_AUTO)
-		SISR D 4 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
-		SISR E 1 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
-		TNT1 A 0 A_StartSound("Foley/Pistol/Raise", CHAN_AUTO)
-		SISR EFF 1 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
-		SISR GH 2 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
-		TNT1 A 0 A_StartSound("Foley/MagPouch/Out", CHAN_AUTO)
-		SISR IJKKK 2 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
-		SISR LMN 2 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
-        TNT1 A 0 A_Playsound("Weapon/Pistol/Load")
-		SISR OPP 2 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
-	    Goto ReloadingLoop2Silent    
-	ReloadingLoop2Silent:
-        TNT1 A 0 A_TakeInventory("MariaLightClip", 1)
-        TNT1 A 0 A_GiveInventory("MariaPistolLoaded", 1)
-        TNT1 A 0 A_JumpIfInventory("MariaPistolLoaded", 9, "FinishReload2Silent")
-        TNT1 A 0 A_JumpIfInventory("MariaLightClip", 1, "ReloadingLoop2Silent")		
-	    Goto FinishReload2
-	 FinishReload2Silent:
-		TNT1 A 0 A_StartSound("Foley/Pistol/Lower", CHAN_AUTO)
-		SISR QQRST 2 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
-	    Goto ReadySilentLoop
+		SESR A 0 A_JumpIf(CountInv("MariaPistolLoaded") < 1,2)
+		SISR A 0		
+		"####" ABCD 1 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
+		"####" A 0 A_Playsound("Weapon/Pistol/Eject")
+		"####" D 2 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
+		"####" A 0 A_SpawnItemEx("EmptyPistolMagazine", 17, 2, 35, 0, random(3,6), 4)
+		"####" D 4 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
+		"####" E 1 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
+		"####" A 0 A_StartSound("Foley/Pistol/Raise", CHAN_AUTO)
+		"####" EFF 1 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
+		"####" GH 2 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
+		"####" A 0 A_StartSound("Foley/MagPouch/Out", CHAN_AUTO)
+		"####" IJKKK 2 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
+		"####" LMN 2 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
+		"####" A 0 A_Playsound("Weapon/Pistol/Load")
+		"####" OPP 2 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
+		"####" A 0 A_JumpIf(CountInv("MariaPistolLoaded") < 1, "ReloadingLoop")
+		Goto ReloadingLoop2
 
-    ThrowPipebomb:
-	    TNT1 A 0 A_JumpIfInventory("MariaPistolLoaded", 1, 1)
-	    Goto EmptyThrowPipebomb
+	ThrowPipebomb:
+		TNT1 A 0 A_JumpIfInventory("MariaPistolLoaded", 1, 1)
+		Goto EmptyThrowPipebomb
 		TNT1 A 0 A_JumpIfInventory("PistolSuppressor",1,"ThrowPipebombSilent")
-        SIGD ABCDE 1
-        TASQ ABC 1
-        TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
-        TASG DEH 1
-        TNT1 A 0 A_TakeInventory("PipebombAmmo", 1)
-        TASG I 1 A_PlayWeaponSound("Maria/Pipebomb/Miss",1)
-        TASG J 1 A_PlaySound("Maria/Pipebomb/Ignite", 2)
-        TASG KLM 1
-        TASG OPQR 1 
-        TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
-        TAHA AB 1
-        TNT1 A 0 A_JumpIfInventory("PowerQuadDamage",1,2)
-        TNT1 A 0 A_Jump(256,2)
-        TNT1 A 0 A_PlaySound("Maria/Powerup/Quad/Shoot",7)
-        TNT1 A 0 A_PlaySound("Maria/Pipebomb/Throw", 3)
-        TNT1 A 0 A_FireCustomMissile("HolyPipebomb",0,1,0,0)
-        TAHA CDE 1
-        TNT1 A 5
-        SIGS ABCDE 1
-        Goto ReadyLoop
-    EmptyThrowPipebomb:
+		SIGD ABCDE 1
+		TASQ ABC 1
+		TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
+		TASG DEH 1
+		TNT1 A 0 A_TakeInventory("PipebombAmmo", 1)
+		TASG I 1 A_PlayWeaponSound("Maria/Pipebomb/Miss",1)
+		TASG J 1 A_PlaySound("Maria/Pipebomb/Ignite", 2)
+		TASG KLM 1
+		TASG OPQR 1 
+		TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
+		TAHA AB 1
+		TNT1 A 0 A_JumpIfInventory("PowerQuadDamage",1,2)
+		TNT1 A 0 A_Jump(256,2)
+		TNT1 A 0 A_PlaySound("Maria/Powerup/Quad/Shoot",7)
+		TNT1 A 0 A_PlaySound("Maria/Pipebomb/Throw", 3)
+		TNT1 A 0 A_FireCustomMissile("HolyPipebomb",0,1,0,0)
+		TAHA CDE 1
+		TNT1 A 5
+		SIGS ABCDE 1
+		Goto ReadyLoop
+	EmptyThrowPipebomb:
 		TNT1 A 0 A_JumpIfInventory("PistolSuppressor",1,"EmptyThrowPipebombSilent")
-        SEGD ABCDE 1
-        TASQ ABC 1
-        TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
-        TASG DEH 1
-        TNT1 A 0 A_TakeInventory("PipebombAmmo", 1)
-        TASG I 1 A_PlayWeaponSound("Maria/Pipebomb/Miss",1)
-        TASG J 1 A_PlaySound("Maria/Pipebomb/Ignite", 2)
-        TASG KLM 1
-        TASG OPQR 1 
-        TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
-        TAHA AB 1
-        TNT1 A 0 A_JumpIfInventory("PowerQuadDamage",1,2)
-        TNT1 A 0 A_Jump(256,2)
-        TNT1 A 0 A_PlaySound("Maria/Powerup/Quad/Shoot",7)
-        TNT1 A 0 A_PlaySound("Maria/Pipebomb/Throw", 3)
-        TNT1 A 0 A_FireCustomMissile("HolyPipebomb",0,1,0,0)
-        TAHA CDE 1
-        TNT1 A 5
-        SEGS ABCDE 1
-        Goto ReadyLoop
+		SEGD ABCDE 1
+		TASQ ABC 1
+		TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
+		TASG DEH 1
+		TNT1 A 0 A_TakeInventory("PipebombAmmo", 1)
+		TASG I 1 A_PlayWeaponSound("Maria/Pipebomb/Miss",1)
+		TASG J 1 A_PlaySound("Maria/Pipebomb/Ignite", 2)
+		TASG KLM 1
+		TASG OPQR 1 
+		TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
+		TAHA AB 1
+		TNT1 A 0 A_JumpIfInventory("PowerQuadDamage",1,2)
+		TNT1 A 0 A_Jump(256,2)
+		TNT1 A 0 A_PlaySound("Maria/Powerup/Quad/Shoot",7)
+		TNT1 A 0 A_PlaySound("Maria/Pipebomb/Throw", 3)
+		TNT1 A 0 A_FireCustomMissile("HolyPipebomb",0,1,0,0)
+		TAHA CDE 1
+		TNT1 A 5
+		SEGS ABCDE 1
+		Goto ReadyLoop
 
-    ThrowPipebombSilent:
-	    TNT1 A 0 A_JumpIfInventory("MariaPistolLoaded", 1, 1)
-	    Goto EmptyThrowPipebombSilent
-        SISD ABCDE 1
-        TASQ ABCDE 1
-        TASG H 1
-        TNT1 A 0 A_TakeInventory("PipebombAmmo", 1)
-        TASG I 1 A_PlayWeaponSound("Maria/Pipebomb/Miss",1)
-        TASG J 1 A_PlaySound("Maria/Pipebomb/Ignite", 2)
-        TASG KLM 1
-        TASG OPQR 1 
-        TAHA AB 1
-        TNT1 A 0 A_JumpIfInventory("PowerQuadDamage",1,2)
-        TNT1 A 0 A_Jump(256,2)
-        TNT1 A 0 A_PlaySound("Maria/Powerup/Quad/Shoot",7)
-        TNT1 A 0 A_PlaySound("Maria/Pipebomb/Throw", 3)
-        TNT1 A 0 A_PlaySound("Maria/Yeet", 4)
-        TNT1 A 0 A_FireCustomMissile("HolyPipebomb",0,1,0,0)
-        TAHA CDE 1
-        TNT1 A 5
-        SISS ABCDE 1
-        Goto ReadySilentLoop
-    EmptyThrowPipebombSilent:
-        SESD ABCDE 1
-        TASQ ABCDE 1
-        TASG H 1
-        TNT1 A 0 A_TakeInventory("PipebombAmmo", 1)
-        TASG I 1 A_PlayWeaponSound("Maria/Pipebomb/Miss",1)
-        TASG J 1 A_PlaySound("Maria/Pipebomb/Ignite", 2)
-        TASG KLM 1
-        TASG OPQR 1 
-        TAHA AB 1
-        TNT1 A 0 A_JumpIfInventory("PowerQuadDamage",1,2)
-        TNT1 A 0 A_Jump(256,2)
-        TNT1 A 0 A_PlaySound("Maria/Powerup/Quad/Shoot",7)
-        TNT1 A 0 A_PlaySound("Maria/Pipebomb/Throw", 3)
-        TNT1 A 0 A_PlaySound("Maria/Yeet", 4)
-        TNT1 A 0 A_FireCustomMissile("HolyPipebomb",0,1,0,0)
-        TAHA CDE 1
-        TNT1 A 5
-        SESS ABCDE 1
-        Goto EmptyReadySilentLoop
+	ThrowPipebombSilent:
+		TNT1 A 0 A_JumpIfInventory("MariaPistolLoaded", 1, 1)
+		Goto EmptyThrowPipebombSilent
+		SISD ABCDE 1
+		TASQ ABCDE 1
+		TASG H 1
+		TNT1 A 0 A_TakeInventory("PipebombAmmo", 1)
+		TASG I 1 A_PlayWeaponSound("Maria/Pipebomb/Miss",1)
+		TASG J 1 A_PlaySound("Maria/Pipebomb/Ignite", 2)
+		TASG KLM 1
+		TASG OPQR 1 
+		TAHA AB 1
+		TNT1 A 0 A_JumpIfInventory("PowerQuadDamage",1,2)
+		TNT1 A 0 A_Jump(256,2)
+		TNT1 A 0 A_PlaySound("Maria/Powerup/Quad/Shoot",7)
+		TNT1 A 0 A_PlaySound("Maria/Pipebomb/Throw", 3)
+		TNT1 A 0 A_PlaySound("Maria/Yeet", 4)
+		TNT1 A 0 A_FireCustomMissile("HolyPipebomb",0,1,0,0)
+		TAHA CDE 1
+		TNT1 A 5
+		SISS ABCDE 1
+		Goto ReadySilentLoop
+	EmptyThrowPipebombSilent:
+		SESD ABCDE 1
+		TASQ ABCDE 1
+		TASG H 1
+		TNT1 A 0 A_TakeInventory("PipebombAmmo", 1)
+		TASG I 1 A_PlayWeaponSound("Maria/Pipebomb/Miss",1)
+		TASG J 1 A_PlaySound("Maria/Pipebomb/Ignite", 2)
+		TASG KLM 1
+		TASG OPQR 1 
+		TAHA AB 1
+		TNT1 A 0 A_JumpIfInventory("PowerQuadDamage",1,2)
+		TNT1 A 0 A_Jump(256,2)
+		TNT1 A 0 A_PlaySound("Maria/Powerup/Quad/Shoot",7)
+		TNT1 A 0 A_PlaySound("Maria/Pipebomb/Throw", 3)
+		TNT1 A 0 A_PlaySound("Maria/Yeet", 4)
+		TNT1 A 0 A_FireCustomMissile("HolyPipebomb",0,1,0,0)
+		TAHA CDE 1
+		TNT1 A 5
+		SESS ABCDE 1
+		Goto EmptyReadySilentLoop
 
 	UseStimShot:
-	    TNT1 A 0 A_JumpIfInventory("MariaPistolLoaded", 1, 1)
-	    Goto EmptyUseStimShot
+		TNT1 A 0 A_JumpIfInventory("MariaPistolLoaded", 1, 1)
+		Goto EmptyUseStimShot
 		TNT1 A 0 A_JumpIfInventory("PistolSuppressor",1,"UseStimShotSilent")
 		TNT1 A 0 A_JumpIfHealthLower(100, 1)
 		Goto FullHealth
-        SIGD ABCDE 1
-        SYRI AB 1
-        TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
-        SYRI CD 1
-        SYRI EEFFGGG 1
-        SYRI HIJKKLLL 1
-        TNT1 A 0 A_PlaySound("Weapon/Syringe/Cap", 1)
-        SYRI MNOPQQQRR 1
-        TNT1 A 0 A_PlaySound("Weapon/Syringe/Tab", 1)
-        SYRI STUUUVV 1
-        TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
-        SYRI WXYZ 1
-        SYR2 AB 1
-        TNT1 A 0 A_TakeInventory("MariaSyringeAmmo", 1)
-        TNT1 A 0 A_PlaySound("Weapon/Syringe/Inject", 1)
-        SYR2 CD 1
-        TNT1 A 0 A_PlaySound("Weapon/Syringe/Heal", 2)
-        TNT1 A 0 A_SetBlend("BLUE",.5,25)
-        TNT1 A 0 HealThing(10, 100)
-        TNT1 A 0 A_GiveInventory("SyringeProtection")
-        TNT1 A 0 A_GiveInventory("SyringeRegeneration")
-        SYR2 EFGHIJ 2
-        SYR2 KLLMMN 1
-        TNT1 A 5
-        SIGS ABCDE 1
-	    Goto ReadyLoop
+		SIGD ABCDE 1
+		SYRI AB 1
+		TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
+		SYRI CD 1
+		SYRI EEFFGGG 1
+		SYRI HIJKKLLL 1
+		TNT1 A 0 A_PlaySound("Weapon/Syringe/Cap", 1)
+		SYRI MNOPQQQRR 1
+		TNT1 A 0 A_PlaySound("Weapon/Syringe/Tab", 1)
+		SYRI STUUUVV 1
+		TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
+		SYRI WXYZ 1
+		SYR2 AB 1
+		TNT1 A 0 A_TakeInventory("MariaSyringeAmmo", 1)
+		TNT1 A 0 A_PlaySound("Weapon/Syringe/Inject", 1)
+		SYR2 CD 1
+		TNT1 A 0 A_PlaySound("Weapon/Syringe/Heal", 2)
+		TNT1 A 0 A_SetBlend("BLUE",.5,25)
+		TNT1 A 0 HealThing(10, 100)
+		TNT1 A 0 A_GiveInventory("SyringeProtection")
+		TNT1 A 0 A_GiveInventory("SyringeRegeneration")
+		SYR2 EFGHIJ 2
+		SYR2 KLLMMN 1
+		TNT1 A 5
+		SIGS ABCDE 1
+		Goto ReadyLoop
 	FullHealth:
 		TNT1 A 0 A_Print("You are healthy.")
 		Goto ReadyLoop
-		
+
 	EmptyUseStimShot:
 		TNT1 A 0 A_JumpIfInventory("PistolSuppressor",1,"EmptyUseStimShotSilent")
 		TNT1 A 0 A_JumpIfHealthLower(100, 1)
 		Goto FullHealthEmpty
-        SEGD ABCDE 1
-        SYRI AB 1
-        TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
-        SYRI CD 1
-        SYRI EEFFGGG 1
-        SYRI HIJKKLLL 1
-        TNT1 A 0 A_PlaySound("Weapon/Syringe/Cap", 1)
-        SYRI MNOPQQQRR 1
-        TNT1 A 0 A_PlaySound("Weapon/Syringe/Tab", 1)
-        SYRI STUUUVV 1
-        TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
-        SYRI WXYZ 1
-        SYR2 AB 1
-        TNT1 A 0 A_TakeInventory("MariaSyringeAmmo", 1)
-        TNT1 A 0 A_PlaySound("Weapon/Syringe/Inject", 1)
-        SYR2 CD 1
-        TNT1 A 0 A_PlaySound("Weapon/Syringe/Heal", 2)
-        TNT1 A 0 A_SetBlend("BLUE",.5,25)
-        TNT1 A 0 HealThing(10, 100)
-        TNT1 A 0 A_GiveInventory("SyringeProtection")
-        TNT1 A 0 A_GiveInventory("SyringeRegeneration")
-        SYR2 EFGHIJ 2
-        SYR2 KLLMMN 1
-        TNT1 A 5
-        SEGS ABCDE 1
-	    Goto EmptyReady
+		SEGD ABCDE 1
+		SYRI AB 1
+		TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
+		SYRI CD 1
+		SYRI EEFFGGG 1
+		SYRI HIJKKLLL 1
+		TNT1 A 0 A_PlaySound("Weapon/Syringe/Cap", 1)
+		SYRI MNOPQQQRR 1
+		TNT1 A 0 A_PlaySound("Weapon/Syringe/Tab", 1)
+		SYRI STUUUVV 1
+		TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
+		SYRI WXYZ 1
+		SYR2 AB 1
+		TNT1 A 0 A_TakeInventory("MariaSyringeAmmo", 1)
+		TNT1 A 0 A_PlaySound("Weapon/Syringe/Inject", 1)
+		SYR2 CD 1
+		TNT1 A 0 A_PlaySound("Weapon/Syringe/Heal", 2)
+		TNT1 A 0 A_SetBlend("BLUE",.5,25)
+		TNT1 A 0 HealThing(10, 100)
+		TNT1 A 0 A_GiveInventory("SyringeProtection")
+		TNT1 A 0 A_GiveInventory("SyringeRegeneration")
+		SYR2 EFGHIJ 2
+		SYR2 KLLMMN 1
+		TNT1 A 5
+		SEGS ABCDE 1
+		Goto EmptyReady
 	FullHealthEmpty:
 		TNT1 A 0 A_Print("You are healthy.")
 		Goto EmptyReady
 
 	UseStimShotSilent:
-	    TNT1 A 0 A_JumpIfInventory("MariaPistolLoaded", 1, 1)
-	    Goto EmptyUseStimShotSilent
+		TNT1 A 0 A_JumpIfInventory("MariaPistolLoaded", 1, 1)
+		Goto EmptyUseStimShotSilent
 		TNT1 A 0 A_JumpIfHealthLower(100, 1)
 		Goto FullHealthSilent
-        SISD ABCDE 1
-        SYRI AB 1
-        TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
-        SYRI CD 1
-        SYRI EEFFGGG 1
-        SYRI HIJKKLLL 1
-        TNT1 A 0 A_PlaySound("Weapon/Syringe/Cap", 1)
-        SYRI MNOPQQQRR 1
-        TNT1 A 0 A_PlaySound("Weapon/Syringe/Tab", 1)
-        SYRI STUUUVV 1
-        TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
-        SYRI WXYZ 1
-        SYR2 AB 1
-        TNT1 A 0 A_TakeInventory("MariaSyringeAmmo", 1)
-        TNT1 A 0 A_PlaySound("Weapon/Syringe/Inject", 1)
-        SYR2 CD 1
-        TNT1 A 0 A_PlaySound("Weapon/Syringe/Heal", 2)
-        TNT1 A 0 A_SetBlend("BLUE",.5,25)
-        TNT1 A 0 HealThing(10, 100)
-        TNT1 A 0 A_GiveInventory("SyringeProtection")
-        TNT1 A 0 A_GiveInventory("SyringeRegeneration")
-        SYR2 EFGHIJ 2
-        SYR2 KLLMMN 1
-        TNT1 A 5
-        SISS ABCDE 1
-	    Goto ReadySilentLoop
+		SISD ABCDE 1
+		SYRI AB 1
+		TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
+		SYRI CD 1
+		SYRI EEFFGGG 1
+		SYRI HIJKKLLL 1
+		TNT1 A 0 A_PlaySound("Weapon/Syringe/Cap", 1)
+		SYRI MNOPQQQRR 1
+		TNT1 A 0 A_PlaySound("Weapon/Syringe/Tab", 1)
+		SYRI STUUUVV 1
+		TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
+		SYRI WXYZ 1
+		SYR2 AB 1
+		TNT1 A 0 A_TakeInventory("MariaSyringeAmmo", 1)
+		TNT1 A 0 A_PlaySound("Weapon/Syringe/Inject", 1)
+		SYR2 CD 1
+		TNT1 A 0 A_PlaySound("Weapon/Syringe/Heal", 2)
+		TNT1 A 0 A_SetBlend("BLUE",.5,25)
+		TNT1 A 0 HealThing(10, 100)
+		TNT1 A 0 A_GiveInventory("SyringeProtection")
+		TNT1 A 0 A_GiveInventory("SyringeRegeneration")
+		SYR2 EFGHIJ 2
+		SYR2 KLLMMN 1
+		TNT1 A 5
+		SISS ABCDE 1
+		Goto ReadySilentLoop
 	FullHealthSilent:
 		TNT1 A 0 A_Print("You are healthy.")
 		Goto ReadySilentLoop
-		
+
 	EmptyUseStimShotSilent:
 		TNT1 A 0 A_JumpIfHealthLower(100, 1)
 		Goto FullHealthSilentEmpty
-        SESD ABCDE 1
-        SYRI AB 1
-        TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
-        SYRI CD 1
-        SYRI EEFFGGG 1
-        SYRI HIJKKLLL 1
-        TNT1 A 0 A_PlaySound("Weapon/Syringe/Cap", 1)
-        SYRI MNOPQQQRR 1
-        TNT1 A 0 A_PlaySound("Weapon/Syringe/Tab", 1)
-        SYRI STUUUVV 1
-        TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
-        SYRI WXYZ 1
-        SYR2 AB 1
-        TNT1 A 0 A_TakeInventory("MariaSyringeAmmo", 1)
-        TNT1 A 0 A_PlaySound("Weapon/Syringe/Inject", 1)
-        SYR2 CD 1
-        TNT1 A 0 A_PlaySound("Weapon/Syringe/Heal", 2)
-        TNT1 A 0 A_SetBlend("BLUE",.5,25)
-        TNT1 A 0 HealThing(10, 100)
-        TNT1 A 0 A_GiveInventory("SyringeProtection")
-        TNT1 A 0 A_GiveInventory("SyringeRegeneration")
-        SYR2 EFGHIJ 2
-        SYR2 KLLMMN 1
-        TNT1 A 5
-        SESS ABCDE 1
-	    Goto EmptyReadySilentLoop
+		SESD ABCDE 1
+		SYRI AB 1
+		TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
+		SYRI CD 1
+		SYRI EEFFGGG 1
+		SYRI HIJKKLLL 1
+		TNT1 A 0 A_PlaySound("Weapon/Syringe/Cap", 1)
+		SYRI MNOPQQQRR 1
+		TNT1 A 0 A_PlaySound("Weapon/Syringe/Tab", 1)
+		SYRI STUUUVV 1
+		TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
+		SYRI WXYZ 1
+		SYR2 AB 1
+		TNT1 A 0 A_TakeInventory("MariaSyringeAmmo", 1)
+		TNT1 A 0 A_PlaySound("Weapon/Syringe/Inject", 1)
+		SYR2 CD 1
+		TNT1 A 0 A_PlaySound("Weapon/Syringe/Heal", 2)
+		TNT1 A 0 A_SetBlend("BLUE",.5,25)
+		TNT1 A 0 HealThing(10, 100)
+		TNT1 A 0 A_GiveInventory("SyringeProtection")
+		TNT1 A 0 A_GiveInventory("SyringeRegeneration")
+		SYR2 EFGHIJ 2
+		SYR2 KLLMMN 1
+		TNT1 A 5
+		SESS ABCDE 1
+		Goto EmptyReadySilentLoop
 	FullHealthSilentEmpty:
 		TNT1 A 0 A_Print("You are healthy.")
 		Goto EmptyReadySilentLoop
 
-    User3:
-    EquipShield:
-        TNT1 A 0 A_ZoomFactor(1.0)
-        TNT1 A 0 A_GiveInventory("MariaShield",1)
-        TNT1 A 0 A_SelectWEapon("MariaShield")
-        Goto Deselect
+	User3:
+	EquipShield:
+		TNT1 A 0 A_ZoomFactor(1.0)
+		TNT1 A 0 A_GiveInventory("MariaShield",1)
+		TNT1 A 0 A_SelectWEapon("MariaShield")
+		Goto Deselect
 		
 	PunchFlash:
-	    TNT1 A 0 A_JumpIfInventory("MariaPistolLoaded", 1, 1)
-	    Goto EmptyPunchFlash
 		TNT1 A 0 A_JumpIfInventory("PistolSuppressor",1,"PunchFlashSilent")
-		SIGK ABC 1
-		SIGK D 12
-		SIGK CBA 1
-		SIGG A 1		
-		Goto LightDone
-	EmptyPunchFlash:
-		TNT1 A 0 A_JumpIfInventory("PistolSuppressor",1,"EmptyPunchFlashSilent")
-		SEGK ABC 1
-		SEGK D 12
-		SEGK CBA 1
-		SIGG C 1		
-		Goto LightDone
+		SIGK A 0 A_JumpIf(CountInv("MariaPistolLoaded") < 1, 2)
+		SEGK A 0		
+		"####" ABC 1
+		"####" D 12
+		"####" CBA 1
+		Stop
 	PunchFlashSilent:
-	    TNT1 A 0 A_JumpIfInventory("MariaPistolLoaded", 1, 1)
-	    Goto EmptyPunchFlashSilent
-		SISK ABC 1
-		SISK D 12
-		SISK CBA 1
-		SISG A 1		
-		Goto LightDone
-	EmptyPunchFlashSilent:
-		SESK ABC 1
-		SESK D 12
-		SESK CBA 1
-		SISG C 1		
-		Goto LightDone
+		SISK A 0 A_JumpIf(CountInv("MariaPistolLoaded") < 1, 2)
+		SESK A 0
+		"####" ABC 1
+		"####" D 12
+		"####" CBA 1
+		Stop
 	}
 }
 
 Actor MariaPistolLoaded: Ammo
 {
-    Inventory.Icon ""//insert ammo icon here
-    Inventory.MaxAmount 9 //8+1
-    +IGNORESKILL
+	Inventory.Icon ""//insert ammo icon here
+	Inventory.MaxAmount 9 //8+1
+	+IGNORESKILL
 }

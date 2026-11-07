@@ -21,7 +21,7 @@ ACTOR MariaShotgun : MariaWeapon //replaces Shotgun
 	States
 	{
 	Spawn:
-		SPAP A 0 nodelay A_JumpIf(GetCvar("shotguntoggle")==1,2)	//(GetCvar("shotguntoggle")==1, "LegacySpawn")
+		SPAP A 0 nodelay A_JumpIf(GetCvar("shotguntoggle")==1, "LegacySpawn")
 		REMT A 0
 		"####" A -1
 		Stop
