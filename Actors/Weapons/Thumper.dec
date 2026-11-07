@@ -11,170 +11,174 @@
 //==============================================================================
 Actor MariaThumper : MariaWeapon //Replaces Rocketlauncher
 {
-  Weapon.AmmoType1 "MariaThumperLoaded"
-  Weapon.AmmoGive2 1
-  Weapon.AmmoType2 "MariaGrenadeAmmo" 
-  +WEAPON.NOAUTOFIRE
-  +WEAPON.AMMO_CHECKBOTH
-  Inventory.PickupSound "Weapon/GrenadeLauncher/Pickup"
-  Inventory.PickupMessage "M79 Thumper Obtained!"
-  Tag "Thumper"
+	Weapon.AmmoType1 "MariaThumperLoaded"
+	Weapon.AmmoGive2 1
+	Weapon.AmmoType2 "MariaGrenadeAmmo" 
+	+WEAPON.NOAUTOFIRE
+	+WEAPON.AMMO_CHECKBOTH
+	Inventory.PickupSound "Weapon/GrenadeLauncher/Pickup"
+	Inventory.PickupMessage "M79 Thumper Obtained!"
+	Tag "Thumper"
 	States
 	{
 	Ready:
-        TNT1 A 0 A_PlaySound("Maria/Draw/Primary")
-     	MATS ABCDE 1
-        Goto ReadyLoop
+		TNT1 A 0 A_PlaySound("Maria/Draw/Primary")
+		MATS ABCDE 1
+		Goto ReadyLoop
+
 	ReadyLoop:
 		MATH A 1 A_WeaponReady(WRF_ALLOWZOOM|WRF_ALLOWRELOAD|WRF_ALLOWUSER1|WRF_ALLOWUSER2|WRF_ALLOWUSER3)
 		Loop
+
 	Deselect:
-     	MATD ABCDE 1
-        TNT1 AAAAAAAAAAAAAAAAAA 0 A_Lower
-        TNT1 A 1
-        Wait
+		MATD ABCDE 1
+		TNT1 AAAAAAAAAAAAAAAAAA 0 A_Lower
+		TNT1 A 1
+		Wait
+
 	Select:
 		TNT1 AA 0 A_Raise
 		Loop
+
 	Fire:
-        NULL A 0 A_JumpIfInventory("MariaThumperLoaded", 1, 1)
-        Goto dryfire
-        TNT1 A 0 A_JumpIfInventory("Zoomed",1,"FireZoomed")
-        TNT1 A 0 A_PlaySound("Weapon/Shinigami/Dry",0)
-        MATH A 1 Offset(0,33)
-        MATH A 1 Offset(0,34)
-        MATH A 1
+		NULL A 0 A_JumpIfInventory("MariaThumperLoaded", 1, 1)
+		Goto dryfire
+		TNT1 A 0 A_JumpIfInventory("Zoomed",1,"FireZoomed")
+		TNT1 A 0 A_PlaySound("Weapon/Shinigami/Dry",0)
+		MATH A 1 Offset(0,33)
+		MATH A 1 Offset(0,34)
+		MATH A 1
 	FireCounted:
-        NULL A 0 A_JumpIfInventory("MariaThumperLoaded", 1, 1)
-        Goto dryfire
+		NULL A 0 A_JumpIfInventory("MariaThumperLoaded", 1, 1)
+		Goto dryfire
 		TNT1 A 0 A_GunFlash
 		TNT1 A 0 A_JumpIfInventory("PowerQuadDamage",1,2)
 		TNT1 A 0 A_Jump(256,2)
 		TNT1 A 0 A_PlaySound("Maria/Powerup/Quad/Shoot",7)
-        TNT1 A 0 A_PlaySound ("Weapon/GrenadeLauncher/Fire", CHAN_WEAPON)
-        //TNT1 A 0 A_PlaySound("Weapon/RocketLauncher/Distant", 6)
-        TNT1 A 0 A_AlertMonsters
-        TNT1 A 0 A_TakeInventory("MariaThumperLoaded", 1)
+		TNT1 A 0 A_PlaySound ("Weapon/GrenadeLauncher/Fire", CHAN_WEAPON)
+		//TNT1 A 0 A_PlaySound("Weapon/RocketLauncher/Distant", 6)
+		TNT1 A 0 A_AlertMonsters
+		TNT1 A 0 A_TakeInventory("MariaThumperLoaded", 1)
 		TNT1 A 0 A_Recoil(2)
-		MATH A 0 A_FireCustomMissile("MariaGrenadeLauncherGrenade")	
+		MATH A 0 A_FireCustomMissile("MariaGrenadeLauncherGrenade")
 		MATF A 1 A_SetPitch(pitch-1.0)
 		MATF B 1 A_SetPitch(pitch-1.0)
 		MATF C 1 A_SetPitch(pitch-0.6)
 		MATF D 1 A_SetPitch(pitch-0.3)
 		MATF EFGH 1 
 		MATH AA 1
-	    TNT1 A 0 A_CheckReload	
+		TNT1 A 0 A_CheckReload
 		MATH A 0 //A_ReFire
 		Goto ReadyLoop
-    DryFire:
-        TNT1 A 0 A_PlaySound("Weapon/GrenadeLauncher/Dry",0)
-        TNT1 A 0 offset(0,36)
-        MATH A 1 A_WeaponReady(WRF_NOFIRE|WRF_NOSWITCH)
-        TNT1 A 0 offset(0,35)
-        MATH A 10 A_WeaponReady(WRF_NOFIRE|WRF_NOSWITCH)
-        Goto ReadyLoop
-   /*AltFire:
-	    Goto Ready2*/
-    Reload:
-        TNT1 A 0 A_JumpIfInventory("MariaThumperLoaded", 1, 2)
-        TNT1 A 0 A_JumpIfInventory("MariaGrenadeAmmo", 1, "ReloadWork")
-        MISG A 0 A_WeaponReady(WRF_NOFIRE)
-        Goto ReadyLoop
-    ReloadWork:
-        TNT1 A 0 A_StartSound("Foley/Thumper/Raise", CHAN_AUTO)
-	    MATR ABB 1
-		TNT1 A 0 A_StartSound("Foley/Thumper/Lower", CHAN_AUTO) //TNT1 A 0 A_StartSound("", CHAN_AUTO)
-	    MATR C 1 
-        TNT1 A 0 A_StartSound("Foley/Thumper/Open", CHAN_AUTO)
-	    MATR DD 1 
-        TNT1 A 0 A_PlaySound("Weapon/GrenadeLauncher/Open") 
-	    MATR E 1
-        TNT1 A 0 A_StartSound("Foley/Thumper/Eject", CHAN_AUTO)
-	    MATR F 1
-        TNT1 A 0 A_SpawnItemEx("BarrelGrenadeCasing", 14, 2, 35, 0, random(-2,-4), random(-2,-4))
-		//TNT1 A 0 A_StartSound("Foley/RocketLauncher/Movement", CHAN_AUTO)
-	    MATR GHIIJJJ 1
-	    MATR KLMOOPP 1
-        TNT1 A 0 A_StartSound("Foley/Thumper/Load", CHAN_AUTO)
-	    MATR QQ 1
-        TNT1 A 0 A_PlaySound("Weapon/GrenadeLauncher/Load")
-	    MATR RST 1
-        TNT1 A 1 
-	    Goto ReloadingLoop    
-   ReloadingLoop:
-        TNT1 A 0 A_TakeInventory("MariaGrenadeAmmo", 1)
-        TNT1 A 0 A_GiveInventory("MariaThumperLoaded", 1)
-        TNT1 A 0 A_JumpIfInventory("MariaThumperLoaded", 1, "FinishReload")
-        TNT1 A 0 A_JumpIfInventory("MariaGrenadeAmmo", 1, "ReloadingLoop")		
-		Goto FinishReload	    
-   FinishReload:
-        TNT1 A 1 
-        TNT1 A 0 A_StartSound("Foley/Thumper/Raise", CHAN_AUTO)
-	    MATR UV 1
-		TNT1 A 0 A_StartSound("Foley/Thumper/Close", CHAN_AUTO)
-	    MATR W 1
-        TNT1 A 0 A_PlaySound("Weapon/GrenadeLauncher/Close")
-	    MATR XYZZ 1
-	    MAT2 AABBC 1
-		TNT1 A 0 A_StartSound("Foley/Thumper/Lower", CHAN_AUTO)
-	    MAT2 DEFGH 1
-	    MAT2 IJ 2
-		MATH A 1
-	    Goto ReadyLoop
 
-    ThrowPipebomb:
-        MATD ABCDE 1
-        TASQ ABC 1
-        TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
-        TASG DEH 1
-        TNT1 A 0 A_TakeInventory("PipebombAmmo", 1)
-        TASG I 1 A_PlayWeaponSound("Maria/Pipebomb/Miss",1)
-        TASG J 1 A_PlaySound("Maria/Pipebomb/Ignite", 2)
-        TASG KLM 1
-        TASG OPQR 1 
-        TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
-        TAHA AB 1
-        TNT1 A 0 A_JumpIfInventory("PowerQuadDamage",1,2)
-        TNT1 A 0 A_Jump(256,2)
-        TNT1 A 0 A_PlaySound("Maria/Powerup/Quad/Shoot",7)
-        TNT1 A 0 A_PlaySound("Maria/Pipebomb/Throw", 3)
-        TNT1 A 0 A_FireCustomMissile("HolyPipebomb",0,1,0,0)
-        TAHA CDE 1
-        TNT1 A 5
-        MATS ABCDE 1
-        Goto ReadyLoop
+	DryFire:
+		TNT1 A 0 A_PlaySound("Weapon/GrenadeLauncher/Dry",0)
+		TNT1 A 0 offset(0,36)
+		MATH A 1 A_WeaponReady(WRF_NOFIRE|WRF_NOSWITCH)
+		TNT1 A 0 offset(0,35)
+		MATH A 10 A_WeaponReady(WRF_NOFIRE|WRF_NOSWITCH)
+		Goto ReadyLoop
+
+	Reload:
+		TNT1 A 0 A_JumpIfInventory("MariaThumperLoaded", 0, 2)
+		TNT1 A 0 A_JumpIfInventory("MariaGrenadeAmmo", 1, "ReloadWork")
+		MISG A 0 A_WeaponReady(WRF_NOFIRE)
+		Goto ReadyLoop
+
+	ReloadWork:
+		TNT1 A 0 A_StartSound("Foley/Thumper/Raise", CHAN_AUTO)
+		MATR ABB 1
+		TNT1 A 0 A_StartSound("Foley/Thumper/Lower", CHAN_AUTO) //TNT1 A 0 A_StartSound("", CHAN_AUTO)
+		MATR C 1 
+		TNT1 A 0 A_StartSound("Foley/Thumper/Open", CHAN_AUTO)
+		MATR DD 1 
+		TNT1 A 0 A_PlaySound("Weapon/GrenadeLauncher/Open") 
+		MATR E 1
+		TNT1 A 0 A_StartSound("Foley/Thumper/Eject", CHAN_AUTO)
+		MATR F 1
+		TNT1 A 0 A_SpawnItemEx("BarrelGrenadeCasing", 14, 2, 35, 0, random(-2,-4), random(-2,-4))
+		//TNT1 A 0 A_StartSound("Foley/RocketLauncher/Movement", CHAN_AUTO)
+		MATR GHIIJJJ 1
+		MATR KLMOOPP 1
+		TNT1 A 0 A_StartSound("Foley/Thumper/Load", CHAN_AUTO)
+		MATR QQ 1
+		TNT1 A 0 A_PlaySound("Weapon/GrenadeLauncher/Load")
+		MATR RST 1
+		TNT1 A 1 
+		Goto ReloadingLoop
+
+	ReloadingLoop:
+		TNT1 A 0 A_TakeInventory("MariaGrenadeAmmo", 1)
+		TNT1 A 0 A_GiveInventory("MariaThumperLoaded", 1)
+		TNT1 A 0 A_JumpIfInventory("MariaThumperLoaded", 0, "FinishReload")
+		TNT1 A 0 A_JumpIfInventory("MariaGrenadeAmmo", 1, "ReloadingLoop")
+		Goto FinishReload
+
+	FinishReload:
+		TNT1 A 1 
+		TNT1 A 0 A_StartSound("Foley/Thumper/Raise", CHAN_AUTO)
+		MATR UV 1
+		TNT1 A 0 A_StartSound("Foley/Thumper/Close", CHAN_AUTO)
+		MATR W 1
+		TNT1 A 0 A_PlaySound("Weapon/GrenadeLauncher/Close")
+		MATR XYZZ 1
+		MAT2 AABBC 1
+		TNT1 A 0 A_StartSound("Foley/Thumper/Lower", CHAN_AUTO)
+		MAT2 DEFGH 1
+		MAT2 IJ 2
+		MATH A 1
+		Goto ReadyLoop
+
+	ThrowPipebomb:
+		MATD ABCDE 1
+		TASQ ABC 1
+		TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
+		TASG DEH 1
+		TNT1 A 0 A_TakeInventory("PipebombAmmo", 1)
+		TASG I 1 A_PlayWeaponSound("Maria/Pipebomb/Miss",1)
+		TASG J 1 A_PlaySound("Maria/Pipebomb/Ignite", 2)
+		TASG KLM 1
+		TASG OPQR 1 
+		TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
+		TAHA AB 1
+		TNT1 A 0 A_JumpIfInventory("PowerQuadDamage",1,2)
+		TNT1 A 0 A_Jump(256,2)
+		TNT1 A 0 A_PlaySound("Maria/Powerup/Quad/Shoot",7)
+		TNT1 A 0 A_PlaySound("Maria/Pipebomb/Throw", 3)
+		TNT1 A 0 A_FireCustomMissile("HolyPipebomb",0,1,0,0)
+		TAHA CDE 1
+		TNT1 A 5
+		MATS ABCDE 1
+		Goto ReadyLoop
 
 	UseStimShot:
 		TNT1 A 0 A_JumpIfHealthLower(100, 1)
 		Goto FullHealth
-        MATD ABCDE 1
-        SYRI AB 1
-        TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
-        SYRI CD 1
-        SYRI EEFFGGG 1
-        SYRI HIJKKLLL 1
-        TNT1 A 0 A_PlaySound("Weapon/Syringe/Cap", 1)
-        SYRI MNOPQQQRR 1
-        TNT1 A 0 A_PlaySound("Weapon/Syringe/Tab", 1)
-        SYRI STUUUVV 1
-        TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
-        SYRI WXYZ 1
-        SYR2 AB 1
-        TNT1 A 0 A_TakeInventory("MariaSyringeAmmo", 1)
-        TNT1 A 0 A_PlaySound("Weapon/Syringe/Inject", 1)
-        SYR2 CD 1
-        TNT1 A 0 A_PlaySound("Weapon/Syringe/Heal", 2)
-        TNT1 A 0 A_SetBlend("BLUE",.5,25)
-        TNT1 A 0 HealThing(10, 100)
-        TNT1 A 0 A_GiveInventory("SyringeProtection")
-        TNT1 A 0 A_GiveInventory("SyringeRegeneration")
-        SYR2 EFGHIJ 2
-        SYR2 KLLMMN 1
-        TNT1 A 5
-        MATS ABCDE 1
-	    Goto ReadyLoop
-	FullHealth:
-		TNT1 A 0 A_Print("You are healthy.")
+		MATD ABCDE 1
+		SYRI AB 1
+		TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
+		SYRI CD 1
+		SYRI EEFFGGG 1
+		SYRI HIJKKLLL 1
+		TNT1 A 0 A_PlaySound("Weapon/Syringe/Cap", 1)
+		SYRI MNOPQQQRR 1
+		TNT1 A 0 A_PlaySound("Weapon/Syringe/Tab", 1)
+		SYRI STUUUVV 1
+		TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
+		SYRI WXYZ 1
+		SYR2 AB 1
+		TNT1 A 0 A_TakeInventory("MariaSyringeAmmo", 1)
+		TNT1 A 0 A_PlaySound("Weapon/Syringe/Inject", 1)
+		SYR2 CD 1
+		TNT1 A 0 A_PlaySound("Weapon/Syringe/Heal", 2)
+		TNT1 A 0 A_SetBlend("BLUE",.5,25)
+		TNT1 A 0 HealThing(10, 100)
+		TNT1 A 0 A_GiveInventory("SyringeProtection")
+		TNT1 A 0 A_GiveInventory("SyringeRegeneration")
+		SYR2 EFGHIJ 2
+		SYR2 KLLMMN 1
+		TNT1 A 5
+		MATS ABCDE 1
 		Goto ReadyLoop
 
 	User3:
@@ -183,19 +187,19 @@ Actor MariaThumper : MariaWeapon //Replaces Rocketlauncher
 		TNT1 A 0 A_GiveInventory("MariaShield",1)
 		TNT1 A 0 A_SelectWEapon("MariaShield")
 		Goto Deselect
-			
+
 	Flash:
-        TNT1 A 2 Bright A_Light1
-        TNT1 A 2 Bright A_Light2
-        TNT1 A 1 Bright A_Light1
+		TNT1 A 2 Bright A_Light1
+		TNT1 A 2 Bright A_Light2
+		TNT1 A 1 Bright A_Light1
 		Goto LightDone
 
-    PunchFlash:
-    	MATK ABC 1
-    	MATK D 12
-	    MATK CBA 1
-        MATH A 1
-	    Goto LightDone
+	PunchFlash:
+		MATK ABC 1
+		MATK D 12
+		MATK CBA 1
+		Stop
+
 	Spawn:
 		GLAP A -1
 		Stop
@@ -204,9 +208,9 @@ Actor MariaThumper : MariaWeapon //Replaces Rocketlauncher
 
 ACTOR MariaThumperLoaded : Ammo
 {
-   Inventory.Amount 0
-   Inventory.MaxAmount 1
-   Ammo.BackpackAmount 0
-   Ammo.BackpackMaxAmount 1
-   Inventory.Icon ""
+	Inventory.Amount 0
+	Inventory.MaxAmount 1
+	Ammo.BackpackAmount 0
+	Ammo.BackpackMaxAmount 1
+	Inventory.Icon ""
 }

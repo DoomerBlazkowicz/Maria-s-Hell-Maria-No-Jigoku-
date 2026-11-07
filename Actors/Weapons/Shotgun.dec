@@ -22,8 +22,7 @@ ACTOR MariaShotgun : MariaWeapon //replaces Shotgun
 	{
 	Spawn:
 		SPAP A 0 nodelay A_JumpIf(GetCvar("shotguntoggle")==1, "LegacySpawn")
-		REMT A 0
-		"####" A -1
+		REMT A -1
 		Stop
 	Select:
 		TNT1 AA 0 A_Raise
@@ -297,9 +296,6 @@ ACTOR MariaShotgun : MariaWeapon //replaces Shotgun
 		REMS A 0
 		"####" ABCDE 1
 		Goto ReadyLoop
-	FullHealth:
-		TNT1 A 0 A_Print("You are healthy.")
-		Goto ReadyLoop
 
 	User3:
 	EquipShield:
@@ -329,10 +325,10 @@ ACTOR MariaShotgun : MariaWeapon //replaces Shotgun
 // and yes it's a workhorse of killing demons.
 //==============================================================================
 
-	/*LegacySpawn:
+	LegacySpawn:
 		SPAP A -1
 		Stop
-	LegacyDeselect:
+	/*LegacyDeselect:
 	 	SPAD ABCDE 1
 		TNT1 AAAAAAAAAAAAAAAAAA 0 A_Lower
 		TNT1 A 1
