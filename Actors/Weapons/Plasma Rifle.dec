@@ -11,271 +11,329 @@
 //==============================================================================
 actor MariaPlasmaRifle : MariaWeapon //Replaces PlasmaRifle
 {
-  Weapon.AmmoType1 "MariaPlasmaRifleLoaded"
-  Weapon.AmmoGive2 50
-  Weapon.AmmoType2 "Cell"
-  Inventory.PickupSound "Weapon/PlasmaRifle/Pickup"
-  Tag "Plasma Rifle"
-  Inventory.PickupMessage "Plasma Rifle Obtained!"
-  +WEAPON.NOAUTOFIRE
-  +WEAPON.AMMO_CHECKBOTH
-  States
-  {
-  Ready:
-    TNT1 A 0 A_JumpIfInventory("MariaPlasmaRifleLoaded", 1, 1)
-    Goto EmptyReady
-    TNT1 A 0 A_JumpIf(CallACS("PlasmaRifleSkinToggler")==1, "ClassicReady")
-    TNT1 A 0 A_PlaySound("Weapon/PlasmaRifle/Select")
-	PLZS ABCDE 1
-	Goto ReadyLoop
-  EmptyReady:
-    TNT1 A 0 A_JumpIf(CallACS("PlasmaRifleSkinToggler")==1, "ClassicEmptyReady")
-    TNT1 A 0 A_PlaySound("Weapon/PlasmaRifle/Select")
-	PLSE ABCDE 1
-	Goto EmptyReadyLoop 
-  ReadyLoop:
-    TNT1 A 0 A_JumpIf(CallACS("PlasmaRifleSkinToggler")==1, "ClassicReadyLoop")
-    PLZM A 0 A_takeinventory("FasterPlasmaToken")
-    PLZM A 1 A_WeaponReady(WRF_ALLOWZOOM|WRF_ALLOWRELOAD|WRF_ALLOWUSER1|WRF_ALLOWUSER2|WRF_ALLOWUSER3)
-    Loop
-  EmptyReadyLoop:
-    TNT1 A 0 A_JumpIf(CallACS("PlasmaRifleSkinToggler")==1, "ClassicEmptyReadyLoop")
-    PLZE A 0 A_StopSound(CHAN_WEAPON)
-    PLZE A 2 A_WeaponReady(WRF_ALLOWZOOM|WRF_ALLOWRELOAD|WRF_ALLOWUSER1|WRF_ALLOWUSER2|WRF_ALLOWUSER3)
-    Loop
-  Deselect:
-    TNT1 A 0 A_JumpIfInventory("MariaPlasmaRifleLoaded", 1, 1)
-    Goto EmptyDeselect
-    TNT1 A 0 A_JumpIf(CallACS("PlasmaRifleSkinToggler")==1, "ClassicDeselect")
-    PLZE A 0 A_StopSound(CHAN_WEAPON)
-	PLZD ABCDE 1
-    TNT1 AAAAAAAAAAAAAAAAAA 0 A_Lower
-    TNT1 A 1
-    Wait
-  EmptyDeselect:
-    TNT1 A 0 A_JumpIf(CallACS("PlasmaRifleSkinToggler")==1, "ClassicEmptyDeselect")
-    PLZE A 0 A_StopSound(CHAN_WEAPON)
-	PLDE ABCDE 1
-    TNT1 AAAAAAAAAAAAAAAAAA 0 A_Lower
-    TNT1 A 1
-    Wait
-  Select:
-    TNT1 A 0 A_JumpIf(CallACS("PlasmaRifleSkinToggler")==1, "ClassicSelect")
-	TNT1 AA 0 A_Raise
-    Loop
-  Fire:
-    TNT1 A 0 A_JumpIf(CallACS("PlasmaRifleSkinToggler")==1, "ClassicFire")
-    NULL A 0 A_JumpIfInventory("MariaPlasmaRifleLoaded", 1, 1)
-    Goto dryfire
-	TNT1 A 0 A_PlaySound("Weapon/Shinigami/Dry",0)
-    PLZM A 1 Offset(0,33)
-    PLZM A 1 Offset(0,34)
-    PLZM AA 1
-  FireCounted:
-    TNT1 A 0 A_JumpIf(CallACS("PlasmaRifleSkinToggler")==1, "ClassicFireCounted")
-    NULL A 0 A_JumpIfInventory("MariaPlasmaRifleLoaded", 1, 1)
-    Goto dryfire
-    TNT1 A 0 A_jumpifinventory("FasterPlasmaToken",20,"FasterFire")
-    PLZF A 0
-    TNT1 B 0 radius_quake (2.5, 2, 0, 1, 0)
-    TNT1 A 0 A_TakeInventory("MariaPlasmaRifleLoaded", 1)
-	PLZF A 0 A_FireProjectile("MariaPlasmaBall")
-    PLZF A 0 A_giveinventory("FasterPlasmaToken",1)
-	TNT1 A 0 A_JumpIfInventory("PowerQuadDamage",1,2)
-	TNT1 A 0 A_Jump(256,2)
-    TNT1 A 0 A_PlaySound("Maria/Powerup/Quad/Shoot",7)
-	PLZF A 0 A_PlaySound("Weapon/PlasmaRifle/Fire", CHAN_WEAPON)
-    TNT1 A 0 A_AlertMonsters
-	PLZF A 1 BRIGHT A_SetPitch(pitch-1.0)
-	PLZF BC 1
-    TNT1 A 0 A_JumpIfInventory("MariaPlasmaRifleLoaded", 1, 1)
-    Goto EmptyReadyLoop
-	PLZM A 0 A_ReFire("FireCounted")
-    Goto ReadyLoop
-  FasterFire:
-    TNT1 A 0 A_JumpIf(CallACS("PlasmaRifleSkinToggler")==1, "ClassicFasterFire")
-    NULL A 0 A_JumpIfInventory("MariaPlasmaRifleLoaded", 1, 1)
-    Goto dryfire
-    RLZF A 0
-    TNT1 B 0 radius_quake (2.5, 2, 0, 1, 0)
-    TNT1 A 0 A_TakeInventory("MariaPlasmaRifleLoaded", 1)
-	RLZF A 0 A_FireProjectile("MariaRedPlasmaBall")
-	TNT1 A 0 A_JumpIfInventory("PowerQuadDamage",1,2)
-	TNT1 A 0 A_Jump(256,2)
-	TNT1 A 0 A_PlaySound("Maria/Powerup/Quad/Shoot",7)
-	RLZF A 0 A_PlaySound("Weapon/PlasmaRifle/Fire/Heated", CHAN_WEAPON)
-    TNT1 A 0 A_AlertMonsters
-    TNT1 A 0 A_FireCustomMissile("MariaMuzzleSmoke",0,0,0,8)
-	RLZF A 1 BRIGHT A_SetPitch(pitch-1.0)
-	RLZF BC 1 
-	PLZM A 1 A_ReFire("FasterFire")
-	PLZC A 1
-	PLZC BBCCDD 1
-	TNT1 A 0 A_PlaySound("Weapon/PlasmaRifle/Cooldown")
-	PLZC E 15
-	PLZC FFGG 1
-	PLZC HI 1
-    Goto ReadyLoop
-  AltFire:
-    TNT1 A 0 A_JumpIf(CallACS("PlasmaRifleSkinToggler")==1, "ClassicAltFire")
-    NULL A 0 A_JumpIfInventory("MariaPlasmaRifleLoaded", 1, 1)
-    Goto dryfire
-	TNT1 A 0 A_PlaySound("Weapon/Shinigami/Dry",0)
-    PLZM A 1 Offset(0,33)
-    PLZM A 1 Offset(0,34)
-    PLZM AA 1
-  AltFireCounted:
-    NULL A 0 A_JumpIfInventory("MariaPlasmaRifleLoaded", 1, 1)
-    Goto dryfire
-    TNT1 A 0 A_JumpIf(CallACS("PlasmaRifleSkinToggler")==1, "ClassicAltFireCounted")
-    PLZF A 0
-    TNT1 B 0 radius_quake (2.5, 2, 0, 1, 0)
-    TNT1 A 0 A_TakeInventory("MariaPlasmaRifleLoaded", 1)
-	PLZF A 0 A_FireProjectile("MariaCryoProjectile") 
-	PLZF A 0 A_FireProjectile("MariaCryoProjectile") 
-	TNT1 A 0 A_JumpIfInventory("PowerQuadDamage",1,2)
-	TNT1 A 0 A_Jump(256,2)
-	TNT1 A 0 A_PlaySound("Maria/Powerup/Quad/Shoot",7)
-	PLZF A 0 A_PlaySound("Weapon/PlasmaRifle/Altfire", CHAN_7)
-    TNT1 A 0 A_AlertMonsters
-	CLZF AB 1 BRIGHT
-	PLZM A 0
-    TNT1 A 0 A_JumpIfInventory("MariaPlasmaRifleLoaded", 1, 1)
-    Goto EmptyReadyLoop
-	PLZM A 0 A_ReFire("AltFireCounted")
-    Goto ReadyLoop
-  DryFire:
-    TNT1 A 0 A_JumpIf(CallACS("PlasmaRifleSkinToggler")==1, "ClassicDryFire")
-    TNT1 A 0 A_PlaySound("Weapon/PlasmaRifle/Dry",0)
-    TNT1 A 0 offset(0,36)
-    PLZE A 1 A_WeaponReady(WRF_NOFIRE|WRF_NOSWITCH)
-    TNT1 A 0 offset(0,35)
-    PLZE A 10 A_WeaponReady(WRF_NOFIRE|WRF_NOSWITCH)
-    Goto EmptyReadyLoop
+	Weapon.AmmoType1 "MariaPlasmaRifleLoaded"
+	Weapon.AmmoGive2 50
+	Weapon.AmmoType2 "Cell"
+	Inventory.PickupSound "Weapon/PlasmaRifle/Pickup"
+	Tag "Plasma Rifle"
+	Inventory.PickupMessage "Plasma Rifle Obtained!"
+	+WEAPON.NOAUTOFIRE
+	+WEAPON.AMMO_CHECKBOTH
+	States
+	{
+	Ready:
+		PLSE A 0 
+		{
+		A_PlaySound("Weapon/PlasmaRifle/Select");
+		If(GetCvar("plasmarifletoggle") == 1)
+			{
+				return state("ClassicReady");
+			}
+			else if(CountInv("MariaPlasmaRifleLoaded") < 1)
+			{
+				return state(2);
+			}
+		return state("");
+		}
+		PLZS A 0 
+		PLZS ABCDE 1
+		Goto ReadyLoop
 
-  Reload:
-    TNT1 A 0 A_JumpIf(CallACS("PlasmaRifleSkinToggler")==1, "ClassicReload")
-    TNT1 A 0 A_JumpIfInventory("MariaPlasmaRifleLoaded", 50, 2)
-    TNT1 A 0 A_JumpIfInventory("Cell", 1, "ReloadWork")
-    PLZE A 2 A_WeaponReady(WRF_NOFIRE)
-    Goto ReadyLoop
-  ReloadWork:
-    TNT1 A 0 A_JumpIf(CallACS("PlasmaRifleSkinToggler")==1, "ClassicReloadWork")
-	PLZE A 1
-    PLZR A 1
-    TNT1 A 0 A_StartSound("Foley/PlasmaRifle/Misc", CHAN_AUTO)
-    PLZR B 1
-    PLZR CCDD 1
-	RGUR A 0  A_PlaySound ("Weapon/PlasmaRifle/Reload/Out", CHAN_AUTO)
-    TNT1 A 0 A_SpawnItemEx("EmptyCell", 17, 2, 35, 0, random(3,6), 4)
-    PLZR E 1
-    PLZR EFFGG 1
-	TNT1 A 0 A_StartSound("Foley/MagPouch/Out", CHAN_AUTO)
-    PLZR H 25	
-	RGUR A 0  A_PlaySound ("Weapon/PlasmaRifle/Reload/In", CHAN_AUTO)
-    PLZR I 1	
-	Goto ReloadingLoop    
-  ReloadingLoop:
-    TNT1 A 0 A_JumpIf(CallACS("PlasmaRifleSkinToggler")==1, "ClassicReloadingLoop")
-    TNT1 A 0 A_TakeInventory("Cell", 1)
-    TNT1 A 0 A_GiveInventory("MariaPlasmaRifleLoaded", 1)
-    TNT1 A 0 A_JumpIfInventory("MariaPlasmaRifleLoaded", 50, "FinishReload")
-    TNT1 A 0 A_JumpIfInventory("Cell", 1, "ReloadingLoop")		
-	Goto FinishReload	    
-  FinishReload:
-    TNT1 A 0 A_JumpIf(CallACS("PlasmaRifleSkinToggler")==1, "ClassicFinishReload")
-    TNT1 A 0 A_StartSound("Foley/PlasmaRifle/Misc", CHAN_AUTO)
-    PLZR JK 1	
-    PLZR LLMMMNN 1	
-    PLZR OOPPQ 2	
-	Goto ReadyLoop
+	ReadyLoop:
+		PLZE A 0
+		{
+		A_TakeInventory("FasterPlasmaToken");
+		If(GetCvar("plasmarifletoggle") == 1)
+			{
+				return state("ClassicReadyLoop");
+			}
+			else if(CountInv("MariaPlasmaRifleLoaded") < 1)
+			{
+				A_StopSound(CHAN_WEAPON);
+				return state(2);
+			}
+		return state("");
+		}
+		PLZM A 0 
+		"####" A 1 A_WeaponReady(WRF_ALLOWZOOM|WRF_ALLOWRELOAD|WRF_ALLOWUSER1|WRF_ALLOWUSER2|WRF_ALLOWUSER3)
+		Loop
 
-  ThrowPipebomb:
-    TNT1 A 0 A_JumpIf(CallACS("PlasmaRifleSkinToggler")==1, "ClassicThrowPipebomb")
-    PLZD ABCD 1
-    TASQ ABC 1
-    TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
-    TASG DEH 1
-    TNT1 A 0 A_TakeInventory("PipebombAmmo", 1)
-    TASG I 1 A_PlayWeaponSound("Maria/Pipebomb/Miss",1)
-    TASG J 1 A_PlaySound("Maria/Pipebomb/Ignite", 2)
-    TASG KLM 1
-    TASG OPQR 1 
-    TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
-    TAHA AB 1
-    TNT1 A 0 A_JumpIfInventory("PowerQuadDamage",1,2)
-    TNT1 A 0 A_Jump(256,2)
-    TNT1 A 0 A_PlaySound("Maria/Powerup/Quad/Shoot",7)
-    TNT1 A 0 A_PlaySound("Maria/Pipebomb/Throw", 3)
-    TNT1 A 0 A_FireCustomMissile("HolyPipebomb",0,1,0,0)
-    TAHA CDE 1
-    TNT1 A 5
-    PLZS ABCD 1
-    Goto ReadyLoop
+	Deselect:
+		PLZE A 0
+		{
+		A_StopSound(CHAN_WEAPON);
+		If(GetCvar("plasmarifletoggle") == 1)
+			{
+				return state("ClassicDeselect");
+			}
+			else if(CountInv("MariaPlasmaRifleLoaded") < 1)
+			{
+				return state(2);
+			}
+		return state("");
+		}
+		PLZD A 0
+		"####" ABCDE 1
+		Goto DeselectFinish
 
-  UseStimShot:
-    TNT1 A 0 A_JumpIf(CallACS("PlasmaRifleSkinToggler")==1, "ClassicUseStimShot")
-	TNT1 A 0 A_JumpIfHealthLower(100, 1)
-	Goto FullHealth
-    PLZD ABCD 1
-    SYRI AB 1
-    TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
-    SYRI CD 1
-    SYRI EEFFGGG 1
-    SYRI HIJKKLLL 1
-    TNT1 A 0 A_PlaySound("Weapon/Syringe/Cap", 1)
-    SYRI MNOPQQQRR 1
-    TNT1 A 0 A_PlaySound("Weapon/Syringe/Tab", 1)
-    SYRI STUUUVV 1
-    TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
-    SYRI WXYZ 1
-    SYR2 AB 1
-    TNT1 A 0 A_TakeInventory("MariaSyringeAmmo", 1)
-    TNT1 A 0 A_PlaySound("Weapon/Syringe/Inject", 1)
-    SYR2 CD 1
-    TNT1 A 0 A_PlaySound("Weapon/Syringe/Heal", 2)
-    TNT1 A 0 A_SetBlend("BLUE",.5,25)
-    TNT1 A 0 HealThing(10, 100)
-    TNT1 A 0 A_GiveInventory("SyringeProtection")
-    TNT1 A 0 A_GiveInventory("SyringeRegeneration")
-    SYR2 EFGHIJ 2
-    SYR2 KLLMMN 1
-    TNT1 A 5
-    PLZS ABCD 1
-    Goto ReadyLoop
-  FullHealth:
-    TNT1 A 0 A_JumpIf(CallACS("PlasmaRifleSkinToggler")==1, "ClassicFullHealth")
-	TNT1 A 0 A_Print("You are healthy.")
-	Goto ReadyLoop
+	Select:
+		TNT1 AA 0 A_Raise
+		Loop
 
-  User3:
-  EquipShield:
-    TNT1 A 0 A_JumpIf(CallACS("PlasmaRifleSkinToggler")==1, "ClassicEquipShield")
-	TNT1 A 0 A_ZoomFactor(1.0)
-	TNT1 A 0 A_GiveInventory("MariaShield",1)
-	TNT1 A 0 A_SelectWEapon("MariaShield")
-	Goto Deselect
+	Fire:
+		"####" A 0 A_JumpIf(CountInv("MariaPlasmaRifleLoaded") < 1, "DryFire")
+		"####" A 0 A_PlaySound("Weapon/Shinigami/Dry",0)
+		"####" A 1 Offset(0,33)
+		"####" A 1 Offset(0,34)
+		"####" AA 1
+	FireCounted:
+		"####" A 0 A_JumpIf(CountInv("MariaPlasmaRifleLoaded") < 1,"DryFire")
+		ALPF A 0 A_JumpIf(GetCvar("plasmarifletoggle") == 1,2)
+		PLZF A 0
+		"####" A 0
+		{
+		radius_quake (2.5, 2, 0, 1, 0);
+		A_TakeInventory("MariaPlasmaRifleLoaded", 1);
+		if(CountInv("PowerQuadDamage") == 1) { A_PlaySound("Maria/Powerup/Quad/Shoot",7); }
+		A_AlertMonsters;
+		if(CountInv("FasterPlasmaToken") == 20) 
+			{
+				A_FireProjectile("MariaRedPlasmaBall");
+				if(GetCvar("plasmarifletoggle") == 1)
+					{
+						A_PlaySound("Weapon/PewPewGun/Fire/Heated", CHAN_WEAPON);
+					}
+					else 
+					{
+						A_PlaySound("Weapon/PlasmaRifle/Fire/Heated", CHAN_WEAPON);
+					}
+				return state("FasterFire");
+			}
+			else
+			{
+				A_giveinventory("FasterPlasmaToken",1);
+				if(GetCvar("plasmarifletoggle") == 1)
+					{
+						A_FireProjectile("MariaLunarPlasmaBall");
+						A_PlaySound("Weapon/PewPewGun/Fire", CHAN_WEAPON);
+					}
+					else 
+					{
+						A_FireProjectile("MariaPlasmaBall");
+						A_PlaySound("Weapon/PlasmaRifle/Fire", CHAN_WEAPON);
+					}
+			}
+		return state("");
+		}
+		"####" A 1 BRIGHT A_SetPitch(pitch-1.0)
+		"####" BC 1
+		"####" A 0 A_ReFire("FireCounted")
+		Goto ReadyLoop
+
+	FasterFire:
+		ALRF A 0 A_JumpIf(GetCvar("plasmarifletoggle") == 1, 2)
+		RLZF A 0
+		"####" A 0 A_FireCustomMissile("MariaMuzzleSmoke",0,0,0,8)
+		"####" A 1 BRIGHT A_SetPitch(pitch-1.0)
+		"####" BC 1 
+		PLZM A 0 A_JumpIf(GetCvar("plasmarifletoggle") == 1, 2)
+		PLZM A 0
+		PLZM A 1 A_ReFire("FireCounted")
+		ALPC A 0 A_JumpIf(GetCvar("plasmarifletoggle") == 1, "CooldownClassic")
+		PLZC A 0
+		"####" A 1
+		"####" BBCCDD 1
+		"####" A 0 A_PlaySound("Weapon/PlasmaRifle/Cooldown")
+		"####" E 15
+		"####" FFGG 1
+		"####" HI 1
+		Goto ReadyLoop
+
+	AltFire:
+		"####" A 0 A_JumpIf(CountInv("MariaPlasmaRifleLoaded") < 1, "DryFire")
+		TNT1 A 0 A_PlaySound("Weapon/Shinigami/Dry",0)
+		PLZM A 1 Offset(0,33)
+		PLZM A 1 Offset(0,34)
+		PLZM AA 1
+	AltFireCounted:
+		"####" A 0 A_JumpIf(CountInv("MariaPlasmaRifleLoaded") < 1, "DryFire")
+		ALCF A 0
+		{
+		radius_quake(2.5, 2, 0, 1, 0);
+		A_TakeInventory("MariaPlasmaRifleLoaded", 1);
+		A_FireProjectile("MariaCryoProjectile");
+		A_FireProjectile("MariaCryoProjectile");
+		If(CountInv("PowerQuadDamage") == 1) { A_PlaySound("Maria/Powerup/Quad/Shoot",7); }
+		A_PlaySound("Weapon/PlasmaRifle/Altfire", CHAN_7);	
+		If(GetCvar("plasmarifletoggle") == 1) { return state(2); }
+		A_AlertMonsters;
+		return state("");
+		}
+		CLZF A 0
+		"####" AB 1 BRIGHT
+		PLZM A 0
+		PLZM A 0 A_ReFire("AltFireCounted")
+		Goto ReadyLoop
+
+	DryFire:
+		"####" A 0 A_PlaySound("Weapon/PlasmaRifle/Dry",0) 
+		"####" A 1 { A_WeaponOffset(0,36); A_WeaponReady(WRF_NOFIRE|WRF_NOSWITCH); }
+		"####" A 10 { A_WeaponOffset(0,35); A_WeaponReady(WRF_NOFIRE|WRF_NOSWITCH); }
+		Goto ReadyLoop
+
+	Reload:
+		"####" A 0 A_JumpIfInventory("MariaPlasmaRifleLoaded", 0, 2)
+		"####" A 0 A_JumpIfInventory("Cell", 1, "ReloadWork")
+		"####" A 2 A_WeaponReady(WRF_NOFIRE)
+		Goto ReadyLoop
+
+	ReloadWork:
+		TNT1 A 0 A_JumpIf(GetCvar("plasmarifletoggle") == 1, "ClassicReloadWork")
+		PLZE A 1
+		PLZR A 1
+		TNT1 A 0 A_StartSound("Foley/PlasmaRifle/Misc", CHAN_AUTO)
+		PLZR B 1
+		PLZR CCDD 1
+		RGUR A 0 A_PlaySound ("Weapon/PlasmaRifle/Reload/Out", CHAN_AUTO)
+		TNT1 A 0 A_SpawnItemEx("EmptyCell", 17, 2, 35, 0, random(3,6), 4)
+		PLZR E 1
+		PLZR EFFGG 1
+		TNT1 A 0 A_StartSound("Foley/MagPouch/Out", CHAN_AUTO)
+		PLZR H 25
+		RGUR A 0 A_PlaySound ("Weapon/PlasmaRifle/Reload/In", CHAN_AUTO)
+		PLZR I 1
+		Goto ReloadingLoop
+
+	ReloadingLoop:
+		TNT1 A 0 A_TakeInventory("Cell", 1)
+		TNT1 A 0 A_GiveInventory("MariaPlasmaRifleLoaded", 1)
+		TNT1 A 0 A_JumpIfInventory("MariaPlasmaRifleLoaded", 0, "FinishReload")
+		TNT1 A 0 A_JumpIfInventory("Cell", 1, "ReloadingLoop")
+		Goto FinishReload
+
+	FinishReload:
+		TNT1 A 0 A_JumpIf(GetCvar("plasmarifletoggle") == 1, "ClassicFinishReload")
+		TNT1 A 0 A_StartSound("Foley/PlasmaRifle/Misc", CHAN_AUTO)
+		PLZR JK 1
+		PLZR LLMMMNN 1
+		PLZR OOPPQ 2
+		Goto ReadyLoop
+
+	ThrowPipebomb:
+		PLZE A 0
+		{
+		If(GetCvar("plasmarifletoggle") == 1)
+			{
+			return state("ClassicThrowPipebomb");
+			}
+			else if(CountInv("MariaPlasmaRifleLoaded") < 1)
+			{
+			return state(2);
+			}
+		return state("");
+		}
+		PLZD A 0
+		"####" ABCD 1
+		TASQ ABC 1
+		TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
+		TASG DEH 1
+		TNT1 A 0 A_TakeInventory("PipebombAmmo", 1)
+		TASG I 1 A_PlayWeaponSound("Maria/Pipebomb/Miss",1)
+		TASG J 1 A_PlaySound("Maria/Pipebomb/Ignite", 2)
+		TASG KLM 1
+		TASG OPQR 1 
+		TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
+		TAHA AB 1
+		TNT1 A 0 A_JumpIfInventory("PowerQuadDamage",1,2)
+		TNT1 A 0 A_Jump(256,2)
+		TNT1 A 0 A_PlaySound("Maria/Powerup/Quad/Shoot",7)
+		TNT1 A 0 A_PlaySound("Maria/Pipebomb/Throw", 3)
+		TNT1 A 0 A_FireCustomMissile("HolyPipebomb",0,1,0,0)
+		TAHA CDE 1
+		TNT1 A 5
+		PLZE A 0 A_JumpIf(CountInv("MariaPlasmaRifleLoaded") < 1, 2)
+		PLZS A 0
+		"####" ABCD 1
+		Goto ReadyLoop
+
+	UseStimShot:
+		TNT1 A 0 A_JumpIfHealthLower(100, 1)
+		Goto FullHealth
+		PLZE A 0
+		{
+		If(GetCvar("plasmarifletoggle") == 1)
+			{
+			return state("ClassicUseStimShot");
+			}
+			else if(CountInv("MariaPlasmaRifleLoaded") < 1)
+			{
+			return state(2);
+			}
+		return state("");
+		}
+		PLZD A 0
+		"####" ABCD 1
+		SYRI AB 1
+		TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
+		SYRI CD 1
+		SYRI EEFFGGG 1
+		SYRI HIJKKLLL 1
+		TNT1 A 0 A_PlaySound("Weapon/Syringe/Cap", 1)
+		SYRI MNOPQQQRR 1
+		TNT1 A 0 A_PlaySound("Weapon/Syringe/Tab", 1)
+		SYRI STUUUVV 1
+		TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
+		SYRI WXYZ 1
+		SYR2 AB 1
+		TNT1 A 0 A_TakeInventory("MariaSyringeAmmo", 1)
+		TNT1 A 0 A_PlaySound("Weapon/Syringe/Inject", 1)
+		SYR2 CD 1
+		TNT1 A 0 A_PlaySound("Weapon/Syringe/Heal", 2)
+		TNT1 A 0 A_SetBlend("BLUE",.5,25)
+		TNT1 A 0 HealThing(10, 100)
+		TNT1 A 0 A_GiveInventory("SyringeProtection")
+		TNT1 A 0 A_GiveInventory("SyringeRegeneration")
+		SYR2 EFGHIJ 2
+		SYR2 KLLMMN 1
+		TNT1 A 5
+		PLZE A 0 A_JumpIf(CountInv("MariaPlasmaRifleLoaded") < 1, 2)
+		PLZS A 0
+		"####" ABCD 1
+		Goto ReadyLoop
+
+	User3:
+	EquipShield:
+		TNT1 A 0 A_ZoomFactor(1.0)
+		TNT1 A 0 A_GiveInventory("MariaShield",1)
+		TNT1 A 0 A_SelectWEapon("MariaShield")
+		Goto Deselect
 		
-  PunchFlash:
-    TNT1 A 0 A_JumpIfInventory("MariaPlasmaRifleLoaded", 1, 1)
-    Goto PunchFlashEmpty
-    TNT1 A 0 A_JumpIf(CallACS("PlasmaRifleSkinToggler")==1, "ClassicPunchFlash")
-	PLZK ABC 1
-	PLZK D 12
-	PLZK CBA 1
-    PLZE A 1
-	Goto LightDone
-  PunchFlashEmpty:
-    TNT1 A 0 A_JumpIf(CallACS("PlasmaRifleSkinToggler")==1, "ClassicPunchFlashEmpty")
-	PLEK ABC 1
-	PLEK D 12
-	PLEK CBA 1
-    PLZE A 1
-	Goto LightDone
-  Spawn:
-    TNT1 A 0 nodelay A_JumpIf(CallACS("PlasmaRifleSkinToggler")==1, "ClassicSpawn")
-    PLZP A -1
-    Stop
+	PunchFlash:
+		PLEK A 0 
+		{
+		If(GetCvar("plasmarifletoggle") == 1)
+			{
+				return state("ClassicPunchFlash");
+			}
+			else if(CountInv("MariaPlasmaRifleLoaded") < 1)
+			{
+				return state(2);
+			}
+		return state("");	
+		}
+		PLZK A 0
+		"####" ABC 1
+		"####" D 12
+		"####" CBA 1
+		PLZE A 0
+		PLZM A 0
+		"####" A 1
+		Goto LightDone
+
+	Spawn:
+		TNT1 A 0 nodelay A_JumpIf(GetCvar("plasmarifletoggle") == 1, "ClassicSpawn")
+		PLZP A -1
+		Stop
 
 /////////////////////////////
 //PewPewGun from Bunny Maze//
@@ -293,248 +351,145 @@ actor MariaPlasmaRifle : MariaWeapon //Replaces PlasmaRifle
 // 
 //==============================================================================
 
-  ClassicReady:
-    TNT1 A 0 A_JumpIfInventory("MariaPlasmaRifleLoaded", 1, 1)
-    Goto ClassicEmptyReady
-    TNT1 A 0 A_PlaySound("Weapon/PlasmaRifle/Select")
-	ALPS ABCDE 1
-	Goto ClassicReadyLoop
-  ClassicEmptyReady:
-    TNT1 A 0 A_PlaySound("Weapon/PlasmaRifle/Select")
-	ALES ABCDE 1
-	Goto ClassicEmptyReadyLoop 
-  ClassicReadyLoop:
-    TNT1 A 0 A_JumpIfInventory("MariaPlasmaRifleLoaded", 1, 1)
-    Goto ClassicEmptyReadyLoop
-    PLZM A 0 A_PlaySound("Weapon/PlasmaRifle/Idle", CHAN_WEAPON, 1, 1)
-    PLZM A 0 A_takeinventory("FasterPlasmaToken")
-    ALPL A 1 A_WeaponReady(WRF_ALLOWZOOM|WRF_ALLOWRELOAD|WRF_ALLOWUSER1|WRF_ALLOWUSER2|WRF_ALLOWUSER3)
-    Loop
-  ClassicEmptyReadyLoop:
-    PLZE A 0 A_StopSound(CHAN_WEAPON)
-    ALPE A 2 A_WeaponReady(WRF_ALLOWZOOM|WRF_ALLOWRELOAD|WRF_ALLOWUSER1|WRF_ALLOWUSER2|WRF_ALLOWUSER3)
-    Loop
-  ClassicDeselect:
-    TNT1 A 0 A_JumpIfInventory("MariaPlasmaRifleLoaded", 1, 1)
-    Goto ClassicEmptyDeselect
-    PLZE A 0 A_StopSound(CHAN_WEAPON)
-	ALPD ABCDE 1
-    TNT1 AAAAAAAAAAAAAAAAAA 0 A_Lower
-    TNT1 A 1
-    Wait
-  ClassicEmptyDeselect:
-    PLZE A 0 A_StopSound(CHAN_WEAPON)
-	ALED ABCDE 1
-    TNT1 AAAAAAAAAAAAAAAAAA 0 A_Lower
-    TNT1 A 1
-    Wait
-  ClassicSelect:
-	TNT1 AA 0 A_Raise
-    Loop
-  ClassicFire:
-    NULL A 0 A_JumpIfInventory("MariaPlasmaRifleLoaded", 1, 1)
-    Goto dryfire
-	TNT1 A 0 A_PlaySound("Weapon/Shinigami/Dry",0)
-    ALPL A 1 Offset(0,33)
-    ALPL A 1 Offset(0,34)
-    ALPL AA 1
-  ClassicFireCounted:
-    NULL A 0 A_JumpIfInventory("MariaPlasmaRifleLoaded", 1, 1)
-    Goto Classicdryfire
-    TNT1 A 0 A_jumpifinventory("FasterPlasmaToken",20,"FasterFire")
-    ALPF A 0
-    //TNT1 B 0 radius_quake (2.5, 2, 0, 1, 0)
-    TNT1 A 0 A_TakeInventory("MariaPlasmaRifleLoaded", 1)
-	ALPF A 0 A_FireProjectile("MariaLunarPlasmaBall")
-    ALPF A 0 A_giveinventory("FasterPlasmaToken",1)
-	TNT1 A 0 A_JumpIfInventory("PowerQuadDamage",1,2)
-	TNT1 A 0 A_Jump(256,2)
-    TNT1 A 0 A_PlaySound("Maria/Powerup/Quad/Shoot",7)
-	ALPF A 0 A_PlaySound("Weapon/PewPewGun/Fire", CHAN_WEAPON)
-    TNT1 A 0 A_AlertMonsters
-	ALPF A 1 BRIGHT A_SetPitch(pitch-1.0)
-	ALPF BC 1 
-    TNT1 A 0 A_JumpIfInventory("MariaPlasmaRifleLoaded", 1, 1) 
-    Goto ClassicEmptyReadyLoop
-	PLZM A 0 A_ReFire("ClassicFireCounted")
-    Goto ClassicReadyLoop
-  ClassicFasterFire:
-    NULL A 0 A_JumpIfInventory("MariaPlasmaRifleLoaded", 1, 1)
-    Goto Classicdryfire
-    ALRF A 0
-    TNT1 B 0 radius_quake (2.5, 2, 0, 1, 0)
-    TNT1 A 0 A_TakeInventory("MariaPlasmaRifleLoaded", 1)
-	ALRF A 0 A_FireProjectile("MariaRedPlasmaBall")
-	TNT1 A 0 A_JumpIfInventory("PowerQuadDamage",1,2)
-	TNT1 A 0 A_Jump(256,2)
-	TNT1 A 0 A_PlaySound("Maria/Powerup/Quad/Shoot",7)
-	ALRF A 0 A_PlaySound("Weapon/PewPewGun/Fire/Heated", CHAN_WEAPON)
-    TNT1 A 0 A_AlertMonsters
-    TNT1 A 0 A_FireCustomMissile("MariaMuzzleSmoke",0,0,0,8)
-	ALRF A 1 BRIGHT A_SetPitch(pitch-1.0)
-	ALRF BC 1
-	ALPC A 1 A_ReFire("ClassicFasterFire")
-    TNT1 A 0 A_JumpIfInventory("MariaPlasmaRifleLoaded", 1, 1)
-    Goto ClassicEmptyReadyLoop
-	RLZM A 0 A_ReFire("ClassicFasterFire")
-	ALPC ABBCC 1
-	TNT1 A 0 A_PlaySound("Weapon/PlasmaRifle/Cooldown")
-	ALPC C 16
-	ALPC DDDDEEF 1
-	ALPL A 3
-    Goto ClassicReadyLoop
-  ClassicAltFire:
-    NULL A 0 A_JumpIfInventory("MariaPlasmaRifleLoaded", 1, 1)
-    Goto Classicdryfire
-	TNT1 A 0 A_PlaySound("Weapon/Shinigami/Dry",0)
-    ALPL A 1 Offset(0,33)
-    ALPL A 1 Offset(0,34)
-    ALPL AA 1
-  ClassicAltFireCounted:
-    NULL A 0 A_JumpIfInventory("MariaPlasmaRifleLoaded", 1, 1)
-    Goto Classicdryfire
-    ALPF A 0
-    TNT1 B 0 radius_quake (2.5, 2, 0, 1, 0)
-    TNT1 A 0 A_TakeInventory("MariaPlasmaRifleLoaded", 1)
-	ALPF A 0 A_FireProjectile("MariaCryoProjectile") 
-	ALPF A 0 A_FireProjectile("MariaCryoProjectile") 
-	TNT1 A 0 A_JumpIfInventory("PowerQuadDamage",1,2)
-	TNT1 A 0 A_Jump(256,2)
-	TNT1 A 0 A_PlaySound("Maria/Powerup/Quad/Shoot",7)
-	ALPF A 0 A_PlaySound("Weapon/PlasmaRifle/Altfire", CHAN_7)
-    TNT1 A 0 A_AlertMonsters
-	ALCF AB 1 BRIGHT
-	PLZM A 0
-    TNT1 A 0 A_JumpIfInventory("MariaPlasmaRifleLoaded", 1, 1)
-    Goto ClassicEmptyReadyLoop
-	PLZM A 0 A_ReFire("ClassicAltFireCounted")
-    Goto ClassicReadyLoop
-  ClassicDryFire:
-    TNT1 A 0 A_PlaySound("Weapon/PlasmaRifle/Dry",0)
-    TNT1 A 0 offset(0,36)
-    ALPE A 1 A_WeaponReady(WRF_NOFIRE|WRF_NOSWITCH)
-    TNT1 A 0 offset(0,35)
-    ALPE A 10 A_WeaponReady(WRF_NOFIRE|WRF_NOSWITCH)
-    Goto ClassicEmptyReadyLoop
+	ClassicReady:
+		ALES A 0 A_JumpIf(CountInv("MariaPlasmaRifleLoaded") < 1,2)
+		ALPS A 0 
+		"####" ABCDE 1
+		Goto ReadyLoop
 
-  ClassicReload:
-    TNT1 A 0 A_JumpIfInventory("MariaPlasmaRifleLoaded", 50, 2)
-    TNT1 A 0 A_JumpIfInventory("Cell", 1, "ReloadWork")
-    ALZE A 0 A_WeaponReady(WRF_NOFIRE)
-    Goto ReadyLoop
-  ClassicReloadWork:
-	ALPE A 1
-    ALPR A 1
-    ALPR B 1
-    ALPR C 1
-	TNT1 A 0  A_PlaySound ("Weapon/PewPewGun/Reload/Out", CHAN_AUTO)
-    ALPR C 1
-    TNT1 A 0 A_SpawnItemEx("EmptyCell", 17, 2, 35, 0, random(3,6), 4)
-    ALPR DDEE 1
-	TNT1 A 0 A_StartSound("Foley/MagPouch/Out", CHAN_AUTO)
-    ALPR F 25	
-    ALPR FGGHH 1	
-	TNT1 A 0  A_PlaySound ("Weapon/PewPewGun/Reload/In", CHAN_AUTO)
-	Goto ClassicReloadingLoop    
-  ClassicReloadingLoop:
-    TNT1 A 0 A_TakeInventory("Cell", 1)
-    TNT1 A 0 A_GiveInventory("MariaPlasmaRifleLoaded", 1)
-    TNT1 A 0 A_JumpIfInventory("MariaPlasmaRifleLoaded", 50, "ClassicFinishReload")
-    TNT1 A 0 A_JumpIfInventory("Cell", 1, "ClassicReloadingLoop")		
-	Goto ClassicFinishReload	        
-  ClassicFinishReload:
-    ALPR IIJJK 1	
-    ALPR KLLMMNO 2	
-	ALPL A 1
-	Goto ClassicReadyLoop
+	ClassicReadyLoop:
+		ALPE A 0 
+		{
+		A_PlaySound("Weapon/PlasmaRifle/Idle", CHAN_WEAPON, 1, 1);
+		If(CountInv("MariaPlasmaRifleLoaded") < 1)
+			{
+			A_StopSound(CHAN_WEAPON);
+			return state(2);
+			}
+		return state("");
+		}
+		ALPL A 0 
+		"####" A 1 A_WeaponReady(WRF_ALLOWZOOM|WRF_ALLOWRELOAD|WRF_ALLOWUSER1|WRF_ALLOWUSER2|WRF_ALLOWUSER3)
+		Goto ReadyLoop
 
-  ClassicThrowPipebomb:
-    ALPD ABCDE 1
-    TASQ ABC 1
-    TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
-    TASG DEH 1
-    TNT1 A 0 A_TakeInventory("PipebombAmmo", 1)
-    TASG I 1 A_PlayWeaponSound("Maria/Pipebomb/Miss",1)
-    TASG J 1 A_PlaySound("Maria/Pipebomb/Ignite", 2)
-    TASG KLM 1
-    TASG OPQR 1 
-    TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
-    TAHA AB 1
-    TNT1 A 0 A_JumpIfInventory("PowerQuadDamage",1,2)
-    TNT1 A 0 A_Jump(256,2)
-    TNT1 A 0 A_PlaySound("Maria/Powerup/Quad/Shoot",7)
-    TNT1 A 0 A_PlaySound("Maria/Pipebomb/Throw", 3)
-    TNT1 A 0 A_FireCustomMissile("HolyPipebomb",0,1,0,0)
-    TAHA CDE 1
-    TNT1 A 5
-    ALPS ABCDE 1
-    Goto ClassicReadyLoop
+	ClassicDeselect:
+		ALED A 0 A_JumpIf(CountInv("MariaPlasmaRifleLoaded") < 1,2)
+		ALPD A 0 
+		"####" ABCDE 1
+	DeselectFinish:
+		TNT1 AAAAAAAAAAAAAAAAAA 0 A_Lower
+		TNT1 A 1
+		Wait
 
-  ClassicUseStimShot:
-	TNT1 A 0 A_JumpIfHealthLower(100, 1)
-	Goto ClassicFullHealth
-    ALPD ABCDE 1
-    SYRI AB 1
-    TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
-    SYRI CD 1
-    SYRI EEFFGGG 1
-    SYRI HIJKKLLL 1
-    TNT1 A 0 A_PlaySound("Weapon/Syringe/Cap", 1)
-    SYRI MNOPQQQRR 1
-    TNT1 A 0 A_PlaySound("Weapon/Syringe/Tab", 1)
-    SYRI STUUUVV 1
-    TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
-    SYRI WXYZ 1
-    SYR2 AB 1
-    TNT1 A 0 A_TakeInventory("MariaSyringeAmmo", 1)
-    TNT1 A 0 A_PlaySound("Weapon/Syringe/Inject", 1)
-    SYR2 CD 1
-    TNT1 A 0 A_PlaySound("Weapon/Syringe/Heal", 2)
-    TNT1 A 0 A_SetBlend("BLUE",.5,25)
-    TNT1 A 0 HealThing(10, 100)
-    TNT1 A 0 A_GiveInventory("SyringeProtection")
-    TNT1 A 0 A_GiveInventory("SyringeRegeneration")
-    SYR2 EFGHIJ 2
-    SYR2 KLLMMN 1
-    TNT1 A 5
-    ALPS ABCDE 1
-    Goto ClassicReadyLoop
-  ClassicFullHealth:
-    TNT1 A 0 A_Print("You are healthy.")
-	Goto ClassicReadyLoop
+	CooldownClassic:
+		ALPC ABBCC 1
+		TNT1 A 0 A_PlaySound("Weapon/PlasmaRifle/Cooldown")
+		ALPC C 16
+		ALPC DDDDEEF 1
+		ALPL A 3
+		Goto ReadyLoop
 
-  ClassicEquipShield:
-	TNT1 A 0 A_ZoomFactor(1.0)
-	TNT1 A 0 A_GiveInventory("MariaShield",1)
-	TNT1 A 0 A_SelectWEapon("MariaShield")
-	Goto ClassicDeselect
-				
-  ClassicPunchFlash:
-    TNT1 A 0 A_JumpIfInventory("MariaPlasmaRifleLoaded", 1, 1)
-    Goto ClassicPunchFlashEmpty
-	ALPK ABC 1
-	ALPK D 12
-	ALPK CBA 1
-    ALPL A 1
-	Goto LightDone
-  ClassicPunchFlashEmpty:
-	ALPK EFG 1
-	ALPK H 12
-	ALPK GFE 1
-    ALPE A 1
-	Goto LightDone
-  ClassicSpawn:
-    ALZP A -1
-    Stop
+	ClassicReloadWork:
+		ALPE A 1
+		ALPR A 1
+		ALPR B 1
+		ALPR C 1
+		TNT1 A 0 A_PlaySound ("Weapon/PewPewGun/Reload/Out", CHAN_AUTO)
+		ALPR C 1
+		TNT1 A 0 A_SpawnItemEx("EmptyCell", 17, 2, 35, 0, random(3,6), 4)
+		ALPR DDEE 1
+		TNT1 A 0 A_StartSound("Foley/MagPouch/Out", CHAN_AUTO)
+		ALPR F 25
+		ALPR FGGHH 1
+		TNT1 A 0 A_PlaySound ("Weapon/PewPewGun/Reload/In", CHAN_AUTO)
+		Goto ReloadingLoop
 
-  }
+	ClassicFinishReload:
+		ALPR IIJJK 1
+		ALPR KLLMMNO 2
+		ALPL A 1
+		Goto ReadyLoop
+
+	ClassicThrowPipebomb:
+		ALED A 0 A_JumpIf(CountInv("MariaPlasmaRifleLoaded") < 1,2)
+		ALPD A 0
+		"####" ABCDE 1
+		TASQ ABC 1
+		TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
+		TASG DEH 1
+		TNT1 A 0 A_TakeInventory("PipebombAmmo", 1)
+		TASG I 1 A_PlayWeaponSound("Maria/Pipebomb/Miss",1)
+		TASG J 1 A_PlaySound("Maria/Pipebomb/Ignite", 2)
+		TASG KLM 1
+		TASG OPQR 1 
+		TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
+		TAHA AB 1
+		TNT1 A 0 A_JumpIfInventory("PowerQuadDamage",1,2)
+		TNT1 A 0 A_Jump(256,2)
+		TNT1 A 0 A_PlaySound("Maria/Powerup/Quad/Shoot",7)
+		TNT1 A 0 A_PlaySound("Maria/Pipebomb/Throw", 3)
+		TNT1 A 0 A_FireCustomMissile("HolyPipebomb",0,1,0,0)
+		TAHA CDE 1
+		TNT1 A 5
+		ALES A 0 A_JumpIf(CountInv("MariaPlasmaRifleLoaded") < 1,2)
+		ALPS A 0
+		"####" ABCDE 1
+		Goto ReadyLoop
+
+	ClassicUseStimShot:
+		ALED A 0 A_JumpIf(CountInv("MariaPlasmaRifleLoaded") < 1,2)
+		ALPD A 0
+		"####" ABCDE 1
+		SYRI AB 1
+		TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
+		SYRI CD 1
+		SYRI EEFFGGG 1
+		SYRI HIJKKLLL 1
+		TNT1 A 0 A_PlaySound("Weapon/Syringe/Cap", 1)
+		SYRI MNOPQQQRR 1
+		TNT1 A 0 A_PlaySound("Weapon/Syringe/Tab", 1)
+		SYRI STUUUVV 1
+		TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
+		SYRI WXYZ 1
+		SYR2 AB 1
+		TNT1 A 0 A_TakeInventory("MariaSyringeAmmo", 1)
+		TNT1 A 0 A_PlaySound("Weapon/Syringe/Inject", 1)
+		SYR2 CD 1
+		TNT1 A 0 A_PlaySound("Weapon/Syringe/Heal", 2)
+		TNT1 A 0 A_SetBlend("BLUE",.5,25)
+		TNT1 A 0 HealThing(10, 100)
+		TNT1 A 0 A_GiveInventory("SyringeProtection")
+		TNT1 A 0 A_GiveInventory("SyringeRegeneration")
+		SYR2 EFGHIJ 2
+		SYR2 KLLMMN 1
+		TNT1 A 5
+		ALES A 0 A_JumpIf(CountInv("MariaPlasmaRifleLoaded") < 1,2)
+		ALPS A 0
+		"####" ABCDE 1
+		Goto ReadyLoop
+
+	ClassicPunchFlash:
+		ALPK A 0 A_JumpIf(CountInv("MariaPlasmaRifleLoaded") < 1, 2)
+		ALPK A 0
+		"####" ABC 1
+		"####" D 12
+		"####" CBA 1
+		ALPE A 0 A_JumpIf(CountInv("MariaPlasmaRifleLoaded") < 1, 2)
+		ALPL A 0
+		"####" A 1
+		Goto LightDone
+
+	ClassicSpawn:
+		ALZP A -1
+		Stop
+	}
 }
 
 ACTOR MariaPlasmaRifleLoaded : Ammo
 {
-   Inventory.Amount 0
-   Inventory.MaxAmount 50
-   Ammo.BackpackAmount 0
-   Ammo.BackpackMaxAmount 50
-   Inventory.Icon ""
+	Inventory.Amount 0
+	Inventory.MaxAmount 50
+	Ammo.BackpackAmount 0
+	Ammo.BackpackMaxAmount 50
+	Inventory.Icon ""
 }

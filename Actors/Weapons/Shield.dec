@@ -3,37 +3,38 @@ ACTOR MariaShield : MariaWeapon
 	Obituary "%o slammed by %k's shield."
 	Inventory.PickupMessage "You picked up a Tac Shield."
 	Tag "Tac Shield"
-    +INVENTORY.UNDROPPABLE
-    +INVENTORY.UNTOSSABLE
+	+INVENTORY.UNDROPPABLE
+	+INVENTORY.UNTOSSABLE
 	//Inventory.Pickupsound "REAPICK"
 	Scale 0.35
 	States
 	{
 	Ready:
-        TNT1 A 0 A_PlaySound("Maria/Draw/Equipment", 1)
-        SHIL AB 1
-        TNT1 A 0 A_JumpIfInventory("PowerShieldCooldown", 1, "ShieldDown")
-        TNT1 A 0 A_JumpIfInventory("ShieldDurability", 1, "ShieldRaise")
-        TNT1 A 0 A_GiveInventory("ShieldDurability", 10)
-    ShieldRaise:
-        TNT1 A 0 A_SetSpeed(0.75)
-        SHIL C 1
-        TNT1 A 0 A_PlaySound("Weapon/Shield/Equip", 2)
-        SHIL D 1
-        Goto ReadyLoop
+		TNT1 A 0 A_PlaySound("Maria/Draw/Equipment", 1)
+		SHIL AB 1
+		TNT1 A 0 A_JumpIfInventory("PowerShieldCooldown", 1, "ShieldDown")
+		TNT1 A 0 A_JumpIfInventory("ShieldDurability", 1, "ShieldRaise")
+		TNT1 A 0 A_GiveInventory("ShieldDurability", 10)
+	ShieldRaise:
+		TNT1 A 0 A_SetSpeed(0.75)
+		SHIL C 1
+		TNT1 A 0 A_PlaySound("Weapon/Shield/Equip", 2)
+		SHIL D 1
+		Goto ReadyLoop
 
 	ReadyLoop:
-    	SHIG A 1 A_WeaponReady(WRF_ALLOWZOOM|WRF_ALLOWUSER1|WRF_ALLOWUSER2)
-    	TNT1 A 0 A_JumpIfInventory("ShieldDurability", 1, "ShieldUp")
-    	Goto ShieldBreak
+		SHIG A 1 A_WeaponReady(WRF_ALLOWZOOM|WRF_ALLOWUSER1|WRF_ALLOWUSER2)
+		TNT1 A 0 A_JumpIfInventory("ShieldDurability", 1, "ShieldUp")
+		Goto ShieldBreak
+
 	ShieldUp:
-    	TNT1 A 0 A_SpawnItemEx("MariaShieldProtection", 20, 0, 15, 0,0,0, 0, SXF_NOCHECKPOSITION|SXF_SETMASTER)
-    	Goto ReadyLoop
+		TNT1 A 0 A_SpawnItemEx("MariaShieldProtection", 20, 0, 15, 0,0,0, 0, SXF_NOCHECKPOSITION|SXF_SETMASTER)
+		Goto ReadyLoop
 
 	ShieldBreak:
 		TNT1 A 0 A_JumpIfInventory("PowerShieldCooldown", 1, "ShieldDown")
 		TNT1 A 0 A_PlaySound("Weapon/Shield/Break", CHAN_AUTO)
-        TNT1 A 0 A_Print("Shield broke!")
+		TNT1 A 0 A_Print("Shield broke!")
 		TNT1 A 0 A_SetSpeed(1.0)
 		TNT1 A 0 A_GiveInventory("PowerShieldCooldown", 1)
 		SHIL DCBA 1
@@ -54,19 +55,19 @@ ACTOR MariaShield : MariaWeapon
 		Goto ReadyLoop
 
 	Deselect:
-        TNT1 A 0 A_PlaySound("Maria/Draw/Equipment", 1)
-     	SHIL DC 1
-     	TNT1 A 0 A_SetSpeed(1.0)
-     	SHIL BA 1
-        TNT1 AAAAAAAAAAAAAAAAAA 0 A_Lower
-        TNT1 A 1
+		TNT1 A 0 A_PlaySound("Maria/Draw/Equipment", 1)
+		SHIL DC 1
+		TNT1 A 0 A_SetSpeed(1.0)
+		SHIL BA 1
+		TNT1 AAAAAAAAAAAAAAAAAA 0 A_Lower
+		TNT1 A 1
 
 		TNT1 A 1 
 		TNT1 A 0 A_TakeInventory("MariaShield", 1)
 		TNT1 A -1
-        Wait
+		Wait
 	Select:
-        TNT1 AA 0 A_Raise
+		TNT1 AA 0 A_Raise
 		Loop
 	Fire:
 		SHIS ABC 1
@@ -75,9 +76,9 @@ ACTOR MariaShield : MariaWeapon
 		TNT1 A 0 A_PlaySound("Maria/Powerup/Quad/Shoot",7)
 		TNT1 A 0 A_PlaySound("Weapon/Shield/Bash")
 		TNT1 A 0 A_ChangeVelocitY(2.5,0,2,CVF_RELATIVE ) 
-    	TNT1 A 0 A_FireCustomMissile("MariaShieldPuff",0,0)
+		TNT1 A 0 A_FireCustomMissile("MariaShieldPuff",0,0)
 		TNT1 A 0 A_SetPitch (pitch + 0.4)
-    	SHIS C 1  
+		SHIS C 1  
 		TNT1 A 0 A_SetPitch (pitch - 0.2)
 		SHIS C 2 
 		TNT1 A 0 A_SetPitch (pitch - 0.1)
@@ -85,70 +86,54 @@ ACTOR MariaShield : MariaWeapon
 		TNT1 A 0 A_SetPitch (pitch - 0.1)
 		SHIS CBA 1
 		TNT1 A 0
-	    Goto ReadyLoop
-		
-    ThrowPipebomb:
+		Goto ReadyLoop
+
+	ThrowPipebomb:
 		SHIL HHGGFEDCBA 1
 		TASQ ABCDE 1
-        TASG H 1
-        TNT1 A 0 A_TakeInventory("PipebombAmmo", 1)
-        TASG I 1 A_PlayWeaponSound("Maria/Pipebomb/Miss",1)
-        TASG J 1 A_PlaySound("Maria/Pipebomb/Ignite", 2)
-        TASG KLM 1
-        TASG OPQR 1 
-        TAHA AB 1
-        TNT1 A 0 A_JumpIfInventory("PowerQuadDamage",1,2)
-        TNT1 A 0 A_Jump(256,2)
-        TNT1 A 0 A_PlaySound("Maria/Powerup/Quad/Shoot",7)
-        TNT1 A 0 A_PlaySound("Maria/Pipebomb/Throw", 3)
-        TNT1 A 0 A_FireCustomMissile("HolyPipebomb",0,1,0,0)
-        TAHA CDE 1
-        TNT1 A 5
-        SHIL ABCDEFGGHH 1
-        Goto ReadyLoop		
+		TASG H 1
+		TNT1 A 0 A_TakeInventory("PipebombAmmo", 1)
+		TASG I 1 A_PlayWeaponSound("Maria/Pipebomb/Miss",1)
+		TASG J 1 A_PlaySound("Maria/Pipebomb/Ignite", 2)
+		TASG KLM 1
+		TASG OPQR 1 
+		TAHA AB 1
+		TNT1 A 0 A_JumpIfInventory("PowerQuadDamage",1,2)
+		TNT1 A 0 A_Jump(256,2)
+		TNT1 A 0 A_PlaySound("Maria/Powerup/Quad/Shoot",7)
+		TNT1 A 0 A_PlaySound("Maria/Pipebomb/Throw", 3)
+		TNT1 A 0 A_FireCustomMissile("HolyPipebomb",0,1,0,0)
+		TAHA CDE 1
+		TNT1 A 5
+		SHIL ABCDEFGGHH 1
+		Goto ReadyLoop
 
 	UseStimShot:
 		TNT1 A 0 A_JumpIfHealthLower(100, 1)
 		Goto FullHealth
-        SHIL HHGGFEDCBA 1
-	    SYRI ABCD 1
-	    SYRI EEFFGHH 1
+		SHIL HHGGFEDCBA 1
+		SYRI ABCD 1
+		SYRI EEFFGHH 1
 		TNT1 A 0 A_TakeInventory("MariaSyringeAmmo", 1)
-        TNT1 A 0 A_PlaySound("Weapon/Syringe/Inject", 1)
-	    SYRI IJ 1
-        TNT1 A 0 A_PlaySound("Weapon/Syringe/Press", 2)
-        TNT1 A 0 A_SetBlend("BLUE",.5,25)
+		TNT1 A 0 A_PlaySound("Weapon/Syringe/Inject", 1)
+		SYRI IJ 1
+		TNT1 A 0 A_PlaySound("Weapon/Syringe/Press", 2)
+		TNT1 A 0 A_SetBlend("BLUE",.5,25)
 		TNT1 A 0 HealThing(10, 100)
-        TNT1 A 0 A_GiveInventory("SyringeProtection")
-	    SYRI KLLMMN 1
-	    SYRI OPQR 1	
-        TNT1 A 5
-        SHIL ABCDEFGGHH 1
-	    Goto ReadyLoop
-	FullHealth:
-		TNT1 A 0 A_Print("You are healthy.")
+		TNT1 A 0 A_GiveInventory("SyringeProtection")
+		SYRI KLLMMN 1
+		SYRI OPQR 1
+		TNT1 A 5
+		SHIL ABCDEFGGHH 1
 		Goto ReadyLoop
 
-    Zoom:
-        TNT1 A 0 A_JumpIfInventory("PowerQuadDamage",1,2)
-        TNT1 A 0 A_Jump(256,2)
-        TNT1 A 0 A_PlaySound("Maria/Powerup/Quad/Shoot",7)
-        TNT1 A 0 A_PlaySound("weapons/melee/fist/uppercut")
-        TNT1 A 0 A_ChangeVelocitY(2.5,0,2,CVF_RELATIVE ) 
-        TNT1 A 0 A_gunflash("PunchFlash") //PunchFlash
-        TNT1 A 2
-        HANU AB 1 A_WeaponReady(WRF_NOFIRE|WRF_NOSWITCH)
-        HANU C 0 A_FireCustomMissile("MariaPunch2",0,0)
-        HANU CCDEFGHIJK 1 A_WeaponReady(WRF_NOFIRE|WRF_NOSWITCH)
-        TNT1 A 5 //19
-        Goto PunchFinish
-		
-    PunchFlash:
-        SHIL CBA 1
-        SHIL A 12
-        SHIL ABC 1
+	PunchFlash:
+		SHIL CBA 1
+		SHIL A 12
+		SHIL ABC 1
 		SHIG A 1
 		Goto LightDone
+
 	Spawn:
 		REPP A -1
 		Stop
@@ -184,18 +169,18 @@ actor MariaShieldProtection
  
 actor MariaShieldHit : MariaPuff
 {
-  scale 0.15
-  alpha 0.7
-    States
-    {
-    Spawn:
-      TNT1 A 0 A_SetScale(0.3)
-	  TNT1 A 0 A_SetTranslucent(0.8)
-      TNT1 AAA 0 A_CustomMissile ("MariaSmokeTrail", 2, 0, random (0, 360), 2, random (0, 360))
-      TNT1 A 0 A_PlaySound("shieldricochet")	  
-      MUFF AABCDE 1 BRIGHT
-    Stop
-    }
+	scale 0.15
+	alpha 0.7
+	States
+	{
+	Spawn:
+		TNT1 A 0 A_SetScale(0.3)
+		TNT1 A 0 A_SetTranslucent(0.8)
+		TNT1 AAA 0 A_CustomMissile ("MariaSmokeTrail", 2, 0, random (0, 360), 2, random (0, 360))
+		TNT1 A 0 A_PlaySound("shieldricochet")
+		MUFF AABCDE 1 BRIGHT
+		Stop
+	}
 }
 
 ACTOR ShieldDurability : MariaToken

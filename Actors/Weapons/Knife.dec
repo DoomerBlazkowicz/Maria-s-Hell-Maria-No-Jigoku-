@@ -9,153 +9,159 @@
 
 ACTOR MariaKnife : MariaWeapon //replaces Chainsaw
 {
-  Obituary "%k butchered %o!"
-  +FORCEPAIN
-  +WEAPON.NOALERT
-  +CHEATNOTWEAPON
-  +INVENTORY.UNDROPPABLE
-  +INVENTORY.UNTOSSABLE
-  +WEAPON.WIMPY_WEAPON
-  +WEAPON.MELEEWEAPON
-  Inventory.PickupMessage "Knife Obtained!"
-  Inventory.PickupSound "Weapon/ValmerPickup"
-  //Weapon.upsound "Weapon/ValmerSelect"
-  Tag "Knife"
-  Scale 0.65
-  Inventory.Icon "VALPA0"
-  States
-  {
-  Spawn:
-	VALP A -1
-	Stop
-  Deselect:
-    VALD ABCD 1
-    TNT1 AAAAAAAAAAAAAAAAAA 0 A_Lower
-    TNT1 A 1
-    Wait
-  Select:
-    TNT1 AA 0 A_Raise
-    Loop
-  Ready:
-    TNT1 A 0 A_PlaySound("Weapon/Valmer/Select")
-    VALS ABCD 1
-    Goto ReadyLoop
-  ReadyLoop:
-    VALG A 1 A_WeaponReady(WRF_ALLOWZOOM|WRF_ALLOWUSER1|WRF_ALLOWUSER2|WRF_ALLOWUSER3)
-    Loop
-  Fire:
-    VALG ABCD 1
-    Goto Right
-  Right:
-    VALR A 1
-    TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
-    VALR BC 1
-    TNT1 A 0 A_PlaySound("Weapon/Valmer/Swing", CHAN_WEAPON)
-    VALR D 1
-    VALR E 1 A_FireCustomMissile("MariaKnifeHit1",0,0,0,6)
-    VALR FG 1 
-    TNT1 A 1
-    VALR D 0 A_Refire("Left")
-    Goto FireDone 
-  Left:
-    VALL A 1
-    TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
-    TNT1 A 0 A_PlaySound("Weapon/Valmer/Swing", CHAN_WEAPON)
-    VALL BC 1
-    VALL D 1 
-    TNT1 A 0 A_FireCustomMissile("MariaKnifeHit1",0,0,0,6)
-    VALL E 1
-    VALL FG 1 
-    TNT1 A 1
-    VALL D 0 A_Refire("Stab")
-    Goto FireDone
-  Stab:
-    VALB A 1
-    TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
-    TNT1 A 0 A_PlaySound("Weapon/Valmer/Swing", CHAN_WEAPON)
-    VALB BC 1
-    VALB D 1
-    VALB E 0 A_FireCustomMissile("MariaKnifeHit1",0,0,0,6)
-    VALB E 1 
-    VALB FG 1
-    TNT1 A 1
-    VALR D 0 A_Refire("Right")
-    Goto FireDone 
-   FireDone:
-    TNT1 A 1 
-    VALS AB 1
-    TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
-    VALS CD 1
-    VALG A 1
-    Goto ReadyLoop
+	Obituary "%k butchered %o!"
+	+FORCEPAIN
+	+WEAPON.NOALERT
+	+CHEATNOTWEAPON
+	+INVENTORY.UNDROPPABLE
+	+INVENTORY.UNTOSSABLE
+	+WEAPON.WIMPY_WEAPON
+	+WEAPON.MELEEWEAPON
+	Inventory.PickupMessage "Knife Obtained!"
+	Inventory.PickupSound "Weapon/ValmerPickup"
+	//Weapon.upsound "Weapon/ValmerSelect"
+	Tag "Knife"
+	Scale 0.65
+	Inventory.Icon "VALPA0"
+	States
+	{
+	Spawn:
+		VALP A -1
+		Stop
 
-   ThrowPipebomb:
-    VALD ABCD 1
-    TASQ ABC 1
-    TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
-    TASG DEH 1
-    TNT1 A 0 A_TakeInventory("PipebombAmmo", 1)
-    TASG I 1 A_PlayWeaponSound("Maria/Pipebomb/Miss",1)
-    TASG J 1 A_PlaySound("Maria/Pipebomb/Ignite", 2)
-    TASG KLM 1
-    TASG OPQR 1 
-    TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
-    TAHA AB 1
-    TNT1 A 0 A_JumpIfInventory("PowerQuadDamage",1,2)
-    TNT1 A 0 A_Jump(256,2)
-    TNT1 A 0 A_PlaySound("Maria/Powerup/Quad/Shoot",7)
-    TNT1 A 0 A_PlaySound("Maria/Pipebomb/Throw", 3)
-    TNT1 A 0 A_FireCustomMissile("HolyPipebomb",0,1,0,0)
-    TAHA CDE 1
-    TNT1 A 5
-    VALS ABCD 1
-    Goto ReadyLoop
+	Deselect:
+		VALD ABCD 1
+		TNT1 AAAAAAAAAAAAAAAAAA 0 A_Lower
+		TNT1 A 1
+		Wait
 
-   UseStimShot:
-    TNT1 A 0 A_JumpIfHealthLower(100, 1)
-	Goto FullHealth
-    VALD ABCD 1
-    SYRI AB 1
-    TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
-    SYRI CD 1
-    SYRI EEFFGGG 1
-    SYRI HIJKKLLL 1
-    TNT1 A 0 A_PlaySound("Weapon/Syringe/Cap", 1)
-    SYRI MNOPQQQRR 1
-    TNT1 A 0 A_PlaySound("Weapon/Syringe/Tab", 1)
-    SYRI STUUUVV 1
-    TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
-    SYRI WXYZ 1
-    SYR2 AB 1
-    TNT1 A 0 A_TakeInventory("MariaSyringeAmmo", 1)
-    TNT1 A 0 A_PlaySound("Weapon/Syringe/Inject", 1)
-    SYR2 CD 1
-    TNT1 A 0 A_PlaySound("Weapon/Syringe/Heal", 2)
-    TNT1 A 0 A_SetBlend("BLUE",.5,25)
-    TNT1 A 0 HealThing(10, 100)
-    TNT1 A 0 A_GiveInventory("SyringeProtection")
-    TNT1 A 0 A_GiveInventory("SyringeRegeneration")
-    SYR2 EFGHIJ 2
-    SYR2 KLLMMN 1
-    TNT1 A 5
-    VALS ABCD 1
-    Goto ReadyLoop
-  FullHealth:
-    TNT1 A 0 A_Print("You are healthy.")
-	Goto ReadyLoop
+	Select:
+		TNT1 AA 0 A_Raise
+		Loop
 
-  User3:
-  EquipShield:
-    TNT1 A 0 A_ZoomFactor(1.0)
-    TNT1 A 0 A_GiveInventory("MariaShield",1)
-    TNT1 A 0 A_SelectWEapon("MariaShield")
-    Goto Deselect
+	Ready:
+		TNT1 A 0 A_PlaySound("Weapon/Valmer/Select")
+		VALS ABCD 1
+		Goto ReadyLoop
 
-  PunchFlash:
-    VALK ABC 1
-    VALK D 12
-    VALK CBA 1
-    VALG A 1
-    Goto LightDone
+	ReadyLoop:
+		VALG A 1 A_WeaponReady(WRF_ALLOWZOOM|WRF_ALLOWUSER1|WRF_ALLOWUSER2|WRF_ALLOWUSER3)
+		Loop
+
+	Fire:
+		VALG ABCD 1
+		Goto Right
+
+	Right:
+		VALR A 1
+		TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
+		VALR BC 1
+		TNT1 A 0 A_PlaySound("Weapon/Valmer/Swing", CHAN_WEAPON)
+		VALR D 1
+		VALR E 1 A_FireCustomMissile("MariaKnifeHit1",0,0,0,6)
+		VALR FG 1 
+		TNT1 A 1
+		VALR D 0 A_Refire("Left")
+		Goto FireDone
+
+	Left:
+		VALL A 1
+		TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
+		TNT1 A 0 A_PlaySound("Weapon/Valmer/Swing", CHAN_WEAPON)
+		VALL BC 1
+		VALL D 1 
+		TNT1 A 0 A_FireCustomMissile("MariaKnifeHit1",0,0,0,6)
+		VALL E 1
+		VALL FG 1 
+		TNT1 A 1
+		VALL D 0 A_Refire("Stab")
+		Goto FireDone
+
+	Stab:
+		VALB A 1
+		TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
+		TNT1 A 0 A_PlaySound("Weapon/Valmer/Swing", CHAN_WEAPON)
+		VALB BC 1
+		VALB D 1
+		VALB E 0 A_FireCustomMissile("MariaKnifeHit1",0,0,0,6)
+		VALB E 1 
+		VALB FG 1
+		TNT1 A 1
+		VALR D 0 A_Refire("Right")
+		Goto FireDone
+
+	FireDone:
+		TNT1 A 1 
+		VALS AB 1
+		TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
+		VALS CD 1
+		VALG A 1
+		Goto ReadyLoop
+
+	ThrowPipebomb:
+		VALD ABCD 1
+		TASQ ABC 1
+		TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
+		TASG DEH 1
+		TNT1 A 0 A_TakeInventory("PipebombAmmo", 1)
+		TASG I 1 A_PlayWeaponSound("Maria/Pipebomb/Miss",1)
+		TASG J 1 A_PlaySound("Maria/Pipebomb/Ignite", 2)
+		TASG KLM 1
+		TASG OPQR 1 
+		TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
+		TAHA AB 1
+		TNT1 A 0 A_JumpIfInventory("PowerQuadDamage",1,2)
+		TNT1 A 0 A_Jump(256,2)
+		TNT1 A 0 A_PlaySound("Maria/Powerup/Quad/Shoot",7)
+		TNT1 A 0 A_PlaySound("Maria/Pipebomb/Throw", 3)
+		TNT1 A 0 A_FireCustomMissile("HolyPipebomb",0,1,0,0)
+		TAHA CDE 1
+		TNT1 A 5
+		VALS ABCD 1
+		Goto ReadyLoop
+
+	UseStimShot:
+		TNT1 A 0 A_JumpIfHealthLower(100, 1)
+		Goto FullHealth
+		VALD ABCD 1
+		SYRI AB 1
+		TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
+		SYRI CD 1
+		SYRI EEFFGGG 1
+		SYRI HIJKKLLL 1
+		TNT1 A 0 A_PlaySound("Weapon/Syringe/Cap", 1)
+		SYRI MNOPQQQRR 1
+		TNT1 A 0 A_PlaySound("Weapon/Syringe/Tab", 1)
+		SYRI STUUUVV 1
+		TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
+		SYRI WXYZ 1
+		SYR2 AB 1
+		TNT1 A 0 A_TakeInventory("MariaSyringeAmmo", 1)
+		TNT1 A 0 A_PlaySound("Weapon/Syringe/Inject", 1)
+		SYR2 CD 1
+		TNT1 A 0 A_PlaySound("Weapon/Syringe/Heal", 2)
+		TNT1 A 0 A_SetBlend("BLUE",.5,25)
+		TNT1 A 0 HealThing(10, 100)
+		TNT1 A 0 A_GiveInventory("SyringeProtection")
+		TNT1 A 0 A_GiveInventory("SyringeRegeneration")
+		SYR2 EFGHIJ 2
+		SYR2 KLLMMN 1
+		TNT1 A 5
+		VALS ABCD 1
+		Goto ReadyLoop
+
+	User3:
+	EquipShield:
+		TNT1 A 0 A_ZoomFactor(1.0)
+		TNT1 A 0 A_GiveInventory("MariaShield",1)
+		TNT1 A 0 A_SelectWEapon("MariaShield")
+		Goto Deselect
+
+	PunchFlash:
+		VALK ABC 1
+		VALK D 12
+		VALK CBA 1
+		VALG A 1
+		Goto LightDone
   }
 }

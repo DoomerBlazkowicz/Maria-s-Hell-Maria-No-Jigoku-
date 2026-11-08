@@ -20,193 +20,199 @@ ACTOR MariaKatana : MariaWeapon
 	//+NOAUTOFIRE
 	+NOALERT
 	+CHEATNOTWEAPON
-    +INVENTORY.UNDROPPABLE
-    +INVENTORY.UNTOSSABLE
-    +WEAPON.WIMPY_WEAPON
-    +WEAPON.MELEEWEAPON
+	+INVENTORY.UNDROPPABLE
+	+INVENTORY.UNTOSSABLE
+	+WEAPON.WIMPY_WEAPON
+	+WEAPON.MELEEWEAPON
 	States
 	{
 	Spawn:
 		MAKP A -1 bright
 		Loop
+
 	Select:
 		TNT1 AA 0 A_Raise
 		Loop
+
 	Deselect:
-     	MAKA ABCD 1
-        TNT1 AAAAAAAAAAAAAAAAAA 0 A_Lower
-        TNT1 A 1
-        Wait
+		MAKA ABCD 1
+		TNT1 AAAAAAAAAAAAAAAAAA 0 A_Lower
+		TNT1 A 1
+		Wait
+
 	Ready:
-        MAKA A 0 A_TakeInventory("MariaCrowbar",1)
-        MAKA A 0 A_TakeInventory("MariaKnife",1)
-        MAKA A 0 A_TakeInventory("MariaFist",1)
-        TNT1 A 0 A_PlaySound("Foley/Sleeves/Movement", CHAN_AUTO)
-     	MAKA DCBA 1
-        Goto ReadyLoop
+		MAKA A 0 A_TakeInventory("MariaCrowbar",1)
+		MAKA A 0 A_TakeInventory("MariaKnife",1)
+		MAKA A 0 A_TakeInventory("MariaFist",1)
+		TNT1 A 0 A_PlaySound("Foley/Sleeves/Movement", CHAN_AUTO)
+		MAKA DCBA 1
+		Goto ReadyLoop
+
 	ReadyLoop:
 		MAKA A 1 A_weaponready(WRF_ALLOWZOOM|WRF_ALLOWUSER1|WRF_ALLOWUSER2|WRF_ALLOWUSER3)
 		loop
+
 	Fire:
 		MAKA EF 1 
-    LeftA:
+	LeftA:
 		TNT1 A 1
-        TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
+		TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
 		TNT1 A 0 A_JumpIfInventory("PowerQuadDamage",1,2)
 		TNT1 A 0 A_Jump(256,2)
 		TNT1 A 0 A_PlaySound("Maria/Powerup/Quad/Shoot",7)
 		TNT1 A 0 A_PlaySound("Weapon/Sword/Unsheat", 1)
 		MAKL AB 1 
-        TNT1 A 0 A_SetPitch (pitch + 0.6)
+		TNT1 A 0 A_SetPitch (pitch + 0.6)
 		MAKL C 1
-        TNT1 A 0 A_SetPitch (pitch + 0.2)
+		TNT1 A 0 A_SetPitch (pitch + 0.2)
 		MAKL D 1
 		TNT1 A 0 A_FireCustomMissile("MariaSwordPuff1",0,0,0)
-        TNT1 A 0 A_SetPitch (pitch - 0.4)
+		TNT1 A 0 A_SetPitch (pitch - 0.4)
 		MAKL E 1
-        TNT1 A 0 A_SetPitch (pitch - 0.4)
+		TNT1 A 0 A_SetPitch (pitch - 0.4)
 		TNT1 AAA 1
 		TNT1 A 1 A_Refire("Right")
 		Goto Returning
-    Right:
+
+	Right:
 		TNT1 A 1 
-        TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
+		TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
 		MAKR AB 1 
 		TNT1 A 0 A_JumpIfInventory("PowerQuadDamage",1,2)
 		TNT1 A 0 A_Jump(256,2)
 		TNT1 A 0 A_PlaySound("Maria/Powerup/Quad/Shoot",7)
 		TNT1 A 0 A_PlaySound("Weapon/Sword/Swing", 2)
-        TNT1 A 0 A_SetPitch (pitch + 0.6)
+		TNT1 A 0 A_SetPitch (pitch + 0.6)
 		MAKR C 1
-        TNT1 A 0 A_SetPitch (pitch + 0.2)
+		TNT1 A 0 A_SetPitch (pitch + 0.2)
 		MAKR D 1
 		TNT1 A 0 A_FireCustomMissile("MariaSwordPuff2",0,0,0)
-        TNT1 A 0 A_SetPitch (pitch - 0.4)
+		TNT1 A 0 A_SetPitch (pitch - 0.4)
 		MAKR E 1
-        TNT1 A 0 A_SetPitch (pitch - 0.4)
+		TNT1 A 0 A_SetPitch (pitch - 0.4)
 		TNT1 AAA 1
 		TNT1 A 1 A_Refire("LeftB")
 		Goto Returning
-    LeftB:
+
+	LeftB:
 		TNT1 A 1
-        TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
+		TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
 		MAKL FG 1 
 		TNT1 A 0 A_JumpIfInventory("PowerQuadDamage",1,2)
 		TNT1 A 0 A_Jump(256,2)
 		TNT1 A 0 A_PlaySound("Maria/Powerup/Quad/Shoot",7)
 		TNT1 A 0 A_PlaySound("Weapon/Sword/Swing", 3)
-        TNT1 A 0 A_SetPitch (pitch + 0.6)
+		TNT1 A 0 A_SetPitch (pitch + 0.6)
 		MAKL H 1
-        TNT1 A 0 A_SetPitch (pitch + 0.2)
+		TNT1 A 0 A_SetPitch (pitch + 0.2)
 		MAKL I 1
 		TNT1 A 0 A_FireCustomMissile("MariaSwordPuff1",0,0,0)
-        TNT1 A 0 A_SetPitch (pitch - 0.4)
+		TNT1 A 0 A_SetPitch (pitch - 0.4)
 		MAKL J 1
-        TNT1 A 0 A_SetPitch (pitch - 0.4)
+		TNT1 A 0 A_SetPitch (pitch - 0.4)
 		TNT1 AAA 1
 		TNT1 A 1 A_Refire("Right")
 		Goto Returning
-    Altfire:
-    	MAKA A 0 A_JumpIfInventory("MariaManaCharge",1,1)
-	    goto NotEnough
+
+	Altfire:
+		MAKA A 0 A_JumpIfInventory("MariaManaCharge",1,1)
+		goto NotEnough
 		MAKA AEEFF 1 
-        TNT1 A 2
-    Unleash:
-    	MAKA A 0 A_JumpIfInventory("MariaManaCharge",1,1)
-	    goto NotEnough
+		TNT1 A 2
+	Unleash:
+		MAKA A 0 A_JumpIfInventory("MariaManaCharge",1,1)
+		goto NotEnough
 		TNT1 A 1
-        TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
+		TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
 		MAKL FG 1 
 		TNT1 A 0 A_JumpIfInventory("PowerQuadDamage",1,2)
 		TNT1 A 0 A_Jump(256,2)
 		TNT1 A 0 A_PlaySound("Maria/Powerup/Quad/Shoot",7)
 		TNT1 A 0 A_PlaySound("Weapon/Sword/Unsheat", 1)
-        TNT1 A 0 A_PlaySound("Weapon/Sword/Unleash", CHAN_AUTO)
- 		TNT1 A 0 A_TakeInventory("MariaManaCharge",25)
-        TNT1 A 0 A_SetPitch (pitch + 0.6)
+		TNT1 A 0 A_PlaySound("Weapon/Sword/Unleash", CHAN_AUTO)
+		TNT1 A 0 A_TakeInventory("MariaManaCharge",25)
+		TNT1 A 0 A_SetPitch (pitch + 0.6)
 		MAKL H 1
 		TNT1 A 0 bright A_FireCustomMissile("MariaKatanaSlash", 12, 0, 0, 4)
 		TNT1 A 0 bright A_FireCustomMissile("MariaKatanaSlash", 9, 0, 0, 4)
 		TNT1 A 0 bright A_FireCustomMissile("MariaKatanaSlash", 6, 0, 0, 4)
-        TNT1 A 0 A_SetPitch (pitch + 0.2)
+		TNT1 A 0 A_SetPitch (pitch + 0.2)
 		MAKL I 1
 		TNT1 A 0 bright A_FireCustomMissile("MariaKatanaSlash", 3, 0, 0, 4)
 		TNT1 A 0 bright A_FireCustomMissile("MariaKatanaSlash", 0, 0, 0, 4)
 		TNT1 A 0 bright A_FireCustomMissile("MariaKatanaSlash", -3, 0, 0, 4)
-        TNT1 A 0 A_SetPitch (pitch - 0.4)
+		TNT1 A 0 A_SetPitch (pitch - 0.4)
 		MAKL J 1
 		TNT1 A 0 bright A_FireCustomMissile("MariaKatanaSlash", -6, 0, 0, 4)
 		TNT1 A 0 bright A_FireCustomMissile("MariaKatanaSlash", -9, 0, 0, 4)
 		TNT1 A 0 bright A_FireCustomMissile("MariaKatanaSlash", -12, 0, 0, 4)
-        TNT1 A 0 A_SetPitch (pitch - 0.4)
+		TNT1 A 0 A_SetPitch (pitch - 0.4)
 		TNT1 AAAAAA 1
-        Goto Returning
-    Returning:
+		Goto Returning
+
+	Returning:
 		MAKA GHHIII 1
 		MAKA JJ 1
-        TNT1 A 0 A_PlaySound("Weapon/Sword/Sheat", 1)
+		TNT1 A 0 A_PlaySound("Weapon/Sword/Sheat", 1)
 		MAKA KKLLMN 2
 		MAKA A 1
 		Goto ReadyLoop
 
-    NotEnough:
-        TNT1 A 0 A_Print("You Lack Right Amount of Blood!")
+	NotEnough:
+		TNT1 A 0 A_Print("You Lack Right Amount of Blood!")
 		MAKA A 11 A_WeaponReady(WRF_NOFIRE|WRF_NOSWITCH)
 		Goto ReadyLoop
 
-    ThrowPipebomb:
-        MAKA ABCDE 1
-        TASQ ABC 1
-        TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
-        TASG DEH 1
-        TNT1 A 0 A_TakeInventory("PipebombAmmo", 1)
-        TASG I 1 A_PlayWeaponSound("Maria/Pipebomb/Miss",1)
-        TASG J 1 A_PlaySound("Maria/Pipebomb/Ignite", 2)
-        TASG KLM 1
-        TASG OPQR 1 
-        TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
-        TAHA AB 1
-        TNT1 A 0 A_JumpIfInventory("PowerQuadDamage",1,2)
-        TNT1 A 0 A_Jump(256,2)
-        TNT1 A 0 A_PlaySound("Maria/Powerup/Quad/Shoot",7)
-        TNT1 A 0 A_PlaySound("Maria/Pipebomb/Throw", 3)
-        TNT1 A 0 A_FireCustomMissile("HolyPipebomb",0,1,0,0)
-        TAHA CDE 1
-        TNT1 A 5
-        MAKA EDCBA 1
-        Goto ReadyLoop
+	ThrowPipebomb:
+		MAKA ABCDE 1
+		TASQ ABC 1
+		TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
+		TASG DEH 1
+		TNT1 A 0 A_TakeInventory("PipebombAmmo", 1)
+		TASG I 1 A_PlayWeaponSound("Maria/Pipebomb/Miss",1)
+		TASG J 1 A_PlaySound("Maria/Pipebomb/Ignite", 2)
+		TASG KLM 1
+		TASG OPQR 1 
+		TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
+		TAHA AB 1
+		TNT1 A 0 A_JumpIfInventory("PowerQuadDamage",1,2)
+		TNT1 A 0 A_Jump(256,2)
+		TNT1 A 0 A_PlaySound("Maria/Powerup/Quad/Shoot",7)
+		TNT1 A 0 A_PlaySound("Maria/Pipebomb/Throw", 3)
+		TNT1 A 0 A_FireCustomMissile("HolyPipebomb",0,1,0,0)
+		TAHA CDE 1
+		TNT1 A 5
+		MAKA EDCBA 1
+		Goto ReadyLoop
 
-    UseStimShot:
+	UseStimShot:
 		TNT1 A 0 A_JumpIfHealthLower(100, 1)
 		Goto FullHealth
-        MAKA ABCDE 1
-        SYRI AB 1
-        TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
-        SYRI CD 1
-        SYRI EEFFGGG 1
-        SYRI HIJKKLLL 1
-        TNT1 A 0 A_PlaySound("Weapon/Syringe/Cap", 1)
-        SYRI MNOPQQQRR 1
-        TNT1 A 0 A_PlaySound("Weapon/Syringe/Tab", 1)
-        SYRI STUUUVV 1
-        TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
-        SYRI WXYZ 1
-        SYR2 AB 1
-        TNT1 A 0 A_TakeInventory("MariaSyringeAmmo", 1)
-        TNT1 A 0 A_PlaySound("Weapon/Syringe/Inject", 1)
-        SYR2 CD 1
-        TNT1 A 0 A_PlaySound("Weapon/Syringe/Heal", 2)
-        TNT1 A 0 A_SetBlend("BLUE",.5,25)
-        TNT1 A 0 HealThing(10, 100)
-        TNT1 A 0 A_GiveInventory("SyringeProtection")
-        TNT1 A 0 A_GiveInventory("SyringeRegeneration")
-        SYR2 EFGHIJ 2
-        SYR2 KLLMMN 1
-        TNT1 A 5
-        MAKA EDCBA 1
-        Goto ReadyLoop		
-	FullHealth:
-		TNT1 A 0 A_Print("You are healthy.")
+		MAKA ABCDE 1
+		SYRI AB 1
+		TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
+		SYRI CD 1
+		SYRI EEFFGGG 1
+		SYRI HIJKKLLL 1
+		TNT1 A 0 A_PlaySound("Weapon/Syringe/Cap", 1)
+		SYRI MNOPQQQRR 1
+		TNT1 A 0 A_PlaySound("Weapon/Syringe/Tab", 1)
+		SYRI STUUUVV 1
+		TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
+		SYRI WXYZ 1
+		SYR2 AB 1
+		TNT1 A 0 A_TakeInventory("MariaSyringeAmmo", 1)
+		TNT1 A 0 A_PlaySound("Weapon/Syringe/Inject", 1)
+		SYR2 CD 1
+		TNT1 A 0 A_PlaySound("Weapon/Syringe/Heal", 2)
+		TNT1 A 0 A_SetBlend("BLUE",.5,25)
+		TNT1 A 0 HealThing(10, 100)
+		TNT1 A 0 A_GiveInventory("SyringeProtection")
+		TNT1 A 0 A_GiveInventory("SyringeRegeneration")
+		SYR2 EFGHIJ 2
+		SYR2 KLLMMN 1
+		TNT1 A 5
+		MAKA EDCBA 1
 		Goto ReadyLoop
 
 	Zoom:
@@ -216,26 +222,26 @@ ACTOR MariaKatana : MariaWeapon
 		TNT1 A 0 A_PlaySound("weapons/melee/fist/uppercut")
 		TNT1 A 0 A_ChangeVelocitY(2.5,0,2,CVF_RELATIVE ) 
 		TNT1 A 0 A_gunflash("PunchFlash") //PunchFlash
-        TNT1 A 2
+		TNT1 A 2
 		HANU AB 1 A_WeaponReady(WRF_NOFIRE|WRF_NOSWITCH)
 		HANU C 0 A_FireCustomMissile("MariaPunch2",0,0)
 		HANU CCDEFGHIJK 1 A_WeaponReady(WRF_NOFIRE|WRF_NOSWITCH)
 		TNT1 A 5 //19
 		Goto PunchFinish
 
-    User3:
-    EquipShield:
-    	TNT1 A 0 A_ZoomFactor(1.0)
-    	TNT1 A 0 A_GiveInventory("MariaShield",1)
-    	TNT1 A 0 A_SelectWEapon("MariaShield")
-    	Goto Deselect
-		
-    PunchFlash:
+	User3:
+	EquipShield:
+		TNT1 A 0 A_ZoomFactor(1.0)
+		TNT1 A 0 A_GiveInventory("MariaShield",1)
+		TNT1 A 0 A_SelectWEapon("MariaShield")
+		Goto Deselect
+
+	PunchFlash:
 		MAKA BC 1
 		MAKA D 14
 		MAKA CB 1
-		MAKA A 1		
-        Goto LightDone
+		MAKA A 1
+		Goto LightDone
 	}
 }
 
@@ -251,7 +257,7 @@ ACTOR MariaManaCharge : Ammo
    States
    {
    Spawn:
-      ARCA ABC 2 //Bright
+	  ARCA ABC 2 //Bright
 	  Loop
    }
 }
