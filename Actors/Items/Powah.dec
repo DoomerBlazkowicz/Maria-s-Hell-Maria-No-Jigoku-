@@ -1,7 +1,8 @@
 
 ACTOR MariaMegaHealth : Health replaces Soulsphere
 {
-  Scale 0.9
+  Tag "Trauma Kit"
+  Scale 0.60
   +COUNTITEM
   +INVENTORY.AUTOACTIVATE
   +INVENTORY.ALWAYSPICKUP
@@ -23,6 +24,7 @@ ACTOR MariaMegaStone : Megasphere replaces Megasphere
 	+COUNTITEM
     +FLOATBOB
 	+INVENTORY.ALWAYSPICKUP
+	Tag "Monolith"
 	Inventory.PickupMessage "$GOTMSPHERE"
 	Inventory.PickupSound "Maria/Powerup/Mega"
 	//Inventory.PickupAnnouncerEntry "megasphere"

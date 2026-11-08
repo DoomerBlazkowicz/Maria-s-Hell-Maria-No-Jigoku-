@@ -1,7 +1,7 @@
 
 ACTOR MariaStimpack : Health //Replaces Stimpack
 {
-	Tag "Stimpack"
+	Tag "Bandage"
 	Inventory.Amount 10
     Inventory.PickupSound "Maria/Health/Stimpack"
     Inventory.PickupMessage "$GOTSTIM"
@@ -16,11 +16,12 @@ ACTOR MariaStimpack : Health //Replaces Stimpack
 
 ACTOR MariaMedikit : Health //Replaces Medikit
 {
-	Tag "Medikit"
+	Tag "First Aid Kit"
     Inventory.PickupSound "Maria/Health/Medkit"
 	Inventory.Amount 25
 	Inventory.PickupMessage "$GOTMEDIKIT"
 	Health.LowMessage 25, "$GOTMEDINEED"	
+    Scale 0.60
   	States
 	{
 	Spawn:
