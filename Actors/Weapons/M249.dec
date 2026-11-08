@@ -124,7 +124,7 @@ Actor MariaLMG : MariaWeapon //replaces Chaingun
 		Goto ReloadingLoop
 
 	ReloadingLoop:
-		TNT1 A 0 A_TakeInventory("MariaHeavyClip", 1)
+		TNT1 A 0 A_TakeInventory("MariaHeavyClip", 1,TIF_NOTAKEINFINITE)
 		TNT1 A 0 A_GiveInventory("MariaLMGLoaded", 1)
 		TNT1 A 0 A_JumpIfInventory("MariaLMGLoaded", 0, "FinishReload")
 		TNT1 A 0 A_JumpIfInventory("MariaHeavyClip", 1, "ReloadingLoop")
@@ -173,7 +173,7 @@ Actor MariaLMG : MariaWeapon //replaces Chaingun
 		Goto ReloadingLoop2
 
 	ReloadingLoop2:
-		TNT1 A 0 A_TakeInventory("MariaHeavyClip", 1)
+		TNT1 A 0 A_TakeInventory("MariaHeavyClip", 1,TIF_NOTAKEINFINITE)
 		TNT1 A 0 A_GiveInventory("MariaLMGLoaded", 1)
 		TNT1 A 0 A_JumpIfInventory("MariaLMGLoaded", 0, "FinishReload2")
 		TNT1 A 0 A_JumpIfInventory("MariaHeavyClip", 1, "ReloadingLoop2")

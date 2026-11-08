@@ -48,7 +48,6 @@ Actor MariaRocketLauncher : MariaWeapon //Replaces Rocketlauncher
 		Loop
 
 	Deselect:
-
 		MIED A 0 
 		{
 		A_SetSpeed(1.0);
@@ -213,7 +212,7 @@ Actor MariaRocketLauncher : MariaWeapon //Replaces Rocketlauncher
 		Goto ReloadingLoop
 
 	ReloadingLoop:
-		TNT1 A 0 A_TakeInventory("MariaRocketAmmo", 1)
+		TNT1 A 0 A_TakeInventory("MariaRocketAmmo", 1,TIF_NOTAKEINFINITE)
 		TNT1 A 0 A_GiveInventory("MariaRocketLauncherLoaded", 1)
 		TNT1 A 0 A_JumpIfInventory("MariaRocketLauncherLoaded", 0, "FinishReload")
 		TNT1 A 0 A_JumpIfInventory("MariaRocketAmmo", 1, "ReloadingLoop")
@@ -239,7 +238,7 @@ Actor MariaRocketLauncher : MariaWeapon //Replaces Rocketlauncher
 		TASQ ABC 1
 		TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
 		TASG DEH 1
-		TNT1 A 0 A_TakeInventory("PipebombAmmo", 1)
+		TNT1 A 0 A_TakeInventory("PipebombAmmo", 1,TIF_NOTAKEINFINITE)
 		TASG I 1 A_PlayWeaponSound("Maria/Pipebomb/Miss",1)
 		TASG J 1 A_PlaySound("Maria/Pipebomb/Ignite", 2)
 		TASG KLM 1

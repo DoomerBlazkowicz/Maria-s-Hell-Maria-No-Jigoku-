@@ -65,19 +65,13 @@ actor MariaIncinerator : MariaWeapon //Replaces ID24Incinerator
 	Hold:
 		INCG A 0
 		{
-		If(CountInv("MariaGasoline") < 1)
-			{
-			return state("DryFire");
-			}
-		If(CountInv("PowerQuadDamage") == 1)
-			{
-			A_PlaySound("Maria/Powerup/Quad/Shoot",7);
-			}
+		If(CountInv("MariaGasoline") < 1) { return state("DryFire"); }
+		If(CountInv("PowerQuadDamage") == 1) { A_PlaySound("Maria/Powerup/Quad/Shoot",7); }
 		A_PlaySound("Weapon/Incinerator/Fire/Loop", 1, 1, 1);
 		A_AlertMonsters;
 		A_SetBlend("DarkRed",0.3,16);
 		A_SetPitch(pitch-0.5);
-		A_TakeInventory("MariaGasoline", 1);
+		A_TakeInventory("MariaGasoline", 1, TIF_NOTAKEINFINITE);
 		return state("");
 		}
 		INCF A 1 Bright 
@@ -89,7 +83,7 @@ actor MariaIncinerator : MariaWeapon //Replaces ID24Incinerator
 		{
 		A_SetBlend("DarkRed",0.3,16);
 		A_SetPitch(pitch-0.5);
-		A_TakeInventory("MariaGasoline", 1);
+		A_TakeInventory("MariaGasoline", 1, TIF_NOTAKEINFINITE);
 		}
 		INCF C 1 Bright 
 		{
