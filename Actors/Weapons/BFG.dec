@@ -67,7 +67,7 @@ Actor MariaBFG : MariaWeapon //Replaces BFG9000
 		A_PlaySound("Weapon/BFG/Fire", CHAN_BODY);
 		A_AlertMonsters;
 		A_SetBlend("Green", 0.50, 16);
-		A_TakeInventory("MariaBFGCell", 1);
+		A_TakeInventory("MariaBFGCell", 1, TIF_NOTAKEINFINITE);
 		A_FireCustomMissile("MariaBFGBall",0,1);
 		A_Recoil(4);
 		}
@@ -98,7 +98,7 @@ Actor MariaBFG : MariaWeapon //Replaces BFG9000
 		TASQ ABC 1
 		TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
 		TASG DEH 1
-		TNT1 A 0 A_TakeInventory("PipebombAmmo", 1)
+		TNT1 A 0 A_TakeInventory("PipebombAmmo", 1, TIF_NOTAKEINFINITE)
 		TASG I 1 A_PlayWeaponSound("Maria/Pipebomb/Miss",1)
 		TASG J 1 A_PlaySound("Maria/Pipebomb/Ignite", 2)
 		TASG KLM 1

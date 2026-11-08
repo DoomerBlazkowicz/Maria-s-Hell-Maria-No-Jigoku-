@@ -82,46 +82,49 @@ ACTOR MariaChainsaw : MariaWeapon
 		SAWG A 1
 		SAWF AB 1
 	Hold:
-		NULL A 0 A_JumpIf(CountInv("MariaGasoline") < 1, "DryFire")
-		TNT1 A 0 A_AlertMonsters
-		TNT1 A 0 A_JumpIfInventory("PowerQuadDamage",1,2)
-		TNT1 A 0 A_Jump(256,2)
-		TNT1 A 0 A_PlaySound("Maria/Powerup/Quad/Shoot",7)
-		TNT1 A 0 A_PlaySound("Weapon/Chainsaw/Attack", CHAN_WEAPON)
-		TNT1 A 0 A_TakeInventory("MariaGasoline", 1)
-		TNT1 A 0 A_PlaySound("Weapon/Chainsaw/Attack")
+		NULL A 0 
+		{
+		If(CountInv("MariaGasoline") < 1) { return state("DryFire"); }
+		A_AlertMonsters;
+		If(CountInv("PowerQuadDamage") == 1) { A_PlaySound("Maria/Powerup/Quad/Shoot",7); }
+		A_PlaySound("Weapon/Chainsaw/Attack", CHAN_WEAPON);
+		A_TakeInventory("MariaGasoline", 1, TIF_NOTAKEINFINITE);
+		A_PlaySound("Weapon/Chainsaw/Attack");
+		return state("");
+		}
 		SAWF C 1 A_FireCustomMissile("MariaChainsawHit",0,0,0,6)
 		SAWF D 1
-		TNT1 B 0 radius_quake (1, 2, 0, 1, 0)
-		TNT1 A 0 A_AlertMonsters
-		TNT1 A 0 A_JumpIfInventory("PowerQuadDamage",1,2)
-		TNT1 A 0 A_Jump(256,2)
-		TNT1 A 0 A_PlaySound("Maria/Powerup/Quad/Shoot",7)
-		TNT1 A 0 A_PlaySound("Weapon/Chainsaw/Attack")
+		{
+		radius_quake (1, 2, 0, 1, 0);
+		A_AlertMonsters;
+		If(CountInv("PowerQuadDamage") == 1) { A_PlaySound("Maria/Powerup/Quad/Shoot",7); }
+		A_PlaySound("Weapon/Chainsaw/Attack");
+		}
 		SAWF E 1 A_FireCustomMissile("MariaChainsawHit",0,0,0,6)
 		SAWF F 1 
-		TNT1 B 0 radius_quake (1, 2, 0, 1, 0)
-		TNT1 A 0 A_CheckReload
-		TNT1 A 0 A_JumpIfInventory("MariaGasoline", 1, 1)
-		TNT1 A 0 A_AlertMonsters
-		TNT1 A 0 A_JumpIfInventory("PowerQuadDamage",1,2)
-		TNT1 A 0 A_Jump(256,2)
-		TNT1 A 0 A_PlaySound("Maria/Powerup/Quad/Shoot",7)
-		TNT1 A 0 A_PlaySound("Weapon/Chainsaw/Attack", CHAN_WEAPON)
-		TNT1 A 0 A_TakeInventory("MariaGasoline", 1)
-		TNT1 A 0 A_PlaySound("Weapon/Chainsaw/Attack")
+		{
+		radius_quake (1, 2, 0, 1, 0);
+		A_CheckReload;
+		A_AlertMonsters;
+		If(CountInv("PowerQuadDamage") == 1) { A_PlaySound("Maria/Powerup/Quad/Shoot",7); }
+		A_PlaySound("Weapon/Chainsaw/Attack", CHAN_WEAPON);
+		A_TakeInventory("MariaGasoline", 1, TIF_NOTAKEINFINITE);
+		A_PlaySound("Weapon/Chainsaw/Attack");
+		}
 		SAWF C 1 A_FireCustomMissile("MariaChainsawHit",0,0,0,6)
 		SAWF D 1
-		TNT1 B 0 radius_quake (1, 2, 0, 1, 0)
-		TNT1 A 0 A_AlertMonsters
-		TNT1 A 0 A_JumpIfInventory("PowerQuadDamage",1,2)
-		TNT1 A 0 A_Jump(256,2)
-		TNT1 A 0 A_PlaySound("Maria/Powerup/Quad/Shoot",7)
-		TNT1 A 0 A_PlaySound("Weapon/Chainsaw/Attack")
+		{
+		radius_quake (1, 2, 0, 1, 0);
+		A_AlertMonsters;
+		If(CountInv("PowerQuadDamage") == 1) { A_PlaySound("Maria/Powerup/Quad/Shoot",7); }
+		A_PlaySound("Weapon/Chainsaw/Attack");
+		}
 		SAWF E 1 A_FireCustomMissile("MariaChainsawHit",0,0,0,6)
 		SAWF F 1 
-		TNT1 B 0 radius_quake (1, 2, 0, 1, 0)
-		TNT1 A 0 A_CheckReload
+		{
+		radius_quake (1, 2, 0, 1, 0);
+		A_CheckReload;
+		}
 		TNT1 A 0 A_JumpIfInventory("MariaGasoline", 1, 1)
 		SAWF A 0 A_ReFire
 		Goto FireDone
