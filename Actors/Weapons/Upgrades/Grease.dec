@@ -135,8 +135,8 @@ Actor MariaGrease : MariaWeapon
 			}
 		}
 		TNT1 A 10
-		MESS A 0 A_JumpIfInventory("GreaseSuppressor",1,2)
-		MEAS A 0
+		MESD A 0 A_JumpIfInventory("GreaseSuppressor",1,2)
+		MEAD A 0
 		"####" EDCBA 1
 		Goto ReadyLoop
 		
