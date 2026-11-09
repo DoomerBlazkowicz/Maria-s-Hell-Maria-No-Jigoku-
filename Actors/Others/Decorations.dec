@@ -166,7 +166,7 @@ Actor MariaColumn : Column replaces Column 2028
     states
     {
     Spawn:
-        LAM3 A 1 bright A_Playsound("Maria/Prop/Lamp",CHAN_5,1,1)
+        LAM3 A 1 bright A_Playsound("Maria/Prop/Lamp",CHAN_BODY,1,1)
         LAM3 A 3 bright A_SpawnItem("MariaYellowLensFlareAltLong",0,44)
         Loop
     Death:
