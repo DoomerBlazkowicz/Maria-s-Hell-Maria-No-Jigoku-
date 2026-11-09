@@ -1,11 +1,11 @@
 [enu default]
-GOTSTIM =  "\c[Blue]Stimpack. (10+ HP)";
+GOTSTIM =  "\c[Blue]Bandage. (10+ HP)";
 GOTMEDIKIT = "\c[Blue]First aid kit. (25+ HP)";
 GOTMEDINEED	= "\c[Blue]You desperatelly clutched a first aid kit.";
-GOTSTIMNEED = "\c[Blue]You desperatelly clutched a stimpack, better than nothing.";
-GOTHTHBONUS	= "\c[Blue]Health Bonus. (5+ HP)";
+GOTSTIMNEED = "\c[Blue]You desperatelly clutched a bandage, better than nothing.";
+GOTHTHBONUS	= "\c[Blue]Health Bonus. (2+ HP)";
 GOTHTHBONUSSURVIVAL	= "\c[Blue]Health Bonus. (1+ HP)";
-GOTARMBONUS	= "\c[Green]Armour Bonus. (5+ AP)";
+GOTARMBONUS	= "\c[Green]Armour Bonus. (2+ AP)";
 GOTARMBONUSSURVIVAL	= "\c[Green]Armour Bonus. (1+ AP)";
 GOTARMOR = "\c[Dark Gray]Ballistic Vest. (100+ AP)";
 GOTMEGA = "\c[Green]Security Armour. (150+ AP)";
@@ -29,8 +29,8 @@ GOTGRENADE = "Picked up a \c[Orange]Grenade.";
 GOTGRENBOX = "Picked up a box of \c[Orange]Grenade.";
 GOTCELL = "Picked up an \c[Blue]Energy Cell";
 GOTCELLBOX = "Picked up an \c[Blue]Energy Cell pack";
-GOTGAS = "Picked up a \c[Orange]fuel can.";
-GOTGASTANK = "Picked up a \c[Orange]fuel tank.";
+GOTGAS = "Picked up a \c[Orange]Fuel can.";
+GOTGASTANK = "Picked up a \c[Orange]Fuel tank.";
 GOTROCKET = "Picked up a \c[Orange]Rocket.";
 GOTROCKPILE = "Picked up a pile of \c[Orange]Rockets.";
 GOTBFGCELL = "Picked up a \c[Green]BFG Cell.";
@@ -55,19 +55,18 @@ AMSTR_FOLLOWOFF = "Follow Mode OFF";
 
 SECRETMESSAGE = "";
 
-GOTSUPER = "Megapack! (100+ HP)";
-GOTMSPHERE = "Mega Stone! (200+ HP and AP)";
+GOTSUPER = "Trauma Kit! (100+ HP)";
+GOTMSPHERE = "Monolith! (200+ HP and AP)";
 GOTROSARIA = "Rosary of Resistance!";
 GOTINVIS = "Invisibility Cape!";
 GOTCANDLE = "Candle of Holy Light!";
 GOTMAP = "Kiritaka's Diary! (All Map)";
 GOTCATPLUSH = "Plushie of Pusanian! (300+ HP and AP)";
-
-GOTSUIT = "Rune of Hazmat!";
-GOTQUAD = "Rune of Quad Damage!";
-GOTBERSERK = "Rune of Berserk!";
-GOTOVERKILL = "Rune of Overkill!";
-GOTHASTE = "Rune of Overdrive!";
+GOTSUIT = "Rune of Bio Protection! (Bio Protection)";
+GOTQUAD = "Rune of Onslaught! (Quad Damage)";
+GOTBERSERK = "Rune of Berserker! (Berserk)";
+GOTOVERKILL = "Rune of Overkill! (Death Machine)";
+GOTHASTE = "Rune of Overdrive! (Haste)";
 
 CC_HERO = "Maria Akeboshi";
 
