@@ -35,8 +35,8 @@ E2TEXT =
 	"\n"
 	"To be continued at Inferno.";
 E3TEXT =
-	"The machinery protrude out of the corpse\n"
-	"of the spider demon I fought.\n"
+	"The machinery remnants of the spider demon\n"
+	"I fought got charred and stained with it's blood.\n"
 	"Assuming that she's the mastermind of\n"
 	"the assaults that happened at Phobos and Deimos.\n"
 	"\n"
@@ -45,7 +45,7 @@ E3TEXT =
 	"I heed the ''voice'' of Kiri-Kun\n"
 	"And so, I step in the portal.\n"
 	"\n"
-	"Where am I?\n"
+	"Now... Where am I?\n"
 	"Is this... Home?\n"
 	"I think I'm back home.\n"
 	"I'm glad that the nightmare is over\n"
@@ -108,20 +108,20 @@ C3TEXT =
 	"\n"
 	"Welcome home.";
 C4TEXT =
-	"The godlike demon you've just slain\n"
-	"bellows in pain and disintegrates\n"
-	"before her eyes as you pump the\n"
-	"last of your military payload into its\n"
-	"diseased brain, causing the icon to\n"
-	"thrash wildly and demolish untold miles\n"
-	"of its own dimension.\n"
+	"It's over.\n"
+	"The titanic monstrosity has been demolished\n"
+	"after I launched explosive after explosive\n"
+	"into its brain.\n"
 	"\n"
-	"You've done it. Hell is no more.\n"
-	"Humanity is saved, albeit in a damaged\n"
-	"condition. Having done your duty, instead\n"
-	"of eating your gun, you decide to start\n"
-	"your trek back home, wanting to rebuild\n"
-	"knowing no demon shall rise anytime soon.\n";
+	"The loud roars of agony and the bright flashes of explosions\n"
+	"deafened and blinded me to what was happening.\n"
+	"And after a bright flash...\n"
+	"\n"
+	"I opened my eyes to an unusual land.\n"
+	"I assumed this was the world I had been promised...\n"
+	"And I was correct. They brought him back, as promised...\n"
+	"Kiri-kun... I missed you so much.\n"
+	"...THE END?\n";
 C5TEXT =
 	"Where am I?\n"
 	"This place seems to be... Familiar.\n"
@@ -133,7 +133,7 @@ C5TEXT =
 	"And blaming to my family.\n"
 	"\n"
 	"Shizuka... Nozomu... Okaya...\n"
-	"FUCK YOU TWO!";
+	"DAMN YOU TWO!";
 C6TEXT =
 	"The alternate path took me to ground floor\n"
 	"feeling that her fellow men waiting for me to strike.\n"
