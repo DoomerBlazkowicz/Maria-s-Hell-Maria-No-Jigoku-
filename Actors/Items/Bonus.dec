@@ -3,6 +3,7 @@ actor MariaHealthBonus : HealthBonus //replaces HealthBonus
 {
 	+COUNTITEM
 	+INVENTORY.ALWAYSPICKUP
+   	Tag "Health Bonus"
 	Inventory.Pickupmessage "$GOTHTHBONUS"
     Inventory.PickupSound "Maria/Bonus/Health"
 	Inventory.Amount 2
@@ -31,6 +32,7 @@ actor MariaArmorShard : ArmorBonus //replaces ArmorBonus
 {
 	+COUNTITEM
 	+INVENTORY.ALWAYSPICKUP
+   	Tag "Armour Bonus"
 	Inventory.Pickupmessage "$GOTARMBONUS"
 	Inventory.Icon "TNT1A0"
     Inventory.PickupSound "Maria/Bonus/Armour"

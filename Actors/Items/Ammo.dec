@@ -6,6 +6,7 @@ ACTOR MariaHeavyClip : Ammo //replaces Clip
 	Ammo.BackpackAmount 60
 	Ammo.BackpackMaxAmount 400
 	Inventory.Icon "CLIPA0"
+	Tag "Heavy Bullet Mag"
     Inventory.PickupSound "Maria/Ammo/HeavyBullets/Single"
 	States
 	{
@@ -17,6 +18,7 @@ ACTOR MariaHeavyClip : Ammo //replaces Clip
 
 ACTOR MariaHeavyClipBox : MariaHeavyClip //replaces ClipBox
 {
+	Tag "Heavy Bullet Box"
 	Inventory.PickupMessage "$GOTCLIPBOX2"
 	Inventory.Amount 90
     Inventory.PickupSound "Maria/Ammo/HeavyBullets/Box"
@@ -30,6 +32,7 @@ ACTOR MariaHeavyClipBox : MariaHeavyClip //replaces ClipBox
 
 ACTOR MariaLightClip : Ammo //replaces Clip
 {
+	Tag "Light Bullet Mag"
 	Inventory.PickupMessage "$GOTCLIP1"
 	Inventory.Amount 8
 	Inventory.MaxAmount 300
@@ -48,6 +51,7 @@ ACTOR MariaLightClip : Ammo //replaces Clip
 
 ACTOR MariaLightClipBox : MariaLightClip //replaces ClipBox
 {
+	Tag "Light Bullet Box"
 	Inventory.PickupMessage "$GOTCLIPBOX1"
 	Inventory.Amount 32
     Inventory.PickupSound "Maria/Ammo/LightBullets/Box"
@@ -61,6 +65,7 @@ ACTOR MariaLightClipBox : MariaLightClip //replaces ClipBox
 
 ACTOR MariaLightClipSpeedloader : MariaLightClip //replaces ClipBox
 {
+	Tag "Light Bullet Speedloader"
 	Inventory.PickupMessage "$GOTSPEDLOAD"
 	Inventory.Amount 6
     Inventory.PickupSound "Maria/Ammo/LightBullets/SpeedLoader"
@@ -91,6 +96,7 @@ ACTOR MariaShell : Shell
 	Inventory.MaxAmount 40
 	Ammo.BackpackAmount 4
 	Ammo.BackpackMaxAmount 80
+	Tag "Shells"
 	Inventory.Icon "SHELA0"
     Scale 0.75
     Inventory.PickupSound "Maria/Ammo/Shell/Multi"
@@ -104,6 +110,7 @@ ACTOR MariaShell : Shell
 
 ACTOR MariaShellBox : ShellBox //Replaces ShellBox
 {
+	Tag "Shell Box"
 	Inventory.PickupMessage "$GOTSHELLBOX"
 	Inventory.Amount 12
     Inventory.PickupSound "Maria/Ammo/Shell/Box"
@@ -117,6 +124,7 @@ ACTOR MariaShellBox : ShellBox //Replaces ShellBox
 
 ACTOR MariaArrowAmmo : Ammo
 {
+	Tag "Arrows"
 	Inventory.PickupMessage "$GOTARROW"
 	Inventory.Amount 3
 	Inventory.MaxAmount 40
@@ -134,8 +142,9 @@ ACTOR MariaArrowAmmo : Ammo
 
 ACTOR MariaQuiver : MariaArrowAmmo
 {
+	Tag "Quiver of Arrows"
 	Inventory.PickupMessage "$GOTQUIVER"
-	Inventory.Amount 20
+	Inventory.Amount 10
     Inventory.PickupSound "Maria/Ammo/Arrow/Quiver"
 	States
 	{
@@ -147,8 +156,9 @@ ACTOR MariaQuiver : MariaArrowAmmo
 
 ACTOR MariaArrowBox : MariaArrowAmmo
 {
+	Tag "Box of Arrows"
 	Inventory.PickupMessage "$GOTARROBOX"
-	Inventory.Amount 12
+	Inventory.Amount 20
     Inventory.PickupSound "Maria/Ammo/Arrow/Box"
 	States
 	{
@@ -164,6 +174,7 @@ ACTOR MariaGrenadeAmmo : Ammo
 	Inventory.MaxAmount 30
 	Ammo.BackpackAmount 1
 	Ammo.BackpackMaxAmount 60
+	Tag "Grenade"
 	Inventory.PickupMessage "$GOTGRENADE"
 	Inventory.Icon "GRENA0"
     Inventory.PickupSound "Maria/Ammo/Grenade/Single"
@@ -177,6 +188,7 @@ ACTOR MariaGrenadeAmmo : Ammo
 
 ACTOR MariaGrenadeBox : MariaGrenadeAmmo
 {
+	Tag "Grenade Container"
 	Inventory.PickupMessage "$GOTGRENBOX"
 	Inventory.Amount 3
     Inventory.PickupSound "Maria/Ammo/Grenade/Crate"
@@ -190,6 +202,7 @@ ACTOR MariaGrenadeBox : MariaGrenadeAmmo
 
 ACTOR MariaCell : Cell //Replaces Cell
 {
+	Tag "Energy Cell"
 	Inventory.PickupMessage "$GOTCELL"
 	Inventory.Amount 25
 	Inventory.MaxAmount 200
@@ -207,6 +220,7 @@ ACTOR MariaCell : Cell //Replaces Cell
 
 ACTOR MariaCellPack : CellPack //Replaces Cellpack 
 {
+	Tag "Energy Cell Pack"
 	Inventory.PickupMessage "$GOTCELLBOX"
 	Inventory.Amount 50
     Inventory.PickupSound "Maria/Ammo/Cell/Large"
@@ -224,6 +238,7 @@ ACTOR MariaRocketAmmo : Ammo
 	Inventory.MaxAmount 4
 	Ammo.BackpackAmount 1
 	Ammo.BackpackMaxAmount 8
+	Tag "Panzerfaust-3 Rocket"
 	Inventory.PickupMessage "$GOTROCKET"
 	Inventory.Icon "ROCKA0"
     Inventory.PickupSound "Maria/Ammo/Rocket/Single"
@@ -251,6 +266,7 @@ ACTOR MariaRocketAmmo : Ammo
 
 ACTOR MariaBFGCell : Ammo
 {
+	Tag "BFG Cell"
 	Inventory.PickupMessage "$GOTBFGCELL"
 	Inventory.Amount 1
 	Inventory.MaxAmount 3
@@ -268,14 +284,15 @@ ACTOR MariaBFGCell : Ammo
 
 Actor MariaGasoline : Ammo
 {
-Scale 0.9
-Inventory.PickupMessage "$GOTGAS"
-Inventory.Amount 10
-Inventory.MaxAmount 150
-Ammo.BackpackAmount 0
-Ammo.BackpackMaxAmount 300
-Inventory.Icon "GSLNA0"
-Inventory.PickupSound "Maria/Ammo/Fuel/Jug"
+	Tag "Fuel Jug"
+    Scale 0.9
+    Inventory.PickupMessage "$GOTGAS"
+    Inventory.Amount 10
+    Inventory.MaxAmount 150
+    Ammo.BackpackAmount 0
+    Ammo.BackpackMaxAmount 300
+    Inventory.Icon "GSLNA0"
+    Inventory.PickupSound "Maria/Ammo/Fuel/Jug"
 	States
 	{
 	Spawn:
@@ -286,6 +303,7 @@ Inventory.PickupSound "Maria/Ammo/Fuel/Jug"
 
 ACTOR MariaGasolineTank : MariaGasoline
 {
+   Tag "Fuel Tank"
    Inventory.Amount 25
    Inventory.PickupMessage "$GOTGASTANK"
    Inventory.PickupSound "Maria/Ammo/Fuel/Tank"
@@ -299,15 +317,16 @@ ACTOR MariaGasolineTank : MariaGasoline
 
 ACTOR PipebombAmmo : Ammo //Use it for Hexen
 {
-Inventory.Amount 1
-Inventory.MaxAmount 5
-Ammo.BackpackAmount 1
-Ammo.BackpackMaxAmount 10
-Inventory.Icon "PIPPA0"
-Inventory.PickupMessage "Picked up a Pipebomb."
-Inventory.PickupSound "Pipebomb/Up"
-Scale 0.9
-States
+	Inventory.Amount 1
+	Inventory.MaxAmount 5
+	Ammo.BackpackAmount 1
+	Ammo.BackpackMaxAmount 10
+	Tag "Pipebomb"
+	Inventory.Icon "PIPPA0"
+	Inventory.PickupMessage "Picked up a Pipebomb."
+	Inventory.PickupSound "Pipebomb/Up"
+	Scale 0.75
+	States
 	{
 	Spawn:
 		PIPP A -1

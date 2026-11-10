@@ -50,6 +50,7 @@ ACTOR MariaRosary : InvulnerabilitySphere replaces InvulnerabilitySphere
 	Inventory.MaxAmount 0
 	Powerup.Type Invulnerable
 	Powerup.Color Yellow, 0.125
+	Tag "Rosaria Of Protection"
 	Inventory.PickupSound "Maria/Powerup/Invul"
 	Inventory.PickupMessage "$GOTROSARIA"
 	States
@@ -66,6 +67,7 @@ ACTOR MariaDiary : MapRevealer replaces Allmap
 	+INVENTORY.FANCYPICKUPSOUND
 	+INVENTORY.ALWAYSPICKUP
 	Inventory.MaxAmount 0
+	Tag "Kiritaka's Diary"
 	Inventory.PickupSound "Maria/Powerup/Diary"
 	Inventory.PickupMessage "$GOTMAP"
 	States
@@ -86,6 +88,7 @@ ACTOR MariaBerserk : CustomInventory //replaces Berserk
   FloatBobPhase 1
   FloatBobStrength 0.5
   Scale 0.7
+  Tag "Rune of Berserker"
   Inventory.PickupSound "Maria/Powerup/Berserk"
   Inventory.PickupMessage "$GOTBERSERK"
   States
@@ -133,6 +136,7 @@ ACTOR MariaOnslaught : PowerupGiver 12370
 	+INVENTORY.AUTOACTIVATE
 	+INVENTORY.ALWAYSPICKUP
 	Inventory.MaxAmount 0
+	Tag "Rune of Onslaught"
 	Inventory.PickupMessage "$GOTQUAD"
 	Inventory.PickupSound "Maria/Powerup/Quad"
 	Powerup.Type QuadDamage
@@ -165,6 +169,7 @@ Actor MariaInvisibilityCloak : PowerupGiver replaces BlurSphere
   Powerup.Mode Translucent
   Powerup.Strength 80
   RenderStyle Translucent
+  Tag "Invisibility Cloak"
   Inventory.PickupSound "Maria/Powerup/Cape"
   Inventory.PickupMessage "$GOTINVIS"
   States
@@ -183,6 +188,7 @@ ACTOR MariaCandle : PowerupGiver replaces Infrared
 	+INVENTORY.PICKUPFLASH
 	Inventory.MaxAmount 0
 	Powerup.Type Torch
+	Tag "Candle of Holy Light"
 	Inventory.PickupMessage "$GOTCANDLE"
 	Inventory.PickupSound "Maria/Powerup/Candle"
 	States
@@ -197,6 +203,7 @@ ACTOR MariaAntiHazmat : RadSuit Replaces RadSuit
 {
 	Inventory.PickupMessage "$GOTSUIT"
 	Inventory.PickupSound "Maria/Powerup/Hazmat"
+	Tag "Rune of Bio Protection"
     Scale 0.7
     +FLOATBOB
 	States
@@ -262,6 +269,7 @@ ACTOR MariaOverkill : CustomInventory //replaces Berserk
   FloatBobStrength 0.5
   Scale 0.7
   Inventory.PickupSound "Maria/Powerup/Minigun"
+  Tag "Rune of Overkill"
   Inventory.PickupMessage "$GOTOVERKILL"
   States
   {
@@ -289,6 +297,7 @@ ACTOR MariaCatPlushie : Megasphere //MariaMegaStone
 	+COUNTITEM
     //+FLOATBOB
 	+INVENTORY.ALWAYSPICKUP
+	Tag "Plushie of Pusanian"
 	Inventory.PickupMessage "$GOTCATPLUSH"
 	Inventory.PickupSound "Maria/Powerup/Mega"
 	//Inventory.PickupAnnouncerEntry "megasphere"
