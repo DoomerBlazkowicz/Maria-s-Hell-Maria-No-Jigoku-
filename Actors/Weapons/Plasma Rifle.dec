@@ -25,14 +25,8 @@ actor MariaPlasmaRifle : MariaWeapon //Replaces PlasmaRifle
 		PLSE A 0 
 		{
 		A_PlaySound("Weapon/PlasmaRifle/Select");
-		If(GetCvar("plasmarifletoggle") == 1)
-			{
-				return state("ClassicReady");
-			}
-			else if(CountInv("MariaPlasmaRifleLoaded") < 1)
-			{
-				return state(2);
-			}
+		If(GetCvar("plasmarifletoggle") == 1) { return state("ClassicReady"); }
+			else if(CountInv("MariaPlasmaRifleLoaded") < 1) { return state(2); }
 		return state("");
 		}
 		PLZS A 0 
@@ -43,10 +37,7 @@ actor MariaPlasmaRifle : MariaWeapon //Replaces PlasmaRifle
 		PLZE A 0
 		{
 		A_TakeInventory("FasterPlasmaToken");
-		If(GetCvar("plasmarifletoggle") == 1)
-			{
-				return state("ClassicReadyLoop");
-			}
+		If(GetCvar("plasmarifletoggle") == 1) { return state("ClassicReadyLoop"); }
 			else if(CountInv("MariaPlasmaRifleLoaded") < 1)
 			{
 				A_StopSound(CHAN_WEAPON);
@@ -62,14 +53,8 @@ actor MariaPlasmaRifle : MariaWeapon //Replaces PlasmaRifle
 		PLZE A 0
 		{
 		A_StopSound(CHAN_WEAPON);
-		If(GetCvar("plasmarifletoggle") == 1)
-			{
-				return state("ClassicDeselect");
-			}
-			else if(CountInv("MariaPlasmaRifleLoaded") < 1)
-			{
-				return state(2);
-			}
+		If(GetCvar("plasmarifletoggle") == 1) { return state("ClassicDeselect"); }
+			else if(CountInv("MariaPlasmaRifleLoaded") < 1) { return state(2); }
 		return state("");
 		}
 		PLZD A 0
@@ -103,10 +88,7 @@ actor MariaPlasmaRifle : MariaWeapon //Replaces PlasmaRifle
 					{
 						A_PlaySound("Weapon/PewPewGun/Fire/Heated", CHAN_WEAPON);
 					}
-					else 
-					{
-						A_PlaySound("Weapon/PlasmaRifle/Fire/Heated", CHAN_WEAPON);
-					}
+					else { A_PlaySound("Weapon/PlasmaRifle/Fire/Heated", CHAN_WEAPON); }
 				return state("FasterFire");
 			}
 			else
@@ -127,6 +109,8 @@ actor MariaPlasmaRifle : MariaWeapon //Replaces PlasmaRifle
 		}
 		"####" A 1 BRIGHT A_SetPitch(pitch-1.0)
 		"####" BC 1
+		ALPE A 0 A_JumpIf(GetCvar("plasmarifletoggle") == 1,2)
+		PLZE A 0 
 		"####" A 0 A_ReFire("FireCounted")
 		Goto ReadyLoop
 
@@ -136,9 +120,9 @@ actor MariaPlasmaRifle : MariaWeapon //Replaces PlasmaRifle
 		"####" A 0 A_FireCustomMissile("MariaMuzzleSmoke",0,0,0,8)
 		"####" A 1 BRIGHT A_SetPitch(pitch-1.0)
 		"####" BC 1 
-		PLZM A 0 A_JumpIf(GetCvar("plasmarifletoggle") == 1, 2)
+		ALPL A 0 A_JumpIf(GetCvar("plasmarifletoggle") == 1, 2)
 		PLZM A 0
-		PLZM A 1 A_ReFire("FireCounted")
+		"####" A 1 A_ReFire("FireCounted")
 		ALPC A 0 A_JumpIf(GetCvar("plasmarifletoggle") == 1, "CooldownClassic")
 		PLZC A 0
 		"####" A 1
@@ -150,11 +134,15 @@ actor MariaPlasmaRifle : MariaWeapon //Replaces PlasmaRifle
 		Goto ReadyLoop
 
 	AltFire:
-		"####" A 0 A_JumpIf(CountInv("MariaPlasmaRifleLoaded") < 1, "DryFire")
-		TNT1 A 0 A_PlaySound("Weapon/Shinigami/Dry",0)
-		PLZM A 1 Offset(0,33)
-		PLZM A 1 Offset(0,34)
-		PLZM AA 1
+		"####" A 0 
+		{
+		If(CountInv("MariaPlasmaRifleLoaded") < 1) { return state("DryFire"); }
+		A_PlaySound("Weapon/Shinigami/Dry",0);
+		return state("");
+		}
+		"####" A 1 Offset(0,33)
+		"####" A 1 Offset(0,34)
+		"####" AA 1
 	AltFireCounted:
 		"####" A 0 A_JumpIf(CountInv("MariaPlasmaRifleLoaded") < 1, "DryFire")
 		ALCF A 0
@@ -171,8 +159,9 @@ actor MariaPlasmaRifle : MariaWeapon //Replaces PlasmaRifle
 		}
 		CLZF A 0
 		"####" AB 1 BRIGHT
-		PLZM A 0
-		PLZM A 0 A_ReFire("AltFireCounted")
+		ALPE A 0 A_JumpIf(GetCvar("plasmarifletoggle") == 1,2)
+		PLZE A 0 
+		"####" A 0 A_ReFire("AltFireCounted")
 		Goto ReadyLoop
 
 	DryFire:

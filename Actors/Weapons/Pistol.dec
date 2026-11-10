@@ -62,14 +62,8 @@ ACTOR MariaPistol : MariaWeapon
 		SEGS A 0 
 		{
 		A_PlaySound("Maria/Draw/Sidearm");
-		If(CountInv("PistolSuppressor") == 1)
-			{
-				return state("ReadySilent");
-			}
-			else if(CountInv("MariaPistolLoaded") < 1)
-			{
-				return state(2);
-			}
+		If(CountInv("PistolSuppressor") == 1) { return state("ReadySilent"); }
+			else if(CountInv("MariaPistolLoaded") < 1) { return state(2); }
 		return state("");
 		}
 		SIGS A 0
@@ -85,14 +79,8 @@ ACTOR MariaPistol : MariaWeapon
 	ReadyLoop:
 		SIGG C 0 
 		{
-		If(CountInv("PistolSuppressor") == 1)
-			{
-				return state("ReadySilentLoop");
-			}
-			else if(CountInv("MariaPistolLoaded") < 1)
-			{
-				return state(2);
-			}
+		If(CountInv("PistolSuppressor") == 1) { return state("ReadySilentLoop"); }
+			else if(CountInv("MariaPistolLoaded") < 1) { return state(2); }
 		return state("");
 		}
 		SIGG A 0
@@ -106,9 +94,13 @@ ACTOR MariaPistol : MariaWeapon
 		Goto ReadyLoop
 
 	Fire:
-		"####" "#" 0 A_JumpIf(CountInv("MariaPistolLoaded") < 1, "DryFire")
-		"####" "#" 0 A_PlaySound("Weapon/Shinigami/Dry",0)
-		"####" "#" 0 Offset(0,33)
+		"####" "#" 0 
+		{
+		if(CountInv("MariaPistolLoaded") < 1) { return state("DryFire"); }
+		A_PlaySound("Weapon/Shinigami/Dry",0);
+		A_WeaponOffset(0,33);
+		return state("");
+		}
 	FireCounted:
 		"####" "#" 0 
 		{

@@ -42,9 +42,13 @@ Actor MariaGrease : MariaWeapon
 		TNT1 A 1
 		Wait
 
-	Ready:
-		TNT1 A 0 A_PlaySound("Maria/Draw/Primary")
-		MESS A 0 A_JumpIfInventory("GreaseSuppressor",1,2)
+	Ready: 
+		MESS A 0 
+		{
+		A_PlaySound("Maria/Draw/Primary");
+		If(CountInv("GreaseSuppressor") == 1) { return state(2); }
+		return state("");
+		}
 		MEAS A 0
 		"####" ABCDE 1
 		Goto ReadyLoop
@@ -56,22 +60,26 @@ Actor MariaGrease : MariaWeapon
 		loop
 
 	Fire:
-		NULL A 0 A_JumpIf(CountInv("MariaGreaseLoaded") < 1, "DryFire")
-		TNT1 A 0 A_PlaySound("Weapon/Shinigami/Dry",0)
-		MEAI B 0 A_JumpIfInventory("GreaseSuppressor",1,2)
+		"####" "#" 0 A_JumpIf(CountInv("MariaGreaseLoaded") < 1, "DryFire")
+		MEAI B 0 
+		{
+		A_PlaySound("Weapon/Shinigami/Dry",0);
+		If(CountInv("GreaseSuppressor") == 1) { return state(2); }
+		return state("");
+		}
 		MEAI A 0
 		MEAI "#" 1 Offset(0,33)
 		MEAI "#" 1 Offset(0,34)
 		MEAI "#" 1
 	FireCounted:
-		NULL A 0 A_JumpIf(CountInv("MariaGreaseLoaded") < 1, "DryFire")
+		MEAI "#" 0 A_JumpIf(CountInv("MariaGreaseLoaded") < 1, "DryFire")
 		TNT1 A 0 A_JumpIfInventory("GreaseSuppressor",1,"FireCountedSilent")
 		MEAF A 1 BRIGHT 
 		{
 		A_FireBullets (1, 1, -1, 10, "MariaPuff");
 		A_TakeInventory("MariaGreaseLoaded", 1);
 		radius_quake (3, 2, 0, 1, 0);
-		If(GetCvar("MagClicking") ==0 && CountInv("MariaGreaseLoaded") < 9) { A_PlaySound("Weapon/Magclick", 1); }
+		If(GetCvar("MagClicking") == 0 && CountInv("MariaGreaseLoaded") < 9) { A_PlaySound("Weapon/Magclick", 1); }
 		A_FireCustomMissile("MariaFlareOrange",0,0,0,8);
 		A_FireCustomMissile("MariaMuzzleSmoke",0,0,0,8);
 		A_SetPitch(pitch-0.50);
@@ -91,7 +99,7 @@ Actor MariaGrease : MariaWeapon
 		A_FireBullets (1, 1, -1, 15, "MariaPuff");
 		A_TakeInventory("MariaGreaseLoaded", 1);
 		radius_quake (3, 2, 0, 1, 0);
-		If(GetCvar("MagClicking") ==0 && CountInv("MariaGreaseLoaded") < 9) { A_PlaySound("Weapon/Magclick", 1); }
+		If(GetCvar("MagClicking") == 0 && CountInv("MariaGreaseLoaded") < 9) { A_PlaySound("Weapon/Magclick", 1); }
 		A_FireCustomMissile("MariaMuzzleSmoke",0,0,0,8);
 		A_SetPitch(pitch-0.50);
 		A_WeaponOffset(random(-1,1),32+random(0,1));
@@ -142,10 +150,8 @@ Actor MariaGrease : MariaWeapon
 		
 	DryFire:
 		MEAI "#" 0 A_PlaySound("Weapon/SMG/Dry",1)
-		MEAI "#" 0 offset(0,36)
-		MEAI "#" 1 A_WeaponReady(WRF_NOFIRE|WRF_NOSWITCH)
-		MEAI "#" 0 offset(0,35)
-		MEAI "#" 10 A_WeaponReady(WRF_NOFIRE|WRF_NOSWITCH)
+		MEAI "#" 1 { A_WeaponOffset(0,36); A_WeaponReady(WRF_NOFIRE|WRF_NOSWITCH); }
+		MEAI "#" 10 { A_WeaponOffset(0,35); A_WeaponReady(WRF_NOFIRE|WRF_NOSWITCH); }
 		Goto ReadyLoop
 
 	Reload:

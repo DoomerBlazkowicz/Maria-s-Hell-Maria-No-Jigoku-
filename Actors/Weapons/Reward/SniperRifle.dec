@@ -58,7 +58,7 @@ ACTOR MariaSniperRifle : MariaWeapon
 		Loop
 
 	Fire:
-		NULL A 0 
+		"####" "#" 0 
 		{
 		If(CountInv("MariaSniperLoaded") < 1) { return state("dryfire"); }
 		If(CountInv("PowerQuadDamage") == 1) { A_PlaySound("Maria/Powerup/Quad/Shoot",7); }

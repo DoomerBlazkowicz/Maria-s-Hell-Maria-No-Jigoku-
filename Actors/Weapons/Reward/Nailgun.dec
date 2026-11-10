@@ -45,7 +45,7 @@ Actor MariaOscillator : MariaWeapon
 		Loop
 
 	Fire:
-		NULL A 0 
+		"####" "#" 0 
 		{
 		If(CountInv("MariaArrowAmmo") < 1) { return state("DryFire"); }
 		A_PlaySound("Weapon/Shinigami/Dry",0);
@@ -55,7 +55,7 @@ Actor MariaOscillator : MariaWeapon
 		NLMG A 1 Offset(0,34)
 		NLMG AA 1
 	Left:
-		NULL A 0 
+		"####" "#" 0 
 		{
 		If(CountInv("MariaArrowAmmo") < 1) { return state("DryFire"); }
 		If(CountInv("PowerQuadDamage") == 1) { A_PlaySound("Maria/Powerup/Quad/Shoot",7); }
@@ -72,7 +72,7 @@ Actor MariaOscillator : MariaWeapon
 		Goto ReadyLoop
 
 	Right:
-		NULL A 0 
+		"####" "#" 0 
 		{
 		If(CountInv("MariaArrowAmmo") < 1) { return state("DryFire"); }
 		If(CountInv("PowerQuadDamage") == 1) { A_PlaySound("Maria/Powerup/Quad/Shoot",7); }
@@ -89,7 +89,7 @@ Actor MariaOscillator : MariaWeapon
 		Goto ReadyLoop
 
 	AltFire:
-		NULL A 0 
+		"####" "#" 0 
 		{
 		If(CountInv("MariaArrowAmmo") < 2) { return state("DryFire"); }
 		A_PlaySound("Weapon/Shinigami/Dry",0);
@@ -99,7 +99,7 @@ Actor MariaOscillator : MariaWeapon
 		NLMG A 1 Offset(0,34)
 		NLMG AAA 1
 	AltLeft:
-		NULL A 0 
+		"####" "#" 0 
 		{
 		If(CountInv("MariaArrowAmmo") < 2) { return state("DryFire"); }
 		If(CountInv("PowerQuadDamage") == 1) { A_PlaySound("Maria/Powerup/Quad/Shoot",7); }

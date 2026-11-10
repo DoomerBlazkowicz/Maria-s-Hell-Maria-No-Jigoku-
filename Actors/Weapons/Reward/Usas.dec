@@ -46,13 +46,13 @@ ACTOR MariaUsas : MariaWeapon
 		Loop
 
 	Fire:
-		NULL A 0 A_JumpIf(CountInv("MariaUsasLoaded") < 1, "DryFire")
+		"####" "#" 0 A_JumpIf(CountInv("MariaUsasLoaded") < 1, "DryFire")
 		USAG A 1 Offset(0,33)
 		TNT1 A 0 A_PlaySound("Weapon/Shinigami/Dry",0)
 		USAG A 1 Offset(0,34)
 		USAG AAAA 1
 	FireCounted:
-		NULL A 0 
+		"####" "#" 0 
 		{
 		If(CountInv("MariaUsasLoaded") < 1) { return state("DryFire"); }
 		If(GetCvar("magclicking") == 0 && CountInv("MariaUsasLoaded") < 9) { A_PlaySound("Weapon/Magclick", 1); }
@@ -94,7 +94,7 @@ ACTOR MariaUsas : MariaWeapon
 		If(CountInv("PowerQuadDamage") == 1) { A_PlaySound("Maria/Powerup/Quad/Shoot",7); } 
 		A_PlayWeaponSound("Weapon/Usas/Fire");
 		A_PlaySound("Weapon/Shotgun/Distant", 6);
-		A_AlertMonsters;		
+		A_AlertMonsters;
 		A_TakeInventory("MariaUsasLoaded", 2);
 		return state("");
 		}
@@ -120,10 +120,8 @@ ACTOR MariaUsas : MariaWeapon
 
 	DryFire:
 		TNT1 A 0 A_PlaySound("Weapon/Shotgun/Dry",0)
-		TNT1 A 0 offset(0,36)
-		USAG A 1 A_WeaponReady(WRF_NOFIRE|WRF_NOSWITCH)
-		TNT1 A 0 offset(0,35)
-		USAG A 1 A_WeaponReady(WRF_NOFIRE|WRF_NOSWITCH)
+		USAG A 1 { A_WeaponOffset(0,36); A_WeaponReady(WRF_NOFIRE|WRF_NOSWITCH); }
+		USAG A 1 { A_WeaponOffset(0,35); A_WeaponReady(WRF_NOFIRE|WRF_NOSWITCH); }
 		Goto ReadyLoop
 
 	Reload:
@@ -133,7 +131,6 @@ ACTOR MariaUsas : MariaWeapon
 		Goto ReadyLoop
 
 	ReloadWork:
-		TNT1 A 0 A_JumpIfInventory("MariaUsasLoaded", 1, "ReloadWork2")
 		USAG A 2
 		TNT1 A 0 A_StartSound("Foley/Rifle/Misc", CHAN_AUTO)
 		USAR ABCDEF 2

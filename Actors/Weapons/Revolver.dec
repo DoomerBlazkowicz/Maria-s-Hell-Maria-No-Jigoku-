@@ -53,47 +53,56 @@ ACTOR MariaRevolver : MariaWeapon //replaces Pistol
 		TNT1 A 0 A_PlaySound("Weapon/Shinigami/Dry",0)
 		REVG ABB 1 //A_PlayWeaponSound("weapons/revolvercock",CHAN_WEAPON)
 	FireCounted:
-		REVG A 0 A_GunFlash
-		REVG A 0 A_JumpIfInventory("PowerQuadDamage",1,2)
-		REVG A 0 A_Jump(256,2)
-		REVG A 0 A_PlaySound("Maria/Powerup/Quad/Shoot",7)
-		REVG A 0 A_PlayWeaponSound("Weapon/Revolver/Fire", CHAN_AUTO)
-		TNT1 A 0 A_PlaySound("Weapon/Revolver/Distant", 6)
-		TNT1 A 0 A_TakeInventory("MariaRevolverLoaded", 1)
-		REVG B 0 BRIGHT A_AlertMonsters
-		TNT1 B 0 radius_quake (3.5, 3, 0, 1, 0)
-		REVF A 1 BRIGHT A_FireBullets (1, 1, -1, 25, "MariaPuff")
-		TNT1 A 0 A_FireCustomMissile("MariaFlareOrange",0,0,0,8)
-		TNT1 A 0 A_FireCustomMissile("MariaMuzzleSmoke",0,0,0,8)
+		REVG B 0 BRIGHT
+		{
+		A_GunFlash;
+		If(CountInv("PowerQuadDamage") == 1) { A_PlaySound("Maria/Powerup/Quad/Shoot",7); }
+		A_PlayWeaponSound("Weapon/Revolver/Fire", CHAN_AUTO);
+		A_PlaySound("Weapon/Revolver/Distant", 6);
+		A_TakeInventory("MariaRevolverLoaded", 1);
+		A_AlertMonsters;
+		radius_quake (3.5, 3, 0, 1, 0);
+		}
+		REVF A 1 BRIGHT 
+		{
+		A_FireBullets (1, 1, -1, 25, "MariaPuff");
+		A_FireCustomMissile("MariaFlareOrange",0,0,0,8);
+		A_FireCustomMissile("MariaMuzzleSmoke",0,0,0,8);
+		}
 		REVF BCD 1 A_SetPitch (pitch - 1.5)
-		REVF EFG 1
-		REVF HIJ 1
-		REVF KLM 1
+		REVF EFGHIJKLM 1
 		REVG A 1
 		REVG A 6 //A_Refire
 		Goto ReadyLoop
 
 	AltFire:
-		NULL A 0 A_JumpIfInventory("MariaRevolverloaded", 1, 1)
-		Goto dryfire
-		REZF A 0 A_GunFlash
+		NULL A 0 
+		{
+		If(CountInv("MariaRevolverloaded") < 1) { return state("DryFire"); }
+		A_GunFlash;
+		return state("");
+		}
 		REVZ ABCDE 1
 	AltHold:
-		NULL A 0 A_JumpIfInventory("MariaRevolverloaded", 1, 1)
-		Goto dryfire
-		TNT1 A 0 A_PlaySound("Weapon/Shinigami/Dry",0)
-		REZF A 0 A_GunFlash
-		REZF A 0 A_JumpIfInventory("PowerQuadDamage",1,2)
-		REZF A 0 A_Jump(256,2)
-		REZF A 0 A_PlaySound("Maria/Powerup/Quad/Shoot",7)
-		REZF A 0 A_PlayWeaponSound("Weapon/Revolver/Fire", CHAN_AUTO)
-		TNT1 A 0 A_PlaySound("Weapon/Revolver/Distant", 6)
-		TNT1 A 0 A_TakeInventory("MariaRevolverLoaded", 1)
-		REZF B 0 BRIGHT A_AlertMonsters
-		TNT1 B 0 radius_quake (3.5, 3, 0, 1, 0)
-		REZF A 1 BRIGHT A_FireBullets (5, 5, -1, 25, "MariaPuff")
-		TNT1 A 0 A_FireCustomMissile("MariaFlareOrange",0,0,0,8)
-		TNT1 A 0 A_FireCustomMissile("MariaMuzzleSmoke",0,0,0,8)
+		REZF B 0 BRIGHT
+		{
+		If(CountInv("MariaRevolverloaded") < 1) { return state("DryFire"); }
+		A_PlaySound("Weapon/Shinigami/Dry",0);
+		A_GunFlash;
+		If(CountInv("PowerQuadDamage") == 1) { A_PlaySound("Maria/Powerup/Quad/Shoot",7); }
+		A_PlayWeaponSound("Weapon/Revolver/Fire", CHAN_AUTO);
+		A_PlaySound("Weapon/Revolver/Distant", 6);
+		A_TakeInventory("MariaRevolverLoaded", 1);
+		A_AlertMonsters;
+		radius_quake (3.5, 3, 0, 1, 0);
+		return state("");
+		}
+		REZF A 1 BRIGHT 
+		{
+		A_FireBullets (5, 5, -1, 25, "MariaPuff");
+		A_FireCustomMissile("MariaFlareOrange",0,0,0,8);
+		A_FireCustomMissile("MariaMuzzleSmoke",0,0,0,8);
+		}
 		REZF B 1 BRIGHT
 		REZF C 1 BRIGHT A_SetPitch (pitch - 1.5)
 		REZF D 1 BRIGHT A_SetPitch (pitch - 0.5)
@@ -107,10 +116,8 @@ ACTOR MariaRevolver : MariaWeapon //replaces Pistol
 
 	DryFire:
 		TNT1 A 0 A_PlaySound("Weapon/Revolver/Dry",0)
-		TNT1 A 0 offset(0,36)
-		REVG AB 1 A_WeaponReady(WRF_NOFIRE|WRF_NOSWITCH)
-		TNT1 A 0 offset(0,35)
-		REVG A 10 A_WeaponReady(WRF_NOFIRE|WRF_NOSWITCH)
+		REVG AB 1 { A_WeaponOffset(0,36); A_WeaponReady(WRF_NOFIRE|WRF_NOSWITCH); }
+		REVG A 10 { A_WeaponOffset(0,35); A_WeaponReady(WRF_NOFIRE|WRF_NOSWITCH); }
 		Goto ReadyLoop
 
 	Reload:

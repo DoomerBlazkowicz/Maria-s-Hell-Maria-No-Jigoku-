@@ -110,6 +110,7 @@ actor MariaIncinerator : MariaWeapon //Replaces ID24Incinerator
 	Useless:
 		TNT1 A 0 A_PRINT("Are you trying to roast the fish?")
 		Goto WaterReady
+
 	User1:
 		TNT1 A 0 A_JumpIfInventory("PipebombAmmo", 1, "ThrowPipebomb")
 	NoPipebomb:

@@ -59,19 +59,19 @@ Actor MariaLMG : MariaWeapon //replaces Chaingun
 		loop
 	
 	Fire:
-		NULL A 0 A_JumpIf(CountInv("MariaLMGLoaded") < 1, "DryFire")
-		LMGG A 1 Offset(0,33)
-		LMGG A 1 Offset(0,34)
-		TNT1 A 0 A_PlaySound("Weapon/Shinigami/Dry",0)
-		LMGG AAAA 1
+		"####" A 0 A_JumpIf(CountInv("MariaLMGLoaded") < 1, "DryFire")
+		"####" A 1 Offset(0,33)
+		"####" A 1 Offset(0,34)
+		"####" A 0 A_PlaySound("Weapon/Shinigami/Dry",0)
+		"####" AAAA 1
 	FireCounted:
-		NULL A 0 
+		"####" A 0 
 		{
 			if(CountInv("MariaLMGLoaded") < 1) { return state("DryFire"); }
 			if(GetCvar("magclicking") == 1 && CountInv("MariaLMGLoaded") < 9) { A_PlaySound("Weapon/Magclick", 1); }
 			return state("");
 		}
-		LMGF A 0 bright 
+		"####" A 0 bright 
 		{
 		A_FireBullets (3, 3, 1, 20, "MariaPuffPurple");
 		A_FireCustomMissile("LMGCasingSpawner",-5,0,0,-6); //A_SpawnItemEx("ARBulletCasing", 17, 3, 35, 0, random(3,6), random(3,7))
@@ -87,7 +87,9 @@ Actor MariaLMG : MariaWeapon //replaces Chaingun
 		}
 		LMGF A 1 bright A_SetPitch(pitch-1.5)
 		LMGF BC 1
-		RGUN A 0 A_Refire("FireCounted")
+		LMGE A 0 A_JumpIf(CountInv("MariaLMGLoaded") < 1, 2)
+		LMGG A 0
+		"####" A 0 A_Refire("FireCounted")
 		Goto ReadyLoop
 
 	DryFire:

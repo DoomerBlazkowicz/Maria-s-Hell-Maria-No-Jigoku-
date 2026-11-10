@@ -30,25 +30,19 @@ ACTOR MariaChainsaw : MariaWeapon
 		SAWS FGH 1
 		TNT1 A 0 
 		{
-		If(CountInv("MariaGasoline") > 1)
-			{
-				A_PlaySound("Weapon/Chainsaw/Select", 3);
-			}			
-			return state("");
+		If(CountInv("MariaGasoline") > 1) { A_PlaySound("Weapon/Chainsaw/Select", 3); }			
+		return state("");
 		}
 		SAWS IJKL 1
 		SAWS MNOP 1
 		Goto ReadyLoop
 
 	ReadyLoop:
-		TNT1 A 0 
+		SAWG A 0 
 		{
-		If(CountInv("MariaGasoline") < 1)
-			{
-				return state("EmptyLoop");
-			}
-			A_PlaySound("Weapon/Chainsaw/Idle");
-			return state("");
+		If(CountInv("MariaGasoline") < 1) {return state("EmptyLoop"); }
+		A_PlaySound("Weapon/Chainsaw/Idle");
+		return state("");
 		}
 		SAWG ABCD 2 A_WeaponReady(WRF_ALLOWZOOM|WRF_ALLOWUSER1|WRF_ALLOWUSER2|WRF_ALLOWUSER3)
 		Loop
