@@ -7,27 +7,27 @@
 //==============================================================================
 ACTOR FKFWP0 : RandomSpawner replaces FWeapAxe		{DropItem "MariaShotgunSpawner"} 	 //MAP02
 ACTOR FKFWP1 : RandomSpawner replaces FWeapHammer  	{DropItem "MariaPRSpawner2"} //MAP08
-ACTOR FKFWP2 : RandomSpawner replaces FWeaponPiece1 {DropItem "MariaRocketLauncherPiece1"} 	 //MAP27
-ACTOR FKFWP3 : RandomSpawner replaces FWeaponPiece2 {DropItem "MariaRocketLauncherPiece2"} 	 //MAP12
-ACTOR FKFWP4 : RandomSpawner replaces FWeaponPiece3 {DropItem "MariaRocketLauncherPiece3"} 	 //MAP02
+ACTOR FKFWP2 : RandomSpawner replaces FWeaponPiece1 {DropItem "MariaRocketLauncher"} 	 //MAP27
+ACTOR FKFWP3 : RandomSpawner replaces FWeaponPiece2 {DropItem "MariaSurvivalItemBlank"} 	 //MAP12
+ACTOR FKFWP4 : RandomSpawner replaces FWeaponPiece3 {DropItem "MariaSurvivalItemBlank"} 	 //MAP02
 
 //==============================================================================
 // Cleric
 //==============================================================================
 ACTOR FKCWP0 : RandomSpawner replaces CWeapStaff	{DropItem "MariaChaingunSpawner"} 	  //MAP02
 ACTOR FKCWP1 : RandomSpawner replaces CWeapFlame	{DropItem "MariaSuperShotgunSpawner"} //MAP08
-ACTOR FKCWP2 : RandomSpawner replaces CWeaponPiece1 {DropItem "MariaUnmakyrPiece1"} 	  //MAP27
-ACTOR FKCWP3 : RandomSpawner replaces CWeaponPiece2 {DropItem "MariaUnmakyrPiece2"} 	  //MAP12
-ACTOR FKCWP4 : RandomSpawner replaces CWeaponPiece3 {DropItem "MariaUnmakyrPiece3"} 	  //MAP02
+ACTOR FKCWP2 : RandomSpawner replaces CWeaponPiece1 {DropItem "MariaUnmakyr"} 	  //MAP27
+ACTOR FKCWP3 : RandomSpawner replaces CWeaponPiece2 {DropItem "MariaSurvivalItemBlank"} 	  //MAP12
+ACTOR FKCWP4 : RandomSpawner replaces CWeaponPiece3 {DropItem "MariaSurvivalItemBlank"} 	  //MAP02
 
 //==============================================================================
 // Mage
 //==============================================================================
 ACTOR FKMWP0 : RandomSpawner replaces MWeapFrost     {DropItem "MariaSawSpawner"} 		//MAP02
 ACTOR FKMWP1 : RandomSpawner replaces MWeapLightning {DropItem "MariaChaingunSpawner"}//MAP08
-ACTOR FKMWP2 : RandomSpawner replaces MWeaponPiece1  {DropItem "MariaBFGPiece1"} 		//MAP27
-ACTOR FKMWP3 : RandomSpawner replaces MWeaponPiece2  {DropItem "MariaBFGPiece2"} 		//MAP12
-ACTOR FKMWP4 : RandomSpawner replaces MWeaponPiece3  {DropItem "MariaBFGPiece3"} 		//MAP02
+ACTOR FKMWP2 : RandomSpawner replaces MWeaponPiece1  {DropItem "MariaBFG"} 		//MAP27
+ACTOR FKMWP3 : RandomSpawner replaces MWeaponPiece2  {DropItem "MariaSurvivalItemBlank"} 		//MAP12
+ACTOR FKMWP4 : RandomSpawner replaces MWeaponPiece3  {DropItem "MariaSurvivalItemBlank"} 		//MAP02
 
 //==============================================================================
 // Ammo
