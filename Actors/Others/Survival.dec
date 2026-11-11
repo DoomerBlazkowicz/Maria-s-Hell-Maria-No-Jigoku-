@@ -40,11 +40,12 @@ Actor MariaMedikitspawnerHarder : RandomSpawner //replaces Medikit
 Actor MariaBallisticArmorspawnerHarder : RandomSpawner //replaces GreenArmor
 {
     DropItem "MariaSurvivalItemBlank", 255, 10
-    DropItem "MariaArmourPlate", 255, 5
+    DropItem "MariaBallisticArmor", 255, 5
 }
 
 Actor MariaHeavyArmorspawnerHarder : RandomSpawner //replaces BlueArmor
 {
-    DropItem "MariaSurvivalItemBlank", 255, 5
-    DropItem "MariaArmourPlate", 255, 5
+    DropItem "MariaSurvivalItemBlank", 255, 15
+    DropItem "MariaHeavyArmor", 255, 5
+    DropItem "MariaSuperShield", 255, 1
 }

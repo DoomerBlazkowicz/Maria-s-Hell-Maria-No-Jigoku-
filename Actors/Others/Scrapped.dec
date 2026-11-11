@@ -156,3 +156,323 @@ ACTOR MariaImpostorPlasmaBall : MariaRedPlasmaBall //Special for Faker
 	Stop
   }
 } 
+
+ACTOR MariaUnmakyrPiece : WeaponPiece
+{
+	//Inventory.PickupSound "misc/w_pkup"
+	WeaponPiece.Weapon MariaUnmakyrHexen
+	+FLOATBOB
+	+NOGRAVITY
+}
+
+ACTOR MariaUnmakyrPiece1 : MariaUnmakyrPiece
+{
+	WeaponPiece.Number 1
+	Inventory.PickupMessage "You got a Calamity Arbalest Muzzle!"
+	States
+	{
+	Spawn:
+		RAI1 A -1 Bright
+		Stop
+	}
+}
+
+ACTOR MariaUnmakyrPiece2 : MariaUnmakyrPiece
+{
+	WeaponPiece.Number 2
+	Inventory.PickupMessage "You got a Calamity Arbalest Base!"
+	States
+	{
+	Spawn:
+		RAI2 A -1 Bright
+		Stop
+	}
+}
+
+ACTOR MariaUnmakyrPiece3 : MariaUnmakyrPiece
+{
+	WeaponPiece.Number 3
+	Inventory.PickupMessage "You got a Calamity Arbalest Core!"
+	States
+	{
+	Spawn:
+		RAI3 A -1 Bright
+		Stop
+	}
+}
+
+ACTOR MariaUnmakyrDrop
+{
+	States
+	{
+	Spawn:
+		TNT1 A 1
+		TNT1 A 1 A_DropWeaponPieces("MariaUnmakyrPiece1", "MariaUnmakyrPiece2", "MariaUnmakyrPiece3")
+		Stop
+	}
+}
+
+ACTOR MariaUnmakyrHexen : MariaUnmakyr
+{
+	Health 3
+	Weapon.slotnumber 7
+	+Weapon.cheatnotweapon
+	Inventory.PickupMessage "The Calamity Arbalest assembled!"
+}
+
+ACTOR MariaBFGPiece : WeaponPiece
+{
+	//Inventory.PickupSound "misc/w_pkup"
+	WeaponPiece.Weapon MariaBFGHexen
+	+FLOATBOB
+	+NOGRAVITY
+}
+
+ACTOR MariaBFGPiece1 : MariaBFGPiece
+{
+	WeaponPiece.Number 1
+	Inventory.PickupMessage "You got a BFG Muzzle!"
+	States
+	{
+	Spawn:
+		BFG1 A -1 Bright
+		Stop
+	}
+}
+
+ACTOR MariaBFGPiece2 : MariaBFGPiece
+{
+	WeaponPiece.Number 2
+	Inventory.PickupMessage "You got a BFG Grip and Stock!"
+	States
+	{
+	Spawn:
+		BFG2 A -1 Bright
+		Stop
+	}
+}
+
+ACTOR MariaBFGPiece3 : MariaBFGPiece
+{
+	WeaponPiece.Number 3
+	Inventory.PickupMessage "You got a BFG Base!"
+	States
+	{
+	Spawn:
+		BFG3 A -1 Bright
+		Stop
+	}
+}
+
+ACTOR MariaBFGDrop
+{
+	States
+	{
+	Spawn:
+		TNT1 A 1
+		TNT1 A 1 A_DropWeaponPieces("MariaBFGPiece1", "MariaBFGPiece2", "MariaBFGPiece3")
+		Stop
+	}
+}
+
+ACTOR MariaBFGHexen : MariaBFG
+{
+  Health 3
+  Weapon.slotnumber 7
+  +Weapon.cheatnotweapon
+  Inventory.PickupMessage "The BFG 10k assembled!"
+}
+
+Actor MariaRocketBackblast: FastProjectile
+{
+	speed 80
+	damage (random(12,12))
+	Decal "Scorch"
+	Radius 22
+	Height 12
+	Alpha 0.9
+	Scale 1.0
+	RenderStyle "Add"
+	+RIPPER
+	+GHOST
+	+THRUGHOST
+	Species "Marines"
+	+THRUSPECIES
+	DamageType Shotgun
+	Obituary "$OBBD_ROCKETBACKBLAST"
+	States
+	{
+	Spawn:
+		TNT1 A 0
+		TNT1 A 2
+		//TNT1 A 0 A_CustomMissile("ExplosionSmokeHD", 2, 0, random(0, 360), 2, random(0, 90))
+		EXPL GHI 1 //A_CustomMissile ("BackblastFlames", 0, 0, random (0, 360), 2, random (0, 360))
+		Stop
+
+	Death:
+		TNT1 A 0
+		TNT1 A 0 ACS_NamedExecuteAlways("CheckRocketBackblast")
+		TNT1 A 3
+		TNT1 A 0 A_Explode(4, 1, 0)
+		TNT1 A 0 A_SpawnItemEx ("LiquidExplosionEffectSpawner",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION,0)
+		TNT1 A 0 A_CustomMissile("ExplosionSmokeHD", 2, 0, random(0, 360), 2, random(0, 90))
+		Stop
+
+	Disappear:
+		TNT1 A 0
+		Stop
+	}
+}
+
+Actor MariaRocketBackblast2: MariaRocketBackblast
+{
+	Decal "None"
+	Radius 4
+	Height 4
+	//DamageType "Shrapnel"
+	States
+	{
+	Spawn:
+		TNT1 A 0
+		TNT1 A 2
+		TNT1 A 0 A_CustomMissile("ExplosionSmokeHD", 2, 0, random(0, 360), 2, random(0, 90))
+		TNT1 GHI 1 //A_CustomMissile ("BackblastFlames", 0, 0, random (0, 360), 2, random (0, 360))
+		Stop
+
+	Death:
+		TNT1 A 0
+		TNT1 A 3
+		//TNT1 A 0 A_Explode(22, 2)
+		TNT1 A 0 A_SpawnItemEx ("LiquidExplosionEffectSpawner",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION,0)
+		TNT1 A 0 A_CustomMissile("ExplosionSmokeHD", 2, 0, random(0, 360), 2, random(0, 90))
+		Stop
+	}
+}
+
+Actor MariaRocketBackblast3: MariaRocketBackblast2
+{
+	Radius 32
+	Height 12
+	//Damagetype "Shrapnel"
+	States
+	{
+	Death:
+		TNT1 A 3
+		TNT1 A 0 A_Explode(32, 64, 0, 0, 64)
+		TNT1 A 0 A_SpawnItemEx ("LiquidExplosionEffectSpawner",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION,0)
+		//TNT1 A 0 A_CustomMissile("ExplosionSmokeHD", 2, 0, random(0, 360), 2, random(0, 90))
+		Stop
+	}
+}
+
+
+ACTOR MariaRocketLauncherPiece : WeaponPiece
+{
+	//Inventory.PickupSound "misc/w_pkup"
+	WeaponPiece.Weapon MariaRocketLauncherHexen
+	+FLOATBOB
+	+NOGRAVITY
+}
+
+ACTOR MariaRocketLauncherPiece1 : MariaRocketLauncherPiece
+{
+	WeaponPiece.Number 1
+	Inventory.PickupMessage "You got a Rocket Launcher Scope!"
+	States
+	{
+	Spawn:
+		RKT1 A -1 Bright
+		Stop
+	}
+}
+
+ACTOR MariaRocketLauncherPiece2 : MariaRocketLauncherPiece
+{
+	WeaponPiece.Number 2
+	Inventory.PickupMessage "You got a Rocket Launcher Base!"
+	States
+	{
+	Spawn:
+		RKT2 A -1 Bright
+		Stop
+	}
+}
+
+ACTOR MariaRocketLauncherPiece3 : MariaRocketLauncherPiece
+{
+	WeaponPiece.Number 3
+	Inventory.PickupMessage "You got a Rocket Launcher Parts!"
+	States
+	{
+	Spawn:
+		RKT3 A -1 Bright
+		Stop
+	}
+}
+
+ACTOR MariaRocketLauncherDrop
+{
+	States
+	{
+	Spawn:
+		TNT1 A 1
+		TNT1 A 1 A_DropWeaponPieces("MariaRocketLauncherPiece1", "MariaRocketLauncherPiece2", "MariaRocketLauncherPiece3")
+		Stop
+	}
+}
+
+ACTOR MariaRocketLauncherHexen : MariaRocketLauncher
+{
+	Health 3
+	Weapon.slotnumber 7
+	+Weapon.cheatnotweapon
+	Inventory.PickupMessage "The BFG 10k assembled!"
+}
+
+Actor MariaArmourPlate : CustomInventory 
+{
+  Inventory.Amount 1
+  Inventory.PickupSound "Maria/Plate/Pickup"
+  Inventory.UseSound "Maria/Plate/Insert"
+  Inventory.DefMaxAmount
+  Inventory.PickupMessage "$GOTARMPLT"
+  Tag "Armour Plate"
+  Inventory.Icon "ARPPB0"
+  +Inventory.InvBar
+  +FloorClip
+  States
+  {
+  Spawn:
+    ARPP A -1
+    Loop
+  Use:
+    TNT1 A 0 A_GiveInventory("ArmourPlateProtection")
+    Stop
+
+ /*Use:
+    TNT1 A 0 A_JumpIfInventory("useitem",1,"Waite")
+    TNT1 A 0 A_GiveInventory("useitem",1)
+    TNT1 A 6
+    TNT1 A 0 A_GiveInventory("doarmplt",1)
+    Stop
+  Waite:
+	TNT1 A 0 A_Print("Wait")
+	FAIL*/
+  }
+}
+
+Actor ArmourPlateProtection : ArmorBonus
+{
+    //Inventory.PickupSound ""
+	//Inventory.Pickupmessage ""
+	Inventory.Icon "TNT1A0"
+	Armor.SavePercent 25
+	Armor.SaveAmount 25
+	Armor.Maxsaveamount 50
+	States
+	{
+	Spawn:
+		TNT1 A -1
+		loop
+	}
+}
