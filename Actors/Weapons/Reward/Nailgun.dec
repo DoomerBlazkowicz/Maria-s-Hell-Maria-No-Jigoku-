@@ -1,13 +1,12 @@
 //==============================================================================
-// UAC "Oscillator" Nailgun
+// "Oscillator"
 //==============================================================================
-// Caliber: 
+// Caliber: Arrows
 //==============================================================================
-//
+// Like the double barreled shotgun, another non-Earth weapon that fires armour
+// piercing Arrows like it's a machine gun. 
 // 
-// 
-//
-// 
+// Nail 'em up!
 //==============================================================================
 Actor MariaOscillator : MariaWeapon
 {

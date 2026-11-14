@@ -3,11 +3,8 @@
 //==============================================================================
 // Caliber: 12 Gauge
 //==============================================================================
-//
-// 
-// 
-//
-// 
+// Buckshot? Check. Drum mag? Check. And full auto? Check. It's heavy to carry 
+// but it carries destruction of pellets and Dragons Breath.
 //==============================================================================
 ACTOR MariaUsas : MariaWeapon
 {
@@ -131,9 +128,9 @@ ACTOR MariaUsas : MariaWeapon
 		Goto ReadyLoop
 
 	ReloadWork:
-		USAG A 2
+		USAG A 2 A_WeaponReady(WRF_NOBOB|WRF_NOFIRE|WRF_ALLOWZOOM)
 		TNT1 A 0 A_StartSound("Foley/Rifle/Misc", CHAN_AUTO)
-		USAR ABCDEF 2
+		USAR ABCDEF 2 A_WeaponReady(WRF_NOBOB|WRF_NOFIRE|WRF_ALLOWZOOM)
 		USAR A 0 A_PlaySound ("Weapon/Usas/Reload/Out", CHAN_AUTO)
 		TNT1 A 0 A_FireCustomMissile("EmptyASGAmmo",-5,0,0,-6) 
 		USAR GHHH 2
@@ -159,15 +156,15 @@ ACTOR MariaUsas : MariaWeapon
 		Goto FinishReload
 
 	FinishReload:
-		USAR YZ 2
+		USAR YZ 2 
 		US2R AB 2
 		USAR E 0 A_PlaySound ("Weapon/Usas/Reload/Bolt/Pull", 1) 
 		US2R CDE 2
 		USAR E 0 A_PlaySound ("Weapon/Usas/Reload/Bolt/Release", 2)
 		TNT1 A 0 A_StartSound("Foley/Rifle/Misc", CHAN_AUTO)
-		US2R FGHIJK 2
-		US2R LMNOP 2
-		USAG A 2
+		US2R FGHIJK 2 A_WeaponReady(WRF_NOBOB|WRF_NOFIRE|WRF_ALLOWZOOM)
+		US2R LMNOP 2 A_WeaponReady(WRF_NOBOB|WRF_NOFIRE|WRF_ALLOWZOOM)
+		USAG A 2 A_WeaponReady(WRF_NOBOB|WRF_NOFIRE|WRF_ALLOWZOOM)
 		Goto ReadyLoop
 
 	ReloadingLoop2:
@@ -178,11 +175,11 @@ ACTOR MariaUsas : MariaWeapon
 		Goto FinishReload2
 
 	FinishReload2:
-		USAR YZ 2
+		USAR YZ 2 A_WeaponReady(WRF_NOBOB|WRF_NOFIRE|WRF_ALLOWZOOM)
 		TNT1 A 0 A_StartSound("Foley/Rifle/Misc", CHAN_AUTO)
-		US2R GHIJK 2
-		US2R LMNOP 2
-		USAG A 2
+		US2R GHIJK 2 A_WeaponReady(WRF_NOBOB|WRF_NOFIRE|WRF_ALLOWZOOM)
+		US2R LMNOP 2 A_WeaponReady(WRF_NOBOB|WRF_NOFIRE|WRF_ALLOWZOOM)
+		USAG A 2 A_WeaponReady(WRF_NOBOB|WRF_NOFIRE|WRF_ALLOWZOOM)
 		Goto ReadyLoop
 
 	ThrowPipebomb:

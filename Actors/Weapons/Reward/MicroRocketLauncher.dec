@@ -1,11 +1,13 @@
 //==============================================================================
-// UAC Mk93 Micro Rocket Launcher
+// UAC Micro Rocket Launcher Model 96
 //==============================================================================
-// Caliber: 40mm Grenades
+// Caliber: 40mm Grenades(?)
 //==============================================================================
-// Uhh... What is this? Why this launcher... too colourful? And why it "speaks"
-// whenever I fire or do something? Aside from it speaking Japanese, it's getting 
-// kinda annoying, but not gonna lie, "her" voice is pretty cute.
+// Rocket launcher of the future... appearently. Another invention of UAC's
+// military branch, MRL96 is something a demolisher dreams; a compact rocket
+// launcher with more ammo instead of one.
+//
+// These guys won't dissapoint... weapons wise.
 //==============================================================================
 Actor MariaMicroRocketLauncher : MariaWeapon
 {
