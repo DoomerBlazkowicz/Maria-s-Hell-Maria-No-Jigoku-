@@ -65,6 +65,12 @@ ACTOR MariaNOBPuff: MariaPuff
     DamageType SSG
 }
 
+actor MariaSniperPuff : MariaPuff
+{
+	DamageType SniperDamage
+}
+
+
 ACTOR ShieldPuff : BulletPuff
 {   
    ProjectileKickback 500
