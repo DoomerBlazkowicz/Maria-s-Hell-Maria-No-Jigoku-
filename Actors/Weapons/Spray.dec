@@ -3,11 +3,13 @@
 //==============================================================================
 // Caliber: Fuel (Gasoline, Aerosol)
 //==============================================================================
-//
+// Nothing is "better" than a makeshift flamethrower than a spray can with 
+// flammable liquid and a American brand lighter.
 // 
+// Not so powerful but it can set on fire for a brief time and can conserve 
+// Fuel.
 // 
-//
-// 
+// Also outside of a flamethrower, it can be used as a flame bomb.
 //==============================================================================
 actor MariaAerosolCan : MariaWeapon
 {
@@ -164,7 +166,7 @@ actor MariaAerosolCan : MariaWeapon
 		TASQ ABC 1
 		TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
 		TASG DEH 1
-		TNT1 A 0 A_TakeInventory("PipebombAmmo", 1, TIF_NOTAKEINFINITE)
+		TNT1 A 0 A_TakeInventory("PipebombAmmo", 1,TIF_NOTAKEINFINITE)
 		TASG I 1 A_PlayWeaponSound("Maria/Pipebomb/Miss",1)
 		TASG J 1 A_PlaySound("Maria/Pipebomb/Ignite", 2)
 		TASG KLM 1

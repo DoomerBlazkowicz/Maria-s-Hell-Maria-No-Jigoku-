@@ -1,13 +1,16 @@
 //==============================================================================
 // Nozomu Okaya's Bane
 //==============================================================================
-// Caliber: Specialized 12 Gauge
+// Caliber: Specialized X Shells
 //==============================================================================
 // A Earth design double barreled shotgun but... Alienating modifications.
 // With such ornate look, modified and uses special shell's for it's purpose.
+//
 // It's calling me and strikes fear to Devil Reincarnate Okaya himself and his
-// assosiates. And not gonna lie, it not only looks both Earth design and Alien
-// design, I sense... Kiri-kun's presence?
+// assosiates. 
+//
+// And not gonna lie, it not only looks both Earth design and Alien design 
+// Did I sense... Kiri-kun's presence?
 //==============================================================================
 actor MariaBoomstick : MariaWeapon //Replaces SuperShotgun
 {
@@ -70,10 +73,16 @@ actor MariaBoomstick : MariaWeapon //Replaces SuperShotgun
 			A_SetPitch(pitch - 9.0);
 			radius_quake (10, 2, 0, 1, 0);
 		}
-		TNT1 AAA 0 A_FireCustomMissile("MariaMuzzleSmoke",3,0,0,8)
-		TNT1 AAA 0 A_FireCustomMissile("MariaMuzzleSmoke",-3,0,0,8)
-		TNT1 A 0 A_AlertMonsters
-		SSGF A 0 A_Light2
+		TNT1 AAA 0 
+		{
+		A_FireCustomMissile("MariaMuzzleSmoke",3,0,0,8);
+		A_FireCustomMissile("MariaMuzzleSmoke",-3,0,0,8);
+		}
+		TNT1 A 0 
+		{
+		A_AlertMonsters;
+		A_Light2;
+		}
 		SSGF C 1 A_SetPitch(pitch - 7.0)
 		SSGF D 2 A_SetPitch(pitch - 5.0)
 		SSGF E 3
@@ -95,12 +104,12 @@ actor MariaBoomstick : MariaWeapon //Replaces SuperShotgun
 		Goto ReadyLoop
 
 	ReloadWork:
-		SSGR ABC 1 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
+		SSGR ABC 1 A_WeaponReady(WRF_NOBOB|WRF_NOFIRE|WRF_ALLOWZOOM)
 		TNT1 A 0 A_PlaySound ("Weapon/NOB/Switch", 1)
-		SSGR D 1 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
+		SSGR D 1 A_WeaponReady(WRF_NOBOB|WRF_NOFIRE|WRF_ALLOWZOOM)
 		TNT1 A 0 A_StartSound("Foley/NOB/Raise", CHAN_AUTO)
-		SSGR EF 1 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
-		SSGR GHI 2 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
+		SSGR EF 1 A_WeaponReady(WRF_NOBOB|WRF_NOFIRE|WRF_ALLOWZOOM)
+		SSGR GHI 2 A_WeaponReady(WRF_NOBOB|WRF_NOFIRE|WRF_ALLOWZOOM)
 		TNT1 A 0 A_StartSound("Foley/NOB/Lower", CHAN_AUTO)
 		SSGR JKL 1 
 		TNT1 A 0 A_PlaySound ("Weapon/NOB/Open", 2)
@@ -134,20 +143,20 @@ actor MariaBoomstick : MariaWeapon //Replaces SuperShotgun
 
 	FinishReload:
 		TNT1 A 0 A_StartSound("Foley/NOB/Raise", CHAN_AUTO)
-		SS2R MNO 1 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
+		SS2R MNO 1 A_WeaponReady(WRF_NOBOB|WRF_NOFIRE|WRF_ALLOWZOOM)
 		TNT1 A 0 A_PlaySound ("Weapon/NOB/Close", 2)
-		SS2R PQQ 1 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
-		SS2R R 4 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
-		SS2R SSTTUV 1 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
-		SS2R WXY 1 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
-		SSGH ABC 1 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
+		SS2R PQQ 1 A_WeaponReady(WRF_NOBOB|WRF_NOFIRE|WRF_ALLOWZOOM)
+		SS2R R 4 A_WeaponReady(WRF_NOBOB|WRF_NOFIRE|WRF_ALLOWZOOM)
+		SS2R SSTTUV 1 A_WeaponReady(WRF_NOBOB|WRF_NOFIRE|WRF_ALLOWZOOM)
+		SS2R WXY 1 A_WeaponReady(WRF_NOBOB|WRF_NOFIRE|WRF_ALLOWZOOM)
+		SSGH ABC 1 A_WeaponReady(WRF_NOBOB|WRF_NOFIRE|WRF_ALLOWZOOM)
 		TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
-		SSGH DEFFGG 1 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
+		SSGH DEFFGG 1 A_WeaponReady(WRF_NOBOB|WRF_NOFIRE|WRF_ALLOWZOOM)
 		TNT1 A 0 A_PlaySound ("Weapon/NOB/Hammer", 3)
-		SSGH HIJ 1 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
-		SSGH KKL 1 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
-		SSGG AA 1 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
-		SSGG A 1 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
+		SSGH HIJ 1 A_WeaponReady(WRF_NOBOB|WRF_NOFIRE|WRF_ALLOWZOOM)
+		SSGH KKL 1 A_WeaponReady(WRF_NOBOB|WRF_NOFIRE|WRF_ALLOWZOOM)
+		SSGG AA 1 A_WeaponReady(WRF_NOBOB|WRF_NOFIRE|WRF_ALLOWZOOM)
+		SSGG A 1 A_WeaponReady(WRF_NOBOB|WRF_NOFIRE|WRF_ALLOWZOOM)
 		Goto ReadyLoop
 
 	AltFire:
@@ -182,18 +191,19 @@ actor MariaBoomstick : MariaWeapon //Replaces SuperShotgun
 		TASQ ABC 1
 		TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
 		TASG DEH 1
-		TNT1 A 0 A_TakeInventory("PipebombAmmo", 1)
+		TNT1 A 0 A_TakeInventory("PipebombAmmo", 1,TIF_NOTAKEINFINITE)
 		TASG I 1 A_PlayWeaponSound("Maria/Pipebomb/Miss",1)
 		TASG J 1 A_PlaySound("Maria/Pipebomb/Ignite", 2)
 		TASG KLM 1
 		TASG OPQR 1 
 		TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
 		TAHA AB 1
-		TNT1 A 0 A_JumpIfInventory("PowerQuadDamage",1,2)
-		TNT1 A 0 A_Jump(256,2)
-		TNT1 A 0 A_PlaySound("Maria/Powerup/Quad/Shoot",7)
-		TNT1 A 0 A_PlaySound("Maria/Pipebomb/Throw", 3)
-		TNT1 A 0 A_FireCustomMissile("HolyPipebomb",0,1,0,0)
+		TNT1 A 0 
+		{
+		If(CountInv("PowerQuadDamage") == 1) { A_PlaySound("Maria/Powerup/Quad/Shoot",7); }
+		A_PlaySound("Maria/Pipebomb/Throw", 3);
+		A_FireCustomMissile("HolyPipebomb",0,1,0,0);
+		}
 		TAHA CDE 1
 		TNT1 A 5
 		SSGS ABCD 1

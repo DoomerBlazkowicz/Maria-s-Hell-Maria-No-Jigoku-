@@ -1,13 +1,13 @@
 //==============================================================================
-// Panzerfaust 3 Rocket Launcher
+// Panzerfaust-3 Rocket Launcher
 //==============================================================================
 // Caliber: 60mm Rocket
 //==============================================================================
-//
+// Ara ara~? Now this is something big, a rocket launcher.
 // 
-// 
-//
-// 
+// Even though it's intended as a "Anti-Tank Weapon" for armoured vehicles,
+// but I can guess that it'll destroy one of those monstrosities with 
+// machinery.
 //==============================================================================
 Actor MariaRocketLauncher : MariaWeapon //Replaces Rocketlauncher
 {
@@ -242,11 +242,12 @@ Actor MariaRocketLauncher : MariaWeapon //Replaces Rocketlauncher
 		TASG OPQR 1 
 		TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
 		TAHA AB 1
-		TNT1 A 0 A_JumpIfInventory("PowerQuadDamage",1,2)
-		TNT1 A 0 A_Jump(256,2)
-		TNT1 A 0 A_PlaySound("Maria/Powerup/Quad/Shoot",7)
-		TNT1 A 0 A_PlaySound("Maria/Pipebomb/Throw", 3)
-		TNT1 A 0 A_FireCustomMissile("HolyPipebomb",0,1,0,0)
+		TNT1 A 0 
+		{
+		If(CountInv("PowerQuadDamage") == 1) { A_PlaySound("Maria/Powerup/Quad/Shoot",7); }
+		A_PlaySound("Maria/Pipebomb/Throw", 3);
+		A_FireCustomMissile("HolyPipebomb",0,1,0,0);
+		}
 		TAHA CDE 1
 		TNT1 A 5
 		MIES A 0 A_JumpIf(CountInv("MariaRocketLauncherLoaded") < 1, 2)
@@ -357,150 +358,4 @@ ACTOR RocketlauncherInfrared : PowerupGiver
 		TNT1 A -1
 		Loop
 	}
-}
-
-Actor MariaRocketBackblast: FastProjectile
-{
-	speed 80
-	damage (random(12,12))
-	Decal "Scorch"
-	Radius 22
-	Height 12
-	Alpha 0.9
-	Scale 1.0
-	RenderStyle "Add"
-	+RIPPER
-	+GHOST
-	+THRUGHOST
-	Species "Marines"
-	+THRUSPECIES
-	DamageType Shotgun
-	Obituary "$OBBD_ROCKETBACKBLAST"
-	States
-	{
-	Spawn:
-		TNT1 A 0
-		TNT1 A 2
-		//TNT1 A 0 A_CustomMissile("ExplosionSmokeHD", 2, 0, random(0, 360), 2, random(0, 90))
-		EXPL GHI 1 //A_CustomMissile ("BackblastFlames", 0, 0, random (0, 360), 2, random (0, 360))
-		Stop
-
-	Death:
-		TNT1 A 0
-		TNT1 A 0 ACS_NamedExecuteAlways("CheckRocketBackblast")
-		TNT1 A 3
-		TNT1 A 0 A_Explode(4, 1, 0)
-		TNT1 A 0 A_SpawnItemEx ("LiquidExplosionEffectSpawner",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION,0)
-		TNT1 A 0 A_CustomMissile("ExplosionSmokeHD", 2, 0, random(0, 360), 2, random(0, 90))
-		Stop
-
-	Disappear:
-		TNT1 A 0
-		Stop
-	}
-}
-
-Actor MariaRocketBackblast2: MariaRocketBackblast
-{
-	Decal "None"
-	Radius 4
-	Height 4
-	//DamageType "Shrapnel"
-	States
-	{
-	Spawn:
-		TNT1 A 0
-		TNT1 A 2
-		TNT1 A 0 A_CustomMissile("ExplosionSmokeHD", 2, 0, random(0, 360), 2, random(0, 90))
-		TNT1 GHI 1 //A_CustomMissile ("BackblastFlames", 0, 0, random (0, 360), 2, random (0, 360))
-		Stop
-
-	Death:
-		TNT1 A 0
-		TNT1 A 3
-		//TNT1 A 0 A_Explode(22, 2)
-		TNT1 A 0 A_SpawnItemEx ("LiquidExplosionEffectSpawner",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION,0)
-		TNT1 A 0 A_CustomMissile("ExplosionSmokeHD", 2, 0, random(0, 360), 2, random(0, 90))
-		Stop
-	}
-}
-
-Actor MariaRocketBackblast3: MariaRocketBackblast2
-{
-	Radius 32
-	Height 12
-	//Damagetype "Shrapnel"
-	States
-	{
-	Death:
-		TNT1 A 3
-		TNT1 A 0 A_Explode(32, 64, 0, 0, 64)
-		TNT1 A 0 A_SpawnItemEx ("LiquidExplosionEffectSpawner",0,0,0,0,0,0,0,SXF_NOCHECKPOSITION,0)
-		//TNT1 A 0 A_CustomMissile("ExplosionSmokeHD", 2, 0, random(0, 360), 2, random(0, 90))
-		Stop
-	}
-}
-
-
-ACTOR MariaRocketLauncherPiece : WeaponPiece
-{
-	//Inventory.PickupSound "misc/w_pkup"
-	WeaponPiece.Weapon MariaRocketLauncherHexen
-	+FLOATBOB
-	+NOGRAVITY
-}
-
-ACTOR MariaRocketLauncherPiece1 : MariaRocketLauncherPiece
-{
-	WeaponPiece.Number 1
-	Inventory.PickupMessage "You got a Rocket Launcher Scope!"
-	States
-	{
-	Spawn:
-		RKT1 A -1 Bright
-		Stop
-	}
-}
-
-ACTOR MariaRocketLauncherPiece2 : MariaRocketLauncherPiece
-{
-	WeaponPiece.Number 2
-	Inventory.PickupMessage "You got a Rocket Launcher Base!"
-	States
-	{
-	Spawn:
-		RKT2 A -1 Bright
-		Stop
-	}
-}
-
-ACTOR MariaRocketLauncherPiece3 : MariaRocketLauncherPiece
-{
-	WeaponPiece.Number 3
-	Inventory.PickupMessage "You got a Rocket Launcher Parts!"
-	States
-	{
-	Spawn:
-		RKT3 A -1 Bright
-		Stop
-	}
-}
-
-ACTOR MariaRocketLauncherDrop
-{
-	States
-	{
-	Spawn:
-		TNT1 A 1
-		TNT1 A 1 A_DropWeaponPieces("MariaRocketLauncherPiece1", "MariaRocketLauncherPiece2", "MariaRocketLauncherPiece3")
-		Stop
-	}
-}
-
-ACTOR MariaRocketLauncherHexen : MariaRocketLauncher
-{
-	Health 3
-	Weapon.slotnumber 7
-	+Weapon.cheatnotweapon
-	Inventory.PickupMessage "The BFG 10k assembled!"
 }
