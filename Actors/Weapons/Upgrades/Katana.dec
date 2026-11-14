@@ -3,11 +3,10 @@
 //==============================================================================
 // Caliber: Mana/Purified Blood
 //==============================================================================
-//
+// So sharp and long, this sword is thirsty for blood to unleash it's power.
+// As the saying goes;
 // 
-// 
-//
-// 
+// Mankind is dead. Blood is fuel. Hell is full.
 //==============================================================================
 ACTOR MariaKatana : MariaWeapon
 {
@@ -168,18 +167,19 @@ ACTOR MariaKatana : MariaWeapon
 		TASQ ABC 1
 		TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
 		TASG DEH 1
-		TNT1 A 0 A_TakeInventory("PipebombAmmo", 1)
+		TNT1 A 0 A_TakeInventory("PipebombAmmo", 1,TIF_NOTAKEINFINITE)
 		TASG I 1 A_PlayWeaponSound("Maria/Pipebomb/Miss",1)
 		TASG J 1 A_PlaySound("Maria/Pipebomb/Ignite", 2)
 		TASG KLM 1
 		TASG OPQR 1 
 		TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
 		TAHA AB 1
-		TNT1 A 0 A_JumpIfInventory("PowerQuadDamage",1,2)
-		TNT1 A 0 A_Jump(256,2)
-		TNT1 A 0 A_PlaySound("Maria/Powerup/Quad/Shoot",7)
-		TNT1 A 0 A_PlaySound("Maria/Pipebomb/Throw", 3)
-		TNT1 A 0 A_FireCustomMissile("HolyPipebomb",0,1,0,0)
+		TNT1 A 0 
+		{
+		If(CountInv("PowerQuadDamage") == 1) { A_PlaySound("Maria/Powerup/Quad/Shoot",7); }
+		A_PlaySound("Maria/Pipebomb/Throw", 3);
+		A_FireCustomMissile("HolyPipebomb",0,1,0,0);
+		}
 		TAHA CDE 1
 		TNT1 A 5
 		MAKA EDCBA 1
