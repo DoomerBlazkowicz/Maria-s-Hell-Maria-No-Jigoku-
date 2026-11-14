@@ -4,7 +4,9 @@
 // Caliber: 5.56x45mm NATO/7.62x39mm
 //==============================================================================
 // UAC modified Russian Kalashnikov, surpising to see a old relic got relevance
-// in 2046. Slow but deals pretty good damage, accurate and even average recoil.
+// in 2046. 
+//
+// Slow but deals pretty good damage, accurate and even average recoil.
 //==============================================================================
 Actor MariaAbakan : MariaWeapon //replaces Chaingun
 {
@@ -64,7 +66,7 @@ Actor MariaAbakan : MariaWeapon //replaces Chaingun
 		}
 		RGUF A 0 bright
 		{
-			A_FireBullets (2, 2, -1, 25, "MariaPuffPurple");
+			A_FireBullets (2, 2, -1, 20, "MariaPuffPurple");
 			A_FireCustomMissile("AKCasingSpawner",-5,0,0,-6);
 			radius_quake (4, 2, 0, 1, 0);
 			If(CountInv("PowerQuadDamage") == 1) { A_PlaySound("Maria/Powerup/Quad/Shoot",7); }
@@ -124,13 +126,13 @@ Actor MariaAbakan : MariaWeapon //replaces Chaingun
 
 	ReloadWork:
 		TNT1 A 0 A_StartSound("Foley/Rifle/Raise", CHAN_AUTO)
-		RGUR ABCDEFF 1 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
-		RGUR G 1 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
+		RGUR ABCDEFF 1 A_WeaponReady(WRF_NOBOB|WRF_NOFIRE|WRF_ALLOWZOOM)
+		RGUR G 1 A_WeaponReady(WRF_NOBOB|WRF_NOFIRE|WRF_ALLOWZOOM)
 		TNT1 A 0 A_StartSound("Foley/MagPouch/Out", CHAN_AUTO)
-		RGUR G 1 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
+		RGUR G 1 A_WeaponReady(WRF_NOBOB|WRF_NOFIRE|WRF_ALLOWZOOM)
 		RGUR H 5
 		TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
-		RGUR IJKL 2 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
+		RGUR IJKL 2 A_WeaponReady(WRF_NOBOB|WRF_NOFIRE|WRF_ALLOWZOOM)
 		RGUR A 0 A_PlaySound ("Weapon/Shinigami/Reload/MagOut", CHAN_AUTO)
 		RGUR MNO 2 
 		TNT1 A 0 A_StartSound("Foley/Rifle/Misc", CHAN_AUTO)
@@ -160,14 +162,14 @@ Actor MariaAbakan : MariaWeapon //replaces Chaingun
 
 	FinishReload:
 		TNT1 A 0 A_StartSound("Foley/Rifle/Misc", CHAN_AUTO)
-		RG2R JKLMN 2 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
+		RG2R JKLMN 2 A_WeaponReady(WRF_NOBOB|WRF_NOFIRE|WRF_ALLOWZOOM)
 		TNT1 A 0 A_PlaySound ("Weapon/Shinigami/Reload/Bolt/Back", 1)
-		RG2R OPQRS 2 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
+		RG2R OPQRS 2 A_WeaponReady(WRF_NOBOB|WRF_NOFIRE|WRF_ALLOWZOOM)
 		TNT1 A 0 A_PlaySound ("Weapon/Shinigami/Reload/Bolt/Release", 2)
-		RG2R TUV 2 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
+		RG2R TUV 2 A_WeaponReady(WRF_NOBOB|WRF_NOFIRE|WRF_ALLOWZOOM)
 		TNT1 A 0 A_StartSound("Foley/Rifle/Lower", CHAN_AUTO)
-		RG2R WXGHI 2 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
-		RGUN A 2 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
+		RG2R WXGHI 2 A_WeaponReady(WRF_NOBOB|WRF_NOFIRE|WRF_ALLOWZOOM)
+		RGUN A 2 A_WeaponReady(WRF_NOBOB|WRF_NOFIRE|WRF_ALLOWZOOM)
 		Goto ReadyLoop
 
 	ReloadingLoop2:
@@ -179,11 +181,11 @@ Actor MariaAbakan : MariaWeapon //replaces Chaingun
 
 	FinishReload2:
 		TNT1 A 0 A_StartSound("Foley/Rifle/Lower", CHAN_AUTO)
-		RG2R CDEF 2 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
-		RG2R GH 2 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
+		RG2R CDEF 2 A_WeaponReady(WRF_NOBOB|WRF_NOFIRE|WRF_ALLOWZOOM)
+		RG2R GH 2 A_WeaponReady(WRF_NOBOB|WRF_NOFIRE|WRF_ALLOWZOOM)
 		//TNT1 A 0 A_StartSound("Foley/Rifle/Misc", CHAN_AUTO)
-		RG2R I 2 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
-		RGUN A 2 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
+		RG2R I 2 A_WeaponReady(WRF_NOBOB|WRF_NOFIRE|WRF_ALLOWZOOM)
+		RGUN A 2 A_WeaponReady(WRF_NOBOB|WRF_NOFIRE|WRF_ALLOWZOOM)
 		Goto ReadyLoop
 
 	ThrowPipebomb:
@@ -191,18 +193,19 @@ Actor MariaAbakan : MariaWeapon //replaces Chaingun
 		TASQ ABC 1
 		TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
 		TASG DEH 1
-		TNT1 A 0 A_TakeInventory("PipebombAmmo", 1)
+		TNT1 A 0 A_TakeInventory("PipebombAmmo", 1,TIF_NOTAKEINFINITE)
 		TASG I 1 A_PlayWeaponSound("Maria/Pipebomb/Miss",1)
 		TASG J 1 A_PlaySound("Maria/Pipebomb/Ignite", 2)
 		TASG KLM 1
 		TASG OPQR 1 
 		TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
 		TAHA AB 1
-		TNT1 A 0 A_JumpIfInventory("PowerQuadDamage",1,2)
-		TNT1 A 0 A_Jump(256,2)
-		TNT1 A 0 A_PlaySound("Maria/Powerup/Quad/Shoot",7)
-		TNT1 A 0 A_PlaySound("Maria/Pipebomb/Throw", 3)
-		TNT1 A 0 A_FireCustomMissile("HolyPipebomb",0,1,0,0)
+		TNT1 A 0 
+		{
+		If(CountInv("PowerQuadDamage") == 1) { A_PlaySound("Maria/Powerup/Quad/Shoot",7); }
+		A_PlaySound("Maria/Pipebomb/Throw", 3);
+		A_FireCustomMissile("HolyPipebomb",0,1,0,0);
+		}
 		TAHA CDE 1
 		TNT1 A 5
 		RGUS ABCDE 1

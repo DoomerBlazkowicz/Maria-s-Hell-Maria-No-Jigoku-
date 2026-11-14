@@ -5,7 +5,8 @@
 //==============================================================================
 // A full automatic "light" machine gun with a ammo box attached, pretty fast
 // lot of ammo to fire, but it's heavy to carry and hassle to load it up.
-// Calling this "Light Machine Gun" is a irony.
+//
+// Not gonna lie, calling this a "Light Machine Gun" is a heavy irony.
 //==============================================================================
 Actor MariaLMG : MariaWeapon //replaces Chaingun
 {
@@ -73,7 +74,7 @@ Actor MariaLMG : MariaWeapon //replaces Chaingun
 		}
 		"####" A 0 bright 
 		{
-		A_FireBullets (3, 3, 1, 20, "MariaPuffPurple");
+		A_FireBullets (3.5, 3.5, 1, 20, "MariaPuffPurple");
 		A_FireCustomMissile("LMGCasingSpawner",-5,0,0,-6); //A_SpawnItemEx("ARBulletCasing", 17, 3, 35, 0, random(3,6), random(3,7))
 		A_FireCustomMissile("MinigunLinkCasingSpawner",-5,0,0,-6);
 		radius_quake (8, 3, 0, 1, 0);
@@ -107,12 +108,12 @@ Actor MariaLMG : MariaWeapon //replaces Chaingun
 	ReloadWork:
 		TNT1 A 0 A_StartSound("Foley/Rifle/Misc", CHAN_AUTO)
 		TNT1 A 0 A_JumpIfInventory("MariaLMGLoaded", 1, "ReloadWork2")
-		LMGR ABC 1 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
-		LMGR DEFFGG 1 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
+		LMGR ABC 1 A_WeaponReady(WRF_NOBOB|WRF_NOFIRE|WRF_ALLOWZOOM)
+		LMGR DEFFGG 1 A_WeaponReady(WRF_NOBOB|WRF_NOFIRE|WRF_ALLOWZOOM)
 		LMGR A 0 A_PlaySound ("Weapon/LMG/Reload/Open", CHAN_AUTO)
-		LMGR HIJ 1 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
-		LMGR KLM 2 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
-		LMGR NOP 2 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
+		LMGR HIJ 1 A_WeaponReady(WRF_NOBOB|WRF_NOFIRE|WRF_ALLOWZOOM)
+		LMGR KLM 2 A_WeaponReady(WRF_NOBOB|WRF_NOFIRE|WRF_ALLOWZOOM)
+		LMGR NOP 2 A_WeaponReady(WRF_NOBOB|WRF_NOFIRE|WRF_ALLOWZOOM)
 		LMGR A 0 A_PlaySound ("Weapon/LMG/Reload/BoxOut", CHAN_AUTO)
 		LMGR QQRRSTU 1
 		TNT1 A 0 A_FireCustomMissile("EmptyASGAmmo",-5,0,0,-6) 
@@ -134,35 +135,35 @@ Actor MariaLMG : MariaWeapon //replaces Chaingun
 
 	FinishReload:
 		TNT1 A 0 A_PlaySound ("Weapon/LMG/Reload/Belt", CHAN_AUTO)
-		LM2R IJ 2 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
-		LM2R KLMNN 2 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
-		LM2R OPQ 2 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
+		LM2R IJ 2 A_WeaponReady(WRF_NOBOB|WRF_NOFIRE|WRF_ALLOWZOOM)
+		LM2R KLMNN 2 A_WeaponReady(WRF_NOBOB|WRF_NOFIRE|WRF_ALLOWZOOM)
+		LM2R OPQ 2 A_WeaponReady(WRF_NOBOB|WRF_NOFIRE|WRF_ALLOWZOOM)
 		TNT1 A 0 A_PlaySound ("Weapon/LMG/Reload/Close", CHAN_AUTO)
-		LM2R RSTT 2 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
-		LM2R UUVWX 2 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
-		LM2R YZ 2 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
-		LM3R AABCDD 1 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
+		LM2R RSTT 2 A_WeaponReady(WRF_NOBOB|WRF_NOFIRE|WRF_ALLOWZOOM)
+		LM2R UUVWX 2 A_WeaponReady(WRF_NOBOB|WRF_NOFIRE|WRF_ALLOWZOOM)
+		LM2R YZ 2 A_WeaponReady(WRF_NOBOB|WRF_NOFIRE|WRF_ALLOWZOOM)
+		LM3R AABCDD 1 A_WeaponReady(WRF_NOBOB|WRF_NOFIRE|WRF_ALLOWZOOM)
 		TNT1 A 0 A_PlaySound ("Weapon/LMG/Reload/Bolt/Back", 1)
 		TNT1 A 0 A_StartSound("Foley/Rifle/Misc", CHAN_AUTO)
-		LM3R EFFGGGHHHH 1 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
-		LM3R GGFF 2 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
+		LM3R EFFGGGHHHH 1 A_WeaponReady(WRF_NOBOB|WRF_NOFIRE|WRF_ALLOWZOOM)
+		LM3R GGFF 2 A_WeaponReady(WRF_NOBOB|WRF_NOFIRE|WRF_ALLOWZOOM)
 		TNT1 A 0 A_PlaySound ("Weapon/LMG/Reload/Bolt/Release", 2)
-		LM3R ED 2 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
+		LM3R ED 2 A_WeaponReady(WRF_NOBOB|WRF_NOFIRE|WRF_ALLOWZOOM)
 		TNT1 A 0 A_StartSound("foley/LMG/Movement", CHAN_AUTO)
-		LM3R IJKLM 2 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
-		LMGG A 2 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
+		LM3R IJKLM 2 A_WeaponReady(WRF_NOBOB|WRF_NOFIRE|WRF_ALLOWZOOM)
+		LMGG A 2 A_WeaponReady(WRF_NOBOB|WRF_NOFIRE|WRF_ALLOWZOOM)
 		Goto ReadyLoop
 
 	ReloadWork2:
-		LM4R ABC 1 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
-		LM4R DEFFGG 1 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
+		LM4R ABC 1 A_WeaponReady(WRF_NOBOB|WRF_NOFIRE|WRF_ALLOWZOOM)
+		LM4R DEFFGG 1 A_WeaponReady(WRF_NOBOB|WRF_NOFIRE|WRF_ALLOWZOOM)
 		LM4R A 0 A_PlaySound ("Weapon/LMG/Reload/Open", CHAN_AUTO)
-		LM4R HIJJJ 1 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
-		LM4R KLMN 2 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
+		LM4R HIJJJ 1 A_WeaponReady(WRF_NOBOB|WRF_NOFIRE|WRF_ALLOWZOOM)
+		LM4R KLMN 2 A_WeaponReady(WRF_NOBOB|WRF_NOFIRE|WRF_ALLOWZOOM)
 		TNT1 A 0 A_PlaySound ("Weapon/LMG/Reload/Belt/Remove", CHAN_AUTO)
-		LM4R NOP 2 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
-		LM4R PQR 2 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
-		LM4R STU 1 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
+		LM4R NOP 2 A_WeaponReady(WRF_NOBOB|WRF_NOFIRE|WRF_ALLOWZOOM)
+		LM4R PQR 2 A_WeaponReady(WRF_NOBOB|WRF_NOFIRE|WRF_ALLOWZOOM)
+		LM4R STU 1 A_WeaponReady(WRF_NOBOB|WRF_NOFIRE|WRF_ALLOWZOOM)
 		LM4R A 0 A_PlaySound ("Weapon/LMG/Reload/BoxOut/Full", CHAN_AUTO)
 		LM4R VVWXY 1
 		LMGR VVWWW 2
@@ -183,13 +184,13 @@ Actor MariaLMG : MariaWeapon //replaces Chaingun
 
 	FinishReload2:
 		TNT1 A 0 A_PlaySound ("Weapon/LMG/Reload/Belt", CHAN_AUTO)
-		LM2R IJ 2 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
-		LM2R KLMNN 2 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
-		LM2R OPQ 2 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
+		LM2R IJ 2 A_WeaponReady(WRF_NOBOB|WRF_NOFIRE|WRF_ALLOWZOOM)
+		LM2R KLMNN 2 A_WeaponReady(WRF_NOBOB|WRF_NOFIRE|WRF_ALLOWZOOM)
+		LM2R OPQ 2 A_WeaponReady(WRF_NOBOB|WRF_NOFIRE|WRF_ALLOWZOOM)
 		TNT1 A 0 A_PlaySound ("Weapon/LMG/Reload/Close", CHAN_AUTO)
-		LM2R RSTT 2 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
-		LM2R UUVWX 2 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
-		LMGG A 2 A_WeaponReady(WRF_NOFIRE|WRF_NOBOB)
+		LM2R RSTT 2 A_WeaponReady(WRF_NOBOB|WRF_NOFIRE|WRF_ALLOWZOOM)
+		LM2R UUVWX 2 A_WeaponReady(WRF_NOBOB|WRF_NOFIRE|WRF_ALLOWZOOM)
+		LMGG A 2 A_WeaponReady(WRF_NOBOB|WRF_NOFIRE|WRF_ALLOWZOOM)
 		Goto ReadyLoop
 
 	ThrowPipebomb:
@@ -199,27 +200,25 @@ Actor MariaLMG : MariaWeapon //replaces Chaingun
 		TASQ ABC 1
 		TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
 		TASG DEH 1
-		TNT1 A 0 A_TakeInventory("PipebombAmmo", 1)
+		TNT1 A 0 A_TakeInventory("PipebombAmmo", 1,TIF_NOTAKEINFINITE)
 		TASG I 1 A_PlayWeaponSound("Maria/Pipebomb/Miss",1)
 		TASG J 1 A_PlaySound("Maria/Pipebomb/Ignite", 2)
 		TASG KLM 1
 		TASG OPQR 1 
 		TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
 		TAHA AB 1
-		TNT1 A 0 A_JumpIfInventory("PowerQuadDamage",1,2)
-		TNT1 A 0 A_Jump(256,2)
-		TNT1 A 0 A_PlaySound("Maria/Powerup/Quad/Shoot",7)
-		TNT1 A 0 A_PlaySound("Maria/Pipebomb/Throw", 3)
-		TNT1 A 0 A_FireCustomMissile("HolyPipebomb",0,1,0,0)
+		TNT1 A 0 
+		{
+		If(CountInv("PowerQuadDamage") == 1) { A_PlaySound("Maria/Powerup/Quad/Shoot",7); }
+		A_PlaySound("Maria/Pipebomb/Throw", 3);
+		A_FireCustomMissile("HolyPipebomb",0,1,0,0);
+		}
 		TAHA CDE 1
 		TNT1 A 5
 		LMES A 0 
 		{
 			A_StartSound("foley/LMG/Movement", CHAN_AUTO);
-			if(CountInv("MariaLMGLoaded") < 1)
-			{
-				return state(2);
-			}
+			if(CountInv("MariaLMGLoaded") < 1) { return state(2); }
 			return state("");
 		}
 		LMGS A 0
