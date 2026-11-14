@@ -7,12 +7,13 @@ Actor MariaPunch1 : FastProjectile //Main Punches
     Projectile 
     +FORCEXYBILLBOARD
 	+noextremedeath
+    +ForcePain
 	RenderStyle Translucent
     projectilekickback 150
     Decal "PunchWall"
 	Alpha 0.75
 	Scale 1.00
-	Damage 5
+	Damage (5)
 	Speed 30
 	decal "none"
 	SeeSound "none"
@@ -102,7 +103,7 @@ Actor MariaKick1 : MariaPunch1
 {
     projectilekickback 500
 	DamageType Kick
-	damage 12
+	damage (40)
 	States
 	{
 	Spawn:
@@ -127,7 +128,7 @@ Actor MariaKick2 : MariaPunch1 //Berserked
     projectilekickback 900
 	DamageType Crush
 	-noextremedeath
-	damage 120
+	damage (180)
 	States
 	{
 	Spawn:
@@ -186,6 +187,7 @@ Actor MariaShotgunStockPuff : MariaPunch1
     +FORCEXYBILLBOARD
 	+noextremedeath
 	+BloodSplatter
+    +ForcePain
 	RenderStyle Add
 	decal "none"
 	SeeSound "none"
@@ -222,6 +224,7 @@ Actor MariaCrowbarHit1 : FastProjectile //Normal Attacks
     +FORCEXYBILLBOARD
 	+noextremedeath
 	+BloodSplatter
+    +ForcePain
 	RenderStyle Add
 	Alpha 2
 	Scale 0.25
@@ -264,6 +267,7 @@ Actor MariaKnifeHit1 : FastProjectile //Slice
     +FORCEXYBILLBOARD
 	+noextremedeath
 	+BloodSplatter
+    +ForcePain
 	RenderStyle Add
 	Alpha 2
 	Damage 10
@@ -306,6 +310,7 @@ Actor MariaChainsawHit : FastProjectile
     +FORCEXYBILLBOARD
 	+noextremedeath
 	+BloodSplatter
+    +ForcePain
 	RenderStyle Add
 	Alpha 2
 	Damage 5
@@ -341,6 +346,7 @@ Actor MariaSwordPuff1 : FastProjectile //Left
     +FORCEXYBILLBOARD
 	+noextremedeath
 	+BloodSplatter
+    +ForcePain
 	RenderStyle Add
 	Alpha 2
 	Damage 20
