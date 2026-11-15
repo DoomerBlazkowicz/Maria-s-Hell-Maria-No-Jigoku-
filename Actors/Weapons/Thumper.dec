@@ -197,7 +197,7 @@ Actor MariaThumper : MariaWeapon //Replaces Rocketlauncher
 
 	PunchFlash:
 		MATK ABC 1
-		MATK D 12
+		MATK D 13
 		MATK CBA 1
 		Stop
 
