@@ -315,6 +315,11 @@ brightmap sprite PLZCG0		{map "Brightmaps/Weapons/6.1-Plasma Rifle/Cooldown/PLZC
 brightmap sprite PLZCH0		{map "Brightmaps/Weapons/6.1-Plasma Rifle/Cooldown/PLZCB0_BM.png"}
 brightmap sprite PLZCI0		{map "Brightmaps/Weapons/6.1-Plasma Rifle/Cooldown/PLZCA0_BM.png"}
 
+brightmap sprite PLZRN0		{map "Brightmaps/Weapons/6.1-Plasma Rifle/Reloading/PLZRN0_BM.png"}
+brightmap sprite PLZRO0		{map "Brightmaps/Weapons/6.1-Plasma Rifle/Reloading/PLZRO0_BM.png"}
+brightmap sprite PLZRP0		{map "Brightmaps/Weapons/6.1-Plasma Rifle/Reloading/PLZRP0_BM.png"}
+brightmap sprite PLZRQ0		{map "Brightmaps/Weapons/6.1-Plasma Rifle/Reloading/PLZRQ0_BM.png"}
+
 //PewPewGun
 
 brightmap sprite ALPDA0		{map "Brightmaps/Weapons/6.1.2-PewPewGun/Deselect/ALPDA0_BM.png"}
