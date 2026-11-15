@@ -14,8 +14,6 @@ server int legtoggle = 0;
 server int bonusitemtoggle = 0;
 
 server int introtoggle = 0;
-server bool MariaWolfensteinSSReplacement = false;
-server bool MariaVanillaDecorationsReplacement = false;
 
 //toggles
 server int jpm_enable_djump = 1;
