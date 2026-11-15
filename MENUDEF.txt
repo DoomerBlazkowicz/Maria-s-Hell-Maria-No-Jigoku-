@@ -91,15 +91,66 @@ OptionMenu "MHCosmetic"
 {
 	Title "Weapon and Item Skins"
 	StaticText " "
+	StaticText "Options for Shotgun looks.", 4
+	StaticText "('93 Shotgun/Default, Spas 12/Legacy)", 2
 	option "Shotgun Look", "shotguntoggle", "ShotgunStyle"
 	StaticText " "
+	StaticText "Options for Plasma Rifle", 4
+	StaticText "(Default, PewPewGun from Bunny Maze)", 2
 	option "Plasma Rifle Look", "plasmarifletoggle", "PlasmaRifleSkinToggler" 
 	StaticText " "
+	StaticText "Options for Kicks", 4
+	StaticText "(Default, Huntress)", 2
 	option "Kick Look", "legtoggle", "LegStyle"
 	StaticText " "
+	StaticText "Options for bonus items", 4
+	StaticText "(Rosaries, Alternative, Classic)", 2
 	option "Bonus Item Looks", "bonusitemtoggle", "BonusItemStyle"
 	StaticText " "
+}
 
+OptionMenu "MHGameplay"
+{
+	Title "Gameplay Options"
+	StaticText " "
+	StaticText "Ammunition Settings (Hexen Exclusive)", 1
+	StaticText "Options for Flechette spawners in Hexen" 
+	StaticText "(Grenades and Pipebomb)" 
+	Option "Flechette spots", "RKAmmoEffects", "RKAmmoValues"
+	StaticText ""
+    Option "Enable Sliding", "jpm_enable_slide", "OnOff"
+	StaticText ""
+	StaticText "Intro Scripts", 1
+	StaticText "Options for enabling or disabling intro's for your preferences" 
+	StaticText "(Both, Hallucination, Knuckle Cracking, None)" 
+	Option "Intro Options", "introtoggle", "IntroOptions"
+	StaticText ""
+
+	Option "Vanilla Behaviours", "bd_classicmonsters", "OnOff"
+	StaticText "Disallow alternate attack and restore vanilla-ish attacks" 
+	StaticText "to some demons"
+	StaticText ""
+
+	Option "Advanced Decorations", "MariaVanillaDecorationsReplacement", "OnOff"
+	StaticText "Options to enamble/disable mod's decorations."
+	StaticText "(Use it for wads that replaces props)"
+	StaticText " "
+
+	StaticText "Tilt++ v1.65", 1
+	StaticText "Options related to Tilt++" 
+	StaticText "(By Nash)" 
+	Submenu "$OPTMNU_TILTPLUSPLUS", "TiltPlusPlusMenu"
+	StaticText ""
+	StaticText "Flashlight++", 1
+	StaticText "Options of Flashlight++"
+	StaticText "(By generic_name_guy)" 
+	Submenu "$FPP_TITOP", "FlashlightPlusOptions"
+	StaticText ""
+	StaticText "Use To Pickup", 1
+	StaticText "Options of Use to Pickup"
+	StaticText "(By argv minus one)" 
+	Submenu "$U2P_OptionsMenu_Title", "UseToPickupOptions"
+	StaticText ""
 	StaticText "Sound Options", 1
 	StaticText " "
 	option "Ear Ringings", "antitinnitus", "AntiTinnitus" 
@@ -108,42 +159,17 @@ OptionMenu "MHCosmetic"
 	StaticText " " 
 }
 
-OptionMenu "MHGameplay"
-{
-	Title "Gameplay Options"
-	StaticText " "
-	StaticText "Ammunition Settings (Hexen Exclusive)", 1
-	StaticText ""
-	Option "Flechette spots", "RKAmmoEffects", "RKAmmoValues"
-	StaticText ""
-	StaticText "Gameplay Settings", 1
-    Option "Enable Sliding", "jpm_enable_slide", "OnOff"
-	StaticText ""
-	StaticText "Intro Scripts", 1
-	Option "Intro Options", "introtoggle", "IntroOptions"
-	StaticText ""
-	StaticText "Tilt++ v1.65", 1
-	StaticText ""
-	Submenu "$OPTMNU_TILTPLUSPLUS", "TiltPlusPlusMenu"
-	StaticText ""
-	StaticText "Flashlight++", 1
-	StaticText ""
-	Submenu "$FPP_TITOP", "FlashlightPlusOptions"
-	StaticText ""
-	StaticText "Use To Pickup", 1
-	StaticText ""
-	Submenu "$U2P_OptionsMenu_Title", "UseToPickupOptions"
-	StaticText ""
-}
-
 OptionMenu "MHHUD"
 {
 	Title "HUD options"
 
 	StaticText "Torso Skins", 1
-	StaticText " " 
+	StaticText "Options for many outfits for Maria." 
+	StaticText "(School Nurse, Casual, Huntress, School Festival, Nude, Bunny Slayer, Killswitch Engage, Empty)" 
 	Option "TorsoBar Torso Type", "MH_TorsoType", "MH_TorsoType"
 	StaticText " "
+	StaticText "Options for HUD types." 
+	StaticText "(The Dark Ages, Eternal, Doom 64)" 
 	Option "HUD Style", "MH_HUDType", "MH_HUDType"
 	StaticText " "
 	
@@ -163,7 +189,7 @@ OptionMenu "MHCredits"
    StaticText "Nathan Silver, ChopBlock223, OSJClatchford, Scalliano,"
    StaticText "Ganbare Lucifer, DoomNukem, SwagMaster, DrPyspy, PGE, Ang3ll0pr0duct,"
    StaticText "Wocht11k, Warhawk, Adventure Dude, iamcarrotmaster/Carrot," 
-   StaticText "Uchi Ixos, Potetobloke"
+   StaticText "Uchi Ixos, Potetobloke, KamiJoJo"
    StaticText ""
    StaticText "[SOUNDS]",1
    StaticText "ID Software, Raven Software, Monolith, Valve, Crowbar Collective,"
@@ -174,39 +200,32 @@ OptionMenu "MHCredits"
    StaticText ""
    StaticText "[VOICES]",1
    StaticText "Sayaka Ohara (For Maria)"
-   StaticText "Ellen McLain (For berserked Maria screams)"
+   StaticText "Ellen McLain (For berserked Maria's screams)"
    StaticText "Atsushi Imaruoka (For Okaya SWAT's)"
    StaticText "Julie Nathanson (For Death Machine announcer)"
    StaticText ""
-   StaticText "[DECORATIONS/PROPS]",1
-   StaticText "KeksDose (Ultimate Torment 'n' Torture torches)"
-   StaticText ""
-   StaticText "[FEEDBACKERS/SUGGESTERS]",1
-   StaticText "IDDQD_1337 (Option for mag clickings)"
-   StaticText "SallieEX (CoF styled syringe and some sound suggestions)"
-   StaticText "katherinecode (Spriting stuff)"
-   StaticText "Allie Leyley420 (Option for disabling ear ringing sound)"
-   StaticText "SwagMaster (Quick Pipebomb throw)"
-   StaticText "Patis (Mag clicking and some sound suggestions)"
-   StaticText ""
    StaticText "[ACS/Zscript/Additional Coders]",1
-   StaticText "popguy12 (HUD, PVT Stone styled torso options)"
-   StaticText "Nash Muhandes (Tilt +)"
-   StaticText "Blade of Agony Team (Low health system, difficulty faces and death script)"
+   StaticText "popguy12 (HUD related)"
+   StaticText "Patis (Weapon and asset provider)"
+   StaticText "IDDQD_1337 (Weapon recoder)"
    StaticText "Skelegant (Kill Tracker from PVT Stone and GD_Echidna)"
-   StaticText "Xenfar (Updated Kill tracker and addition of Secret and Item variants)"
+   StaticText "Xenfar (Updated Skelegant's Kill tracker and addition of Secret and Item variants)"
+   StaticText "Nash Muhandes (Tilt +)"
    StaticText "DrCosmobyte (Creating the Raven Patch and Chex comp)"
    StaticText "generic_name_guy (Flashlight++)"
-   StaticText "LossForWords (Doom 3 styled Berserk)"
-   StaticText "Vortex (Level stats for the HUD)" 
+   StaticText "Vortex (Level stats for the HUD and Shield code help)" 
+   StaticText "Blade of Agony Team (Low health system, difficulty faces and death script)"
+   StaticText "LossForWords (Doom 3 styled Berserk and Red Spiral 93's secret notifier script)"
    StaticText "Jetplane (JPMobility)"
    StaticText ""
    StaticText "[PLAYTESTERS]",1
+   StaticText "popguy12"
+   StaticText "IDDQD_1337"
+   StaticText "Gemini0"
+   StaticText "Patis"   
    StaticText "Uchi Ixos"
    StaticText "Allie Leyley420"
-   StaticText "Patis"
    StaticText "Linok_Games"
-   StaticText "popguy12"
    StaticText ""
    StaticText "[MUSIC]",1
    StaticText "Gravity Well (From Quake 2) by Sonic Mayhem"
@@ -281,7 +300,6 @@ OptionValue IntroOptions
    1, "Hallucination"
    2, "Knuckle Cracking"
    3, "None"
- //4, "Helmet"
 }
 
 OptionValue MH_TorsoType
