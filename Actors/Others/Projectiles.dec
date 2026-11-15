@@ -1739,7 +1739,7 @@ ACTOR HolyPipebomb
 		GLXP A 0 A_AlertMonsters
 		//GLXP A 0 bright A_Explode(200,400)
 		GLXP A 0 bright A_Explode(100,300)
-		TNT1 A 0 A_CustomBulletAttack(180,100,FRandom(48,64),FRandom(2,10),"MariaPuff")
+		TNT1 A 0 A_CustomBulletAttack(180,100,FRandom(48,64),FRandom(2,10),"MariaPipebombPuff")
         TNT1 A 0 A_PlaySound("Maria/Pipebomb/Boom", CHAN_AUTO)
 		TNT1 A 0 A_PlaySound("Maria/Explosion/Ear",5,1,0,1)
         TNT1 A 0 A_PlaySound("Maria/Explosion/Far", CHAN_AUTO)
@@ -1758,7 +1758,7 @@ ACTOR HolyPipebomb
 		GLXP A 0 A_AlertMonsters
 		//GLXP A 0 bright A_Explode(200,400)
 		GLXP A 0 bright A_Explode(100,300)
-		TNT1 A 0 A_CustomBulletAttack(180,100,FRandom(48,64),FRandom(2,10),"MariaPuff")
+		TNT1 A 0 A_CustomBulletAttack(180,100,FRandom(48,64),FRandom(2,10),"MariaPipebombPuff")
         TNT1 A 0 A_PlaySound("Maria/Pipebomb/Boom", CHAN_AUTO)
         TNT1 A 0 A_PlaySound("Maria/Explosion/Far", CHAN_AUTO)
 		GLXP A 0 A_SetTranslucent(0.75,1)
