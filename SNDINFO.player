@@ -1,0 +1,105 @@
+$playeralias    MariaPlayer  male      *pain100     Maria/Pain/Low
+$playeralias    MariaPlayer  male      *pain75      Maria/Pain/Medium
+$playeralias    MariaPlayer  male      *pain50      Maria/Pain/Medium
+$playeralias    MariaPlayer  male      *pain25      Maria/Pain/High
+$playeralias	MariaPlayer	 male	   *usefail	    maria/fail
+$playeralias	MariaPlayer	 male	   *grunt	    maria/land
+$playeralias	MariaPlayer	 male      *land	    maria/land
+$playeralias	MariaPlayer	 male	   *jump        Maria/Jump
+$playeralias	MariaPlayer	 male	   *surface	    maria/surface
+$playeralias	MariaPlayer	 male	   *dive	    maria/dive
+$playeralias    MariaPlayer  male      *death       Maria/Death
+$playeralias    MariaPlayer  male	   *xdeath      Maria/Death/Gibbed
+$playersound	MariaPlayer  male	   *burndeath	Maria/Death/Burning
+$playersound	MariaPlayer  male	   *death-fire	Maria/Death/Burning
+$playeralias	MariaPlayer  male      *Taunt	    Maria/Taunts
+$playeralias	MariaPlayer  male	   *splat	    Maria/Death/Gibbed
+$playeralias	MariaPlayer	 male	   *weaponlaugh Weapon/Book/Pickup
+$playeralias	MariaPlayer	 male	   *evillaugh	Weapon/Book/Pickup
+$playeralias	MariaPlayer	 male	   *falling	    maria/falling
+$playeralias	MariaPlayer	 male	   *puzzfail    maria/hmmm
+
+$playeralias    MariaPlayer  female    *pain100     Maria/Pain/Low
+$playeralias    MariaPlayer  female    *pain75      Maria/Pain/Medium
+$playeralias    MariaPlayer  female    *pain50      Maria/Pain/Medium
+$playeralias    MariaPlayer  female    *pain25      Maria/Pain/High
+$playeralias	MariaPlayer	 female	   *usefail	    maria/fail
+$playeralias	MariaPlayer	 female	   *grunt	    maria/land
+$playeralias	MariaPlayer	 female	   *land	    maria/land
+$playeralias	MariaPlayer	 female	   *jump        Maria/Jump
+$playeralias	MariaPlayer	 female	   *surface	    maria/surface
+$playeralias	MariaPlayer	 female	   *dive	    maria/dive
+$playeralias    MariaPlayer  female    *death       Maria/Death
+$playeralias    MariaPlayer  female	   *xdeath      Maria/Death/Gibbed
+$playersound	MariaPlayer  female	   *burndeath	Maria/Death/Burning 
+$playersound	MariaPlayer  female	   *death-fire	Maria/Death/Burning
+$playeralias	MariaPlayer  female    *Taunt	    Maria/Taunts
+$playeralias	MariaPlayer	 female	   *splat		    Maria/Death/Gibbed
+$playeralias	MariaPlayer	 female	   *weaponlaugh	Weapon/Book/Pickup
+$playeralias	MariaPlayer	 female	   *evillaugh	    Weapon/Book/Pickup
+$playeralias	MariaPlayer	 female	   *falling	    maria/falling
+$playeralias	MariaPlayer	 female	   *puzzfail       maria/hmmm
+
+$random Maria/Pain/Low	{ MALAIN1 MALAIN2 MHLAIN3 MHLAIN4 }
+MALAIN1 MALAIN1
+MALAIN2 MALAIN2
+MHLAIN3 MHLAIN3
+MHLAIN4 MHLAIN4
+
+$random Maria/Pain/Medium { MAMAIN1 MAMAIN2 MAMAIN3 MAMAIN4 MAMAIN5 MAMAIN6 MAMAIN7 }
+MAMAIN1 MAMAIN1
+MAMAIN2 MAMAIN2
+MAMAIN3 MAMAIN3
+MAMAIN4 MAMAIN4
+MAMAIN5 MAMAIN5
+MAMAIN6 MAMAIN6
+MAMAIN7 MAMAIN7
+
+$random Maria/Pain/High	{ MAHAIN1 MAHAIN2 MAHAIN3 MAHAIN4 MAHAIN5 }
+MAHAIN1 MAHAIN1
+MAHAIN2 MAHAIN2
+MAHAIN3 MAHAIN3
+MAHAIN4 MAHAIN4
+MAHAIN5 MAHAIN5
+
+$random Maria/Taunts	{ taunt1 taunt2 taunt3 taunt4 taunt5 taunt6 taunt1 taunt2 taunt3 taunt4 taunt5 taunt6 taunt1 taunt2 taunt3 taunt4 taunt5 taunt6 taunts }
+taunt1 MATAUN1
+taunt2 MATAUN2
+taunt3 MATAUN3
+taunt4 MATAUN4
+taunt5 MATAUN5
+taunt6 MATAUN6
+taunts MATAUNS
+
+maria/oof MANOWAY
+maria/land MAOOFAY
+maria/fail MANOWAY
+maria/falling MOMFALL
+
+$random Maria/Jump { MAJUMP1 MAJUMP2 MAJUMP3 MAJUMP4 MAJUMP5 }
+MAJUMP1 MAJUMP1
+MAJUMP2 MAJUMP2
+MAJUMP3 MAJUMP3
+MAJUMP4 MAJUMP4
+MAJUMP5 MAJUMP5
+
+$random Maria/Death { Maria/Death1 Maria/Death2 } //Normal
+Maria/Death1 MAFDTHE 
+Maria/Death2 MAFDTHG
+
+Maria/Death/Gibbed MOMSCREA //Gibbed
+
+Maria/Death/Burning MOMBURN //Burned
+
+//Maria/Death
+
+maria/dive    MAWATER1
+maria/surface MAWATER2
+
+maria/hmmm MARIHMM
+
+maria/sigh MOMSIGH
+
+$random Maria/Yeet {MOMYEET1 MOMYEET2}
+MOMYEET1 MOMYEET1
+MOMYEET2 MOMYEET2

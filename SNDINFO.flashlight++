@@ -1,0 +1,44 @@
+// Flashlight++ - https://forum.zdoom.org/viewtopic.php?t=75585
+
+//Default
+flashlightOn    	      "SOUNDS/FLASHLIGHT/BlackMesa_On.ogg"
+flashlightOff             "SOUNDS/FLASHLIGHT/BlackMesa_off.ogg"
+
+//Halo: Doom Evolved
+altflashlightOn           "SOUNDS/FLASHLIGHT/Alternate_On.ogg"
+altflashlightOff          "SOUNDS/FLASHLIGHT/Alternate_Off.ogg"
+
+//Old BM + HL2 
+oldflashlightOn           "SOUNDS/FLASHLIGHT/BlackMesaHL2_On.ogg"
+oldflashlightOff          "SOUNDS/FLASHLIGHT/BlackMesaHL2_Off.ogg"
+
+//Half-Life
+hl1flashlightToggle       "SOUNDS/FLASHLIGHT/HalfLife1_Toggle.ogg"
+
+//Selaco
+selacoflashlightOn        "SOUNDS/FLASHLIGHT/Selaco_On.ogg"
+selacoflashlightOff       "SOUNDS/FLASHLIGHT/Selaco_Off.ogg"
+
+//DarkDoomZ
+darkdoomzflashlightToggle "SOUNDS/FLASHLIGHT/DarkDoomZ_Toggle.ogg"
+$pitchset darkdoomzflashlightToggle 0.9 1.1
+
+//Prey '06
+preyflashlightOn          "SOUNDS/FLASHLIGHT/PreyLighter_On.ogg"
+preyflashlightOff         "SOUNDS/PreyLighter_Off.ogg"
+
+//HL OpForce
+op4flashlightOn           "sounds/FLASHLIGHT/OpposingForce_On.ogg"
+op4flashlightOff          "sounds/FLASHLIGHT/OpposingForce_Off.ogg"
+
+//Selaco
+selaco2flashlightOn       "SOUNDS/FLASHLIGHT/SelacoAlt_On.ogg"
+selaco2flashlightOff      "SOUNDS/FLASHLIGHT/SelacoAlt_Off.ogg"
+
+//LiTDOOM (When the Doom is Lit :flushed:)
+litdoomflashlightOn       "SOUNDS/FLASHLIGHT/LiTDoom_On.ogg"
+litdoomflashlightOff      "SOUNDS/FLASHLIGHT/LiTDoom_Off.ogg"
+
+//Brutal Doom
+brutaldoomflashlightOn    "SOUNDS/FLASHLIGHT/BrutalDoom_On.ogg"
+brutaldoomflashlightOff    "SOUNDS/FLASHLIGHT/BrutalDoom_Off.ogg"

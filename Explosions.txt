@@ -1,0 +1,233 @@
+ACTOR ShinigamiGrenade 
+{
+    Radius 9
+    Height 9
+    Speed 60	
+	//Mass 9	
+    Damage (random(102,120))
+    //+NOBLOCKMAP
+    //+DROPOFF
+    +MISSILE
+    +ACTIVATEIMPACT
+    +ACTIVATEPCROSS
+    +NOTELEPORT
+    +FORCEXYBILLBOARD
+    +THRUGHOST
+	BounceSound "Weapon/Shinigami/Grenade/Bounce"
+    Gravity 0.7
+    ReactionTime 139
+	DeathSound "Weapon/RocketLauncher/Boom"
+	Obituary "$OB_GRENADE"
+	DamageType "UGL"
+	DamageType Grenade
+	States
+	{
+	Spawn:
+		TNT1 A 0
+		TNT1 A 0 A_Changevelocity(0,0,2,CVF_RELATIVE)
+	Spawn2:
+		HLGR AA 2 bright //A_CountDown
+		Loop
+	Death:
+        TNT1 A 0 A_JumpIf(CallACS("AntiTinnitus")==1, "NoRinging")
+		GLXP A 0 Bright A_NoGravity
+		TNT1 A 0 Bright radius_quake(7,24,0,960,0)
+		GLXP A 0 bright A_Explode(128,256)
+		GLXP A 0 A_SetTranslucent(0.75,1)
+		//RCKT A 2 Bright 
+		TNT1 A 0 A_PlaySound("Maria/Explosion/Ear",5,1,0,1)
+		TNT1 A 0 A_SpawnItemEx("MariaShockWave")
+        TNT1 AAAAAAAAAA 0 A_SpawnItemEx("MariaMediumExplosionFlames",0,0,0,Random(-10,10),Random(-10,10),Random(-10,10))
+        TNT1 AAAAAAAAAAAAAAA 0 A_SpawnItemEx("MariaExplosionSmoke",0,0,0,Random(-10,10),Random(-10,10),Random(-10,10))
+		stop
+	NoRinging:
+		GLXP A 0 Bright A_NoGravity
+		TNT1 A 0 Bright radius_quake(7,24,0,960,0)
+		GLXP A 0 bright A_Explode(128,256,1,1)
+		GLXP A 0 A_SetTranslucent(0.75,1)
+		//RCKT A 2 Bright 
+		TNT1 A 0 A_SpawnItemEx("MariaShockWave")
+        TNT1 AAAAAAAAAA 0 A_SpawnItemEx("MariaMediumExplosionFlames",0,0,0,Random(-10,10),Random(-10,10),Random(-10,10))
+        TNT1 AAAAAAAAAAAAAAA 0 A_SpawnItemEx("MariaExplosionSmoke",0,0,0,Random(-10,10),Random(-10,10),Random(-10,10))
+		stop
+	}
+}
+
+Actor MariaRocketPlayer : Rocket
+{
+	Radius 10
+	Height 8
+	Speed 100
+	Damage (random(350,420))
+    Gravity 0.2
+	Projectile
+	//Scale 0.75
+	SeeSound ""
+	Obituary "$OB_MPROCKET"
+	DamageType "Explosive"
+    Damagetype "ExplosiveImpact"
+    DamageType "Extreme"
+	Decal "Scorch"
+	+MISSILE 	
+    //+DEHEXPLOSION
+    -NOGRAVITY
+    +EXTREMEDEATH
+    +BLOODSPLATTER 
+	+FORCERADIUSDMG
+    +THRUSPECIES
+	States
+	{
+	Spawn:
+		//TNT1 A 0 A_PlaySound("Rocket/Fly")	
+	Live:
+		RCKT A 1 Bright A_SpawnItem("MariaSmokeTrail", 0, 0) 
+		RCKT A 1 Bright A_SpawnItem("MariaFlameTrails", 0, 0) 
+		RCKT A 1 Bright A_SpawnItem("MariaSmokeTrail", 0, 0) 
+		RCKT A 1 Bright A_SpawnItem("MariaFlameTrails", 0, 0) 
+		RCKT A 1 Bright A_SpawnItem("MariaSmokeTrail", 0, 0)
+		RCKT A 1 Bright A_SpawnItem("MariaFlameTrails", 0, 0)
+		RCKT A 1 Bright A_SpawnItem("MariaSmokeTrail", 0, 0)
+		RCKT A 1 Bright A_SpawnItem("MariaFlameTrails", 0, 0)
+		Loop
+	Death:
+        TNT1 A 0 A_JumpIf(CallACS("AntiTinnitus")==1, "NoRinging")
+        TNT1 A 0 A_SetScale (1.0)
+		TNT1 A 0 A_Explode(300,192,1,1,128)
+		TNT1 A 0 Bright A_NoGravity
+		TNT1 A 0 Bright radius_quake(10,24,0,1000,0) 
+		//RCKT A 2 Bright 
+		TNT1 A 0 A_SpawnItemEx("MariaShockWave")
+		GLXP A 0 A_PlaySound("Weapon/RocketLauncher/Boom",CHAN_BODY)
+		TNT1 A 0 A_PlaySound("Maria/Explosion/Ear",5,1,0,1)
+        TNT1 A 0 A_PlaySound("Maria/Explosion/Far", 3)
+		TNT1 A 0 A_RadiusThrust(128,-1,RTF_AFFECTSOURCE|RTF_NOIMPACTDAMAGE) 
+        TNT1 AAAAAAAAAA 0 A_SpawnItemEx("MariaMediumExplosionFlames",0,0,0,Random(-10,10),Random(-10,10),Random(-10,10))
+        TNT1 A 0 A_SpawnProjectile("MariaBarrelExplosionFlame")
+        TNT1 AAAAAAAAAAAAAAA 0 A_SpawnItemEx("MariaExplosionSmoke",0,0,0,Random(-10,10),Random(-10,10),Random(-10,10))
+		Stop
+	NoRinging:
+        TNT1 A 0 A_SetScale (1.0)
+		TNT1 A 0 A_Explode(300,192,1,1,128)
+		TNT1 A 0 Bright A_NoGravity
+		TNT1 A 0 Bright radius_quake(10,24,0,1000,0) 
+		//RCKT A 2 Bright 
+		TNT1 A 0 A_SpawnItemEx("MariaShockWave")
+		GLXP A 0 A_PlaySound("Weapon/RocketLauncher/Boom",CHAN_BODY)
+        TNT1 A 0 A_PlaySound("Maria/Explosion/Far", 3)
+		TNT1 A 0 A_RadiusThrust(128,-1,RTF_AFFECTSOURCE|RTF_NOIMPACTDAMAGE) 
+        TNT1 AAAAAAAAAA 0 A_SpawnItemEx("MariaMediumExplosionFlames",0,0,0,Random(-10,10),Random(-10,10),Random(-10,10))
+        TNT1 A 0 A_SpawnProjectile("MariaBarrelExplosionFlame")
+        TNT1 AAAAAAAAAAAAAAA 0 A_SpawnItemEx("MariaExplosionSmoke",0,0,0,Random(-10,10),Random(-10,10),Random(-10,10))
+		Stop
+      }
+}
+
+ACTOR HolyPipebomb
+{
+    Radius 4
+    Height 8
+    Speed 30	
+	//Mass 9	
+    Damage 3
+	-NOGRAVITY
+	+EXPLODEONWATER
+    //+NOBLOCKMAP
+    +MISSILE
+    +ACTIVATEIMPACT
+    +ACTIVATEPCROSS
+    +NOTELEPORT
+    +FORCEXYBILLBOARD
+    +THRUGHOST
+    +rollsprite
+	//SeeSound "StunGun/Ignite"
+	BounceType "Doom"
+    BounceSound "TearBomb/Bounce"	
+	BounceFactor 0.36
+	WallBounceFactor 0.43
+	BounceCount 3
+    Gravity 0.7
+	Obituary "$OB_GRENADE"
+	DamageType Grenade
+	States
+	{
+	Spawn:
+		TNT1 A 0
+		TNT1 A 0 A_Changevelocity(0,0,2,CVF_RELATIVE)
+	Spawn2:
+		PIPB ABCDEFGH 2 bright
+		Loop
+	Death:
+        TNT1 A 0 A_JumpIf(CallACS("AntiTinnitus")==1, "NoRinging")
+		PIPB AIJAIJAIJAIJAIJAIJAIJAIJAIJAIJAIJAIJ 2 bright
+		GLXP A 0 Bright A_NoGravity
+		TNT1 A 0 Radius_Quake (2, 54, 0, 15, 0)
+		GLXP A 0 A_AlertMonsters
+		//GLXP A 0 bright A_Explode(200,400)
+		GLXP A 0 bright A_Explode(100,300)
+		TNT1 A 0 A_CustomBulletAttack(180,100,FRandom(48,64),FRandom(2,10),"MariaPuff")
+        TNT1 A 0 A_PlaySound("Maria/Pipebomb/Boom", CHAN_AUTO)
+		TNT1 A 0 A_PlaySound("Maria/Explosion/Ear",5,1,0,1)
+        TNT1 A 0 A_PlaySound("Maria/Explosion/Far", CHAN_AUTO)
+		GLXP A 0 A_SetTranslucent(0.75,1)
+		//GLXP A 1 bright
+        TNT1 A 0 A_PlaySound("Maria/Explosion/Far", CHAN_ITEM)
+		TNT1 A 0 A_SpawnItemEx("MariaShockWave")
+        TNT1 AAAAAAAAAA 0 A_SpawnItemEx("MariaMediumExplosionFlames",0,0,0,Random(-10,10),Random(-10,10),Random(-10,10))
+        TNT1 AAAA 0 A_SpawnItemEx("MariaSmallExplosionFlames",0,0,0,Random(-10,10),Random(-10,10),Random(-10,10))
+        TNT1 AAAAAAAAAAAAAAA 0 A_SpawnItemEx("MariaExplosionSmoke",0,0,0,Random(-10,10),Random(-10,10),Random(-10,10))
+		stop
+	NoRinging:
+		PIPB AIJAIJAIJAIJAIJAIJAIJAIJAIJAIJAIJAIJ 2 bright
+		GLXP A 0 Bright A_NoGravity
+		TNT1 A 0 Radius_Quake (2, 54, 0, 15, 0)
+		GLXP A 0 A_AlertMonsters
+		//GLXP A 0 bright A_Explode(200,400)
+		GLXP A 0 bright A_Explode(100,300)
+		TNT1 A 0 A_CustomBulletAttack(180,100,FRandom(48,64),FRandom(2,10),"MariaPuff")
+        TNT1 A 0 A_PlaySound("Maria/Pipebomb/Boom", CHAN_AUTO)
+        TNT1 A 0 A_PlaySound("Maria/Explosion/Far", CHAN_AUTO)
+		GLXP A 0 A_SetTranslucent(0.75,1)
+		//GLXP A 1 bright
+        TNT1 A 0 A_PlaySound("Maria/Explosion/Far", CHAN_ITEM)
+		TNT1 A 0 A_SpawnItemEx("MariaShockWave")
+        TNT1 AAAAAAAAAA 0 A_SpawnItemEx("MariaMediumExplosionFlames",0,0,0,Random(-10,10),Random(-10,10),Random(-10,10))
+        TNT1 AAAA 0 A_SpawnItemEx("MariaSmallExplosionFlames",0,0,0,Random(-10,10),Random(-10,10),Random(-10,10))
+        TNT1 AAAAAAAAAAAAAAA 0 A_SpawnItemEx("MariaExplosionSmoke",0,0,0,Random(-10,10),Random(-10,10),Random(-10,10))
+		stop
+	XDeath:
+        TNT1 A 0 A_JumpIf(CallACS("AntiTinnitus")==1, "NoRingingX")
+		GLXP A 0 Bright A_NoGravity
+		GLXP A 0 A_AlertMonsters
+		TNT1 A 0 Radius_Quake (2, 54, 0, 15, 0)
+		//GLXP A 0 bright A_Explode(200,400)
+		GLXP A 0 bright A_Explode(100,300)
+		TNT1 A 0 A_CustomBulletAttack(180,100,FRandom(48,64),FRandom(2,10),"MariaPuff")
+		GLXP A 0 A_PlaySound("Pipebomb/Boom",CHAN_BODY)
+		TNT1 A 0 A_PlaySound("Maria/Explosion/Ear",5,1,0,1)
+        TNT1 A 0 A_PlaySound("Maria/Explosion/Far", 3)
+		GLXP A 0 A_SetTranslucent(0.75,1)
+		//GLXP A 1 bright
+		TNT1 A 0 A_SpawnItemEx("MariaShockWave")
+        TNT1 AAAAAAAAAA 0 A_SpawnItemEx("MariaMediumExplosionFlames",0,0,0,Random(-10,10),Random(-10,10),Random(-10,10))
+        TNT1 AAAA 0 A_SpawnItemEx("MariaSmallExplosionFlames",0,0,0,Random(-10,10),Random(-10,10),Random(-10,10))
+        TNT1 AAAAAAAAAAAAAAA 0 A_SpawnItemEx("MariaExplosionSmoke",0,0,0,Random(-10,10),Random(-10,10),Random(-10,10))
+		stop
+	NoRingingX:
+		GLXP A 0 Bright A_NoGravity
+		GLXP A 0 A_AlertMonsters
+		TNT1 A 0 Radius_Quake (2, 54, 0, 15, 0)	
+		//GLXP A 0 bright A_Explode(200,400)
+		GLXP A 0 bright A_Explode(100,300)
+		TNT1 A 0 A_CustomBulletAttack(180,100,FRandom(48,64),FRandom(2,10),"MariaPuff")
+		GLXP A 0 A_PlaySound("Pipebomb/Boom",CHAN_BODY)
+        TNT1 A 0 A_PlaySound("Maria/Explosion/Far", 3)
+		GLXP A 0 A_SetTranslucent(0.75,1)
+		//GLXP A 1 bright
+		TNT1 A 0 A_SpawnItemEx("MariaShockWave")
+        TNT1 AAAAAAAAAA 0 A_SpawnItemEx("MariaMediumExplosionFlames",0,0,0,Random(-10,10),Random(-10,10),Random(-10,10))
+        TNT1 AAAA 0 A_SpawnItemEx("MariaSmallExplosionFlames",0,0,0,Random(-10,10),Random(-10,10),Random(-10,10))
+        TNT1 AAAAAAAAAAAAAAA 0 A_SpawnItemEx("MariaExplosionSmoke",0,0,0,Random(-10,10),Random(-10,10),Random(-10,10))
+		stop
+	}
+}
+

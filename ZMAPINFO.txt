@@ -1,0 +1,316 @@
+GameInfo
+{
+    TitleMusic = "MAINTRO"
+    IntermissionMusic = "MAINTER"
+	StatusBarClass = "StatusBarMod"
+	AddEventHandlers = "TiltPlusPlusHandler"
+	AddEventHandlers = "FPP_Handler"
+	AddEventHandlers = "StepEventHandler"
+    AddEventHandlers = "UseToPickup"
+	PickupColor = "Gray"
+	QuitMessages =  
+	"\c[Gray]You sure you wanna quit?",
+	"\c[Gray]Go ahead and leave. See if I care.",
+	"\c[Gray]You're disappointing Kiri-kun.",
+	"\c[Gray]Aqua Hoshino accomplished his mission and you're gonna leave? \nDon't disappoint your son.",
+	"\c[Gray]Hoshino twins should've been Idolised Maria. \nDon't you agree?",
+	"\c[Gray]Got mad bro?",
+	"\c[Gray]Nozomu Okaya still around, don't you wanna kill him?",
+	"\c[Gray]There are more demon's to cleanse, just like Okaya's followers.",
+	"\c[Gray]Press 'Y' if you're Shizuka. \nPress 'N' if you're Maria.",
+	"\c[Gray]Rudi awaiting Kinugawa at Castle Wolfenstein's dungeon... \nTo be served as a dog food.",
+	"\c[Gray]Read Maria No Danzai for more context.",
+	"\c[Gray]Balls. \n \nBottom Text.",
+	"\c[Gray]Nozomu Okaya still around, don't you wanna kill that fucker?",	
+	"\c[Gray]Kiritaka is petting a rabbit, awaiting you.",
+	"\c[Gray]Tesefy for mayor!",
+	"\c[Gray]PVT Stone wants her SMG's back. Still have them?",
+	"\c[Gray]EXTERMINATE!",
+	"\c[Gray]Play Bunny Maze by Malintala Studios.",
+	"\c[Gray]Have you seen a bald cat?",
+	"\c[Gray]Big Bunny Butt.",
+	"\c[Gray]You fucked up her family.",
+    "\c[Gray]Her name is Mari Nagare and she will have her revenge!",
+	"\c[Gray]Allons-y?",
+	"\c[Gray]Bingle bongle, dingle dangle, yickety doo, yickety da, ping pong, lippy-tappy-too-tah.",
+	"\c[Gray]You're quitting now? What are you, gaming journalist?",
+	"\c[Gray]If you're gaming journalist I have a message for ya. \nYOU SUCK!",	
+	"\c[Gray]You cannot spell IGNorance without IGN.",
+	"\c[Gray]Good boy~",
+	"\c[Gray]Have you seen a hooded man with a cardboard box?",
+	"\c[Gray]This is no message! \nPage intentionally left blank.", 
+	"\c[Gray]CHEEKI BREEKI!",
+	"\c[Gray]HOLY DIVER \nYOU'RE THE STAR OF THE MASQUERADE \nNO NEED TO LOOK SO AFRAID."
+}
+
+clearskills
+
+skill Easy
+{
+	EasyBossBrain
+    EasyKey
+    AutoUseHealth
+	DamageFactor = 0.5	
+	AmmoFactor = 2.0
+	SpawnFilter = Easy
+    TextColor = "Green"
+	Name = "Can I play, mommy?"
+	Key = "h"
+    MustConfirm = "-==    CAN I PLAY, MOMMY?    ==-\
+    \
+    Spawn preset: EASY\
+    Damage taken: 5%\
+    Enemy health: 100%\
+    +Extra Ammo\
+    +Keys on automap\
+    +Easier ICON OF SIN\
+    \
+    Barely a challenge. Purely for power fantasy-ish purposes. Hope you're not a gaming journalist."
+}
+
+skill Normal
+{
+    DamageFactor = 1.0
+	SpawnFilter = Normal
+	Name = "Hurt Me Plenty"
+    TextColor = "Orange"
+	DefaultSkill
+	MustConfirm = "-==    HURT ME PLENTY    ==-\
+    \
+    Spawn preset: NORMAL\
+    Damage taken: 100%\
+    Enemy health: 100%\
+    \
+    For casual playthroughs. Default skill level."
+}
+
+skill Hard
+{
+    DamageFactor = 1.25
+	SpawnFilter = Hard
+    TextColor = "Red"
+	Name = "Devil's curse"
+    mustconfirm = "-==    DEVIL'S CURSE    ==-\
+    \
+    Spawn preset: HARD\
+    Damage taken: 125%\
+    Enemy health: 100%\
+    \
+    For experienced players."
+}
+
+skill SKILL4
+{
+    DamageFactor = 1.25
+    FastMonsters
+    InstantReaction
+    NoPain
+    NoInfighting
+    TextColor = "DarkRed"
+    SpawnFilter = Nightmare
+    Name = "Maria's Judgement!"
+    MustConfirm = "-==    MARIA'S JUDGEMENT!    ==-\
+    \
+    Spawn preset: NIGHTMARE\
+    Damage taken: 125%\
+    Enemy health: 100%\
+    -Fast monsters and projectiles\
+    -No Infight between monsters\
+    -Painless monsters\
+    \
+    For masochist players."
+}
+
+skill UltraNightmare
+{
+    damagefactor = 1.50
+    monsterhealth = 1.25
+    aggressiveness = 1.15
+    TextColor = "Black"
+	FastMonsters
+	InstantReaction
+    NoPain
+    NoInfighting
+	SpawnFilter = Nightmare
+    Replaceactor = "ClipBox", "Clip"
+    Replaceactor = "ShellBox", "Shell"
+    Replaceactor = "RocketBox", "RocketAmmo"
+    Replaceactor = "Cellpack", "Cell"
+    Replaceactor = "HealthBonus", "MariaHealthBonusSpawnerHarder"
+    Replaceactor = "ArmorBonus", "MariaArmorBonusSpawnerHarder"	
+    Replaceactor = "MariaMedikitSpawner", "MariaStimpackSpawner"
+    Replaceactor = "BlurSphere", "MariaMedikitSpawner"
+    Replaceactor = "InvulnerabilitySphere", "Soulsphere"	
+	Replaceactor = "Berserk", "DamageSpawnerHarder"	
+	Name = "Maria's Nightmare!"
+	MustConfirm = "-==    MARIA'S NIGHTMARE!    ==-\
+    \
+    Spawn preset: NIGHTMARE\
+    Damage taken: 150%\
+    Enemy health: 125%\
+    Enemy Aggression: 115%\
+    -Fast monsters and projectiles\
+    -No Infight between monsters\
+    -Painless monsters\
+    -Instant Reaction from monsters\
+    -Larger ammo pickups replaced with medium pickups\
+    -Armor and Health pickups grants 1 instead of 5\
+    -Certain powerups are either disabled or became slightly rare\
+    \
+    For players looking for an extra challenge."
+}
+
+skill Hardcore
+{
+    damagefactor = 9.0
+    monsterhealth = 0.4
+    NoInfighting
+    TextColor = "DarkGray"
+	SpawnFilter = Normal 
+    Replaceactor = "ClipBox", "Clip"
+    Replaceactor = "ShellBox", "Shell"
+    Replaceactor = "RocketBox", "RocketAmmo"
+    Replaceactor = "Cellpack", "Cell"
+    Replaceactor = "HealthBonus", "MariaHealthBonusSpawnerHarder"
+    Replaceactor = "ArmorBonus", "MariaArmorBonusSpawnerHarder"	
+    Replaceactor = "MariaStimpack", "MariaStimpackspawnerHarder" 
+    Replaceactor = "MariaMedikit", "MariaMedikitspawnerHarder" 
+    //Replaceactor = "MariaMediumHealthPotion", "MariaStimpackspawnerHarder" 
+    //Replaceactor = "MariaLargeHealthPotion", "MariaMedikitspawnerHarder" 
+    Replaceactor = "GreenArmor", "MariaBallisticArmorspawnerHarder" 
+    Replaceactor = "BlueArmor", "MariaHeavyArmorspawnerHarder"
+    Replaceactor = "BlurSphere", "MariaSyringeCase" 
+    Replaceactor = "SoulSphere", "MariaSyringeCase" 
+    Replaceactor = "InvulnerabilitySphere", "MariaSyringeCase"
+	Name = "SURVIVAL!"
+	MustConfirm = "-==    SURVIVAL!    ==-\
+    \
+    Spawn preset: NORMAL\
+    Damage taken: 900%\
+    Enemy health: 40%\
+    -Medkits and Stimpacks are disabled except Stim Shots\
+    -Armour Plates instead of instant Armours\
+    -Bonus Items are disabled\
+    -No Infight between monsters\
+    -Larger ammo pickups replaced with medium pickups\
+    -Armor and Health pickups grants 1 instead of 5\
+    -Certain powerups are either disabled or became slightly rare\
+    \
+    For players looking for an extra challenge."
+}
+
+Intermission Doom2Cast
+{
+	Cast
+	{
+		CastClass = "Zombieman"
+		CastName = "$CC_ZOMBIE"
+		AttackSound = "Missile", 1, "grunt/attack"
+	}
+	Cast
+	{
+		CastClass = "ShotgunGuy"
+		CastName = "$CC_SHOTGUN"
+		AttackSound = "Missile", 1, "shotguy/attack"
+	}
+	Cast
+	{
+		CastClass = "ChaingunGuy"
+		CastName = "$CC_HEAVY"
+		AttackSound = "Missile", 1, "chainguy/attack"
+		AttackSound = "Missile", 2, "chainguy/attack"
+		AttackSound = "Missile", 3, "chainguy/attack"
+	}
+	Cast
+	{
+		CastClass = "DoomImp"
+		CastName = "$CC_IMP"
+		AttackSound = "Missile", 2, "imp/attack"
+	}
+	Cast
+	{
+		CastClass = "Demon"
+		CastName = "$CC_DEMON"
+		AttackSound = "Melee", 1, "demon/melee"
+	}
+	Cast
+	{
+		CastClass = "LostSoul"
+		CastName = "$CC_LOST"
+		AttackSound = "Missile", 1, "skull/melee"
+	}
+	Cast
+	{
+		CastClass = "Cacodemon"
+		CastName = "$CC_CACO"
+		AttackSound = "Missile", 1, "caco/attack"
+	}
+	Cast
+	{
+		CastClass = "HellKnight"
+		CastName = "$CC_HELL"
+		AttackSound = "Missile", 1, "baron/attack"
+	}
+	Cast
+	{
+		CastClass = "BaronOfHell"
+		CastName = "$CC_BARON"
+		AttackSound = "Missile", 1, "baron/attack"
+	}
+	Cast
+	{
+		CastClass = "Arachnotron"
+		CastName = "$CC_ARACH"
+		AttackSound = "Missile", 1, "baby/attack"
+	}
+	Cast
+	{
+		CastClass = "PainElemental"
+		CastName = "$CC_PAIN"
+		AttackSound = "Missile", 2, "skull/melee"
+	}
+	Cast
+	{
+		CastClass = "Revenant"
+		CastName = "$CC_REVEN"
+		AttackSound = "Missile", 1, "skeleton/attack"
+		AttackSound = "Melee", 1, "skeleton/swing"
+		AttackSound = "Melee", 3, "skeleton/melee"
+	}
+	Cast
+	{
+		CastClass = "Fatso"
+		CastName = "$CC_MANCU"
+		AttackSound = "Missile", 1, "fatso/attack"
+		AttackSound = "Missile", 4, "fatso/attack"
+		AttackSound = "Missile", 7, "fatso/attack"
+	}
+	Cast
+	{
+		CastClass = "Archvile"
+		CastName = "$CC_ARCH"
+		AttackSound = "Missile", 1, "vile/start"
+	}
+	Cast
+	{
+		CastClass = "SpiderMastermind"
+		CastName = "$CC_SPIDER"
+		AttackSound = "Missile", 1, "spider/attack"
+		AttackSound = "Missile", 2, "spider/attack"
+	}
+	Cast
+	{
+		CastClass = "Cyberdemon"
+		CastName = "$CC_CYBER"
+		AttackSound = "Missile", 1, "weapons/rocklf"
+		AttackSound = "Missile", 3, "weapons/rocklf"
+		AttackSound = "Missile", 5, "weapons/rocklf"
+	}
+	Cast
+	{
+		CastClass = "MariaPlayer"
+		CastName = "$CC_HERO"
+		AttackSound = "Missile", 0, "Weapon/Shotgun/Fire"
+	}
+	Link = Doom2Cast	// restart cast call
+}

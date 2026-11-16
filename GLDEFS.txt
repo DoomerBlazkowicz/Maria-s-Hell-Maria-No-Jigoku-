@@ -1,0 +1,7 @@
+#Include "Brightmaps.gl"
+#Include "GLDefs/GLDEFS.Default"
+#Include "GLDefs/GLDEFS.projectiles"
+#Include "GLDefs/GLDEFS.effects" 
+#Include "GLDefs/GLDEFS.torches"
+#Include "GLDefs/GLDEFS.lights"
+#Include "GLDefs/GLDEFS.Items"

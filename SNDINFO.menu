@@ -1,0 +1,14 @@
+menu/activate					DSFKMNOP //Open Menu
+menu/clear						DSFKMNCL //Close Menu	
+menu/choose						DSFKMNOK //Confirm
+menu/cursor						DSFKMNUD //Up and Down
+menu/invalid					DSFKMNNO //Invalid
+menu/backup						DSFKMNBK //Back to previous
+menu/change						DSFKMNAD //Change Values
+
+menu/quit1						SAYORI  //Menu Quit 1
+menu/quit2						SAYORI  //Menu Quit 2
+
+Intermission/tick				DSFKMNTC //Intermission Counter
+Intermission/nextstage			DSFKMNNS //Intermission Beep
+Intermission/paststats			DSFKMNLL //Next Stage

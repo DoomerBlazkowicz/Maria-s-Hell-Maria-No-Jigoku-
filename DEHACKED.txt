@@ -1,0 +1,19 @@
+Patch File for DeHackEd v3.0
+# Created with WhackEd4 1.3.2
+# Note: Use the pound sign ('#') to start comment lines.
+
+Doom version = 21
+Patch format = 6
+
+
+Ammo 1 (Shells)
+Max ammo = 40
+
+Ammo 2 (Cells)
+Max ammo = 200
+
+Ammo 3 (Rockets)
+Max ammo = 15
+
+Misc 0
+BFG Cells/Shot = 50
