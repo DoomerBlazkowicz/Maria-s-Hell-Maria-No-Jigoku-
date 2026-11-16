@@ -1,7 +1,0 @@
-#Library "UniversalScripts"
-#Include "zcommon.acs"
-
-Script "RKAmmoToggle" (VOID) NET
-{
-	SetResultValue(GetCVar("RKAmmoEffects"));
-}

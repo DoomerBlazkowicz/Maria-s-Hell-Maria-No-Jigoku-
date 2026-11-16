@@ -1,3 +1,0 @@
-STARTUPTITLE = "Maria's Hell: A Maria no Danzai Doom experience"
-STARTUPCOLORS = "FFFFFF", "000000"
-STARTUPTYPE = "Hexen"
