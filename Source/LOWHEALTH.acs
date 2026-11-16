@@ -1,0 +1,96 @@
+
+//Lowhealth scripts - from Blade of Agony
+#library "LOWHEALTH"
+#include "zcommon.acs"
+
+#define MAX_VOLUME 127
+
+Script "LowHealthAlert" ENTER
+{
+	int width = 640, height = 480;
+	int half_width  = (width / 2) << 16;
+	int half_height = (height / 2) << 16;
+	bool lowHP;
+	SetHudSize(width, height, 0);
+	SetFont("HUDLHP1");
+	int health = GetActorProperty(0, APROP_HEALTH);
+	if (health > 0 && health <= 30)
+	{
+		if(!lowHP)
+		{
+			PlaySound(0,"Maria/Checks/LowHealth",20);
+		}
+		HudMessage(s:"A"; HUDMSG_PLAIN, 1266, CR_WHITE, half_width, 395.0, 1.0);//);
+		SetFont("DBIGFONT");
+		HudMessage(s:"CRITICAL HEALTH!"; HUDMSG_PLAIN, 1264, CR_WHITE, half_width, 405.0, 1.0);//);
+		SetHudSize(720, 540, 0);
+		SetFont("HUDLHP2");
+		HudMessage(s:"A"; HUDMSG_FADEOUT|HUDMSG_ALPHA|HUDMSG_ADDBLEND, 1267, CR_WHITE, 358.0, 430.0, 0.5, 1.2, 0.3);
+		lowHP = true;
+		Delay(35);
+		restart;
+	}
+	else if (health > 40 || health <= 0)
+	{
+		if(lowHP == true)
+		{
+			lowHP = false;
+			SetHudSize(width, height, 0);
+			SetFont("HUDLHP1");
+			HudMessage(s:"A"; HUDMSG_FADEOUT, 1266, CR_WHITE, half_width, 395.0, 1.0, 0.5);//);
+			SetFont("DBIGFONT");
+			HudMessage(s:"LOW HEALTH!"; HUDMSG_FADEOUT, 1264, CR_WHITE, half_width, 405.0, 1.0, 0.5);//);
+			SetHudSize(720, 540, 0);
+			SetFont("HUDLHP2");
+			HudMessage(s:"A"; HUDMSG_FADEOUT|HUDMSG_ALPHA, 1267, CR_WHITE, 358.0, 430.0, 1.0, 0.5, 0.3);
+		}
+	}
+	
+	delay(1);
+	Restart;
+}
+
+script "30Health" ENTER
+{
+	int width = 640, height = 480; 
+	SetHudSize(width, height, 0);
+	SetFont("M_INJ");
+
+	// Half width and height (in fixed-point).
+	int half_width  = (width / 2) << 16;
+	int half_height = (height / 2) << 16;
+
+	while (true)
+	{
+		int health = GetActorProperty(0, APROP_HEALTH);
+		if (health > 0 && health <= 30)
+		{
+			HudMessage(s:"A"; HUDMSG_FADEINOUT, 0, CR_WHITE, half_width, half_height, 0.0, 0.5, 0.5);
+
+			// Volume and delay of heartbeat (faster and louder with less health).
+			int volume = MAX_VOLUME;
+			int delay1 = 10;
+			int delay2 = 14;
+
+			if (health > 20)
+			{
+				volume = MAX_VOLUME - 50;
+				delay1 = 21;
+				delay2 = 34;
+			}
+			else if (health > 10)
+			{
+				volume = MAX_VOLUME - 25;
+				delay1 = 18;
+				delay2 = 24;
+			}
+
+			LocalAmbientSound("Maria/HeartBeat", volume);
+			Delay(delay1);
+			LocalAmbientSound("Maria/HeartBeat", volume);
+			Delay(delay2);
+		}
+
+		Delay(1);
+	}
+}

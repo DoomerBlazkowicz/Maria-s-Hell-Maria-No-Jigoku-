@@ -1,0 +1,578 @@
+//Flare effects for guns, explosions and some items.
+//Imported from Brutal Doom by SGTMarkIV
+
+//Base
+Actor MariaFlareBase
+{
++NOINTERACTION
++BLOODSPLATTER
++CLIENTSIDEONLY
++NOTELEPORT
+renderstyle Add
+radius 1
+height 1
+alpha 0.4
+scale 0.8
+states
+    {
+    Spawn:
+        TNT1 A 0
+        stop		
+      }
+}
+
+Actor MariaFlareOrange : MariaFlareBase
+{
+states
+    {
+    Spawn:
+        TNT1 A 0
+        TNT1 A 2 bright
+        stop		
+      }
+}
+
+Actor MariaFlarePurple : MariaFlareBase
+{
+states
+    {
+    Spawn:
+        TNT1 A 0
+        TNT1 A 2 bright
+        stop		
+      }
+}
+ 
+Actor MariaFlareBlue : MariaFlareBase
+{
+states
+    {
+    Spawn:
+        TNT1 A 0
+        TNT1 A 2 bright
+        stop		
+      }
+} 
+
+Actor MariaExplosionFlareEffect : MariaFlareBase
+{
+	XScale 2.0
+	YScale 1.5
+	Alpha 0.4
+	states
+	{
+	Spawn:
+		FLAR B 0
+		FLAR B 2 bright
+		FLAR BBBBBBBBBBBBBB 1 BRIGHT A_FadeOut(0.11)
+		stop
+	}
+}
+
+Actor MariaExplosionGreenFlareEffect : MariaFlareBase
+{
+	states
+	{
+	Spawn:
+		FLAG C 0
+		FLAG C 2 bright
+		FLAG CCCCCCCCCCCCCC 1 BRIGHT A_FadeOut(0.11)
+		stop
+	}
+}
+
+Actor MariaRocketFlare : MariaFlareBase
+{
+alpha 1.0
+yscale 1.2
+xscale 1.2
+states
+	{
+	Spawn:
+	    LEYS O 2 BRIGHT
+		Stop
+	}
+}
+
+Actor MariaPlasmaFlare : MariaFlareBase
+{
+alpha 0.4
+scale 0.3
+states
+	{
+	Spawn:
+		L2NB A 0
+		TNT1 A 0 A_Jump(128,2)
+		L2NB A 1 bright
+		stop
+		TNT1 A 0
+		L2NB B 1 bright
+		stop
+	}
+}
+
+Actor MariaRedPlasmaFlare : MariaFlareBase
+{
+alpha 0.4
+scale 0.3
+states
+	{
+	Spawn:
+		L2NB A 0
+		TNT1 A 0 A_Jump(128,2)
+		L2NR A 1 bright
+		stop
+		TNT1 A 0
+		L2NR B 1 bright
+		stop
+	}
+}
+
+Actor MariaLunarPlasmaFlare : MariaFlareBase
+{
+alpha 0.4
+scale 0.3
+states
+	{
+	Spawn:
+		L2NB A 0
+		TNT1 A 0 A_Jump(128,2)
+		L2NM A 1 bright
+		stop
+		TNT1 A 0
+		L2NM B 1 bright
+		stop
+	}
+}
+
+Actor MariaFlameBulletFlare : MariaFlareBase
+{
+alpha 0.4
+scale 0.3
+states
+	{
+	Spawn:
+		L2NB A 0
+		TNT1 A 0 A_Jump(128,2)
+		L2NY A 1 bright
+		stop
+		TNT1 A 0
+		L2NY B 1 bright
+		stop
+	}
+}
+
+Actor MariaCyanPlasmaFlare : MariaFlareBase
+{
+alpha 0.4
+scale 0.3
+states
+	{
+	Spawn:
+		L2NB A 0
+		TNT1 A 0 A_Jump(128,2)
+		L2NC A 1 bright
+		stop
+		TNT1 A 0
+		L2NC B 1 bright
+		stop
+	}
+}
+
+Actor MariaRedFlare : MariaFlareBase
+{
+states
+	{
+	Spawn:
+		LENR A 0
+		LENR A 0 A_Jump(128,2)
+		LENR A 2 bright
+		stop
+		LENR B 0
+		LENR B 2 bright
+		stop
+	}
+}
+
+Actor MariaRedFlare3 : MariaFlareBase
+{
+states
+	{
+	Spawn:
+		LENR A 0
+		LENR A 0 A_Jump(128,4)
+		LENR AAB 1 bright
+		stop
+		TNT1 A 0
+		LENR BAB 1 bright
+		stop
+	}
+}
+
+
+Actor MariaRedFlare3Flat : MariaRedFlare3
+{
+XScale 1.0
+YScale 0.6
+}
+
+Actor MariaBlueFlare : MariaFlareBase
+{
+states
+	{
+	Spawn:
+		LENB A 0
+		LENB A 0 A_Jump(128,2)
+		LENB A 2 bright
+		stop
+		TNT1 A 0
+		LENB B 2 bright
+		stop
+	}
+}
+
+
+Actor MariaBlueFlare3 : MariaFlareBase
+{
+states
+	{
+	Spawn:
+		LENB A 0
+		TNT1 A 0 A_Jump(128,4)
+		LENB AAB 1 bright
+		stop
+		TNT1 A 0
+		LENB BAB 1 bright
+		stop
+	}
+}
+
+Actor MariaGreenFlare : MariaFlareBase
+{
+states
+	{
+	Spawn:
+        LENG A 0
+	    TNT1 A 0 A_Jump(128,2)
+		LENG A 2 bright
+		stop
+		TNT1 A 0
+		LENG B 2 bright
+		stop
+	}
+}
+
+Actor MariaGreenFlare3 : MariaFlareBase
+{
+states
+	{
+	Spawn:
+        LENG A 0
+	    TNT1 A 0 A_Jump(128,4)
+		LENG AAB 1 bright
+		stop
+		TNT1 A 0
+		LENG BAB 1 bright
+		stop
+	}
+}
+
+Actor MariaYellowFlare : MariaFlareBase
+{
+states
+	{
+	Spawn:
+		LENY A 0
+		TNT1 A 0 A_Jump(128,2)
+		LENY A 2 bright
+		stop
+		TNT1 A 0
+		LENY B 2 bright
+		stop
+	}
+}
+
+
+
+Actor MariaYellowFlareSmall : MariaYellowFlare
+{
+scale 0.3
+}
+
+Actor MariaYellowFlareMedium : MariaYellowFlare
+{
+scale 0.4
+}
+
+Actor MariaYellowFlareLarge1X : MariaYellowFlare
+{
+scale 2.0
+}
+
+Actor MariaRedFlareMedium : MariaRedFlare
+{
+scale 0.5
+}
+
+
+Actor MariaRedFlareBig : MariaRedFlare
+{
+scale 1.8
+}
+
+Actor MariaRedFlareLarge1X : MariaRedFlare
+{
+scale 2.0
+}
+
+Actor MariaRedFlareSmall : MariaRedFlare
+{
+scale 0.3
+}
+
+Actor MariaRedFlareVerySmall : MariaRedFlare
+{
+alpha 0.15
+scale 0.4
+}
+
+Actor MariaRedFlareSmall2 : MariaRedFlare
+{
+scale 0.2
+}
+
+Actor MariaGreenFlareSmall : MariaGreenFlare
+{
+alpha 0.4
+scale 0.4
+}
+
+Actor MariaGreenFlareMedium : MariaGreenFlare
+{
+alpha 0.3
+scale 0.5
+}
+
+Actor MariaBlueFlareMedium : MariaBlueFlare
+{
+alpha 0.3
+scale 0.3
+}
+
+Actor MariaBlueFlareMedium2 : MariaBlueFlare
+{
+alpha 0.3
+scale 0.5
+}
+
+Actor MariaBlueFlareMedium3 : MariaBlueFlare
+{
+alpha 0.3
+scale 0.7
+}
+
+Actor MariaBlueFlareSmall : MariaBlueFlare
+{
+alpha 0.3
+scale 0.3
+}
+
+Actor MariaExplosionFlareSpawner : MariaFlareBase
+{
+states
+	{
+	Spawn:
+	    TNT1 A 0
+		TNT1 A 0 A_SpawnItemEx("MariaExplosionFlareEffect") 
+	    TNT1 A 0 A_SpawnItemEx("MariaExplosionFlareEffect", 36, 36) 
+		TNT1 A 0 A_SpawnItemEx("MariaExplosionFlareEffect", 36, -36) 
+		TNT1 A 0 A_SpawnItemEx("MariaExplosionFlareEffect", -36, 36) 
+		TNT1 A 0 A_SpawnItemEx("MariaExplosionFlareEffect", -36, -36)
+		stop
+	}
+}
+
+Actor MariaExplosionGreenFlareSpawner : MariaExplosionFlareSpawner
+{
+states
+	{
+	Spawn:
+	    TNT1 A 0
+		TNT1 A 0 A_SpawnItemEx("MariaExplosionGreenFlareEffect") 
+	    TNT1 A 0 A_SpawnItemEx("MariaExplosionGreenFlareEffect", 36, 36) 
+		TNT1 A 0 A_SpawnItemEx("MariaExplosionGreenFlareEffect", 36, -36) 
+		TNT1 A 0 A_SpawnItemEx("MariaExplosionGreenFlareEffect", -36, 36) 
+		TNT1 A 0 A_SpawnItemEx("MariaExplosionGreenFlareEffect", -36, -36)
+		stop
+	}
+}
+
+Actor MariaLensFlareAlt : MariaFlareBase
+{
+alpha 0.5
+xscale 0.6
+yscale 0.3
+states
+    {
+    Spawn:
+        LENS A 5 bright
+        stop
+    }
+}
+
+Actor MariaLensFlareAltLong : MariaLensFlareAlt
+{
+states
+    {
+    Spawn:
+        LENS A 10 bright
+        stop
+    }
+}
+
+
+Actor MariaYellowLensFlareAlt : MariaFlareBase
+{
+alpha 0.5
+xscale 0.6
+yscale 0.2
+states
+    {
+    Spawn:
+        LEYS A 5 bright
+        stop
+    }
+}
+
+Actor MariaYellowLensFlareAltLong : MariaYellowLensFlareAlt
+{
+states
+    {
+    Spawn:
+        LEYS A 5 bright
+        stop
+    }
+}
+
+Actor MariaGreenLensFlareAltSmall : MariaFlareBase
+{
++FORCEYBILLBOARD
+alpha 0.3
+xscale 0.4
+yscale 0.1
+states
+    {
+    Spawn:
+        LEYS G 8 bright
+        stop
+    }
+}
+
+
+Actor MariaOrangeLensFlareAlt : MariaFlareBase
+{
++MISSILE
+Speed 20
+alpha 0.6
+xscale 0.5
+yscale 0.2
+states
+    {
+    Spawn:
+        TNT1 A 1
+        TNT1 A 0 A_Stop
+        LEYS O 3 bright
+        stop
+    }
+}
+
+Actor MariaOrangeLensFlareAltFast : MariaOrangeLensFlareAlt
+{
+states
+    {
+    Spawn:
+        LEYS O 2 bright
+        stop
+    }
+}
+
+Actor MariaRedFlare22 : MariaFlareBase
+{
+states
+    {
+    Spawn:
+        TNT1 A 0
+        TNT1 A 0 A_Jump(128,2)
+        L2NR A 2 bright
+        stop
+        TNT1 A 0
+        L2NR B 2 bright
+        stop
+    }
+}
+
+Actor MariaRedFlareSmall22 : MariaRedFlare22
+{
+scale 0.15
+}
+
+Actor MariaBlueFlare22 : MariaFlareBase
+{
+states
+    {
+    Spawn:
+        TNT1 A 0
+        TNT1 A 0 A_Jump(128,2)
+        L2NB A 2 bright
+        stop
+        TNT1 A 0
+        L2NB B 2 bright
+        stop
+    }
+}
+
+Actor MariaGreenFlare22 : MariaFlareBase
+{
+states
+    {
+    Spawn:
+        TNT1 A 0
+        TNT1 A 0 A_Jump(128,2)
+        L2NG A 2 bright
+        stop
+        TNT1 A 0
+        L2NG B 2 bright
+        stop
+    }
+}
+
+Actor MariaYellowFlare22 : MariaFlareBase
+{
+states
+    {
+    Spawn:
+        TNT1 A 0
+        TNT1 A 0 A_Jump(128,2)
+        L2NY A 2 bright
+        stop
+        TNT1 A 0
+        L2NY B 2 bright
+        stop
+    }
+}
+
+Actor MariaYellowFlareSmall22Long : MariaYellowFlare22
+{
+scale 0.15
+states
+    {
+    Spawn:
+        TNT1 A 0
+        TNT1 A 0 A_Jump(128,2)
+        L2NY AABAB 1 bright
+        stop
+        TNT1 A 0
+        L2NY BABAB 1 bright
+        stop
+    }
+}

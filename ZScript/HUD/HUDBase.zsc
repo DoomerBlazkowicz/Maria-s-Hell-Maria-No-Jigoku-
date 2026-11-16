@@ -1,0 +1,217 @@
+Class StatusBarMod : BaseStatusBar
+{
+	HUDFont hfntS;
+	HUDFont hfnt;
+	HUDFont hfntB;
+	
+	//only interpolating health and armor
+	DynamicValueInterpolator mHealthBar;
+	DynamicValueInterpolator mArmorBar;
+	
+	double HUDBarType;
+	int HUDBarTrans;
+	int HUDTorsoType;
+	
+	int health;
+	int armor;
+	
+    Override void Init()
+    {
+		//[Pop] this codeblock sets up the actual HUD space itself, and assigns
+		//fonts to stuff. Change the font called here to whatever you want it to be
+		//do not mess with the SetSize unless youre redoin somethings, its 
+		//basically just creating the canvas the HUD is gonna be drawn to.
+        SetSize(0, 520, 325); 
+		
+		mHealthBar = DynamicValueInterpolator.Create(0, 0.25, 1, 10);
+		mArmorBar = DynamicValueInterpolator.Create(0, 0.25, 1, 10);
+		
+		hfntS = HUDFont.Create("SMALLFNT");
+		hfnt = HUDFont.Create("SMALLFNT");
+		hfntB = HUDFont.Create("DBIGFONT");
+		Super.Init();
+	}
+	
+	override void Tick()
+	{
+		Super.Tick();
+		
+		mArmorBar.Update(GetArmorAmount());
+		mHealthBar.Update(CPlayer.health);
+	}
+	
+    Override void Draw (int state, double TicFrac)
+    {
+        Super.Draw (state, TicFrac);
+
+        BeginStatusBar(true); //Force scale
+		
+		health = mHealthBar.GetValue();
+		armor = mArmorBar.GetValue();
+		
+		HUDBarTrans = CVar.GetCVAR("MH_HUDTrans").GetFloat();
+		HUDBarType = CVar.GetCVAR("MH_HUDType").GetInt();
+		HUDTorsoType = CVar.GetCVAR("MH_TorsoType").GetInt();
+		
+		//[Pop] Debug Middle Line
+		//DrawImage("graphics/HUD/DEBGHUD.png", (0,0), DI_SCREEN_CENTER_BOTTOM | DI_ITEM_BOTTOM, 1.0);
+		
+		
+		if(automapactive)
+		{
+			DrawAutomapAmmoScreen();
+		}
+		else
+		{
+			switch(HUDBarType)
+			{
+				default:
+				case 0:
+					BeginHUD();
+					DrawTorsoBar();
+					break;
+				case 1:
+					BeginHUD();
+					DrawFullScreenBar();
+					break;
+				case 2:
+					BeginStatusBar();
+					Draw64Bar();
+					break;
+			}
+		}
+    }
+	
+	//Helper function to get the appropriate mugshot based on player state
+	TextureID GetBerserkMugshot()
+	{
+		let plr = CPlayer.mo;
+		
+		//Check if player has berserk powerup
+		if(plr.FindInventory("BerserkStrength"))
+		{
+			//Calculate which MOMRAGE sprite to show based on health
+			int health = plr.health;
+			int faceIndex;
+			
+			if(health > 80)
+				faceIndex = 0;
+			else if(health > 60)
+				faceIndex = 1;
+			else if(health > 40)
+				faceIndex = 2;
+			else if(health > 20)
+				faceIndex = 3;
+			else
+				faceIndex = 4;
+			
+			//Return the appropriate MOMRAGE sprite
+			return TexMan.CheckForTexture(String.Format("MOMRAGE%d", faceIndex), TexMan.Type_Any);
+		}
+		else
+		{
+			//Return normal mugshot
+			return GetMugShot(5);
+		}
+	}
+	
+	//[Pop] This is a nice function to quickly grab the exact amount of an item only
+	//in the players inventory.
+	int GetAmountOnly(class<Inventory> item)
+	{
+		let it = CPlayer.mo.FindInventory(item);
+		return (it ? it.Amount : 0);
+	}
+	
+	virtual void DrawTorso(vector2 pos = (0,0), int flags = DI_SCREEN_CENTER_BOTTOM | DI_ITEM_CENTER, vector2 scale = (1,1))
+	{
+		switch(HUDTorsoType)
+		{
+			case 1:
+				DrawImage("graphics/HUD/Torso/Torso1.png", pos, flags, 1.0, (-1,-1), scale);
+				break;
+			case 2:
+				DrawImage("graphics/HUD/Torso/Torso2.png", pos, flags, 1.0, (-1,-1), scale);
+				break;
+			case 3:
+				DrawImage("graphics/HUD/Torso/Torso3.png", pos, flags, 1.0, (-1,-1), scale);
+				break;
+			case 4:
+				DrawImage("graphics/HUD/Torso/Torso4.png", pos, flags, 1.0, (-1,-1), scale);
+				break;
+			case 5:
+				DrawImage("graphics/HUD/Torso/Torso5.png", pos, flags, 1.0, (-1,-1), scale);
+				break;
+			case 6:
+				DrawImage("graphics/HUD/Torso/Torso6.png", pos, flags, 1.0, (-1,-1), scale);
+				break;
+			case 7:
+				DrawImage("graphics/HUD/Torso/Torso7.png", pos, flags, 1.0, (-1,-1), scale);
+				break;
+		}
+	}
+	
+	//[Pop] heres the function to handle the drawing of keys, it does look like a lot
+	//but its mainly some sprite checking and stuff to make sure it works right.
+	virtual void DrawKeys (string tag, vector2 pos, int keycount = 10, int space = 23, int flags = DI_ITEM_OFFSETS)
+    {
+        //from NC HUD
+        textureid icon, iconskull, iconcard;
+        vector2 size;
+        bool scaleup;
+        int count = 0;
+        
+        for(let i = CPlayer.mo.Inv; i != null; i = i.Inv)
+        {
+            if(i is "Key")
+            {
+                // Draw up to defined keycount.
+                if(count == keycount)
+                {
+                    break;
+                }
+                
+                icon = i.AltHUDIcon;
+
+                if (!icon.IsValid())
+                {
+                    if(i.SpawnState && i.SpawnState.sprite != 0)
+                    {
+                        icon = i.SpawnState.GetSpriteTexture(0);
+                    }
+                    else
+                    {
+                        icon = i.Icon;
+                    }
+                    
+                    if(!icon.IsValid())
+                    {
+                        continue;
+                    }
+                }
+                
+                // Exclude keys which use 'TNT1A0' as their icon.
+                if (TexMan.GetName(icon) ~== "TNT1A0")
+                {
+                    continue;
+                }
+                
+                // Scale the icon up if needed.
+                size = TexMan.GetScaledSize(icon);
+                scaleup = (size.x <= 11 && size.y <= 11);
+                
+                string icontag = i.GetTag();
+                
+                if (icontag.RightIndexOf(tag) != -1)
+                {
+                    DrawTexture(icon, (pos.x, pos.y), flags, box : (11, 11), scaleup ? (1, 1) : (1, 1));
+                    pos.x += space;
+                }
+                else
+                {
+                    continue;
+                }
+            }
+        }
+    }
+}	

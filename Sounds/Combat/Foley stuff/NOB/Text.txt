@@ -1,0 +1,4 @@
+1-4: Eject shells
+5-6: Insert shells
+7-8: Lowering weapon before opening
+9-10: Raising weapon after closing

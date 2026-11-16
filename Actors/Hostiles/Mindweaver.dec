@@ -1,0 +1,64 @@
+ACTOR MariaMindweaver /*replaces Deh_Actor_152*/ 3009
+{
+    Health 500 
+    Speed 12 
+    Radius 64
+    Height 64
+    ReactionTime 8
+    PainChance 40
+    Mass 600
+    +SOLID
+    +SHOOTABLE
+    +COUNTKILL
+    SeeSound "mindweaver/sight"
+    ActiveSound "mindweaver/active"
+    PainSound "spider/pain"
+    DeathSound "mindweaver/death"
+	Obituary "%o's mind was riddled with bullets by the Mindweaver."
+
+    States
+    {
+    Spawn:
+        CSPI AB 10 A_Look
+        Loop
+
+    See:
+        CSPI A 20
+    Walk:
+        CSPI A 0 A_PlaySound("mindweaver/walk")
+        CSPI AABBCC 3 A_Chase
+        CSPI D 0 A_PlaySound("mindweaver/walk")
+        CSPI DDEEFF 3 A_Chase
+        Loop
+
+    Missile:
+        CSPI A 20 A_FaceTarget
+
+    Fighting:
+	    TNT1 A 0 A_FaceTarget
+    	TNT1 A 0 A_Playsound("Weapon/Chaingun/Fire")	
+        CSPI G 4 Bright A_custommissile("MariaHostileTracer", 20, 0, 0, 0)
+	    TNT1 A 0 A_FaceTarget
+    	TNT1 A 0 A_Playsound("Weapon/Chaingun/Fire")	
+        CSPI H 4 Bright A_custommissile("MariaHostileTracer", 20, 0, 0, 0)
+        CSPI H 0 Bright A_SpidRefire
+        Goto Fighting
+
+    Pain:
+        CSPI I 3
+        CSPI I 3 A_Pain
+        Goto Walk
+
+    Death:
+        CSPI J 20 A_Scream
+        CSPI K 7 A_Fall
+        CSPI LMNO 7
+        CSPI P -1 A_BossDeath
+        Stop
+
+    Raise:
+        CSPI P 5
+        CSPI ONMLKJ 5
+        Goto Walk
+    }
+}

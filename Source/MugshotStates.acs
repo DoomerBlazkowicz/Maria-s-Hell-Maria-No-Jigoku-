@@ -1,0 +1,21 @@
+#library "MugshotStates"
+#include "zcommon.acs"
+
+Script "VampirePowerActivatorScript" ENTER {
+if (CheckInventory("StoneSynthFire") == 1 && (CheckInventory("StoneSynthAltFire") == 1))
+{
+	if (CheckInventory("BG_ZerkCharge")==150)
+	{
+	GiveInventory("BG_VampZerk_Ready",1);
+	SetMugShotState("ZerkReady");
+	Delay(1);
+	Restart;
+	}
+	Else
+Delay(1);
+Restart;
+}
+	Else
+Delay(1);
+Restart;
+}

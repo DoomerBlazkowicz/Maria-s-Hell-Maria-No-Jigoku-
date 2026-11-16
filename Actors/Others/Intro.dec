@@ -1,0 +1,489 @@
+//Default
+ACTOR MariaCrackKnucklesA : Weapon
+{
+    +CHEATNOTWEAPON
+    +UNDROPPABLE
+    +UNTOSSABLE
+	+WEAPON.CHEATNOTWEAPON	
+    Tag " "
+	States
+	{
+	Spawn:
+        TNT1 A 35
+		Stop
+	Select:		
+		UMGG A 0 A_Raise
+		Loop
+	Deselect:	
+		UMGG A 1 A_Lower
+		Loop
+	Ready:
+    Both:
+        TNT1 A 0 A_JumpIf(CallACS("IntroOptions")==1, "Hallucination")
+        TNT1 A 0 A_JumpIf(CallACS("IntroOptions")==2, "Knuckles")
+        TNT1 A 0 A_JumpIf(CallACS("IntroOptions")==3, "Nothing")
+     	TNT1 A 0 A_SetBlend("Red", 0.3, 110)
+        TNT1 A 2
+        INBL ABCD 2
+        INBL EEEEFFFFEEEEFFFFEEEEFFFFEEEEFFFFEEEE 1
+        TNT1 A 0 A_PlaySound("maria/sigh",1)
+        INBL EEE 1
+     	TNT1 A 0 A_SetBlend("Black", 1.5, 30)
+        INHA AAAAAAAAAAAAAAAAAAAAAAAABBBAAAAAAABBB 1
+        INHA CDEF 2
+        TNT1 A 3
+        KNUK A 1
+        KNUK BCDEE 1
+        TNT1 A 0 A_PlaySound("Maria/Intro/Knuckles", 2)
+        KNUK FFGGHH 1
+        KNUK HHGGFF 1
+        KNUK EEDCB 1
+        KNUK A 1
+        KNUK I 1
+        KNUK JKLMM 1
+        TNT1 A 0 A_PlaySound("Maria/Intro/Knuckles", 2)
+        KNUK NNOOPP 1
+        KNUK PPOONN 1
+        KNUK MMLKJ 1
+        KNUK I 1
+		TNT1 A 0 A_SelectWeapon("MariaPistol")
+        TNT1 A 1 A_TakeInventory("MariaCrackKnucklesA",1)
+		Loop
+    Hallucination:
+        TNT1 A 0 A_JumpIf(CallACS("IntroOptions")==2, "Knuckles")
+        TNT1 A 0 A_JumpIf(CallACS("IntroOptions")==3, "Nothing")
+     	TNT1 A 0 A_SetBlend("Red", 0.3, 110)
+        TNT1 A 2
+        INBL ABCD 2
+        INBL EEEEFFFFEEEEFFFFEEEEFFFFEEEEFFFFEEEE 1
+        TNT1 A 0 A_PlaySound("maria/sigh",1)
+        INBL EEE 1
+     	TNT1 A 0 A_SetBlend("Black", 1.5, 30)
+        INHA AAAAAAAAAAAAAAAAAAAAAAAABBBAAAAAAABBB 1
+        INHA CDEF 2
+        TNT1 A 3
+		TNT1 A 0 A_SelectWeapon("MariaPistol")
+        TNT1 A 1 A_TakeInventory("MariaCrackKnucklesA",1)
+        Loop
+    Knuckles:
+        TNT1 A 0 A_JumpIf(CallACS("IntroOptions")==3, "Nothing")
+        TNT1 A 3
+        KNUK A 1
+        KNUK BCDEE 1
+        TNT1 A 0 A_PlaySound("Maria/Intro/Knuckles", 2)
+        KNUK FFGGHH 1
+        KNUK HHGGFF 1
+        KNUK EEDCB 1
+        KNUK A 1
+        KNUK I 1
+        KNUK JKLMM 1
+        TNT1 A 0 A_PlaySound("Maria/Intro/Knuckles", 2)
+        KNUK NNOOPP 1
+        KNUK PPOONN 1
+        KNUK MMLKJ 1
+        KNUK I 1
+		TNT1 A 0 A_SelectWeapon("MariaPistol")
+        TNT1 A 1 A_TakeInventory("MariaCrackKnucklesA",1)
+	    Loop
+    Nothing:
+        KNUK A 1
+		TNT1 A 0 A_SelectWeapon("MariaPistol")
+        TNT1 A 1 A_TakeInventory("MariaCrackKnucklesA",1)       
+        Loop
+	Fire:
+		TNT1 A 1
+        Stop
+	}
+}
+
+//Alternative
+ACTOR MariaCrackKnucklesB : Weapon
+{
+    +CHEATNOTWEAPON
+    +UNDROPPABLE
+    +UNTOSSABLE
+	+WEAPON.CHEATNOTWEAPON	
+    Tag " "
+	States
+	{
+	Spawn:
+        TNT1 A 35
+		Stop
+	Select:		
+		UMGG A 0 A_Raise
+		Loop
+	Deselect:	
+		UMGG A 1 A_Lower
+		Loop
+	Ready:
+    Both:
+        TNT1 A 0 A_JumpIf(CallACS("IntroOptions")==1, "Hallucination")
+        TNT1 A 0 A_JumpIf(CallACS("IntroOptions")==2, "Knuckles")
+        TNT1 A 0 A_JumpIf(CallACS("IntroOptions")==3, "Nothing")
+     	TNT1 A 0 A_SetBlend("Red", 0.3, 110)
+        TNT1 A 2
+        INBL ABCD 2
+        INBL EEEEFFFFEEEEFFFFEEEEFFFFEEEEFFFFEEEE 1
+        TNT1 A 0 A_PlaySound("maria/sigh",1)
+        INBL EEE 1
+     	TNT1 A 0 A_SetBlend("Black", 1.5, 30)
+        INHA AAAAAAAAAAAAAAAAAAAAAAAABBBAAAAAAABBB 1
+        INHA CDEF 2
+        TNT1 A 3
+        KNUK A 1
+        KNUK BCDEE 1
+        TNT1 A 0 A_PlaySound("Maria/Intro/Knuckles", 2)
+        KNUK FFGGHH 1
+        KNUK HHGGFF 1
+        KNUK EEDCB 1
+        KNUK A 1
+        KNUK I 1
+        KNUK JKLMM 1
+        TNT1 A 0 A_PlaySound("Maria/Intro/Knuckles", 2)
+        KNUK NNOOPP 1
+        KNUK PPOONN 1
+        KNUK MMLKJ 1
+        KNUK I 1
+		TNT1 A 0 A_SelectWeapon("MariaCrossbow")
+        TNT1 A 1 A_TakeInventory("MariaCrackKnucklesB",1)
+		Loop
+    Hallucination:
+        TNT1 A 0 A_JumpIf(CallACS("IntroOptions")==2, "Knuckles")
+        TNT1 A 0 A_JumpIf(CallACS("IntroOptions")==3, "Nothing")
+     	TNT1 A 0 A_SetBlend("Red", 0.3, 110)
+        TNT1 A 2
+        INBL ABCD 2
+        INBL EEEEFFFFEEEEFFFFEEEEFFFFEEEEFFFFEEEE 1
+        TNT1 A 0 A_PlaySound("maria/sigh",1)
+        INBL EEE 1
+     	TNT1 A 0 A_SetBlend("Black", 1.5, 30)
+        INHA AAAAAAAAAAAAAAAAAAAAAAAABBBAAAAAAABBB 1
+        INHA CDEF 2
+        TNT1 A 3
+		TNT1 A 0 A_SelectWeapon("MariaCrossbow")
+        TNT1 A 1 A_TakeInventory("MariaCrackKnucklesB",1)
+        Loop
+    Knuckles:
+        TNT1 A 0 A_JumpIf(CallACS("IntroOptions")==3, "Nothing")
+        TNT1 A 3
+        KNUK A 1
+        KNUK BCDEE 1
+        TNT1 A 0 A_PlaySound("Maria/Intro/Knuckles", 2)
+        KNUK FFGGHH 1
+        KNUK HHGGFF 1
+        KNUK EEDCB 1
+        KNUK A 1
+        KNUK I 1
+        KNUK JKLMM 1
+        TNT1 A 0 A_PlaySound("Maria/Intro/Knuckles", 2)
+        KNUK NNOOPP 1
+        KNUK PPOONN 1
+        KNUK MMLKJ 1
+        KNUK I 1
+		TNT1 A 0 A_SelectWeapon("MariaCrossbow")
+        TNT1 A 1 A_TakeInventory("MariaCrackKnucklesB",1)
+	    Loop
+    Nothing:
+        KNUK A 1
+		TNT1 A 0 A_SelectWeapon("MariaCrossbow")
+        TNT1 A 1 A_TakeInventory("MariaCrackKnucklesB",1)       
+        Loop
+	Fire:
+		TNT1 A 1
+        Stop
+	}
+}
+
+//Eternal
+ACTOR MariaCrackKnucklesC : Weapon
+{
+    +CHEATNOTWEAPON
+    +UNDROPPABLE
+    +UNTOSSABLE
+	+WEAPON.CHEATNOTWEAPON	
+    Tag " "
+	States
+	{
+	Spawn:
+        TNT1 A 35
+		Stop
+	Select:		
+		UMGG A 0 A_Raise
+		Loop
+	Deselect:	
+		UMGG A 1 A_Lower
+		Loop
+	Ready:
+    Both:
+        TNT1 A 0 A_JumpIf(CallACS("IntroOptions")==1, "Hallucination")
+        TNT1 A 0 A_JumpIf(CallACS("IntroOptions")==2, "Knuckles")
+        TNT1 A 0 A_JumpIf(CallACS("IntroOptions")==3, "Nothing")
+     	TNT1 A 0 A_SetBlend("Red", 0.3, 110)
+        TNT1 A 2
+        INBL ABCD 2
+        INBL EEEEFFFFEEEEFFFFEEEEFFFFEEEEFFFFEEEE 1
+        TNT1 A 0 A_PlaySound("maria/sigh",1)
+        INBL EEE 1
+     	TNT1 A 0 A_SetBlend("Black", 1.5, 30)
+        INHA AAAAAAAAAAAAAAAAAAAAAAAABBBAAAAAAABBB 1
+        INHA CDEF 2
+        TNT1 A 3
+        KNUK A 1
+        KNUK BCDEE 1
+        TNT1 A 0 A_PlaySound("Maria/Intro/Knuckles", 2)
+        KNUK FFGGHH 1
+        KNUK HHGGFF 1
+        KNUK EEDCB 1
+        KNUK A 1
+        KNUK I 1
+        KNUK JKLMM 1
+        TNT1 A 0 A_PlaySound("Maria/Intro/Knuckles", 2)
+        KNUK NNOOPP 1
+        KNUK PPOONN 1
+        KNUK MMLKJ 1
+        KNUK I 1
+		TNT1 A 0 A_SelectWeapon("MariaShotgun")
+        TNT1 A 1 A_TakeInventory("MariaCrackKnucklesC",1)
+		Loop
+    Hallucination:
+        TNT1 A 0 A_JumpIf(CallACS("IntroOptions")==2, "Knuckles")
+        TNT1 A 0 A_JumpIf(CallACS("IntroOptions")==3, "Nothing")
+     	TNT1 A 0 A_SetBlend("Red", 0.3, 110)
+        TNT1 A 2
+        INBL ABCD 2
+        INBL EEEEFFFFEEEEFFFFEEEEFFFFEEEEFFFFEEEE 1
+        TNT1 A 0 A_PlaySound("maria/sigh",1)
+        INBL EEE 1
+     	TNT1 A 0 A_SetBlend("Black", 1.5, 30)
+        INHA AAAAAAAAAAAAAAAAAAAAAAAABBBAAAAAAABBB 1
+        INHA CDEF 2
+        TNT1 A 3
+		TNT1 A 0 A_SelectWeapon("MariaShotgun")
+        TNT1 A 1 A_TakeInventory("MariaCrackKnucklesC",1)
+        Loop
+    Knuckles:
+        TNT1 A 0 A_JumpIf(CallACS("IntroOptions")==3, "Nothing")
+        TNT1 A 3
+        KNUK A 1
+        KNUK BCDEE 1
+        TNT1 A 0 A_PlaySound("Maria/Intro/Knuckles", 2)
+        KNUK FFGGHH 1
+        KNUK HHGGFF 1
+        KNUK EEDCB 1
+        KNUK A 1
+        KNUK I 1
+        KNUK JKLMM 1
+        TNT1 A 0 A_PlaySound("Maria/Intro/Knuckles", 2)
+        KNUK NNOOPP 1
+        KNUK PPOONN 1
+        KNUK MMLKJ 1
+        KNUK I 1
+		TNT1 A 0 A_SelectWeapon("MariaShotgun")
+        TNT1 A 1 A_TakeInventory("MariaCrackKnucklesC",1)
+	    Loop
+    Nothing:
+        KNUK A 1
+		TNT1 A 0 A_SelectWeapon("MariaShotgun")
+        TNT1 A 1 A_TakeInventory("MariaCrackKnucklesC",1)       
+        Loop
+	Fire:
+		TNT1 A 1
+        Stop
+	}
+}
+
+//Melee
+ACTOR MariaCrackKnucklesD : Weapon
+{
+    +CHEATNOTWEAPON
+    +UNDROPPABLE
+    +UNTOSSABLE
+	+WEAPON.CHEATNOTWEAPON	
+    Tag " "
+	States
+	{
+	Spawn:
+        TNT1 A 35
+		Stop
+	Select:		
+		UMGG A 0 A_Raise
+		Loop
+	Deselect:	
+		UMGG A 1 A_Lower
+		Loop
+	Ready:
+    Both:
+        TNT1 A 0 A_JumpIf(CallACS("IntroOptions")==1, "Hallucination")
+        TNT1 A 0 A_JumpIf(CallACS("IntroOptions")==2, "Knuckles")
+        TNT1 A 0 A_JumpIf(CallACS("IntroOptions")==3, "Nothing")
+     	TNT1 A 0 A_SetBlend("Red", 0.3, 110)
+        TNT1 A 2
+        INBL ABCD 2
+        INBL EEEEFFFFEEEEFFFFEEEEFFFFEEEEFFFFEEEE 1
+        TNT1 A 0 A_PlaySound("maria/sigh",1)
+        INBL EEE 1
+     	TNT1 A 0 A_SetBlend("Black", 1.5, 30)
+        INHA AAAAAAAAAAAAAAAAAAAAAAAABBBAAAAAAABBB 1
+        INHA CDEF 2
+        TNT1 A 3
+        KNUK A 1
+        KNUK BCDEE 1
+        TNT1 A 0 A_PlaySound("Maria/Intro/Knuckles", 2)
+        KNUK FFGGHH 1
+        KNUK HHGGFF 1
+        KNUK EEDCB 1
+        KNUK A 1
+        KNUK I 1
+        KNUK JKLMM 1
+        TNT1 A 0 A_PlaySound("Maria/Intro/Knuckles", 2)
+        KNUK NNOOPP 1
+        KNUK PPOONN 1
+        KNUK MMLKJ 1
+        KNUK I 1
+		TNT1 A 0 A_SelectWeapon("MariaFist")
+        TNT1 A 1 A_TakeInventory("MariaCrackKnucklesD",1)
+		Loop
+    Hallucination:
+        TNT1 A 0 A_JumpIf(CallACS("IntroOptions")==2, "Knuckles")
+        TNT1 A 0 A_JumpIf(CallACS("IntroOptions")==3, "Nothing")
+     	TNT1 A 0 A_SetBlend("Red", 0.3, 110)
+        TNT1 A 2
+        INBL ABCD 2
+        INBL EEEEFFFFEEEEFFFFEEEEFFFFEEEEFFFFEEEE 1
+        TNT1 A 0 A_PlaySound("maria/sigh",1)
+        INBL EEE 1
+     	TNT1 A 0 A_SetBlend("Black", 1.5, 30)
+        INHA AAAAAAAAAAAAAAAAAAAAAAAABBBAAAAAAABBB 1
+        INHA CDEF 2
+        TNT1 A 3
+		TNT1 A 0 A_SelectWeapon("MariaFist")
+        TNT1 A 1 A_TakeInventory("MariaCrackKnucklesD",1)
+        Loop
+    Knuckles:
+        TNT1 A 0 A_JumpIf(CallACS("IntroOptions")==3, "Nothing")
+        TNT1 A 3
+        KNUK A 1
+        KNUK BCDEE 1
+        TNT1 A 0 A_PlaySound("Maria/Intro/Knuckles", 2)
+        KNUK FFGGHH 1
+        KNUK HHGGFF 1
+        KNUK EEDCB 1
+        KNUK A 1
+        KNUK I 1
+        KNUK JKLMM 1
+        TNT1 A 0 A_PlaySound("Maria/Intro/Knuckles", 2)
+        KNUK NNOOPP 1
+        KNUK PPOONN 1
+        KNUK MMLKJ 1
+        KNUK I 1
+		TNT1 A 0 A_SelectWeapon("MariaFist")
+        TNT1 A 1 A_TakeInventory("MariaCrackKnucklesD",1)
+	    Loop
+    Nothing:
+        KNUK A 1
+		TNT1 A 0 A_SelectWeapon("MariaFist")
+        TNT1 A 1 A_TakeInventory("MariaCrackKnucklesD",1)       
+        Loop
+	Fire:
+		TNT1 A 1
+        Stop
+	}
+}
+
+//Legacy
+ACTOR MariaCrackKnucklesE : Weapon
+{
+    +CHEATNOTWEAPON
+    +UNDROPPABLE
+    +UNTOSSABLE
+	+WEAPON.CHEATNOTWEAPON	
+    Tag " "
+	States
+	{
+	Spawn:
+        TNT1 A 35
+		Stop
+	Select:		
+		UMGG A 0 A_Raise
+		Loop
+	Deselect:	
+		UMGG A 1 A_Lower
+		Loop
+	Ready:
+    Both:
+        TNT1 A 0 A_JumpIf(CallACS("IntroOptions")==1, "Hallucination")
+        TNT1 A 0 A_JumpIf(CallACS("IntroOptions")==2, "Knuckles")
+        TNT1 A 0 A_JumpIf(CallACS("IntroOptions")==3, "Nothing")
+     	TNT1 A 0 A_SetBlend("Red", 0.3, 110)
+        TNT1 A 2
+        INBL ABCD 2
+        INBL EEEEFFFFEEEEFFFFEEEEFFFFEEEEFFFFEEEE 1
+        TNT1 A 0 A_PlaySound("maria/sigh",1)
+        INBL EEE 1
+     	TNT1 A 0 A_SetBlend("Black", 1.5, 30)
+        INHA AAAAAAAAAAAAAAAAAAAAAAAABBBAAAAAAABBB 1
+        INHA CDEF 2
+        TNT1 A 3
+        KNUK A 1
+        KNUK BCDEE 1
+        TNT1 A 0 A_PlaySound("Maria/Intro/Knuckles", 2)
+        KNUK FFGGHH 1
+        KNUK HHGGFF 1
+        KNUK EEDCB 1
+        KNUK A 1
+        KNUK I 1
+        KNUK JKLMM 1
+        TNT1 A 0 A_PlaySound("Maria/Intro/Knuckles", 2)
+        KNUK NNOOPP 1
+        KNUK PPOONN 1
+        KNUK MMLKJ 1
+        KNUK I 1
+		TNT1 A 0 A_SelectWeapon("MariaRevolver")
+        TNT1 A 1 A_TakeInventory("MariaCrackKnucklesE",1)
+		Loop
+    Hallucination:
+        TNT1 A 0 A_JumpIf(CallACS("IntroOptions")==2, "Knuckles")
+        TNT1 A 0 A_JumpIf(CallACS("IntroOptions")==3, "Nothing")
+     	TNT1 A 0 A_SetBlend("Red", 0.3, 110)
+        TNT1 A 2
+        INBL ABCD 2
+        INBL EEEEFFFFEEEEFFFFEEEEFFFFEEEEFFFFEEEE 1
+        TNT1 A 0 A_PlaySound("maria/sigh",1)
+        INBL EEE 1
+     	TNT1 A 0 A_SetBlend("Black", 1.5, 30)
+        INHA AAAAAAAAAAAAAAAAAAAAAAAABBBAAAAAAABBB 1
+        INHA CDEF 2
+        TNT1 A 3
+		TNT1 A 0 A_SelectWeapon("MariaRevolver")
+        TNT1 A 1 A_TakeInventory("MariaCrackKnucklesE",1)
+        Loop
+    Knuckles:
+        TNT1 A 0 A_JumpIf(CallACS("IntroOptions")==3, "Nothing")
+        TNT1 A 3
+        KNUK A 1
+        KNUK BCDEE 1
+        TNT1 A 0 A_PlaySound("Maria/Intro/Knuckles", 2)
+        KNUK FFGGHH 1
+        KNUK HHGGFF 1
+        KNUK EEDCB 1
+        KNUK A 1
+        KNUK I 1
+        KNUK JKLMM 1
+        TNT1 A 0 A_PlaySound("Maria/Intro/Knuckles", 2)
+        KNUK NNOOPP 1
+        KNUK PPOONN 1
+        KNUK MMLKJ 1
+        KNUK I 1
+		TNT1 A 0 A_SelectWeapon("MariaRevolver")
+        TNT1 A 1 A_TakeInventory("MariaCrackKnucklesE",1)
+	    Loop
+    Nothing:
+        KNUK A 1
+		TNT1 A 0 A_SelectWeapon("MariaRevolver")
+        TNT1 A 1 A_TakeInventory("MariaCrackKnucklesE",1)       
+        Loop
+	Fire:
+		TNT1 A 1
+        Stop
+	}
+}

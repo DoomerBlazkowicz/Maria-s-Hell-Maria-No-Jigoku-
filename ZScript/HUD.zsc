@@ -1,0 +1,432 @@
+//[Pop] ill try and annotate this as much as possible so it should be easier
+//to grasp what exactly is going on and what does what.
+
+Class StatusBarMod : BaseStatusBar
+{
+	HUDFont hfntS;
+	HUDFont hfnt;
+	HUDFont hfntB;
+	
+	DynamicValueInterpolator mArmorBar;
+	
+	double HUDBarType;
+	int HUDBarTrans;
+	int HUDTorsoType;
+	
+    Override void Init()
+    {
+		//[Pop] this codeblock sets up the actual HUD space itself, and assigns
+		//fonts to stuff. Change the font called here to whatever you want it to be
+		//do not mess with the SetSize unless youre redoin somethings, its 
+		//basically just creating the canvas the HUD is gonna be drawn to.
+        SetSize(0, 520, 325); 
+		
+		mArmorBar = DynamicValueInterpolator.Create(0, 0.25, 1, 10);
+		
+		hfntS = HUDFont.Create("SMALLFNT");
+		hfnt = HUDFont.Create("SMALLFNT");
+		hfntB = HUDFont.Create("DBIGFONT");
+		Super.Init();
+	}
+	
+	override void Tick()
+	{
+		Super.Tick();
+		
+		mArmorBar.Update(GetArmorAmount());
+	}
+	
+    Override void Draw (int state, double TicFrac)
+    {
+        Super.Draw (state, TicFrac);
+
+        BeginStatusBar(true); //Force scale
+		
+		HUDBarTrans = CVar.GetCVAR("MH_HUDTrans").GetFloat();
+		HUDBarType = CVar.GetCVAR("MH_HUDType").GetInt();
+		HUDTorsoType = CVar.GetCVAR("MH_TorsoType").GetInt();
+		
+		switch(HUDBarType)
+		{
+			default:
+			case 0:
+				BeginHUD();
+				
+				//[Pop] Debug Center Line
+				//DrawImage("graphics/HUD/DEBGHUD.png", (0,0), DI_SCREEN_CENTER_BOTTOM | DI_ITEM_BOTTOM, 1.0);
+				DrawTorsoBar();
+				break;
+			case 1:
+				if(state == HUD_StatusBar)
+				{
+					BeginStatusBar();
+					
+					//[Pop] Debug Center Line
+					//DrawImage("graphics/HUD/DEBGHUD.png", (260,300), DI_SCREEN_CENTER_BOTTOM | DI_ITEM_BOTTOM, 1.0);
+					DrawDoomBar();
+				}
+				else if(state == HUD_Fullscreen)
+				{
+					BeginHUD();
+					
+					//[Pop] Debug Center Line
+					//DrawImage("graphics/HUD/DEBGHUD.png", (0,0), DI_SCREEN_CENTER_BOTTOM | DI_ITEM_BOTTOM, 1.0);
+					DrawFullScreenBar();
+				}
+				break;
+		}
+    }
+	
+	//Helper function to get the appropriate mugshot based on player state
+	TextureID GetBerserkMugshot()
+	{
+		let plr = CPlayer.mo;
+		
+		//Check if player has berserk powerup
+		if(plr.FindInventory("BerserkStrength"))
+		{
+			//Calculate which MOMRAGE sprite to show based on health
+			int health = plr.health;
+			int faceIndex;
+			
+			if(health > 80)
+				faceIndex = 0;
+			else if(health > 60)
+				faceIndex = 1;
+			else if(health > 40)
+				faceIndex = 2;
+			else if(health > 20)
+				faceIndex = 3;
+			else
+				faceIndex = 4;
+			
+			//Return the appropriate MOMRAGE sprite
+			return TexMan.CheckForTexture(String.Format("MOMRAGE%d", faceIndex), TexMan.Type_Any);
+		}
+		else
+		{
+			//Return normal mugshot
+			return GetMugShot(5);
+		}
+	}
+
+	//[Pop] This is the second one, with a different BAR graphic
+	void DrawDoomBar()
+    {   
+		let plr = PlayerPawn(CPlayer.mo);
+		//[Pop] simple null check here to check that the player exists, else 
+		//something funky might happen. These are mainly the only
+		//things that you need to worry about over SBARINFO.
+		if(plr)
+		{
+		
+			DrawImage("graphics/HUD/MARHUD.png", (250,325), DI_ITEM_BOTTOM, HUDBarTrans);
+			//DrawImage("graphics/HUD/MARHUD.png", (250,325), DI_SCREEN_CENTER_BOTTOM | DI_ITEM_BOTTOM, HUDBarTrans);
+		
+			//here we handle ammo
+			Inventory ammotype1, ammotype2;
+			[ammotype1, ammotype2] = GetCurrentAmmo();
+			//[Pop] specifically for mods that have reloading, these can be 
+			//swapped around if its swapped, i personally try to use ammotype1
+			//for whats actually being shot, and ammotype2 for the reserve
+			if (CPlayer.ReadyWeapon != NULL)
+			{
+				If(ammotype1!=null){DrawString(hfntB, FormatNumber(ammotype1.Amount, 1, 3), (290, 300), DI_TEXT_ALIGN_CENTER,Font.CR_GOLD);}
+				If(ammotype2!=null){DrawString(hfntB, FormatNumber(ammotype2.Amount, 3, 3), (340, 300), DI_TEXT_ALIGN_CENTER,Font.CR_WHITE);}
+				
+			}
+			//[Pop] this is less than ideal but i cant find any examples for doing it
+			//the correct way for some reason??? should probably just write a function
+			//for grabbing the ammo tho
+			
+			//also THIS HUD doesnt have MaxAmmo display, so gutting it for this variant
+
+			/*int ShellAmmo = GetAmount("Shell");
+			If(ShellAmmo)
+			{
+				DrawString(hfntS, FormatNumber(ShellAmmo, 1, 3), (404, 304), DI_TEXT_ALIGN_CENTER,Font.CR_RED, scale:(0.7, 0.7));
+			}*/
+			
+			int PipeBombAmmo = GetAmount("PipeBombAmmo");
+			If(PipeBombAmmo)
+			{
+				DrawString(hfntS, FormatNumber(PipeBombAmmo, 1, 3), (470, 299), DI_TEXT_ALIGN_CENTER,Font.CR_CREAM, scale:(1.0, 1.0));
+			}
+
+			int MariaSyringeAmmo = GetAmount("MariaSyringeAmmo");
+			If(MariaSyringeAmmo)
+			{
+				DrawString(hfntS, FormatNumber(MariaSyringeAmmo, 1, 3), (470, 311), DI_TEXT_ALIGN_CENTER,Font.CR_BLUE, scale:(1.0, 1.0));
+			}
+			
+			//here we handle armor/health
+			DrawString(hfntB, FormatNumber(GetArmorAmount(), 1, 3), (157, 300), DI_TEXT_ALIGN_CENTER, Font.CR_GREEN);
+			DrawString(hfntB, FormatNumber(plr.health, 1, 3), (206, 300), DI_TEXT_ALIGN_CENTER, Font.CR_BLUE);
+			
+			//heres the mugshot and inventory
+			DrawTexture(GetBerserkMugshot(), (234, 293), DI_ITEM_OFFSETS);
+			DrawInventoryIcon(plr.InvSel, (112, 316));
+			if (plr.InvSel)
+			{
+				DrawString(hfnt, FormatNumber(Cplayer.mo.InvSel.amount, 0, 3), (100, 310), DI_ITEM_OFFSETS, Font.CR_YELLOW);
+			}
+			
+			//[Pop] Now, these can technically draw more than 3, and itd be a good idea
+			//to allow it to for custom mapsets that have more, but they arent
+			//drawn from the center out, its strictly left to right or right to left
+			//so theyd need to be moved around slightly for it.
+			DrawKeys("Card", (67, 310), 3, -8);
+			DrawKeys("Skull", (75, 316), 3, -8);
+			DrawKeys("Key", (85, 314), 3, -8);
+		}
+    }
+	
+	//[Pop] this is the actual function that draws all the hud stuff
+    void DrawFullscreenBar()
+    {   
+		let plr = PlayerPawn(CPlayer.mo);
+		let armortype = CPlayer.mo.FindInventory("BasicArmor");
+		int armor = mArmorBar.GetValue();
+		//[Pop] simple null check here to check that the player exists, else 
+		//something funky might happen. These are mainly the only
+		//things that you need to worry about over SBARINFO.
+		if(plr)
+		{
+			//[Pop] Gonna place ALL of the HUD panel sections right here.
+			DrawImage("graphics/HUD/FD HUD/Level Stats.png", (-37,0), DI_SCREEN_RIGHT_BOTTOM | DI_ITEM_BOTTOM, HUDBarTrans);
+			DrawImage("graphics/HUD/FD HUD/Ammo.png", (-23,-32), DI_SCREEN_RIGHT_BOTTOM | DI_ITEM_BOTTOM, HUDBarTrans);
+			DrawImage("graphics/HUD/FD HUD/Alt.png", (-97,0), DI_SCREEN_RIGHT_BOTTOM | DI_ITEM_BOTTOM, HUDBarTrans);
+			DrawImage("graphics/HUD/FD HUD/Item.png", (-23,-64), DI_SCREEN_RIGHT_BOTTOM | DI_ITEM_BOTTOM, HUDBarTrans);
+			
+			DrawImage("graphics/HUD/FD HUD/Health.png", (23,0), DI_SCREEN_LEFT_BOTTOM | DI_ITEM_BOTTOM, HUDBarTrans);
+			DrawImage("graphics/HUD/FD HUD/Armour.png", (70,0), DI_SCREEN_LEFT_BOTTOM | DI_ITEM_BOTTOM, HUDBarTrans);
+			
+			//here we handle ammo
+			Inventory ammotype1, ammotype2;
+			[ammotype1, ammotype2] = GetCurrentAmmo();
+			//[Pop] specifically for mods that have reloading, these can be 
+			//swapped around if its swapped, i personally try to use ammotype1
+			//for whats actually being shot, and ammotype2 for the reserve
+			If(ammotype1!=null){DrawString(hfntB, FormatNumber(ammotype1.Amount, 1, 3), (-24, -58), DI_SCREEN_RIGHT_BOTTOM | DI_TEXT_ALIGN_CENTER,Font.CR_GOLD);}
+			If(ammotype2!=null){DrawString(hfntB, FormatNumber(ammotype2.Amount, 3, 3), (-98, -26), DI_SCREEN_RIGHT_BOTTOM | DI_TEXT_ALIGN_CENTER,Font.CR_WHITE);}
+			
+
+			//heres the mugshot
+			if (armor) DrawInventoryIcon(armortype, (70, -5), DI_SCREEN_LEFT_BOTTOM | DI_ITEM_OFFSETS, 0.4);
+			DrawTexture(GetBerserkMugshot(), (55, -63), DI_SCREEN_LEFT_BOTTOM | DI_ITEM_OFFSETS);
+			
+			//here we handle armor/health
+			DrawString(hfntB, FormatNumber(GetArmorAmount(), 1, 3), (70, -25), DI_SCREEN_LEFT_BOTTOM | DI_TEXT_ALIGN_CENTER, Font.CR_GREEN);
+			DrawString(hfntB, FormatNumber(plr.health, 1, 3), (21, -25), DI_SCREEN_LEFT_BOTTOM | DI_TEXT_ALIGN_CENTER, Font.CR_BLUE);
+			
+			//and here the inventory
+			DrawInventoryIcon(plr.InvSel, (-23, -74), DI_SCREEN_RIGHT_BOTTOM | DI_ITEM_BOTTOM);
+			if (plr.InvSel)
+			{
+				DrawString(hfnt, FormatNumber(Cplayer.mo.InvSel.amount, 0, 3), (-10, -74), DI_SCREEN_RIGHT_BOTTOM | DI_ITEM_OFFSETS, Font.CR_YELLOW);
+			}
+			
+			//[Pop] Now, these can technically draw more than 3, and itd be a good idea
+			//to allow it to for custom mapsets that have more, but they arent
+			//drawn from the center out, its strictly left to right or right to left
+			//so theyd need to be moved around slightly for it.
+			DrawKeys("Card", (-60, -34), 3, -8, DI_SCREEN_RIGHT_BOTTOM | DI_ITEM_BOTTOM);
+			DrawKeys("Skull", (-60, -38), 3, -8, DI_SCREEN_RIGHT_BOTTOM | DI_ITEM_BOTTOM);
+			DrawKeys("Key", (-60, -36), 3, -8, DI_SCREEN_RIGHT_BOTTOM | DI_ITEM_BOTTOM);
+			
+			//Level Stats
+			//Calculate time in seconds
+			int timeSeconds = Thinker.Tics2Seconds(Level.time);
+			int minutes = timeSeconds / 60;
+			int seconds = timeSeconds % 60;
+			
+			//Draw values with spacing to align with graphic
+			DrawString(hfntS, String.Format("%i      %i", Level.killed_monsters, Level.total_monsters), (-36, -28), DI_SCREEN_RIGHT_BOTTOM | DI_TEXT_ALIGN_LEFT, Font.CR_RED, scale:(0.7, 0.7));
+			
+			DrawString(hfntS, String.Format("%i      %i", Level.found_items, Level.total_items), (-36, -21), DI_SCREEN_RIGHT_BOTTOM | DI_TEXT_ALIGN_LEFT, Font.CR_GREEN, scale:(0.7, 0.7));
+			
+			DrawString(hfntS, String.Format("%i      %i", Level.found_secrets, Level.total_secrets), (-36, -14), DI_SCREEN_RIGHT_BOTTOM | DI_TEXT_ALIGN_LEFT, Font.CR_PURPLE, scale:(0.7, 0.7));
+			
+			DrawString(hfntS, String.Format("%02i  %02i", minutes, seconds), (-40, -7), DI_SCREEN_RIGHT_BOTTOM | DI_TEXT_ALIGN_LEFT, Font.CR_YELLOW, scale:(0.7, 0.7));
+		}
+    }
+	
+	void DrawTorsoBar()
+    {   
+		let plr = PlayerPawn(CPlayer.mo);
+		let armortype = CPlayer.mo.FindInventory("BasicArmor");
+		int armor = mArmorBar.GetValue();
+		
+		//[Pop] simple null check here to check that the player exists, else 
+		//something funky might happen. These are mainly the only
+		//things that you need to worry about over SBARINFO.
+		if(plr)
+		{	
+			//DrawImage("graphics/HUD/TDA Inspired HUD Concept.png", (-2,0), DI_SCREEN_CENTER_BOTTOM | DI_ITEM_BOTTOM, 0.5);
+			
+			//here we handle ammo
+			Inventory ammotype1, ammotype2;
+			[ammotype1, ammotype2] = GetCurrentAmmo();
+			//[Pop] specifically for mods that have reloading, these can be 
+			//swapped around if its swapped, i personally try to use ammotype1
+			//for whats actually being shot, and ammotype2 for the reserve
+			If(ammotype1!=null){DrawString(hfntB, FormatNumber(ammotype1.Amount, 1, 3), (130, -16), DI_SCREEN_CENTER_BOTTOM | DI_TEXT_ALIGN_RIGHT,Font.CR_GOLD);}
+			If(ammotype2!=null){DrawString(hfntB, FormatNumber(ammotype2.Amount, 3, 3), (150, -16), DI_SCREEN_CENTER_BOTTOM | DI_TEXT_ALIGN_LEFT,Font.CR_WHITE);}
+			DrawString(hfnt, CPlayer.ReadyWeapon.GetTag(), (140, -28), DI_SCREEN_CENTER_BOTTOM | DI_TEXT_ALIGN_CENTER, Font.CR_WHITE);
+			
+			//here we handle armor/health
+			DrawString(hfntB, FormatNumber(GetArmorAmount(), 1, 3), (50, -35), DI_SCREEN_CENTER_BOTTOM | DI_TEXT_ALIGN_LEFT, Font.CR_GREEN);
+			DrawString(hfntB, FormatNumber(plr.health, 1, 3), (-50, -35), DI_SCREEN_CENTER_BOTTOM | DI_TEXT_ALIGN_RIGHT, Font.CR_BLUE);
+			
+			DrawImage("graphics/HUD/MARHEALTH.png", (-50,-20), DI_SCREEN_CENTER_BOTTOM | DI_ITEM_BOTTOM, 1.0);
+			DrawImage("graphics/HUD/MARARMOR.png", (50,-20), DI_SCREEN_CENTER_BOTTOM | DI_ITEM_BOTTOM, 1.0);
+			
+			//heres the mugshot and inventory
+			
+			//Back hair
+			//Super Armor Wings ONLY
+			switch(HUDTorsoType)
+			{
+				case 1:
+					DrawImage("graphics/HUD/Torso/Torso1.png", (0,0), DI_SCREEN_CENTER_BOTTOM | DI_ITEM_BOTTOM, 1.0, (-1,-1), (1.5,1.5));
+					break;
+				case 2:
+					DrawImage("graphics/HUD/Torso/Torso2.png", (0,0), DI_SCREEN_CENTER_BOTTOM | DI_ITEM_BOTTOM, 1.0, (-1,-1), (1.5,1.5));
+					break;
+				case 3:
+					DrawImage("graphics/HUD/Torso/Torso3.png", (0,0), DI_SCREEN_CENTER_BOTTOM | DI_ITEM_BOTTOM, 1.0, (-1,-1), (1.5,1.5));
+					break;
+				case 4:
+					DrawImage("graphics/HUD/Torso/Torso4.png", (0,0), DI_SCREEN_CENTER_BOTTOM | DI_ITEM_BOTTOM, 1.0, (-1,-1), (1.5,1.5));
+					break;
+				case 5:
+					DrawImage("graphics/HUD/Torso/Torso5.png", (0,0), DI_SCREEN_CENTER_BOTTOM | DI_ITEM_BOTTOM, 1.0, (-1,-1), (1.5,1.5));
+					break;
+				case 6:
+					DrawImage("graphics/HUD/Torso/Torso6.png", (0,0), DI_SCREEN_CENTER_BOTTOM | DI_ITEM_BOTTOM, 1.0, (-1,-1), (1.5,1.5));
+					break;
+				case 7:
+					DrawImage("graphics/HUD/Torso/Torso7.png", (0,0), DI_SCREEN_CENTER_BOTTOM | DI_ITEM_BOTTOM, 1.0, (-1,-1), (1.5,1.5));
+					break;
+			}
+			//Do check if Super Armor, draw differenly from Blue and Green Armor
+			if (armor) DrawInventoryIcon(armortype, (0, -11), DI_SCREEN_CENTER_BOTTOM | DI_ITEM_CENTER, 1.0, (-1, -1), (1.5,1.5));
+			DrawTexture(GetBerserkMugshot(), (1, -22), DI_SCREEN_CENTER_BOTTOM | DI_ITEM_BOTTOM, 1.0, (-1,-1), (1.5, 1.5));
+			
+			DrawImage("Graphics/HUD/Icons/Pipebomb.png", (-130, -5), DI_SCREEN_CENTER_BOTTOM | DI_ITEM_BOTTOM);
+			DrawString(hfntS, FormatNumber(GetAmountOnly("PipebombAmmo"), 0, 3), (-120, -8), DI_SCREEN_CENTER_BOTTOM | DI_TEXT_ALIGN_CENTER, Font.CR_YELLOW);
+
+			DrawImage("Graphics/HUD/Icons/Stim.png", (-150, -5), DI_SCREEN_CENTER_BOTTOM | DI_ITEM_BOTTOM);
+			DrawString(hfntS, FormatNumber(GetAmountOnly("MariaSyringeAmmo"), 0, 3), (-140, -8), DI_SCREEN_CENTER_BOTTOM | DI_TEXT_ALIGN_CENTER, Font.CR_BLUE);
+
+			DrawImage("Graphics/HUD/Icons/Rocket.png", (-170, -5), DI_SCREEN_CENTER_BOTTOM | DI_ITEM_BOTTOM);
+			DrawString(hfntS, FormatNumber(GetAmountOnly("MariaRocketAmmo"), 0, 3), (-160, -8), DI_SCREEN_CENTER_BOTTOM | DI_TEXT_ALIGN_CENTER, Font.CR_ORANGE);
+
+			DrawImage("Graphics/HUD/Icons/BFG Cell.png", (-190, -5), DI_SCREEN_CENTER_BOTTOM | DI_ITEM_BOTTOM);
+			DrawString(hfntS, FormatNumber(GetAmountOnly("MariaBFGCell"), 0, 3), (-180, -8), DI_SCREEN_CENTER_BOTTOM | DI_TEXT_ALIGN_CENTER, Font.CR_GREEN);
+			
+			DrawInventoryIcon(plr.InvSel, (180, -5), DI_SCREEN_CENTER_BOTTOM | DI_ITEM_BOTTOM);
+			if (plr.InvSel)
+			{
+				DrawString(hfntS, FormatNumber(Cplayer.mo.InvSel.amount, 0, 3), (170, -8), DI_SCREEN_CENTER_BOTTOM | DI_TEXT_ALIGN_CENTER, Font.CR_YELLOW);
+			}
+			
+			if(GetAirTime() < 700)
+				DrawString(hfnt, "OXYGEN: "..(Formatnumber(((GetAirTime() / 7.0) * 100.0) / 100.0)).."%", (0, 45), DI_SCREEN_CENTER_TOP | DI_TEXT_ALIGN_CENTER, Font.CR_BLUE);
+			
+			//[Pop] Now, these can technically draw more than 3, and itd be a good idea
+			//to allow it to for custom mapsets that have more, but they arent
+			//drawn from the center out, its strictly left to right or right to left
+			//so theyd need to be moved around slightly for it.
+			DrawString(hfnt, "Keys", (-50, 15), DI_SCREEN_RIGHT_TOP | DI_TEXT_ALIGN_CENTER, Font.CR_WHITE);
+			DrawKeys("Card", (-40, 40), 5, -8, DI_SCREEN_RIGHT_TOP | DI_ITEM_OFFSETS);
+			DrawKeys("Skull", (-40, 50), 5, -8, DI_SCREEN_RIGHT_TOP | DI_ITEM_OFFSETS);
+			DrawKeys("Key", (-40, 45), 25, -8, DI_SCREEN_RIGHT_TOP | DI_ITEM_OFFSETS);
+			//[Pop] So this actually handles EVERY HeXen/Heretic key at once, you
+			//wont need to add more lines for each individual key.
+			
+			//kills
+			DrawString(hfnt, "KILLS: "..FormatNumber(Level.killed_monsters,0,5).." / "..FormatNumber(Level.total_monsters,0,5), (35, 40), DI_SCREEN_LEFT_TOP, Font.CR_RED);
+			
+			//items
+			DrawString(hfnt, "ITEMS: "..FormatNumber(Level.found_items,0,5).." / "..FormatNumber(Level.total_items,0,5), (35, 50), DI_SCREEN_LEFT_TOP, Font.CR_GREEN);
+			
+			//secrets
+			DrawString(hfnt, "SECRET: "..FormatNumber(Level.found_secrets,0,5).." / "..FormatNumber(Level.total_secrets,0,5), (35, 60), DI_SCREEN_LEFT_TOP, Font.CR_PURPLE);
+			
+			//DrawImage("graphics/HUD/DEBGHUD.png", (0,0), DI_SCREEN_CENTER_BOTTOM | DI_ITEM_BOTTOM, 1.0);
+		}
+    }
+	
+	//[Pop] This is a nice function to quickly grab the exact amount of an item only
+	//in the players inventory.
+	int GetAmountOnly(class<Inventory> item)
+	{
+		let it = CPlayer.mo.FindInventory(item);
+		return (it ? it.Amount : 0);
+	}
+	
+	//[Pop] heres the function to handle the drawing of keys, it does look like a lot
+	//but its mainly some sprite checking and stuff to make sure it works right.
+	virtual void DrawKeys (string tag, vector2 pos, int keycount = 10, int space = 23, int flags = DI_ITEM_OFFSETS)
+    {
+        //from NC HUD
+        textureid icon, iconskull, iconcard;
+        vector2 size;
+        bool scaleup;
+        int count = 0;
+        
+        for(let i = CPlayer.mo.Inv; i != null; i = i.Inv)
+        {
+            if(i is "Key")
+            {
+                // Draw up to defined keycount.
+                if(count == keycount)
+                {
+                    break;
+                }
+                
+                icon = i.AltHUDIcon;
+
+                if (!icon.IsValid())
+                {
+                    if(i.SpawnState && i.SpawnState.sprite != 0)
+                    {
+                        icon = i.SpawnState.GetSpriteTexture(0);
+                    }
+                    else
+                    {
+                        icon = i.Icon;
+                    }
+                    
+                    if(!icon.IsValid())
+                    {
+                        continue;
+                    }
+                }
+                
+                // Exclude keys which use 'TNT1A0' as their icon.
+                if (TexMan.GetName(icon) ~== "TNT1A0")
+                {
+                    continue;
+                }
+                
+                // Scale the icon up if needed.
+                size = TexMan.GetScaledSize(icon);
+                scaleup = (size.x <= 11 && size.y <= 11);
+                
+                string icontag = i.GetTag();
+                
+                if (icontag.RightIndexOf(tag) != -1)
+                {
+                    DrawTexture(icon, (pos.x, pos.y), flags, box : (11, 11), scaleup ? (1, 1) : (1, 1));
+                    pos.x += space;
+                }
+                else
+                {
+                    continue;
+                }
+            }
+        }
+    }
+}

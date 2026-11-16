@@ -1,0 +1,137 @@
+
+
+object MariaFlareOrange
+{
+    frame TNT1A { light MBFLAREORANGE }
+}
+
+
+object MariaFlarePurple
+{
+    frame TNT1A { light MBFLAREPURPLE }
+}
+
+object MariaFlareBlue
+{
+    frame TNT1A { light MBFLAREBLUE }
+}
+
+//Bullet Puffs
+
+object MariaPuff
+{
+    frame MUFFA { light MBPUFF1 }
+    frame MUFFB { light MBPUFF1 }
+    frame MUFFC { light MBPUFF2 }
+    frame MUFFD { light MBPUFF2 }
+    frame MUFFE { light MBPUFF2 }
+}
+ 
+object MariaPuffPurple
+{
+    frame MUPFA { light MBPPUFF1 }
+    frame MUPFB { light MBPPUFF1 }
+    frame MUPFC { light MBPPUFF2 }
+    frame MUPFD { light MBPPUFF2 }
+    frame MUPFE { light MBPPUFF2 }
+}
+
+object MariaChainsawPuff
+{
+    frame SRI1A { light MBPUFF1 }
+    frame SRI1B { light MBPUFF1 }
+    frame SRI1C { light MBPUFF1 }
+    frame SRI1D { light MBPUFF1 }
+    frame SRI1E { light MBPUFF1 }
+    frame SRI1F { light MBPUFF2 }
+    frame SRI1G { light MBPUFF2 }
+    frame SRI1H { light MBPUFF2 }
+    frame SRI1I { light MBPUFF2 }
+    frame SRI1J { light MBPUFF2 }
+
+    frame SRI2A { light MBPUFF1 }
+    frame SRI2B { light MBPUFF1 }
+    frame SRI2C { light MBPUFF1 }
+    frame SRI2D { light MBPUFF1 }
+    frame SRI2E { light MBPUFF1 }
+    frame SRI2F { light MBPUFF2 }
+    frame SRI2G { light MBPUFF2 }
+    frame SRI2H { light MBPUFF2 }
+    frame SRI2I { light MBPUFF2 }
+    frame SRI2J { light MBPUFF2 }
+}
+
+object MariaNOBPuff
+{
+    frame MUFFA { light MBPUFF1 }
+    frame MUFFB { light MBPUFF1 }
+    frame MUFFC { light MBPUFF2 }
+    frame MUFFD { light MBPUFF2 }
+    frame MUFFE { light MBPUFF2 }
+}
+
+//Explosion
+
+object MariaExplosionFlames
+{
+	frame EXPLA { light ROCKET_X1 }
+	frame EXPLB { light ROCKET_X1 }
+	frame EXPLC { light ROCKET_X1 }
+	frame EXPLD { light ROCKET_X2 }
+	frame EXPLE { light ROCKET_X2 }
+	frame EXPLF { light ROCKET_X2 }
+	frame EXPLG { light ROCKET_X3 }
+	frame EXPLH { light ROCKET_X3 }
+	frame EXPLI { light ROCKET_X3 }
+}
+
+object MariaSmallExplosionFlames
+{
+	frame EXPLA { light ROCKET_X1 }
+	frame EXPLB { light ROCKET_X1 }
+	frame EXPLC { light ROCKET_X1 }
+	frame EXPLD { light ROCKET_X2 }
+	frame EXPLE { light ROCKET_X2 }
+	frame EXPLF { light ROCKET_X2 }
+	frame EXPLG { light ROCKET_X3 }
+	frame EXPLH { light ROCKET_X3 }
+	frame EXPLI { light ROCKET_X3 }
+}
+
+object MariaMediumExplosionFlames
+{
+	frame EXPLA { light ROCKET_X1 }
+	frame EXPLB { light ROCKET_X1 }
+	frame EXPLC { light ROCKET_X1 }
+	frame EXPLD { light ROCKET_X2 }
+	frame EXPLE { light ROCKET_X2 }
+	frame EXPLF { light ROCKET_X2 }
+	frame EXPLG { light ROCKET_X3 }
+	frame EXPLH { light ROCKET_X3 }
+	frame EXPLI { light ROCKET_X3 }
+}
+
+object MariaBarrelExplosionFlame
+{
+	frame BABOA { light ROCKET_X1 }
+	frame BABOB { light ROCKET_X1 }
+	frame BABOC { light ROCKET_X1 }
+	frame BABOD { light ROCKET_X1 }
+	frame BABOE { light ROCKET_X1 }
+	frame BABOF { light ROCKET_X1 }
+	
+	frame BABOG { light ROCKET_X2 }
+	frame BABOH { light ROCKET_X2 }
+	frame BABOI { light ROCKET_X2 }
+	frame BABOJ { light ROCKET_X2 }
+	frame BABOK { light ROCKET_X2 }
+	frame BABOL { light ROCKET_X2 }
+
+	frame BABOM { light ROCKET_X3 }
+	frame BABON { light ROCKET_X3 }
+	frame BABOO { light ROCKET_X3 }
+	frame BABOP { light ROCKET_X3 }
+	frame BABOQ { light ROCKET_X3 }
+	frame BABOR { light ROCKET_X3 }
+	frame BABOS { light ROCKET_X3 }
+} 

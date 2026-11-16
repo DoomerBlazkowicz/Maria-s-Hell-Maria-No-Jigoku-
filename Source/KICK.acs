@@ -1,0 +1,7 @@
+#library "KICK"
+#include "zcommon.acs"
+
+script "GiveKickOnStart" enter //This script will give that item below on start
+{
+	GiveInventory("KickItem", 1); //Needed for kicking, otherwise it won't work
+}

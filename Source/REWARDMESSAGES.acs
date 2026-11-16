@@ -1,0 +1,54 @@
+#library "REWARDMESSAGES"
+#include "zcommon.acs"
+
+//Messages for rewarded weapons.
+
+Script 700 (void) //Usas 12
+{	
+    {
+		SetFont("DBIGFONT");
+		HudMessage(s:"Secret weapon obtained: Usas 12!"; HUDMSG_TYPEON, 0, CR_Yellow, 0.5, 0.8, 1.0, 0.02);
+		delay(20);
+		terminate;
+    }
+}
+
+Script 701 (void) //M24 Sniper Rifle!
+{	
+    {
+		SetFont("DBIGFONT");
+		HudMessage(s:"Secret weapon obtained: M24 Sniper Rifle!"; HUDMSG_TYPEON, 0, CR_Yellow, 0.5, 0.8, 1.0, 0.02);
+		delay(20);
+		terminate;
+    }
+}
+
+Script 702 (void) //Oscillator
+{	
+    {
+		SetFont("DBIGFONT");
+		HudMessage(s:"Secret weapon obtained: Oscillator!"; HUDMSG_TYPEON, 0, CR_Yellow, 0.5, 0.8, 1.0, 0.02);
+		delay(20);
+		terminate;
+    }
+}
+
+Script 703 (void) //Milkor MGL
+{	
+    {
+		SetFont("DBIGFONT");
+		HudMessage(s:"Secret weapon obtained: Micro Rocket Launcher!"; HUDMSG_TYPEON, 0, CR_Yellow, 0.5, 0.8, 1.0, 0.02);
+		delay(20);
+		terminate;
+    }
+}
+
+Script 704 (void) //Book of Sacrament
+{	
+    {
+		SetFont("DBIGFONT");
+		HudMessage(s:"Secret weapon obtained: Book of Sacrament!"; HUDMSG_TYPEON, 0, CR_Yellow, 0.5, 0.8, 1.0, 0.02);
+		delay(20);
+		terminate;
+    }
+}

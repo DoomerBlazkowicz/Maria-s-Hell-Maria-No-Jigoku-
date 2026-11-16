@@ -1,0 +1,42 @@
+//Credits to "The zombie Killer"
+
+/*
+Slight modifications by L30W
+Made it compatible with multiplayer zandronum
+and made the flashlight illuminate further
+*/
+
+// ACS
+#library "fLight"
+#include "zcommon.acs"
+
+// Defines
+#define MAXPLAYERS 8
+int flashlightOn[MAXPLAYERS];
+
+// Scripts
+Script "PointerPitch" (void)
+{
+	SetResultValue(GetActorPitch(0) / -182);
+}
+
+Script "ToggleFlashlight" (void) NET
+{
+	if (flashlightOn[PlayerNumber()])
+		flashlightOn[PlayerNumber()] = 0;
+	else
+		flashlightOn[PlayerNumber()] = 1;
+	ActivatorSound("flashlight/click", 127);
+}
+
+Script "FlashlightHandling" ENTER
+{
+	While(1)
+	{
+		if (flashlightOn[PlayerNumber()])
+			GiveInventory("FlashlightSpawner", 1);
+		Delay(1);
+	}
+}
+
+// Functions

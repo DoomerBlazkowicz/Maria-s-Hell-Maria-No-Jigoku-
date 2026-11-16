@@ -1,0 +1,50 @@
+extend class StatusBarMod
+{
+	void Draw64Bar()
+    {   
+		let plr = PlayerPawn(CPlayer.mo);
+		//[Pop] simple null check here to check that the player exists, else 
+		//something funky might happen. These are mainly the only
+		//things that you need to worry about over SBARINFO.
+		if(plr)
+		{	
+			//here we handle ammo
+			Inventory ammotype1, ammotype2;
+			[ammotype1, ammotype2] = GetCurrentAmmo();
+			//[Pop] specifically for mods that have reloading, these can be 
+			//swapped around if its swapped, i personally try to use ammotype1
+			//for whats actually being shot, and ammotype2 for the reserve
+			If(ammotype1!=null){DrawString(hfntB, FormatNumber(ammotype1.Amount, 1, 3), (340, 300), DI_TEXT_ALIGN_CENTER,Font.CR_GOLD);}
+			If(ammotype2!=null){DrawString(hfntB, FormatNumber(ammotype2.Amount, 3, 3), (335, 280), DI_TEXT_ALIGN_CENTER,Font.CR_WHITE);}
+			
+			//here we handle armor/health
+			DrawString(hfntB, FormatNumber(GetArmorAmount(), 1, 3), (174, 300), DI_TEXT_ALIGN_CENTER, Font.CR_GREEN);
+			DrawString(hfntB, FormatNumber(plr.health, 1, 3), (174, 280), DI_TEXT_ALIGN_CENTER, Font.CR_BLUE);
+			
+			//heres the mugshot and inventory
+			DrawTexture(GetMugShot(5), (247, 292), DI_SCREEN_CENTER_BOTTOM | DI_ITEM_OFFSETS);
+			DrawInventoryIcon(plr.InvSel, (237, 323));
+			
+			if (plr.InvSel)
+			{
+				DrawString(hfnt, FormatNumber(Cplayer.mo.InvSel.amount, 0, 3), (236, 315), DI_ITEM_OFFSETS, Font.CR_YELLOW);
+			}
+			
+			//[Pop] Now, these can technically draw more than 3, and itd be a good idea
+			//to allow it to for custom mapsets that have more, but they arent
+			//drawn from the center out, its strictly left to right or right to left
+			//so theyd need to be moved around slightly for it.
+			DrawKeys("Key", (230, 290), 10, 8, DI_SCREEN_CENTER_BOTTOM | DI_ITEM_BOTTOM);
+			
+			//kills
+			DrawString(hfnt, "KILLS: "..FormatNumber(Level.killed_monsters,0,5).." / "..FormatNumber(Level.total_monsters,0,5), (35, 20), DI_SCREEN_LEFT_TOP, Font.CR_RED);
+			
+			//items
+			DrawString(hfnt, "ITEMS: "..FormatNumber(Level.found_items,0,5).." / "..FormatNumber(Level.total_items,0,5), (35, 30), DI_SCREEN_LEFT_TOP, Font.CR_GREEN);
+			
+			//secrets
+			DrawString(hfnt, "SECRET: "..FormatNumber(Level.found_secrets,0,5).." / "..FormatNumber(Level.total_secrets,0,5), (35, 40), DI_SCREEN_LEFT_TOP, Font.CR_PURPLE);
+			
+		}
+    }
+}

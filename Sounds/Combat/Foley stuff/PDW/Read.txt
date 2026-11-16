@@ -1,0 +1,4 @@
+1: Raise during reloading
+2: Lower during reloading
+3: Mag out
+4: Mag in

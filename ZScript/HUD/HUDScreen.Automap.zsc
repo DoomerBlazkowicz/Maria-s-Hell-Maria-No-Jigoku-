@@ -1,0 +1,7 @@
+extend class StatusBarMod
+{
+	void DrawAutomapAmmoScreen()
+	{
+		//[Pop] Gonna be drawing the ammo stuff onto the automap screen here.
+	}
+}
