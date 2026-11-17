@@ -70,7 +70,7 @@ ACTOR MariaSniperRifle : MariaWeapon
 		}
 		SNPF A 1 Bright 
 		{
-		A_FireBullets (7.5, 7.5, -1, 100, "MariaSniperPuff");
+		A_FireBullets (7.5, 7.5, -1, 100, "MariaSniperPuff", FBF_NORANDOM);
 		A_FireCustomMissile("MariaFlareOrange",0,0,0,8);
 		radius_quake (1.5, 2, 0, 1, 0);
 		}
@@ -128,7 +128,7 @@ ACTOR MariaSniperRifle : MariaWeapon
 	FireZoomed:
 		SNP2 A 0 Bright 
 		{
-		A_FireBullets (1, 1, 0, 100, "MariaSniperPuff");
+		A_FireBullets (1, 1, 0, 100, "MariaSniperPuff", FBF_NORANDOM);
 		A_FireCustomMissile("MariaFlareOrange",0,0,0,8);
 		}
 		SNP2 A 1 A_SetPitch(pitch - 3)

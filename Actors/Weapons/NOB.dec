@@ -62,8 +62,8 @@ actor MariaBoomstick : MariaWeapon //Replaces SuperShotgun
 			A_PlaySound ("Weapon/NOB/Fire", CHAN_WEAPON, 7, 0, 0, 0.20);
 			A_PlaySound("Weapon/NOB/Distant", 6);
 			A_TakeInventory("MariaBoomstickAmmo", 2);
-			A_FireBullets (12, 6, 10, 7, "MariaNOBPuff");
-			A_FireBullets (12, 6, 10, 7, "MariaNOBPuff");
+			A_FireBullets (12, 6, 10, 15, "MariaNOBPuff", FBF_NORANDOM);
+			A_FireBullets (12, 6, 10, 15, "MariaNOBPuff", FBF_NORANDOM);
 			A_FireCustomMissile("MariaFlareOrange",0,0,0,8);
 			return state("");
 		}

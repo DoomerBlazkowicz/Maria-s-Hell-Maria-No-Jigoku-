@@ -66,7 +66,7 @@ Actor MariaAbakan : MariaWeapon //replaces Chaingun
 		}
 		RGUF A 0 bright
 		{
-			A_FireBullets (2, 2, -1, 20, "MariaPuffPurple");
+			A_FireBullets (2, 2, -1, 25, "MariaPuffPurple", FBF_NORANDOM);
 			A_FireCustomMissile("AKCasingSpawner",-5,0,0,-6);
 			radius_quake (4, 2, 0, 1, 0);
 			If(CountInv("PowerQuadDamage") == 1) { A_PlaySound("Maria/Powerup/Quad/Shoot",7); }

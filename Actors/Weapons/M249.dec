@@ -74,7 +74,7 @@ Actor MariaLMG : MariaWeapon //replaces Chaingun
 		}
 		"####" A 0 bright 
 		{
-		A_FireBullets (3.5, 3.5, 1, 20, "MariaPuffPurple");
+		A_FireBullets (3.5, 3.5, 1, 25, "MariaPuffPurple", FBF_NORANDOM);
 		A_FireCustomMissile("LMGCasingSpawner",-5,0,0,-6); //A_SpawnItemEx("ARBulletCasing", 17, 3, 35, 0, random(3,6), random(3,7))
 		A_FireCustomMissile("MinigunLinkCasingSpawner",-5,0,0,-6);
 		radius_quake (8, 3, 0, 1, 0);

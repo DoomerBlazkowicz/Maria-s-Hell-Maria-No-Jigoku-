@@ -66,7 +66,7 @@ ACTOR MariaRevolver : MariaWeapon //replaces Pistol
 		}
 		REVF A 1 BRIGHT 
 		{
-		A_FireBullets (1, 1, -1, 35, "MariaPuff");
+		A_FireBullets (1, 1, -1, 30, "MariaPuff", FBF_NORANDOM);
 		A_FireCustomMissile("MariaFlareOrange",0,0,0,8);
 		A_FireCustomMissile("MariaMuzzleSmoke",0,0,0,8);
 		}
@@ -100,7 +100,7 @@ ACTOR MariaRevolver : MariaWeapon //replaces Pistol
 		}
 		REZF A 1 BRIGHT 
 		{
-		A_FireBullets (5, 5, -1, 35, "MariaPuff");
+		A_FireBullets (5, 5, -1, 30, "MariaPuff", FBF_NORANDOM);
 		A_FireCustomMissile("MariaFlareOrange",0,0,0,8);
 		A_FireCustomMissile("MariaMuzzleSmoke",0,0,0,8);
 		}

@@ -77,7 +77,7 @@ Actor MariaGrease : MariaWeapon
 		TNT1 A 0 A_JumpIfInventory("GreaseSuppressor",1,"FireCountedSilent")
 		MEAF A 1 BRIGHT 
 		{
-		A_FireBullets (1, 1, -1, 10, "MariaPuff");
+		A_FireBullets (1, 1, -1, 15, "MariaPuff", FBF_NORANDOM);
 		A_TakeInventory("MariaGreaseLoaded", 1);
 		radius_quake (3, 2, 0, 1, 0);
 		If(GetCvar("MagClicking") == 0 && CountInv("MariaGreaseLoaded") < 9) { A_PlaySound("Weapon/Magclick", 1); }
@@ -101,7 +101,7 @@ Actor MariaGrease : MariaWeapon
 	FireCountedSilent:
 		MESF A 1
 		{
-		A_FireBullets (1, 1, -1, 15, "MariaPuff");
+		A_FireBullets (1, 1, -1, 18, "MariaPuff", FBF_NORANDOM);
 		A_TakeInventory("MariaGreaseLoaded", 1);
 		radius_quake (3, 2, 0, 1, 0);
 		If(GetCvar("MagClicking") == 0 && CountInv("MariaGreaseLoaded") < 9) { A_PlaySound("Weapon/Magclick", 1); }

@@ -58,7 +58,7 @@ ACTOR MariaUsas : MariaWeapon
 		A_PlaySound("Weapon/Shotgun/Distant", 6);
 		A_AlertMonsters;
 		A_TakeInventory("MariaUsasLoaded", 1);
-		A_FireBullets (5.5, 5.5, 8, 6, "MariaShotgunPuff");
+		A_FireBullets (5.5, 5.5, 8, 11, "MariaShotgunPuff", FBF_NORANDOM);
 		A_FireCustomMissile("MariaFlareOrange",0,0,0,8);
 		return state("");
 		}

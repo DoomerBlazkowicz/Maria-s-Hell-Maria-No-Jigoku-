@@ -134,7 +134,7 @@ ACTOR MariaPistol : MariaWeapon
 		}
 		SIGF A 1 BRIGHT 
 		{
-		A_FireBullets (1, 1, -1, 13, "MariaPuff");
+		A_FireBullets (1, 1, -1, 15, "MariaPuff", FBF_NORANDOM);
 		A_FireCustomMissile("MariaFlareOrange",0,0,0,8);
 		A_FireCustomMissile("MariaMuzzleSmoke",0,0,0,8);
 		}
@@ -155,7 +155,7 @@ ACTOR MariaPistol : MariaWeapon
 	FireCountedSilent:
 		SISF A 1 
 		{
-		A_FireBullets (1, 1, -1, 16, "MariaPuff");
+		A_FireBullets (1, 1, -1, 18, "MariaPuff", FBF_NORANDOM);
 		A_FireCustomMissile("MariaMuzzleSmoke",0,0,0,8);
 		}
 		SISF B 1

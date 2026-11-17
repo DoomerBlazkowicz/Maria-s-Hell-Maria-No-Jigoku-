@@ -13,7 +13,7 @@ Actor MariaPunch1 : FastProjectile //Main Punches
     Decal "PunchWall"
 	Alpha 0.75
 	Scale 1.00
-	Damage (5)
+	Damage (10)
 	Speed 30
 	decal "none"
 	SeeSound "none"
@@ -38,7 +38,7 @@ Actor MariaPunch1 : FastProjectile //Main Punches
 
 Actor MariaPunch2 : MariaPunch1 // Swing/Quick Melee
 {
-	damage 7
+	damage (15)
 	States
 	{
 	XDeath:
@@ -51,7 +51,7 @@ Actor MariaPunch2 : MariaPunch1 // Swing/Quick Melee
 
 Actor MariaPunch2.5 : MariaPunch2 // Book's Quick Melee
 {
-	damage 7
+	damage (15)
 	States
 	{
 	XDeath:
@@ -69,7 +69,7 @@ Actor MariaPunchBerserked : MariaPunch1 //Berserked
     projectilekickback 400
 	DamageType Crush
 	-noextremedeath
-	damage 60
+	damage (85)
 	States
 	{
 	Spawn:
@@ -94,7 +94,7 @@ Actor MariaPunchBerserked2 : MariaPunch1 //Blood Punch
     projectilekickback 600
 	DamageType Crush
 	-noextremedeath
-	damage 100
+	damage (100)
 	States
 	{
 	Spawn:
@@ -166,7 +166,7 @@ Actor MariaShieldPuff : MariaPunch1
     projectilekickback 1500
 	//DamageType Crush
 	-noextremedeath
-	damage 1
+	damage (10)
 	States
 	{
 	Spawn:
@@ -189,7 +189,7 @@ Actor MariaShotgunStockPuff : MariaPunch1
 {
     Radius 10
     Height 6
-	Damage 8
+	Damage (50)
 	Speed 30
 	Alpha 2
 	Scale 0.25
@@ -226,7 +226,7 @@ Actor MariaNOBStockPuff : MariaShotgunStockPuff
 {
     Radius 20
     Height 6
-	Damage 12
+	Damage (50)
 }
 
 Actor MariaCrowbarHit1 : FastProjectile //Normal Attacks
@@ -242,7 +242,7 @@ Actor MariaCrowbarHit1 : FastProjectile //Normal Attacks
 	RenderStyle Add
 	Alpha 2
 	Scale 0.25
-	Damage 10
+	Damage (30)
 	Speed 30
 	decal "none"
 	SeeSound "none"
@@ -269,7 +269,7 @@ Actor MariaCrowbarhit2 : MariaCrowbarhit1 //Charge attack
 {
 	DamageType Crush
 	-noextremedeath
-	damage 20
+	damage (50)
 }
 
 Actor MariaKnifeHit1 : FastProjectile //Slice
@@ -284,7 +284,7 @@ Actor MariaKnifeHit1 : FastProjectile //Slice
     +ForcePain
 	RenderStyle Add
 	Alpha 2
-	Damage 10
+	Damage (20)
 	Speed 30
 	Scale 0.25
 	decal "none"
@@ -312,7 +312,7 @@ Actor MariaKnifehit2 : MariaKnifehit1 //Stab
 {
 	DamageType Crush
 	-noextremedeath
-	damage 18
+	damage (40)
 }
 
 Actor MariaChainsawHit : FastProjectile
@@ -327,7 +327,7 @@ Actor MariaChainsawHit : FastProjectile
     +ForcePain
 	RenderStyle Add
 	Alpha 2
-	Damage 5
+	Damage (15)
 	Speed 30
 	Scale 0.25
 	decal "none"
@@ -363,7 +363,7 @@ Actor MariaSwordPuff1 : FastProjectile //Left
     +ForcePain
 	RenderStyle Add
 	Alpha 2
-	Damage 20
+	Damage (35)
 	Speed 30
 	//Scale 0.25
 	decal "none"
