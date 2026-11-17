@@ -121,21 +121,22 @@ actor MariaIncinerator : MariaWeapon //Replaces ID24Incinerator
 
 	ThrowPipebomb:
 		INCD ABCDE 1
-		TASG ABC 1
+		TASG AB 1
 		TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
-		TASG DEH 1
+		TASG CDDE 1
+		TNT1 A 0 A_PlayWeaponSound("Maria/Pipebomb/Activate",1)
+		TNT1 A 0 A_PlaySound("Maria/Pipebomb/Beep/Two", CHAN_AUTO)
+		TASG F 1
 		TNT1 A 0 A_TakeInventory("PipebombAmmo", 1,TIF_NOTAKEINFINITE)
-		TASG I 1 A_PlayWeaponSound("Maria/Pipebomb/Miss",1)
-		TASG J 1 A_PlaySound("Maria/Pipebomb/Ignite", 2)
-		TASG KLM 1
-		TASG OPQR 1 
+		TASG GHIJKL 1
+		TNT1 A 2 
 		TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
 		TAHA AB 1
 		TNT1 A 0 
 		{
 		If(CountInv("PowerQuadDamage") == 1) { A_PlaySound("Maria/Powerup/Quad/Shoot",7); }
-		A_PlaySound("Maria/Pipebomb/Throw", 3);
-		A_FireCustomMissile("HolyPipebomb",0,1,0,0);
+		A_PlayWeaponSound("Maria/Pipebomb/Yeet",1);
+		A_FireCustomMissile("HolyPipebomb",0,0,-4,1,1,7.328125);
 		}
 		TAHA CDE 1
 		TNT1 A 5

@@ -9,10 +9,12 @@ Kick/Hit KICKHIT
 Kick/Wall KICKMISS
 
 //Pipebombs
-Maria/Pipebomb/Pull           BOMBPULL
-Maria/Pipebomb/Miss           BOMBMISS
-Maria/Pipebomb/Ignite         BOMBIGNI
-Maria/Pipebomb/Throw          BOMBYEET
+Maria/Pipebomb/Activate       BOMBACTI    
+Maria/Pipebomb/Beep/One       BOMBBEEP    
+Maria/Pipebomb/Beep/Two       BOMBBETW
+Maria/Pipebomb/Beep/Four      BOMBBEFR
+Maria/Pipebomb/Yeet           BOMBYEET
+Maria/Pipebomb/Bounce         BOMBBOUN
 $random Maria/Pipebomb/Boom {PIPBOOM1 PIPBOOM2 PIPBOOM3 PIPBOOM4}
 PIPBOOM1 PIPBOOM1
 PIPBOOM2 PIPBOOM2

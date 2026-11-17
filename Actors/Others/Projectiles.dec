@@ -1699,41 +1699,72 @@ ACTOR MariaKatanaSlashTrail
 
 ACTOR HolyPipebomb
 {
-    Radius 4
-    Height 8
+    Radius 5
+    Height 5
     Speed 30	
 	//Mass 9	
     Damage (15)
-	-NOGRAVITY
-	+EXPLODEONWATER
-    //+NOBLOCKMAP
-    +MISSILE
-    +ACTIVATEIMPACT
-    +ACTIVATEPCROSS
-    +NOTELEPORT
-    +FORCEXYBILLBOARD
-    +THRUGHOST
-    +rollsprite
-	//SeeSound "StunGun/Ignite"
-	BounceType "Doom"
-    BounceSound "TearBomb/Bounce"	
-	BounceFactor 0.36
-	WallBounceFactor 0.43
-	BounceCount 3
-    Gravity 0.7
-	Obituary "$OB_GRENADE"
+    Projectile
+    +RANDOMIZE
+    -NOGRAVITY
+    +BLOODSPLATTER
+    +BOUNCEONCEILINGS
+    +BLOODLESSIMPACT
+    +BOUNCEONACTORS
+    +CANBOUNCEWATER
+    +DONTHARMSPECIES
+    +MOVEWITHSECTOR
+    +NOEXTREMEDEATH
+    +ROLLSPRITE
+    Scale 0.5
+    Gravity 1.2
+    BounceType "Doom"
+    BounceCount 6
+    BounceFactor 0.33
+    BounceSound "Maria/Pipebomb/Bounce"
+    WallBounceSound "Maria/Pipebomb/Bounce"
+    Obituary "$OB_GRENADE"
 	DamageType Grenade
 	States
 	{
 	Spawn:
-		TNT1 A 0
-		TNT1 A 0 A_Changevelocity(0,0,2,CVF_RELATIVE)
-	Spawn2:
-		PIPB ABCDEFGH 2 bright
-		Loop
+        FBNG ABCDEFGH 2 A_SetRoll(Roll+frandom(-4, -8),SPF_INTERPOLATE)
+        loop
 	Death:
+        TNT1 A 0 A_SetRoll(0,SPF_INTERPOLATE)
+        Goto Delay
+	Delay:
+        FBNG A 0 A_PlaySound("Maria/Pipebomb/Beep/One",CHAN_6)
+        FBNG IJKL 1
+        FBNG MNOP 2
+        FBNG I 3
+        FBNG J 5
+        TNT1 A 0 A_SpawnItem("MariaRedPlasmaFlare", 0, 0)
+        TNT1 A 0 A_PlaySound("Maria/Pipebomb/Beep/One",CHAN_6)
+        FBNG J 20
+        TNT1 A 0 A_SpawnItem("MariaRedPlasmaFlare", 0, 0)       
+        TNT1 A 0 A_PlaySound("Maria/Pipebomb/Beep/One",CHAN_6)
+        FBNG J 20
+        TNT1 A 0 A_SpawnItem("MariaRedPlasmaFlare", 0, 0)
+        TNT1 A 0 A_PlaySound("Maria/Pipebomb/Beep/One",CHAN_6)
+        FBNG J 5
+        TNT1 A 0 A_SpawnItem("MariaRedPlasmaFlare", 0, 0)
+        TNT1 A 0 A_PlaySound("Maria/Pipebomb/Beep/One",CHAN_6)
+        FBNG J 4
+        TNT1 A 0 A_SpawnItem("MariaRedPlasmaFlare", 0, 0)
+        TNT1 A 0 A_PlaySound("Maria/Pipebomb/Beep/One",CHAN_6)
+        FBNG J 3
+        TNT1 A 0 A_SpawnItem("MariaRedPlasmaFlare", 0, 0)
+        TNT1 A 0 A_PlaySound("Maria/Pipebomb/Beep/One",CHAN_6)
+        FBNG J 2
+        TNT1 A 0 A_SpawnItem("MariaRedPlasmaFlare", 0, 0)
+        TNT1 A 0 A_PlaySound("Maria/Pipebomb/Beep/One",CHAN_6)
+        Goto Explode
+	Explode:
         TNT1 A 0 A_JumpIf(CallACS("AntiTinnitus")==1, "NoRinging")
-		PIPB AIJAIJAIJAIJAIJAIJAIJAIJAIJAIJAIJAIJ 2 bright
+        TNT1 A 0 A_SpawnItem("MariaRedPlasmaFlare", 0, 0)
+        FBNG A 0 A_PlaySound("Maria/Pipebomb/Beep/Four",CHAN_6)
+		PIPB J 1 
 		GLXP A 0 Bright A_NoGravity
 		TNT1 A 0 Radius_Quake (2, 54, 0, 15, 0)
 		GLXP A 0 A_AlertMonsters
@@ -1752,7 +1783,8 @@ ACTOR HolyPipebomb
         TNT1 AAAAAAAAAAAAAAA 0 A_SpawnItemEx("MariaExplosionSmoke",0,0,0,Random(-10,10),Random(-10,10),Random(-10,10))
 		stop
 	NoRinging:
-		PIPB AIJAIJAIJAIJAIJAIJAIJAIJAIJAIJAIJAIJ 2 bright
+        FBNG A 0 A_PlaySound("Maria/Pipebomb/Beep/Four",CHAN_6)
+		PIPB J 1 
 		GLXP A 0 Bright A_NoGravity
 		TNT1 A 0 Radius_Quake (2, 54, 0, 15, 0)
 		GLXP A 0 A_AlertMonsters
@@ -1769,42 +1801,8 @@ ACTOR HolyPipebomb
         TNT1 AAAA 0 A_SpawnItemEx("MariaSmallExplosionFlames",0,0,0,Random(-10,10),Random(-10,10),Random(-10,10))
         TNT1 AAAAAAAAAAAAAAA 0 A_SpawnItemEx("MariaExplosionSmoke",0,0,0,Random(-10,10),Random(-10,10),Random(-10,10))
 		stop
-	XDeath:
-        TNT1 A 0 A_JumpIf(CallACS("AntiTinnitus")==1, "NoRingingX")
-		GLXP A 0 Bright A_NoGravity
-		GLXP A 0 A_AlertMonsters
-		TNT1 A 0 Radius_Quake (2, 54, 0, 15, 0)
-		//GLXP A 0 bright A_Explode(200,400)
-		GLXP A 0 bright A_Explode(100,300)
-		TNT1 A 0 A_CustomBulletAttack(180,100,FRandom(48,64),FRandom(2,10),"MariaPuff")
-		GLXP A 0 A_PlaySound("Pipebomb/Boom",CHAN_BODY)
-		TNT1 A 0 A_PlaySound("Maria/Explosion/Ear",5,1,0,1)
-        TNT1 A 0 A_PlaySound("Maria/Explosion/Far", 3)
-		GLXP A 0 A_SetTranslucent(0.75,1)
-		//GLXP A 1 bright
-		TNT1 A 0 A_SpawnItemEx("MariaShockWave")
-        TNT1 AAAAAAAAAA 0 A_SpawnItemEx("MariaMediumExplosionFlames",0,0,0,Random(-10,10),Random(-10,10),Random(-10,10))
-        TNT1 AAAA 0 A_SpawnItemEx("MariaSmallExplosionFlames",0,0,0,Random(-10,10),Random(-10,10),Random(-10,10))
-        TNT1 AAAAAAAAAAAAAAA 0 A_SpawnItemEx("MariaExplosionSmoke",0,0,0,Random(-10,10),Random(-10,10),Random(-10,10))
-		stop
-	NoRingingX:
-		GLXP A 0 Bright A_NoGravity
-		GLXP A 0 A_AlertMonsters
-		TNT1 A 0 Radius_Quake (2, 54, 0, 15, 0)	
-		//GLXP A 0 bright A_Explode(200,400)
-		GLXP A 0 bright A_Explode(100,300)
-		TNT1 A 0 A_CustomBulletAttack(180,100,FRandom(48,64),FRandom(2,10),"MariaPuff")
-		GLXP A 0 A_PlaySound("Pipebomb/Boom",CHAN_BODY)
-        TNT1 A 0 A_PlaySound("Maria/Explosion/Far", 3)
-		GLXP A 0 A_SetTranslucent(0.75,1)
-		//GLXP A 1 bright
-		TNT1 A 0 A_SpawnItemEx("MariaShockWave")
-        TNT1 AAAAAAAAAA 0 A_SpawnItemEx("MariaMediumExplosionFlames",0,0,0,Random(-10,10),Random(-10,10),Random(-10,10))
-        TNT1 AAAA 0 A_SpawnItemEx("MariaSmallExplosionFlames",0,0,0,Random(-10,10),Random(-10,10),Random(-10,10))
-        TNT1 AAAAAAAAAAAAAAA 0 A_SpawnItemEx("MariaExplosionSmoke",0,0,0,Random(-10,10),Random(-10,10),Random(-10,10))
-		stop
 	}
-}
+}		
 
 ACTOR HolyPipebombBerserked : HolyPipebomb
 {
