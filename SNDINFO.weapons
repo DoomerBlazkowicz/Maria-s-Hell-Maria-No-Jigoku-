@@ -92,6 +92,10 @@ VALWAL2 VALWAL2
 VALWAL3 VALWAL3
 VALWAL4 VALWAL4
 
+$random Weapon/Valmer/Quickmelee {VALQUI1 VALQUI2}
+VALQUI1 VALQUI1
+VALQUI2 VALQUI2
+
 Weapon/Valmer/Stab  VALSTAB
 
 //Saber of Virgin Mary (Melee Upgrade)

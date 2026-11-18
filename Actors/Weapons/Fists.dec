@@ -70,6 +70,41 @@ ACTOR MariaFist : MariaWeapon //replaces Fist
 		TNT1 A 0 A_Refire("Left")
 		Goto FireEnd
 
+	AltFire:
+		HAND A 1
+		HAND B 1
+		TNT1 A 1
+	AltLeft:
+		TNT1 A 0 
+		{
+		If(CountInv("PowerQuadDamage") == 1) { A_PlaySound("Maria/Powerup/Quad/Shoot",7); }
+		A_PlaySound("weapons/melee/fist/uppercut");
+		A_ChangeVelocitY(2.5,0,2,CVF_RELATIVE);
+		A_gunflash("PunchFlash"); //PunchFlash
+		}
+		TNT1 A 2
+		HANU AB 1 A_WeaponReady(WRF_NOFIRE|WRF_NOSWITCH)
+		HANU C 0 A_FireCustomMissile("MariaPunch2",0,0)
+		HANU CCDEFGHIJK 1 A_WeaponReady(WRF_NOFIRE|WRF_NOSWITCH)
+		TNT1 A 5 //19
+		TNT1 A 0 A_Refire("AltRight")
+		Goto FireEnd
+	AltRight:
+		TNT1 A 0 
+		{
+		If(CountInv("PowerQuadDamage") == 1) { A_PlaySound("Maria/Powerup/Quad/Shoot",7); }
+		A_PlaySound("weapons/melee/fist/uppercut");
+		A_ChangeVelocitY(2.5,0,2,CVF_RELATIVE);
+		A_gunflash("PunchFlash"); //PunchFlash
+		}
+		TNT1 A 2
+		RANU AB 1 A_WeaponReady(WRF_NOFIRE|WRF_NOSWITCH)
+		RANU C 0 A_FireCustomMissile("MariaPunch2",0,0)
+		RANU CCDEFGHIJK 1 A_WeaponReady(WRF_NOFIRE|WRF_NOSWITCH)
+		TNT1 A 5 //19
+		TNT1 A 0 A_Refire("AltLeft")
+		Goto FireEnd
+
 	FireEnd:
 		TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
 		HAND BA 1
@@ -138,10 +173,25 @@ ACTOR MariaFist : MariaWeapon //replaces Fist
 		TNT1 A 0 A_SelectWEapon("MariaShield")
 		Goto Deselect
 
-	Kick_Flash:
-		HAND A 1
-		HAND B 16
-		HAND A 1
+	Zoom:
+        TNT1 A 0 A_gunflash("PunchFlash")
+		TNT1 A 4
+		TNT1 A 0 A_PlaySound("Weapon/Valmer/Quickmelee", CHAN_WEAPON)
+		VALQ ABC 1
+		VALQ D 1
+		{
+		If(CountInv("PowerQuadDamage") == 1) { A_PlaySound("Maria/Powerup/Quad/Shoot",7); }
+        A_FireCustomMissile("MariaKnifeHit1",0,0,0,6);
+		A_ChangeVelocitY(2.5,0,2,CVF_RELATIVE);
+		}
+		VALQ EFG 1  
+		TNT1 A 5 //19
+		Goto PunchFinish
+
+	PunchFlash:
+		HAND AB 1
+		TNT1 A 12
+		HAND BA 1
 		Goto LightDone
 	}
 }

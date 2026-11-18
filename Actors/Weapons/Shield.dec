@@ -142,9 +142,24 @@ ACTOR MariaShield : MariaWeapon
 		SHIL ABCDEFGGHH 1
 		Goto ReadyLoop
 
+	Zoom:
+        TNT1 A 0 A_gunflash("PunchFlash")
+		TNT1 A 4
+		TNT1 A 0 A_PlaySound("Weapon/Valmer/Quickmelee", CHAN_WEAPON)
+		VALR ABC 1
+		VALR D 1
+		{
+		If(CountInv("PowerQuadDamage") == 1) { A_PlaySound("Maria/Powerup/Quad/Shoot",7); }
+        A_FireCustomMissile("MariaKnifeHit1",0,0,0,6);
+		A_ChangeVelocitY(2.5,0,2,CVF_RELATIVE);
+		}
+		VALR EFG 1  
+		TNT1 A 5 //19
+		Goto PunchFinish
+	
 	PunchFlash:
 		SHIL CBA 1
-		SHIL A 12
+		SHIL A 11
 		SHIL ABC 1
 		SHIG A 1
 		Goto LightDone
