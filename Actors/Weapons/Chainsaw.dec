@@ -282,14 +282,14 @@ ACTOR MariaChainsaw : MariaWeapon
 		TNT1 A 0 A_JumpIfInventory("MariaGasoline", 1, 1)
 		Goto PunchFlashEmpty
 		SAWK AB 1
-		SAWK CDCDCDCDCD 1
+		SAWK CDCDCDCDCDCDCD 1
 		SAWK BA 1
 		SAWK A 1
 		Goto LightDone
 
 	PunchFlashEmpty:
 		SAWK AB 1
-		SAWK C 14
+		SAWK C 15
 		SAWK BA 1
 		SAWK A 1
 		Goto LightDone

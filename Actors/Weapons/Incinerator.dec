@@ -197,7 +197,7 @@ actor MariaIncinerator : MariaWeapon //Replaces ID24Incinerator
 	
 	PunchFlash:
 		INCK ABC 1
-		INCK D 11
+		INCK D 12
 		INCK CBA 1
 		INCG A 1
 		Goto LightDone
