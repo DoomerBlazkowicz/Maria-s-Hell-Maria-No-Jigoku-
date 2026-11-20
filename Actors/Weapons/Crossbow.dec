@@ -255,10 +255,18 @@ ACTOR MariaCrossbow : MariaWeapon
 		Goto Deselect
 
 	PunchFlash:
+		MBOK F 0 A_JumpIf(CountInv("MariaCrossbowLoaded") < 1, "EmptyPunchFlash")
 		MBOK ABC 1
 		MBOK D 12
 		MBOK CBA 1
 		MBOW A 1
+		Goto LightDone
+
+	EmptyPunchFlash:
+		MBOK FGH 1
+		MBOK H 12
+		MBOK HGF 1
+		MBOW B 1
 		Goto LightDone
 	}
 }
