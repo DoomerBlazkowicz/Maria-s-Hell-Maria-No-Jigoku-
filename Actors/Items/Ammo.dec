@@ -176,12 +176,12 @@ ACTOR MariaGrenadeAmmo : Ammo
 	Ammo.BackpackMaxAmount 60
 	Tag "Grenade"
 	Inventory.PickupMessage "$GOTGRENADE"
-	Inventory.Icon "GRENA0"
+	Inventory.Icon "GREAA0"
     Inventory.PickupSound "Maria/Ammo/Grenade/Single"
 	States
 	{
 	Spawn:
-		GREN A -1
+		GREA A -1
 		Stop
 	}
 }
@@ -240,12 +240,12 @@ ACTOR MariaRocketAmmo : Ammo
 	Ammo.BackpackMaxAmount 8
 	Tag "Panzerfaust-3 Rocket"
 	Inventory.PickupMessage "$GOTROCKET"
-	Inventory.Icon "ROCKA0"
+	Inventory.Icon "PFROA0"
     Inventory.PickupSound "Maria/Ammo/Rocket/Single"
 	States
 	{
 	Spawn:
-		ROCK A -1
+		PFRO A -1
 		Stop
 	}
 }
