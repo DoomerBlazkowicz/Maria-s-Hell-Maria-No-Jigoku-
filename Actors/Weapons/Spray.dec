@@ -123,6 +123,7 @@ actor MariaAerosolCan : MariaWeapon
 
 	DryFire:
 		TNT1 A 0 //A_PlaySound("Maria/Dryfire",0)
+		MARG A 0 A_StopSound(1)
 		TNT1 A 0 A_PRINT("Not enough gas!")
 		MARG A 0 A_WeaponReady(WRF_NOFIRE|WRF_NOSWITCH)
 		Goto ReadyLoop
