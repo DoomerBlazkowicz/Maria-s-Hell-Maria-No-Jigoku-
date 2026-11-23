@@ -75,7 +75,7 @@ Class StatusBarMod : BaseStatusBar
 					DrawFullScreenBar();
 					break;
 				case 2:
-					BeginStatusBar();
+					BeginHUD();
 					Draw64Bar();
 					break;
 			}
