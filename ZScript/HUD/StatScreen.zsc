@@ -202,9 +202,9 @@ class MNJStatusScreen : DoomStatusScreen
 
 	override void Drawer (void)
     {
-		let bgback = TexMan.CheckForTexture("RINTRPIC", TexMan.Type_miscPatch);
+		let bgback = TexMan.CheckForTexture("MINTRPIC", TexMan.Type_miscPatch);
 		screen.Dim("#000000",1.0, 0, 0, screen.GetWidth(), screen.GetHeight());
-		screen.DrawTexture(bgback,0,0,0, DTA_VirtualWidth, 320, DTA_VirtualHeight, 200);
+		screen.DrawTexture(bgback,0,0,0, DTA_DestWidth, Screen.GetWidth(), DTA_DestHeight, Screen.GetHeight());
 		switch (CurState)
 		{
 		case StatCount:
