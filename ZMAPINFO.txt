@@ -3,6 +3,7 @@ GameInfo
     TitleMusic = "MAINTRO"
     IntermissionMusic = "MAINTER"
 	StatusBarClass = "StatusBarMod"
+	statscreen_single = "MNJStatusScreen"
 	AddEventHandlers = "TiltPlusPlusHandler"
 	AddEventHandlers = "FPP_Handler"
 	AddEventHandlers = "StepEventHandler"

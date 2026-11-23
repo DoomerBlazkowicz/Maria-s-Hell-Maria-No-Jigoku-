@@ -1,0 +1,228 @@
+//Customised status screen
+//Sourced from Red Spiral '93 by LossForWords
+
+class MNJStatusScreen : DoomStatusScreen
+{
+	Override void drawEL ()
+	{
+		Font textFont = content.mFont;
+	    int FontWidth = textFont.StringWidth(lnametexts[1]);
+		
+		screen.DrawText ("DBIGFONT", Font.CR_Untranslated, 105, 1, "ACCO", DTA_Clean, true, DTA_Shadow, true);
+		screen.DrawText ("DBIGFONT", Font.CR_Untranslated, 175, 1, lnametexts[1], DTA_Clean, true, DTA_Shadow, true);
+	}
+
+	override void updateStats ()
+	{
+		if (acceleratestage && sp_state != 10)
+		{
+			acceleratestage = 0;
+			sp_state = 10;
+			PlaySound("Menu/Choose");
+
+			cnt_kills[0] = Plrs[me].skills;
+			cnt_items[0] = Plrs[me].sitems;
+			cnt_secret[0] = Plrs[me].ssecret;
+			cnt_time = Thinker.Tics2Seconds(Plrs[me].stime);
+			cnt_par = wbs.partime / Thinker.TICRATE;
+			cnt_total_time = Thinker.Tics2Seconds(wbs.totaltime);
+		}
+
+		if (sp_state == 2)
+		{
+				cnt_kills[0] = Plrs[me].skills;
+				if (Plrs[me].skills >= wbs.maxkills)
+				{
+				PlaySound("Weapon/Valmer/Slice");
+				}
+				else
+				{
+				PlaySound("Intermission/nextstage");
+				}
+				sp_state++;
+			}
+		else if (sp_state == 4)
+		{
+				cnt_items[0] = Plrs[me].sitems;
+				if (Plrs[me].sitems >= wbs.maxitems)
+				{
+				PlaySound("Maria/Health/Syringe");
+				}
+				else
+				{
+				PlaySound("Intermission/nextstage");
+				}
+				sp_state++;
+			}
+		else if (sp_state == 6)
+		{
+				cnt_secret[0] = Plrs[me].ssecret;
+                if (Plrs[me].ssecret >= wbs.maxsecret)
+				{
+				PlaySound("Maria/Keys/Card");
+				}
+				else
+				{
+				PlaySound("Intermission/nextstage");
+				}
+				sp_state++;
+			}
+		else if (sp_state == 8)
+		{
+				{
+                if (Plrs[me].sitems >= wbs.maxitems && Plrs[me].ssecret >= wbs.maxsecret && Plrs[me].skills >= wbs.maxkills)
+				{
+				    PlaySound("Menu/clear");
+					sp_state++;
+				    PlaySound("Intermission/paststats");
+				}
+				else
+				{
+					sp_state++;
+				    PlaySound("Intermission/paststats");
+				}
+				}
+			}
+		else if (sp_state == 10)
+		{
+			if (acceleratestage)
+			{
+				//PlaySound("HQOPEN2");
+				UpdateNoState();//initShowNextLoc();
+			}
+		}
+		else if (sp_state & 1)
+		{
+			if (!--cnt_pause)
+			{
+				sp_state++;
+				cnt_pause = Thinker.TICRATE;
+			}
+		}
+	}
+
+	override void drawStats (void)
+	{
+		// line height
+		int lh = IntermissionFont.GetHeight() * 3 / 2;
+		Font textFont = content.mFont;
+		let RSFont = Font.GetFont ("BigFont");
+		let RSFont2 = Font.GetFont ("BigFont");
+		double TextWidth = 320 / 2.0 - RSFont.StringWidth("Exiting...") / 2.0;
+	    double FontWidth = 320 / 2.0 - RSFont2.StringWidth(lnametexts[0]) / 2.0;
+		double TextWidth2 = 320 / 2.0 - RSFont2.StringWidth("PERFECT!") / 2.0;
+
+		int ptime = Thinker.Tics2Seconds(Plrs[me].stime);
+		int ttime = Thinker.Tics2Seconds(wbs.totaltime);
+        int parti = Thinker.Tics2Seconds(wbs.partime);
+
+		int timeseconds = ptime%60;
+		int timeminutes = (ptime/60)%60;
+		int timehours = ptime/3600;
+
+		int totalseconds = ttime%60;
+		int totalminutes = (ttime/60)%60;
+		int totalhours = ttime/3600;
+
+		int parseconds = parti%60;
+		int parminutes = (parti/60)%60;
+		int parhours =  parti/3600;
+
+		string timeminprefix;
+        If(timeminutes < 10){timeminprefix="0";}
+		string parminprefix;
+        If(parminutes < 10){parminprefix="0";}
+		string totalminprefix;
+        If(totalminutes < 10){totalminprefix="0";}
+		
+        string timesecprefix;
+        If(timeseconds < 10){timesecprefix="0";}
+        string parsecprefix;
+        If(parseconds < 10){parsecprefix="0";}
+        string totalsecprefix;
+        If(totalseconds < 10){totalsecprefix="0";}
+        
+        string printkills = String.Format("%i of %i",Plrs[me].skills,wbs.maxkills);
+		string printitems = String.Format("%i of %i",Plrs[me].sitems,wbs.maxitems);
+		string printsecrets = String.Format("\%i of %i",Plrs[me].ssecret,wbs.maxsecret);
+		
+        string printallkills = String.Format("\c[Gold]%i \c[White]of \c[Gold]%i",Plrs[me].skills,wbs.maxkills);
+		string printallitems = String.Format("\c[Gold]%i \c[White]of \c[Gold]%i",Plrs[me].sitems,wbs.maxitems);
+		string printallsecrets = String.Format("\c[Gold]%i \c[White]of \c[Gold]%i",Plrs[me].ssecret,wbs.maxsecret);
+		
+		string printtime = String.Format("%i:%s%i:%s%i", timehours, timeminprefix, timeminutes, timesecprefix, timeseconds);
+		string printtotal = String.Format("%i:%s%i:%s%i", totalhours, totalminprefix, totalminutes, totalsecprefix, totalseconds);
+        string printpar = String.Format("%i:%s%i:%s%i", parhours, parminprefix, parminutes, parsecprefix, parseconds);
+
+            {
+            if (Plrs[me].skills >= wbs.maxkills)
+			{
+		    screen.DrawText (RSFont, Font.CR_Untranslated, TextWidth, -25, "Cleared!", DTA_Clean, true, DTA_Shadow, true);
+		    screen.DrawText (RSFont2, Font.CR_Untranslated, FontWidth, -10, lnametexts[0], DTA_Clean, true, DTA_Shadow, true);
+			}
+			else
+		    {
+		    screen.DrawText (RSFont, Font.CR_Untranslated, TextWidth, -25, "Exiting...", DTA_Clean, true, DTA_Shadow, true);
+		    screen.DrawText (RSFont2, Font.CR_Untranslated, FontWidth, -10, lnametexts[0], DTA_Clean, true, DTA_Shadow, true);
+			}
+			screen.DrawText (RSFont, Font.CR_Untranslated, 45, 25, "Hostiles Killed:", DTA_Clean, true, DTA_Shadow, true);
+		    screen.DrawText (RSFont, Font.CR_Untranslated, 45, 45, "Items Looted:", DTA_Clean, true, DTA_Shadow, true);
+		    screen.DrawText (RSFont, Font.CR_Untranslated, 45, 65, "Secrets Revealed:", DTA_Clean, true, DTA_Shadow, true);
+            }
+
+		int countpos = gameinfo.gametype==GAME_Strife? 285:270;
+		if (sp_state >= 2)
+		{
+		    screen.DrawText (RSFont, Font.CR_Untranslated, 235, 25, printkills, DTA_Clean, true, DTA_Shadow, true);//drawPercent (RSFont, 75, 338, cnt_kills[0], wbs.maxkills, Font.CR_Untranslated);
+		}
+		if (sp_state >= 4)
+		{
+	    	screen.DrawText (RSFont, Font.CR_Untranslated, 235, 45, printitems, DTA_Clean, true, DTA_Shadow, true);//drawPercent (RSFont, 75, 410, cnt_items[0], wbs.maxitems, Font.CR_Untranslated);
+		}
+		if (sp_state >= 6)
+		{
+	        screen.DrawText (RSFont, Font.CR_Untranslated, 235, 65, printsecrets, DTA_Clean, true, DTA_Shadow, true);//drawPercent (RSFont, 75, 482, cnt_secret[0], wbs.maxsecret, Font.CR_Untranslated);
+		}
+		if (sp_state >= 8)
+		{
+            if (Plrs[me].sitems >= wbs.maxitems && Plrs[me].ssecret >= wbs.maxsecret && Plrs[me].skills >= wbs.maxkills)
+			{
+		    screen.DrawText (RSFont2, Font.CR_Untranslated, TextWidth2, 133, "Perfect!", DTA_Clean, true, DTA_Shadow, true);
+			}
+			else
+			{}
+		    screen.DrawText (RSFont, Font.CR_White, 45, 160, "Time Taken:", DTA_Clean, true, DTA_Shadow, true);
+		    screen.DrawText (RSFont, Font.CR_Untranslated, 235, 160, printtime, DTA_Clean, true, DTA_Shadow, true);
+		    screen.DrawText (RSFont, Font.CR_White, 45, 180, "Par Time:", DTA_Clean, true, DTA_Shadow, true);
+		    screen.DrawText (RSFont, Font.CR_Untranslated, 235, 180, printpar, DTA_Clean, true, DTA_Shadow, true);
+		    screen.DrawText (RSFont, Font.CR_White, 45, 200, "Play Time:", DTA_Clean, true, DTA_Shadow, true);
+		    screen.DrawText (RSFont, Font.CR_Untranslated, 235, 200, printtotal, DTA_Clean, true, DTA_Shadow, true);
+		}
+}
+
+	override void Drawer (void)
+    {
+		let bgback = TexMan.CheckForTexture("RINTRPIC", TexMan.Type_miscPatch);
+		screen.Dim("#000000",1.0, 0, 0, screen.GetWidth(), screen.GetHeight());
+		screen.DrawTexture(bgback,0,0,0, DTA_VirtualWidth, 320, DTA_VirtualHeight, 200);
+		switch (CurState)
+		{
+		case StatCount:
+			// draw animated background
+			drawStats();
+			break;
+
+		case ShowNextLoc:
+			drawStats();//UpdateNoState();//drawEL();//drawShowNextLoc();
+			break;
+
+		case LeavingIntermission:
+			drawStats();//UpdateNoState();//drawEL();
+		break;
+
+		default:
+			drawStats();//UpdateNoState();//drawEL();//drawNoState();
+			break;
+		}
+	}
+}
