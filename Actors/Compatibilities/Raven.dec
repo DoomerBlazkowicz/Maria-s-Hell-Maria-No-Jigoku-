@@ -82,7 +82,7 @@ ACTOR K2HPower1 : RandomSpawner	replaces ArtiPork		  	{DropItem "MariaBerserkPor
 ACTOR K2HPower2 : RandomSpawner	replaces ArtiDarkServant   	{DropItem "MariaCellpack"}
 ACTOR K2HPower3 : RandomSpawner	replaces ArtiSpeedBoots 	{DropItem "PortableDamageSpawner"}
 ACTOR K2HPower4 : RandomSpawner	replaces ArtiBlastRadius 	{DropItem "PortableDamageSpawner"}
-ACTOR K2HPower5 : RandomSpawner	replaces SuperMap 	   		{DropItem "MariaMapScroll"}
+ACTOR K2HPower5 : RandomSpawner	replaces SuperMap 	   		{DropItem "MariaDiary"}
 ACTOR K2HPower6 : RandomSpawner	replaces ArtiBoostMana 		{DropItem "Backpack"}
 ACTOR K2HPower7 : RandomSpawner Replaces ArtiInvisibility	{DropItem "MariaInvisibilityCloak"} 
 ACTOR K2HPower8 : RandomSpawner Replaces ArtiTeleport	    {DropItem "MariaArtiTeleport"} 
@@ -99,7 +99,7 @@ ACTOR HTCWeapon2 : RandomSpawner replaces GoldWand 	    	{DropItem "MariaRevolve
 ACTOR HTCWeapon3 : RandomSpawner replaces Crossbow        	{DropItem "MariaShotgunSpawner"}
 ACTOR HTCWeapon4 : RandomSpawner replaces ArtiTomeOfPower 	{DropItem "MariaDoubleSpawner"}
 ACTOR HTCWeapon5 : RandomSpawner replaces Blaster 	    	{DropItem "MariaChaingunSpawner"}
-ACTOR HTCWeapon6 : RandomSpawner replaces PhoenixRod      	{DropItem "MariaLauncher"}
+ACTOR HTCWeapon6 : RandomSpawner replaces PhoenixRod      	{DropItem "MariaRocketLauncherSpawner"}
 ACTOR HTCWeapon7 : RandomSpawner replaces SkullRod    		{DropItem "MariaPRSpawner"}
 ACTOR HTCWeapon8 : RandomSpawner replaces Mace 	  	    	{DropItem "MariaBFGSpawner"}
 
@@ -135,7 +135,7 @@ ACTOR HTCArmor2 : RandomSpawner replaces EnchantedShield {DropItem "MariaEnchant
 //==============================================================================
 // Power-ups
 //==============================================================================
-ACTOR HTCPower1 : RandomSpawner replaces SuperMap		        {DropItem "MariaMapScroll"}
+ACTOR HTCPower1 : RandomSpawner replaces SuperMap		        {DropItem "MariaDiary"}
 ACTOR HTCPower2 : RandomSpawner Replaces ArtiTorch		        {DropItem "MariaCandlePortable"} 
 ACTOR HTCPower3 : RandomSpawner Replaces ArtiTimeBomb	        {DropItem "PipebombAmmo"} 
 ACTOR HTCPower4 : RandomSpawner Replaces ArtiInvulnerability    {DropItem "MariaRosaryPortable"} 

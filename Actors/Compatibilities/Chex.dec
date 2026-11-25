@@ -8,7 +8,7 @@ ACTOR NSChexWeapon2 : RandomSpawner replaces MiniZorcher 	 	 {DropItem "MariaRev
 ACTOR NSChexWeapon3 : RandomSpawner replaces LargeZorcher   	 {DropItem "MariaShotgunSpawner"}
 ACTOR NSChexWeapon4 : RandomSpawner replaces SuperLargeZorcher {DropItem "MariaBoomstick"}
 ACTOR NSChexWeapon5 : RandomSpawner replaces RapidZorcher   	 {DropItem "MariaChaingunSpawner"}
-ACTOR NSChexWeapon6 : RandomSpawner replaces ZorchPropulsor 	 {DropItem "MariaLauncher"}
+ACTOR NSChexWeapon6 : RandomSpawner replaces ZorchPropulsor 	 {DropItem "MariaRocketLauncherSpawner"}
 ACTOR NSChexWeapon7 : RandomSpawner replaces PhasingZorcher 	 {DropItem "MariaPRSpawner"}
 ACTOR NSChexWeapon8 : RandomSpawner replaces LAZDevice 	  	 {DropItem "MariaBFGSpawner"}
 
@@ -41,7 +41,7 @@ ACTOR NSChexArmor2 : RandomSpawner replaces SuperChexArmor 	   	 {DropItem "Mari
 ACTOR NSChexBonus1 : RandomSpawner replaces GlassOfWater      {DropItem "MariaHealthBonus"}
 ACTOR NSChexBonus2 : RandomSpawner replaces SlimeRepellent    {DropItem "MariaArmorShard"}
 
-ACTOR NSChexPower1 : RandomSpawner replaces ComputerAreaMap 	 {DropItem "MariaMapScroll"}
+ACTOR NSChexPower1 : RandomSpawner replaces ComputerAreaMap 	 {DropItem "MariaDiary"}
 ACTOR NSChexPower2 : RandomSpawner replaces SlimeProofSuit 	 {DropItem "MariaHazmatSuit"}
 
 // END
