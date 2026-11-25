@@ -310,7 +310,7 @@ ACTOR MariaGrimoire : MariaWeapon
 		VALR D 1
 		{
 		If(CountInv("PowerQuadDamage") == 1) { A_PlaySound("Maria/Powerup/Quad/Shoot",7); }
-        A_FireCustomMissile("MariaKnifeHit1",0,0,0,6);
+        A_FireCustomMissile("MariaKnifeHit2.5",0,0,0,6);
 		A_ChangeVelocitY(2.5,0,2,CVF_RELATIVE);
 		}
 		VALR EFG 1  
