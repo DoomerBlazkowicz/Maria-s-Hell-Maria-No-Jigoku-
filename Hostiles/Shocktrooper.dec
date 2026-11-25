@@ -1,0 +1,139 @@
+//Replaced Shocktrooper that drop Plasma Rifle due to MNJ have BOTH Energy type and Flame type weapons. 
+Actor MariaShocktrooper /*replaces Deh_Actor_153*/ //3010
+{
+    Health 100
+    Speed 10
+    Radius 20
+    Height 56
+    ReactionTime 8
+    PainChance 30
+    Mass 100
+    +SOLID
+    +SHOOTABLE
+    +COUNTKILL
+	DropItem "MariaPlasmaRifle"
+    ActiveSound "shocktrooper/active"
+    PainSound "shocktrooper/pain"
+    DeathSound "shocktrooper/death"
+	Obituary "%o was vaporized by the Shocktrooper's plasma barrage."
+    States
+    {
+    Spawn:
+        STPO AB 10 A_Look //Had to rename due to zandronum's possesion rune having similar sprite name
+        Loop
+
+    See:
+        TNT1 A 0 A_PlaySound("Shizuka/SWAT/Footsteps")
+        STPO AABB 3 Fast A_Chase
+        TNT1 A 0 A_PlaySound("Shizuka/SWAT/Footsteps")
+        STPO CCDD 3 Fast A_Chase
+        Loop
+
+    Missile:
+        STPO E 10 A_FaceTarget
+		TNT1 A 0 A_Playsound("Weapon/PlasmaRifle/Fire")
+        STPO F 2 Fast A_CustomMissile("MariaShocktrooperPlasmaBall", 32, 0, 0, 0)
+        STPO E 4 Fast
+		TNT1 A 0 A_Playsound("Weapon/PlasmaRifle/Fire")
+        STPO F 2 Fast A_CustomMissile("MariaShocktrooperPlasmaBall", 32, 0, 0, 0)
+        STPO E 4 Fast
+		TNT1 A 0 A_Playsound("Weapon/PlasmaRifle/Fire")
+        STPO F 2 Fast A_CustomMissile("MariaShocktrooperPlasmaBall", 32, 0, 0, 0)
+        STPO E 4 Fast
+        Goto See
+
+    Pain:
+        STPO G 5 Fast
+        STPO G 5 Fast A_Pain
+        Goto See
+
+    Death:
+        STPO H 0 A_FaceTarget
+        STPO H 5 A_SpawnItemEx("ShocktrooperHead", 0, 0, 40, 2, 0, 0, 0)
+        STPO I 5 A_Scream
+        STPO J 5 A_Fall
+        STPO KL 5
+        STPO M -1
+        Stop
+
+    XDeath:
+        STPO N 5
+        STPO O 5 A_XScream
+        STPO P 5 A_Fall
+        STPO Q 0 A_FaceTarget
+        STPO Q 5 A_SpawnItemEx("ShocktrooperTorso", 0, 0, 32, 4, 0, 0, 0)
+        STPO RST 5
+        STPO U -1
+        Stop
+
+    Raise:
+        STPO MLKJIH 5
+        Goto See
+    }
+}
+
+ACTOR ShocktrooperHead
+{
+    Damage 0
+    Speed 8
+    Radius 6
+    Height 16
+
+    +MISSILE
+    +DROPOFF
+    DeathSound "shocktrooper/headdeath"
+
+    States
+    {
+    Spawn:
+        PHED ABCDEFGHI 3 A_SetGravity(0.125)//Couldn't replicate the gravity of the head and torso going off like in the kex version. TBF it looks more realistic ¯\(ツ)/¯
+        Loop
+    Death:
+        PHED J -1
+        Stop
+    }
+}
+
+
+ACTOR ShocktrooperTorso : ShocktrooperHead
+{
+    Damage 0
+    Speed 8
+    Radius 6
+    Height 16
+
+    +MISSILE
+    +DROPOFF
+    +NOBLOCKMAP
+
+    States
+    {
+    Spawn:
+        STPO V 0 A_SetGravity(0.125)
+        STPO V -1
+        Loop
+    Death:
+        STPO W 5
+        STPO X -1
+        Stop
+    }
+}
+
+ACTOR MariaShocktrooperPlasmaBall : MariaPlasmaBall //Special for Shocktrooper
+{
+  Speed 30
+  Damage (random(10, 20))
+  States
+  {
+  Death:
+    TNT1 A 0 A_SetScale (1.0)
+    TNT1 A 0 A_Explode(6,16)
+	PLPE ABCDE 2 Bright
+	Stop
+  XDeath:
+    TNT1 A 0 A_SetScale (1.0)
+    TNT1 A 0 A_Explode(6,16)
+	PLPE ABCDE 2 Bright
+	Stop
+  }
+}  

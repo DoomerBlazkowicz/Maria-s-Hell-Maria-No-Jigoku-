@@ -3,5 +3,18 @@
 
 script "GiveKickOnStart" enter //This script will give that item below on start
 {
-	GiveInventory("KickItem", 1); //Needed for kicking, otherwise it won't work
+	GiveInventory("MariaKickItem", 1); //Needed for kicking, otherwise it won't work
+	GiveInventory("MariaSlideItem", 1); //Needed for sliding, otherwise it won't work
+}
+
+Script "CameraDown" (Void)
+{
+	SetActorProperty (0, APROP_JumpZ, 0.0);
+	SetActorProperty (0, APROP_VIEWHEIGHT, 14.0);
+}
+
+Script "CameraUp" (Void)
+{
+	SetActorProperty (0, APROP_JumpZ,8.0);
+	SetActorProperty (0, APROP_VIEWHEIGHT, 44.0);
 }

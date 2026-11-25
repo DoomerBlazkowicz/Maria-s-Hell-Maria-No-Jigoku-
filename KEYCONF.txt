@@ -19,8 +19,10 @@ setslot 8, "MariaCrossbow", "MariaSniperRifle"
 AddKeySection "Maria Keys" "Maria_Keys"
 
 addkeysection "Kick" "Kick"
-addmenukey "Quick Kick" "use KickItem"
+addmenukey "Quick Kick" "use MariaKickItem"
 defaultbind q "Quick Kick"
+addmenukey "Slide" "use MariaSlideItem"
+defaultbind z "Slide"
 
 AddMenuKey "Quick Melee" +Zoom
 alias +Zoom
@@ -41,10 +43,6 @@ defaultbind M "Use Stim Shot"
 AddMenuKey "Raise Shield" +User3
 alias +User3
 defaultbind B "Raise Shield"
-
-addmenukey "Slide" +jpmobslide
-alias +jpmobslide "use SpectreSlideAttempt"
-alias -jpmobslide "use SpectreSlideCancel"
 
 alias "usetopickup_push" "netevent UseToPickup_Push"
 addkeysection "$U2P_KeyBindMenu_Heading" "UseToPickup"

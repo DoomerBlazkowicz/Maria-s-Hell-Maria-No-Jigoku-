@@ -1,0 +1,189 @@
+//==============================================================================
+// Big [REDACTED] Gun
+//==============================================================================
+// Caliber: [REDACTED]/BFG Cell
+//==============================================================================
+// Ho ho ho... What do we have here?
+// 
+// Now this is a BIG GUN, unleashes "ultimate power" with one pull.
+//
+// Better use it for right situations.
+//==============================================================================
+Actor MariaBFG : MariaWeapon //Replaces BFG9000
+{
+	Weapon.AmmoGive 1
+	Weapon.AmmoType "MariaBFGCell"
+	Scale 1.2
+	//Weapon.upsound "weapons/bfg/raise"
+	Inventory.PickupSound "Weapon/BFG/Pickup"
+	Inventory.PickupMessage "The BFG OBTAINED!!!"
+	Tag "The BFG"
+	+WEAPON.NOAUTOFIRE
+	States
+	{
+	Ready:
+		TNT1 A 0 
+		{
+		A_PlaySound("Maria/Draw/Heavy", 1);
+		A_SetSpeed(0.60);
+		}
+		BFGS ABCDEFGHIJ 1
+		TNT1 A 0 A_PlaySound("Weapon/BFG/Raise", 2)
+		Goto ReadyLoop
+
+	ReadyLoop:  
+		BFGG A 0 //A_PlaySound("Weapon/BFG/Idle", CHAN_WEAPON, 1, 1)
+		BFGG A 1 A_WeaponReady(WRF_ALLOWZOOM|WRF_ALLOWUSER1|WRF_ALLOWUSER2|WRF_ALLOWUSER3)
+		Loop
+
+	Deselect:
+		TNT1 A 0 
+		{
+		A_StopSound(CHAN_WEAPON);
+		A_SetSpeed(1.0);
+		}
+		BFGD ABCDEFGHIJ 1
+		TNT1 AAAAAAAAAAAAAAAAAA 0 A_Lower
+		TNT1 A 1
+		Wait
+
+	Select:
+		TNT1 AA 0 A_Raise
+		Loop
+
+	Fire:
+		NULL A 0 A_JumpIf(CountInv("MariaBFGCell") < 1, "DryFire")
+		BFGG A 1 Offset(0,33)
+		BFGG A 1 Offset(0,34)
+		TNT1 A 0 A_PlaySound("Weapon/Shinigami/Dry",0)
+		BFGG AAAA 1
+	FireCounted:
+		NULL A 0 
+		{
+		If(CountInv("MariaBFGCell") < 1) { return state("DryFire"); }
+		A_PlaySound("Weapon/BFG/Charge", CHAN_BODY);
+		A_AlertMonsters;
+		return state("");
+		}
+		BFGC ABCD 2
+		BFGC EFGH 2 A_GunFlash
+		BFGF A 2 BRIGHT
+		{
+		If(CountInv("PowerQuadDamage") == 1) { A_PlaySound("Maria/Powerup/Quad/Shoot",7); }
+		A_PlaySound("Weapon/BFG/Fire", CHAN_BODY);
+		A_AlertMonsters;
+		A_SetBlend("Green", 0.50, 16);
+		A_TakeInventory("MariaBFGCell", 1, TIF_NOTAKEINFINITE);
+		A_FireCustomMissile("MariaBFGBall",0,1);
+		A_Recoil(4);
+		}
+		BFGF B 1 BRIGHT A_GunFlash
+		BFGF B 1 BRIGHT A_SetPitch(pitch - 2)
+		BFGF C 1 BRIGHT A_SetPitch(pitch - 3)
+		BFGF C 1 BRIGHT A_SetPitch(pitch - 5)
+		BFGF D 2
+		BFGF EFGHIJKL 3
+		BFGG A 1
+		TNT1 A 0 A_Refire
+		Goto ReadyLoop
+
+	Flash:
+		TNT1 A 2 Bright A_Light1
+		TNT1 A 2 Bright A_Light2
+		TNT1 A 1 Bright A_Light1
+		Goto LightDone
+
+	DryFire:
+		TNT1 A 0 A_PlaySound("Weapon/BFG/Dry",0)
+		BFGG A 1 { A_WeaponOffset(0,36); A_WeaponReady(WRF_NOFIRE|WRF_NOSWITCH); }
+		BFGG A 10 { A_WeaponOffset(0,35); A_WeaponReady(WRF_NOFIRE|WRF_NOSWITCH); }
+		Goto ReadyLoop
+
+	ThrowPipebomb:
+		BFGD ABCDEFGHIJ 1
+		TASG AB 1
+		TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
+		TASG CDDE 1
+		TNT1 A 0 A_PlayWeaponSound("Maria/Pipebomb/Activate",1)
+		TNT1 A 0 A_PlaySound("Maria/Pipebomb/Beep/Two", CHAN_AUTO)
+		TASG F 1
+		TNT1 A 0 A_TakeInventory("PipebombAmmo", 1,TIF_NOTAKEINFINITE)
+		TASG GHIJKL 1
+		TNT1 A 2 
+		TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
+		TAHA AB 1
+		TNT1 A 0 
+		{
+		If(CountInv("PowerQuadDamage") == 1) { A_PlaySound("Maria/Powerup/Quad/Shoot",7); }
+		A_PlayWeaponSound("Maria/Pipebomb/Yeet",1);
+		A_FireCustomMissile("HolyPipebomb",0,0,-4,1,1,7.328125);
+		}
+		TAHA CDE 1
+		TNT1 A 5
+		BFGS ABCDEFGHIJ 1
+		Goto ReadyLoop
+
+	UseStimShot:
+		TNT1 A 0 A_JumpIfHealthLower(100, 1)
+		Goto FullHealth
+		BFGD ABCDEFGHIJ 1
+		SYRI AB 1
+		TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
+		SYRI CD 1
+		SYRI EEFFGGG 1
+		SYRI HIJKKLLL 1
+		TNT1 A 0 A_PlaySound("Weapon/Syringe/Cap", 1)
+		SYRI MNOPQQQRR 1
+		TNT1 A 0 A_PlaySound("Weapon/Syringe/Tab", 1)
+		SYRI STUUUVV 1
+		TNT1 A 0 A_StartSound("Foley/Sleeves/Movement", CHAN_AUTO)
+		SYRI WXYZ 1
+		SYR2 AB 1
+		TNT1 A 0 A_TakeInventory("MariaSyringeAmmo", 1)
+		TNT1 A 0 A_PlaySound("Weapon/Syringe/Inject", 1)
+		SYR2 CD 1
+		TNT1 A 0 A_PlaySound("Weapon/Syringe/Heal", 2)
+		TNT1 A 0 A_SetBlend("BLUE",.5,25)
+		TNT1 A 0 HealThing(10, 100)
+		TNT1 A 0 A_GiveInventory("SyringeProtection")
+		TNT1 A 0 A_GiveInventory("SyringeRegeneration")
+		SYR2 EFGHIJ 2
+		SYR2 KLLMMN 1
+		TNT1 A 5
+		BFGS ABCDEFGHIJ 1
+		Goto ReadyLoop
+
+	User3:
+	EquipShield:
+		TNT1 A 0 A_ZoomFactor(1.0)
+		TNT1 A 0 A_GiveInventory("MariaShield",1)
+		TNT1 A 0 A_SelectWEapon("MariaShield")
+		Goto Deselect
+
+	Zoom:
+        TNT1 A 0 
+		{
+		If(CountInv("PowerQuadDamage") == 1) { A_PlaySound("Maria/Powerup/Quad/Shoot",7); }
+        A_PlaySound("weapons/melee/fist/uppercut");
+		A_ChangeVelocitY(2.5,0,2,CVF_RELATIVE);
+        A_gunflash("PunchFlash"); //PunchFlash
+		}
+		TNT1 A 2
+		HANU AB 1 A_WeaponReady(WRF_NOFIRE|WRF_NOSWITCH)
+		HANU C 0 A_FireCustomMissile("MariaPunch2",0,0)
+		HANU CCDEFGHIJK 1 A_WeaponReady(WRF_NOFIRE|WRF_NOSWITCH)
+		TNT1 A 5 //19
+		Goto PunchFinish
+
+	PunchFlash:
+		BFGK ABC 1
+		BFGK D 12
+		BFGK CBA 1
+		BFGG A 1
+		Goto LightDone
+
+	Spawn:
+		BFUG A -1
+		Stop
+	}
+}

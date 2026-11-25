@@ -1,0 +1,36 @@
+
+ACTOR MariaRedCard : RedCard replaces RedCard
+{
+  Inventory.PickupSound "Maria/Keys/Card"
+  Species RedCard
+}
+
+ACTOR MariaYellowCard : YellowCard replaces YellowCard
+{
+  Inventory.PickupSound "Maria/Keys/Card"
+  Species YellowCard
+}
+
+ACTOR MariaBlueCard : BlueCard replaces BlueCard
+{
+  Inventory.PickupSound "Maria/Keys/Card"
+  Species BlueCard
+}
+
+ACTOR MariaRedSkull : RedSkull replaces RedSkull
+{
+  Inventory.PickupSound "Maria/Keys/Skull"
+  Species RedSkull
+}
+
+ACTOR MariaYellowSkull : YellowSkull replaces YellowSkull
+{
+  Inventory.PickupSound "Maria/Keys/Skull"
+  Species YellowSkull
+}
+
+ACTOR MariaBlueSkull : BlueSkull replaces BlueSkull
+{
+  Inventory.PickupSound "Maria/Keys/Skull"
+  Species BlueSkull
+}

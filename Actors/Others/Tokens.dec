@@ -27,6 +27,10 @@ ACTOR Zoomed : MariaToken
    Inventory.MaxAmount 1
 }
 
+Actor CantKick : Inventory { Inventory.MaxAmount 1 }
+
+Actor CantSlide : Inventory { Inventory.MaxAmount 1 }
+
 Actor IsSlideKicking : MariaToken {}
 
 Actor KickHasHit : MariaToken {}

@@ -118,8 +118,6 @@ OptionMenu "MHGameplay"
 	StaticText "(Grenades and Pipebomb)" 
 	Option "Flechette spots", "RKAmmoEffects", "RKAmmoValues"
 	StaticText ""
-    Option "Enable Sliding", "jpm_enable_slide", "OnOff"
-	StaticText ""
 	StaticText "Intro Scripts", 1
 	StaticText "Options for enabling or disabling intro's for your preferences" 
 	StaticText "(Both, Hallucination, Knuckle Cracking, None)" 
