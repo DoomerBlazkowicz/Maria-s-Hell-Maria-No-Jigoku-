@@ -9,7 +9,6 @@ SLIDEHEIGHT
 GameplayTips
 Trackers
 AltSkins
-p_abilities
 KICK
 LFWStuff
 FLINCHER

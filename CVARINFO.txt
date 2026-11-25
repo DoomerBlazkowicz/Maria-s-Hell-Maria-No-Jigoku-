@@ -15,14 +15,6 @@ server int bonusitemtoggle = 0;
 
 server int introtoggle = 0;
 
-//toggles
-server int jpm_enable_djump = 1;
-server int jpm_enable_slide = 1;
-server int jpm_enable_latch = 1;
-
-//velocity control
-server float jpm_pref_slidevel = 12.0;
-
 //drawing
 user int jpm_draw_staminabar = 1;
 

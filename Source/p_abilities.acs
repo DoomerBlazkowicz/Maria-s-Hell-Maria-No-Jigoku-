@@ -6,46 +6,8 @@
 #DEFINE HUD_X 320
 #DEFINE HUD_Y 240
 #DEFINE HTIC 1.0/35 + 1
-
 #DEFINE SLIDEPOWER 1.0
-
 #DEFINE STAMINATAKESLIDE 50
 #DEFINE CAMLOWER 6.0
 
 global int 56:camheight;
-
-Script "JPMobilityEnter" ENTER
-{
-
-	ACS_NamedExecuteAlways("JPMobilityInit",0,0,0,0);
-	
-}
-
-Script "JPMobilitySpawn" RESPAWN
-{
-
-	ACS_NamedExecuteAlways("JPMobilityInit",0,0,0,0);
-	
-}
-
-Script "JPMobilityInit" (void)
-{
-
-	if(camheight > 0)
-	{
-	
-		SetActorProperty(0,APROP_VIEWHEIGHT,camheight);
-	
-	}
-	
-	TakeInventory("SpectreSliding",9999);
-	GiveInventory("SpectreSlideAttempt",1);
-	GiveInventory("SpectreSlideCancel",1);
-	GiveInventory("MobilityStamina",100);
-	
-	ACS_NamedExecuteAlways("SpectreSlide",0,0,0,0);
-	
-	ACS_NamedExecuteAlways("SpectreDishStam",0,0,0,0);
-	ACS_NamedExecuteAlways("SpectreDrawStam",0,0,0,0);
-
-}
