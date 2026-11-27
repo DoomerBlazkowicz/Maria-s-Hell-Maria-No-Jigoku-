@@ -23,7 +23,7 @@ actor MariaPlasmaRifle : MariaWeapon //Replaces PlasmaRifle
 	States
 	{
 	Ready:
-		PLSE A 0 
+		TNT1 A 0 
 		{
 		A_PlaySound("Weapon/PlasmaRifle/Select");
 		If(GetCvar("plasmarifletoggle") == 1) { return state("ClassicReady"); }
